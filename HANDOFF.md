@@ -27,6 +27,13 @@ Claude Code and Codex never run at the same time, and neither remembers the othe
 
 ## Log (newest first)
 
+### 2026-11-05 — Claude Code — build step 2c
+- Did: built the core rules in `Core`: hearts pool, run phases, seeded random generator, floor picker, difficulty levels and visual tiers. Added the `GameRules` and `DirectorSettings` data assets. All 64 EditMode tests pass from the command line. P0 now focuses on Trivia, seen through to completion before Collapse Escape starts.
+- Files: `Assets/_OneMoreFloor/Core/`, `Game/`, `Data/`, `Tests/EditMode/`, `art-source/concept/`, `AGENTS.md`, `HANDOFF.md`, `docs/`.
+- Other agent needs to know: nothing changes for 2e. Put concept images in `art-source/concept/floors/<floor-id>/` or `style-tests/<style>/`.
+- Owner to check: nothing to test; there is nothing to play yet. Write `docs/floors/trivia.md`. Do step 2d. Decide section 13, questions 8, 11 and 12.
+- Next: Codex does 2e. Step 3 needs the character package from 2d and an answer to question 11.
+
 ### 2026-11-05 — Claude Code — before build step 2
 - Did: recorded the owner's camera decisions and the new approach to sizes. Wrote `docs/sizes.json` with starting guesses for what every floor shares. Each floor now gets its own size from its spec and from playtests.
 - Files: `AGENTS.md`, `HANDOFF.md`, `docs/`.

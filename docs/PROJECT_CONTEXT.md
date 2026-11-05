@@ -4,7 +4,7 @@ Version 0.11 · 5 Nov 2026 · Owner: Wei Bin (GitHub: OrangeCatLoves)
 
 The single source of truth for what the game is and how it is built. Written for the owner and for AI coding agents (Claude Code, Codex).
 
-- **Status:** pre-production. Build step 1 (project setup) is done. No game rules or gameplay yet.
+- **Status:** pre-production. Build step 1 (project setup) is done. The core rules (step 2c) are built and tested, with nothing to play yet.
 - **Current focus:** Phase P0, build step 2 (section 9), on Trivia only. No backend work yet.
 - **Conflicts:** if this file disagrees with the code or with the owner's latest instruction, stop and ask.
 
@@ -473,7 +473,7 @@ First three floors, in this order: **Trivia → Collapse Escape → Monster Aren
   - **Done when:** Claude Code can build the floor without asking you a design question.
 - **2b. You — 3 style tests.** In an image tool, make 3 sets of concept images, one set per style: the lobby, an ordinary office floor (tier 1) and an epic world (tier 3), with your character in each.
   - **Done when:** the 3 sets sit side by side, ready to compare.
-- **2c. Claude Code — core rules** in plain C# with unit tests: hearts pool, run phases, seeded floor picker (no repeats), difficulty levels, visual tiers, and the data assets that hold their numbers.
+- **2c. Claude Code — core rules** (built 5 Nov 2026, waiting for the owner's OK) in plain C# with unit tests: hearts pool, run phases, seeded floor picker (no repeats), difficulty levels, visual tiers, and the data assets that hold their numbers.
   - **Done when:** all EditMode tests pass from the command line.
 - **2d. Your character in Unity.**
   - **Codex:** a shared Blender export script that applies the asset rules (section 7); run it on one of your characters.
@@ -582,7 +582,7 @@ Concept images stay out of `Assets/`, where Unity would import every one. Name t
 ## 11. Testing
 
 - Run EditMode tests from the command line with Unity closed: `unity test . --mode EditMode`. Exit code 0 = passed, 8 = a test failed, 6 = the run never finished (e.g. compile errors; the reason is in `%LOCALAPPDATA%\Unity\Editor\Editor.log`).
-- Agents can also check an open Unity through the CLI: `unity open .`, wait for `unity status` to say `ready`, then `unity command console status`, `console get --level error`, `package list`, `test run --mode editor`, `editor.playmode start` and `stop`, and `capture game_view --output-path <file>` for a screenshot. Close it with `unity command editor quit`.
+- Agents can also check an open Unity through the CLI: `unity open .`, wait for `unity status` to say `ready`, then `unity command console status`, `console get --level error`, `package list`, `test run --mode editor`, `editor.playmode start` and `stop`, and `capture game_view --output-path <file>` for a screenshot. Close it with `unity command editor quit`. Don't use `editor save_all` while the open scene has never been saved: it opens a Save dialog that blocks Unity until someone closes it.
 - What agents can't judge, and the owner tests: how it feels, looks and plays, and real hardware (controller in hand, Steam Deck).
 - Core rules: EditMode unit tests — hearts maths, multi-heart mistakes, game over mid-floor, floor order from a seed, difficulty level and visual tier for a floor number, unlock milestones.
 - Every floor: a PlayMode smoke test that clears it, and one that drains hearts to game over — at level 1 and at its hardest level.
