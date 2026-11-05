@@ -1,0 +1,14 @@
+{
+    "name": "OneMoreFloor.FloorSDK",
+    "rootNamespace": "OneMoreFloor.FloorSDK",
+    "references": ["OneMoreFloor.Core"],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

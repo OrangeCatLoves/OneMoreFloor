@@ -1,0 +1,14 @@
+{
+    "name": "OneMoreFloor.Game",
+    "rootNamespace": "OneMoreFloor.Game",
+    "references": ["OneMoreFloor.Core", "OneMoreFloor.FloorSDK"],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,14 @@
+{
+    "name": "OneMoreFloor.Services",
+    "rootNamespace": "OneMoreFloor.Services",
+    "references": ["OneMoreFloor.Core"],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
