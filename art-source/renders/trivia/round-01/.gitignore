@@ -1,0 +1,3 @@
+# Full resolution intermediates remain local; labelled JPG comparisons are tracked.
+/iteration-*.png
+/unity-*.png

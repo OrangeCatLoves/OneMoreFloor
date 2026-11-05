@@ -1,0 +1,20 @@
+﻿{
+    "editmode":  {
+                     "passed":  82,
+                     "start_utc":  "2026-11-05 17:58:19Z",
+                     "failed":  0,
+                     "total":  82,
+                     "result":  "Passed",
+                     "skipped":  0,
+                     "end_utc":  "2026-11-05 17:58:19Z"
+                 },
+    "playmode":  {
+                     "passed":  21,
+                     "start_utc":  "2026-11-05 17:59:28Z",
+                     "failed":  0,
+                     "total":  21,
+                     "result":  "Passed",
+                     "skipped":  0,
+                     "end_utc":  "2026-11-05 17:59:44Z"
+                 }
+}

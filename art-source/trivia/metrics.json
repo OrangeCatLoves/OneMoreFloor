@@ -1,0 +1,52 @@
+{
+  "triangles_total_render_meshes": 901052,
+  "mesh_objects": 480,
+  "unique_meshes": 229,
+  "materials": 24,
+  "textures": 102,
+  "shared_sizes": {
+    "_note": "Sizes every floor shares, in metres. These are starting guesses; the real numbers come from playtests in build step 5. A floor's overall size is not here: it starts from the floor's spec and is tuned by playing.",
+    "player": {
+      "height": 1.8,
+      "radius": 0.4
+    },
+    "door": {
+      "width": 1.5,
+      "height": 2.5
+    },
+    "corridor": {
+      "width": 3.0
+    },
+    "ceiling": {
+      "height": 3.5
+    },
+    "wall": {
+      "thickness": 0.2
+    },
+    "stairs": {
+      "stepHeight": 0.2,
+      "stepDepth": 0.3,
+      "width": 3.0
+    },
+    "elevator": {
+      "interior": {
+        "width": 5.0,
+        "depth": 5.0,
+        "height": 3.5
+      },
+      "door": {
+        "width": 3.0,
+        "height": 2.5
+      }
+    },
+    "kit": {
+      "gridSize": 0.5
+    },
+    "jump": {
+      "_note": "Filled in during build step 5, once movement is tuned.",
+      "widestGap": null,
+      "highestLedge": null
+    }
+  },
+  "pilot": false
+}

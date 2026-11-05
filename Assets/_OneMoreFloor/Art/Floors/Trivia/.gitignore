@@ -1,0 +1,7 @@
+# Round 1 review binaries remain local until the owner approves this version.
+/*.fbx
+/*.fbx.meta
+/Textures/
+/Textures.meta
+/Materials/
+/Materials.meta

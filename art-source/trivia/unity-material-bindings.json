@@ -1,0 +1,72 @@
+[
+  {
+    "renderer": "SM_Trivia_BackCurtain",
+    "materials": [
+      {
+        "name": "M_Trivia_VelvetRed",
+        "baseMap": "T_Trivia_VelvetRed_BaseColor",
+        "metallicMap": "T_Trivia_VelvetRed_MetallicSmoothness",
+        "keywords": [
+          "_METALLICSPECGLOSSMAP",
+          "_NORMALMAP"
+        ]
+      }
+    ]
+  },
+  {
+    "renderer": "SM_Trivia_Podium_01",
+    "materials": [
+      {
+        "name": "M_Trivia_Gold",
+        "baseMap": "T_Trivia_Gold_BaseColor",
+        "metallicMap": "T_Trivia_Gold_MetallicSmoothness",
+        "keywords": [
+          "_METALLICSPECGLOSSMAP",
+          "_NORMALMAP"
+        ]
+      },
+      {
+        "name": "M_Trivia_Walnut",
+        "baseMap": "T_Trivia_Walnut_BaseColor",
+        "metallicMap": "T_Trivia_Walnut_MetallicSmoothness",
+        "keywords": [
+          "_METALLICSPECGLOSSMAP",
+          "_NORMALMAP"
+        ]
+      },
+      {
+        "name": "M_Trivia_Bulb",
+        "baseMap": "T_Trivia_Bulb_BaseColor",
+        "metallicMap": "T_Trivia_Bulb_MetallicSmoothness",
+        "keywords": [
+          "_EMISSION",
+          "_METALLICSPECGLOSSMAP",
+          "_NORMALMAP"
+        ]
+      },
+      {
+        "name": "M_Trivia_Monitor",
+        "baseMap": "T_Trivia_Monitor_BaseColor",
+        "metallicMap": "T_Trivia_Monitor_MetallicSmoothness",
+        "keywords": [
+          "_METALLICSPECGLOSSMAP",
+          "_NORMALMAP"
+        ]
+      }
+    ]
+  },
+  {
+    "renderer": "SM_Trivia_StagePlank",
+    "materials": [
+      {
+        "name": "M_Trivia_StageWood",
+        "baseMap": "T_Trivia_StageWood_BaseColor",
+        "metallicMap": "T_Trivia_StageWood_MetallicSmoothness",
+        "keywords": [
+          "_METALLICSPECGLOSSMAP",
+          "_NORMALMAP"
+        ]
+      }
+    ]
+  }
+]

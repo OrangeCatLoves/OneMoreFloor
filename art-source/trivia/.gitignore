@@ -1,0 +1,4 @@
+# Rebuild from tools/blender/build_trivia.py; owner approval required for LFS.
+*.blend
+*.blend1
+*-results.xml

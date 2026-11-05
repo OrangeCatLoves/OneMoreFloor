@@ -1,0 +1,296 @@
+{
+  "M_Trivia_StageWood": {
+    "maps": {
+      "BaseColor": "T_Trivia_StageWood_BaseColor.png",
+      "Normal": "T_Trivia_StageWood_Normal.png",
+      "MetallicSmoothness": "T_Trivia_StageWood_MetallicSmoothness.png",
+      "Roughness": "T_Trivia_StageWood_Roughness.png"
+    },
+    "metallic": 0.04,
+    "roughness": 0.31,
+    "size": 2048,
+    "emission_strength": 0.0
+  },
+  "M_Trivia_Walnut": {
+    "maps": {
+      "BaseColor": "T_Trivia_Walnut_BaseColor.png",
+      "Normal": "T_Trivia_Walnut_Normal.png",
+      "MetallicSmoothness": "T_Trivia_Walnut_MetallicSmoothness.png",
+      "Roughness": "T_Trivia_Walnut_Roughness.png"
+    },
+    "metallic": 0.02,
+    "roughness": 0.3,
+    "size": 2048,
+    "emission_strength": 0.0
+  },
+  "M_Trivia_BurgundyWood": {
+    "maps": {
+      "BaseColor": "T_Trivia_BurgundyWood_BaseColor.png",
+      "Normal": "T_Trivia_BurgundyWood_Normal.png",
+      "MetallicSmoothness": "T_Trivia_BurgundyWood_MetallicSmoothness.png",
+      "Roughness": "T_Trivia_BurgundyWood_Roughness.png"
+    },
+    "metallic": 0.02,
+    "roughness": 0.42,
+    "size": 2048,
+    "emission_strength": 0.0
+  },
+  "M_Trivia_Gold": {
+    "maps": {
+      "BaseColor": "T_Trivia_Gold_BaseColor.png",
+      "Normal": "T_Trivia_Gold_Normal.png",
+      "MetallicSmoothness": "T_Trivia_Gold_MetallicSmoothness.png",
+      "Roughness": "T_Trivia_Gold_Roughness.png"
+    },
+    "metallic": 0.9,
+    "roughness": 0.27,
+    "size": 2048,
+    "emission_strength": 0.0
+  },
+  "M_Trivia_InlayGold": {
+    "maps": {
+      "BaseColor": "T_Trivia_InlayGold_BaseColor.png",
+      "Normal": "T_Trivia_InlayGold_Normal.png",
+      "MetallicSmoothness": "T_Trivia_InlayGold_MetallicSmoothness.png",
+      "Roughness": "T_Trivia_InlayGold_Roughness.png"
+    },
+    "metallic": 0.55,
+    "roughness": 0.3,
+    "size": 2048,
+    "emission_strength": 0.0
+  },
+  "M_Trivia_GoldDark": {
+    "maps": {
+      "BaseColor": "T_Trivia_GoldDark_BaseColor.png",
+      "Normal": "T_Trivia_GoldDark_Normal.png",
+      "MetallicSmoothness": "T_Trivia_GoldDark_MetallicSmoothness.png",
+      "Roughness": "T_Trivia_GoldDark_Roughness.png"
+    },
+    "metallic": 0.85,
+    "roughness": 0.31,
+    "size": 2048,
+    "emission_strength": 0.0
+  },
+  "M_Trivia_VelvetRed": {
+    "maps": {
+      "BaseColor": "T_Trivia_VelvetRed_BaseColor.png",
+      "Normal": "T_Trivia_VelvetRed_Normal.png",
+      "MetallicSmoothness": "T_Trivia_VelvetRed_MetallicSmoothness.png",
+      "Roughness": "T_Trivia_VelvetRed_Roughness.png"
+    },
+    "metallic": 0,
+    "roughness": 0.82,
+    "size": 2048,
+    "emission_strength": 0.0
+  },
+  "M_Trivia_VelvetSeat": {
+    "maps": {
+      "BaseColor": "T_Trivia_VelvetSeat_BaseColor.png",
+      "Normal": "T_Trivia_VelvetSeat_Normal.png",
+      "MetallicSmoothness": "T_Trivia_VelvetSeat_MetallicSmoothness.png",
+      "Roughness": "T_Trivia_VelvetSeat_Roughness.png"
+    },
+    "metallic": 0,
+    "roughness": 0.79,
+    "size": 2048,
+    "emission_strength": 0.0
+  },
+  "M_Trivia_RoyalPurple": {
+    "maps": {
+      "BaseColor": "T_Trivia_RoyalPurple_BaseColor.png",
+      "Normal": "T_Trivia_RoyalPurple_Normal.png",
+      "MetallicSmoothness": "T_Trivia_RoyalPurple_MetallicSmoothness.png",
+      "Roughness": "T_Trivia_RoyalPurple_Roughness.png"
+    },
+    "metallic": 0.02,
+    "roughness": 0.62,
+    "size": 2048,
+    "emission_strength": 0.0
+  },
+  "M_Trivia_Ivory": {
+    "maps": {
+      "BaseColor": "T_Trivia_Ivory_BaseColor.png",
+      "Normal": "T_Trivia_Ivory_Normal.png",
+      "MetallicSmoothness": "T_Trivia_Ivory_MetallicSmoothness.png",
+      "Roughness": "T_Trivia_Ivory_Roughness.png"
+    },
+    "metallic": 0.0,
+    "roughness": 0.48,
+    "size": 2048,
+    "emission_strength": 0.0
+  },
+  "M_Trivia_Marble": {
+    "maps": {
+      "BaseColor": "T_Trivia_Marble_BaseColor.png",
+      "Normal": "T_Trivia_Marble_Normal.png",
+      "MetallicSmoothness": "T_Trivia_Marble_MetallicSmoothness.png",
+      "Roughness": "T_Trivia_Marble_Roughness.png"
+    },
+    "metallic": 0.0,
+    "roughness": 0.26,
+    "size": 2048,
+    "emission_strength": 0.0
+  },
+  "M_Trivia_BlackMetal": {
+    "maps": {
+      "BaseColor": "T_Trivia_BlackMetal_BaseColor.png",
+      "Normal": "T_Trivia_BlackMetal_Normal.png",
+      "MetallicSmoothness": "T_Trivia_BlackMetal_MetallicSmoothness.png",
+      "Roughness": "T_Trivia_BlackMetal_Roughness.png"
+    },
+    "metallic": 0.65,
+    "roughness": 0.31,
+    "size": 2048,
+    "emission_strength": 0.0
+  },
+  "M_Trivia_Monitor": {
+    "maps": {
+      "BaseColor": "T_Trivia_Monitor_BaseColor.png",
+      "Normal": "T_Trivia_Monitor_Normal.png",
+      "MetallicSmoothness": "T_Trivia_Monitor_MetallicSmoothness.png",
+      "Roughness": "T_Trivia_Monitor_Roughness.png"
+    },
+    "metallic": 0.05,
+    "roughness": 0.24,
+    "size": 64,
+    "emission_strength": 0.0
+  },
+  "M_Trivia_Screen": {
+    "maps": {
+      "BaseColor": "T_Trivia_Screen_BaseColor.png",
+      "Normal": "T_Trivia_Screen_Normal.png",
+      "MetallicSmoothness": "T_Trivia_Screen_MetallicSmoothness.png",
+      "Roughness": "T_Trivia_Screen_Roughness.png"
+    },
+    "metallic": 0,
+    "roughness": 0.6,
+    "size": 64,
+    "emission_strength": 0.18000000715255737
+  },
+  "M_Trivia_Leaves": {
+    "maps": {
+      "BaseColor": "T_Trivia_Leaves_BaseColor.png",
+      "Normal": "T_Trivia_Leaves_Normal.png",
+      "MetallicSmoothness": "T_Trivia_Leaves_MetallicSmoothness.png",
+      "Roughness": "T_Trivia_Leaves_Roughness.png"
+    },
+    "metallic": 0,
+    "roughness": 0.5,
+    "size": 2048,
+    "emission_strength": 0.0
+  },
+  "M_Trivia_PetalPurple": {
+    "maps": {
+      "BaseColor": "T_Trivia_PetalPurple_BaseColor.png",
+      "Normal": "T_Trivia_PetalPurple_Normal.png",
+      "MetallicSmoothness": "T_Trivia_PetalPurple_MetallicSmoothness.png",
+      "Roughness": "T_Trivia_PetalPurple_Roughness.png"
+    },
+    "metallic": 0,
+    "roughness": 0.58,
+    "size": 2048,
+    "emission_strength": 0.0
+  },
+  "M_Trivia_PetalCream": {
+    "maps": {
+      "BaseColor": "T_Trivia_PetalCream_BaseColor.png",
+      "Normal": "T_Trivia_PetalCream_Normal.png",
+      "MetallicSmoothness": "T_Trivia_PetalCream_MetallicSmoothness.png",
+      "Roughness": "T_Trivia_PetalCream_Roughness.png"
+    },
+    "metallic": 0,
+    "roughness": 0.55,
+    "size": 2048,
+    "emission_strength": 0.0
+  },
+  "M_Trivia_PetalWhite": {
+    "maps": {
+      "BaseColor": "T_Trivia_PetalWhite_BaseColor.png",
+      "Normal": "T_Trivia_PetalWhite_Normal.png",
+      "MetallicSmoothness": "T_Trivia_PetalWhite_MetallicSmoothness.png",
+      "Roughness": "T_Trivia_PetalWhite_Roughness.png"
+    },
+    "metallic": 0,
+    "roughness": 0.56,
+    "size": 2048,
+    "emission_strength": 0.0
+  },
+  "M_Trivia_Bulb": {
+    "maps": {
+      "BaseColor": "T_Trivia_Bulb_BaseColor.png",
+      "Normal": "T_Trivia_Bulb_Normal.png",
+      "MetallicSmoothness": "T_Trivia_Bulb_MetallicSmoothness.png",
+      "Roughness": "T_Trivia_Bulb_Roughness.png",
+      "Emission": "T_Trivia_Bulb_Emission.png"
+    },
+    "metallic": 0,
+    "roughness": 0.22,
+    "size": 64,
+    "emission_strength": 3.0
+  },
+  "M_Trivia_Red": {
+    "maps": {
+      "BaseColor": "T_Trivia_Red_BaseColor.png",
+      "Normal": "T_Trivia_Red_Normal.png",
+      "MetallicSmoothness": "T_Trivia_Red_MetallicSmoothness.png",
+      "Roughness": "T_Trivia_Red_Roughness.png",
+      "Emission": "T_Trivia_Red_Emission.png"
+    },
+    "metallic": 0.08,
+    "roughness": 0.22,
+    "size": 64,
+    "emission_strength": 0.5
+  },
+  "M_Trivia_Blue": {
+    "maps": {
+      "BaseColor": "T_Trivia_Blue_BaseColor.png",
+      "Normal": "T_Trivia_Blue_Normal.png",
+      "MetallicSmoothness": "T_Trivia_Blue_MetallicSmoothness.png",
+      "Roughness": "T_Trivia_Blue_Roughness.png",
+      "Emission": "T_Trivia_Blue_Emission.png"
+    },
+    "metallic": 0.08,
+    "roughness": 0.22,
+    "size": 64,
+    "emission_strength": 0.5
+  },
+  "M_Trivia_Yellow": {
+    "maps": {
+      "BaseColor": "T_Trivia_Yellow_BaseColor.png",
+      "Normal": "T_Trivia_Yellow_Normal.png",
+      "MetallicSmoothness": "T_Trivia_Yellow_MetallicSmoothness.png",
+      "Roughness": "T_Trivia_Yellow_Roughness.png",
+      "Emission": "T_Trivia_Yellow_Emission.png"
+    },
+    "metallic": 0.08,
+    "roughness": 0.22,
+    "size": 64,
+    "emission_strength": 0.5
+  },
+  "M_Trivia_Green": {
+    "maps": {
+      "BaseColor": "T_Trivia_Green_BaseColor.png",
+      "Normal": "T_Trivia_Green_Normal.png",
+      "MetallicSmoothness": "T_Trivia_Green_MetallicSmoothness.png",
+      "Roughness": "T_Trivia_Green_Roughness.png",
+      "Emission": "T_Trivia_Green_Emission.png"
+    },
+    "metallic": 0.08,
+    "roughness": 0.22,
+    "size": 64,
+    "emission_strength": 0.5
+  },
+  "M_Trivia_Symbol": {
+    "maps": {
+      "BaseColor": "T_Trivia_Symbol_BaseColor.png",
+      "Normal": "T_Trivia_Symbol_Normal.png",
+      "MetallicSmoothness": "T_Trivia_Symbol_MetallicSmoothness.png",
+      "Roughness": "T_Trivia_Symbol_Roughness.png",
+      "Emission": "T_Trivia_Symbol_Emission.png"
+    },
+    "metallic": 0,
+    "roughness": 0.25,
+    "size": 64,
+    "emission_strength": 2.0
+  }
+}

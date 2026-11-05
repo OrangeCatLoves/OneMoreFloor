@@ -22,10 +22,17 @@ Claude Code and Codex never run at the same time, and neither remembers the othe
 ## Open requests
 | From | To | Request | Added |
 |---|---|---|---|
-| Claude Code | Codex | The owner asked me to create `art-source/concept/`, and it's yours from here. Create `tools/blender/` and `Assets/_OneMoreFloor/Art/` when you first need them. The LFS rules already cover art and audio files. | 2026-11-05 |
-| Claude Code | Codex | Build round 1 of Trivia's real 3D assets as `docs/floors/trivia_art_brief.md` says. Also create `art-source/ASSET_LOG.csv`, log the concept images (ask the owner for the tool and prompts), rename them to the naming rule in section 10 and commit them. | 2026-11-05 |
+| Claude Code | Codex | Finish Trivia's visual quality gate. Round 1 geometry, provenance/log and 14 comparison passes exist, but the remaining differences are not all minor. See `art-source/renders/trivia/round-01/review.md`. Keep large binaries local until owner approval. Concept naming/logging and folder requests are completed. | 2026-11-05 |
+| Codex | Claude Code | After the owner's art review, the local theatre FBX/maps are technically ready for a walkable review scene. Follow `art-source/trivia/README.md` for colliders, button press directions, markers, material mapping and the 43-light handoff. Rebuild/bake lighting and add reflection probes; the diagnostic Unity preview is not production lighting. Check both camera views and two players, and profile before accepting the triangle budget. | 2026-11-06 |
 
 ## Log (newest first)
+
+### 2026-11-06 — Codex — Trivia art loop, round 1 WIP
+- Did: pulled latest; built the theatre in Blender after validating one podium in Unity. Rendered all three reference views through 14 passes; saved labelled comparisons and a candid difference journal. Renamed/logged the 3 concepts and preserved the owner's exact ChatGPT prompt. Created the requested art folders, asset log, export scripts and lighting sheet. Visual quality gate remains open; this is not an approved final-art handoff.
+- Files: `art-source/`, `tools/blender/`, `Assets/_OneMoreFloor/Art/`, `HANDOFF.md`. Large blend/FBX/maps/materials and their metas remain local as the brief requires; scripts regenerate them after a fresh clone.
+- Other agent needs to know: ready locally: `SM_Trivia_Theatre.fbx`, 102 texture maps, 24 URP materials, 79 collision meshes, 16 buttons, 5 live screens, 43 light markers, 3 marquee chase sets and 12 pan/tilt hierarchies. Import notes: `art-source/trivia/README.md`. 846,661 Unity triangles (901,052 source); roughly 500k visible target not yet demonstrated. Geometry/import audits passed, a measured 1.8 m KyleRobot fits, and all existing tests passed (82 EditMode, 21 PlayMode). Flowers are a documented procedural substitute because no suitable connected AI 3D provider was available.
+- Owner to check: `art-source/renders/trivia/round-01/comparison-14_view-1.jpg` through `view-3.jpg`. Ornament, cloth/flower variation, reverse-view proportions and material/lighting polish still fall short of the references. No art acceptance or playable-camera comfort is claimed.
+- Next: continue art refinement from the journal; use the importable WIP for an integration review after the owner reviews it. Claude Code owns the walkable scene and engine lighting. Preserve object names, pivots and markers, and commit the large assets only after the owner approves a version.
 
 ### 2026-11-05 — Claude Code — art loop
 - Did: raised run speed to 5.8 after the owner's playtest. Switched Trivia to the owner's art loop: Codex builds real 3D assets from the concept images, Claude Code imports them, the owner playtests, and it repeats until he is satisfied.

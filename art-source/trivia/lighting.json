@@ -1,0 +1,1466 @@
+[
+  {
+    "name": "MK_Light_Point_01",
+    "type": "Point",
+    "position_blender": [
+      -4.800000190734863,
+      -3.180000066757202,
+      0.8500000238418579
+    ],
+    "target_blender": null,
+    "color": "#FFCF83",
+    "watts_blender": 2,
+    "relative_intensity": 0.002,
+    "cone_degrees": null,
+    "size_m": 0.3,
+    "casts_shadow_eevee": false,
+    "purpose": "Subtle podium practical spill on polished wood; bake",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      4.800000190734863,
+      0.8500000238418579,
+      3.180000066757202
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Point_02",
+    "type": "Point",
+    "position_blender": [
+      -1.600000023841858,
+      -3.180000066757202,
+      0.8500000238418579
+    ],
+    "target_blender": null,
+    "color": "#FFCF83",
+    "watts_blender": 2,
+    "relative_intensity": 0.002,
+    "cone_degrees": null,
+    "size_m": 0.3,
+    "casts_shadow_eevee": false,
+    "purpose": "Subtle podium practical spill on polished wood; bake",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      1.600000023841858,
+      0.8500000238418579,
+      3.180000066757202
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Point_03",
+    "type": "Point",
+    "position_blender": [
+      1.600000023841858,
+      -3.180000066757202,
+      0.8500000238418579
+    ],
+    "target_blender": null,
+    "color": "#FFCF83",
+    "watts_blender": 2,
+    "relative_intensity": 0.002,
+    "cone_degrees": null,
+    "size_m": 0.3,
+    "casts_shadow_eevee": false,
+    "purpose": "Subtle podium practical spill on polished wood; bake",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      -1.600000023841858,
+      0.8500000238418579,
+      3.180000066757202
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Point_04",
+    "type": "Point",
+    "position_blender": [
+      4.800000190734863,
+      -3.180000066757202,
+      0.8500000238418579
+    ],
+    "target_blender": null,
+    "color": "#FFCF83",
+    "watts_blender": 2,
+    "relative_intensity": 0.002,
+    "cone_degrees": null,
+    "size_m": 0.3,
+    "casts_shadow_eevee": false,
+    "purpose": "Subtle podium practical spill on polished wood; bake",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      -4.800000190734863,
+      0.8500000238418579,
+      3.180000066757202
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Area_05",
+    "type": "Area",
+    "position_blender": [
+      0.0,
+      3.950000047683716,
+      5.599999904632568
+    ],
+    "target_blender": [
+      0,
+      -3,
+      2.4
+    ],
+    "color": "#FFE1AD",
+    "watts_blender": 180,
+    "relative_intensity": 0.18,
+    "cone_degrees": null,
+    "size_m": 8,
+    "casts_shadow_eevee": false,
+    "purpose": "Aggregate marquee bounce; bulbs use three emissive chase sets",
+    "direction_blender": [
+      -1.0394428784366028e-07,
+      -0.9083415269851685,
+      -0.4182291626930237
+    ],
+    "position_unity": [
+      -0.0,
+      5.599999904632568,
+      -3.950000047683716
+    ],
+    "direction_unity": [
+      1.0394428784366028e-07,
+      -0.4182291626930237,
+      0.9083415269851685
+    ]
+  },
+  {
+    "name": "MK_Light_Spot_06",
+    "type": "Spot",
+    "position_blender": [
+      -8.0,
+      1.0,
+      7.840000152587891
+    ],
+    "target_blender": [
+      -5.2,
+      1,
+      1
+    ],
+    "color": "#FFD18B",
+    "watts_blender": 1100,
+    "relative_intensity": 1.1,
+    "cone_degrees": 55,
+    "size_m": 1,
+    "casts_shadow_eevee": true,
+    "purpose": "Warm stage pool",
+    "direction_blender": [
+      0.37884360551834106,
+      -1.6559781101932458e-08,
+      -0.925460696220398
+    ],
+    "position_unity": [
+      8.0,
+      7.840000152587891,
+      -1.0
+    ],
+    "direction_unity": [
+      -0.37884360551834106,
+      -0.925460696220398,
+      1.6559781101932458e-08
+    ]
+  },
+  {
+    "name": "MK_Light_Spot_07",
+    "type": "Spot",
+    "position_blender": [
+      -5.699999809265137,
+      1.0,
+      7.840000152587891
+    ],
+    "target_blender": [
+      -3.705,
+      1,
+      1
+    ],
+    "color": "#FFD18B",
+    "watts_blender": 1100,
+    "relative_intensity": 1.1,
+    "cone_degrees": 55,
+    "size_m": 1,
+    "casts_shadow_eevee": true,
+    "purpose": "Warm stage pool",
+    "direction_blender": [
+      0.2799999713897705,
+      -6.898281412759388e-08,
+      -0.9600000381469727
+    ],
+    "position_unity": [
+      5.699999809265137,
+      7.840000152587891,
+      -1.0
+    ],
+    "direction_unity": [
+      -0.2799999713897705,
+      -0.9600000381469727,
+      6.898281412759388e-08
+    ]
+  },
+  {
+    "name": "MK_Light_Spot_08",
+    "type": "Spot",
+    "position_blender": [
+      -3.4000000953674316,
+      1.0,
+      7.840000152587891
+    ],
+    "target_blender": [
+      -2.21,
+      1,
+      1
+    ],
+    "color": "#C775FF",
+    "watts_blender": 1100,
+    "relative_intensity": 1.1,
+    "cone_degrees": 55,
+    "size_m": 1,
+    "casts_shadow_eevee": true,
+    "purpose": "Purple stage wash",
+    "direction_blender": [
+      0.1714019626379013,
+      -2.3210662281059058e-09,
+      -0.9852011799812317
+    ],
+    "position_unity": [
+      3.4000000953674316,
+      7.840000152587891,
+      -1.0
+    ],
+    "direction_unity": [
+      -0.1714019626379013,
+      -0.9852011799812317,
+      2.3210662281059058e-09
+    ]
+  },
+  {
+    "name": "MK_Light_Spot_09",
+    "type": "Spot",
+    "position_blender": [
+      -1.100000023841858,
+      1.0,
+      7.840000152587891
+    ],
+    "target_blender": [
+      -0.7150000000000001,
+      1,
+      1
+    ],
+    "color": "#FFD18B",
+    "watts_blender": 1100,
+    "relative_intensity": 1.1,
+    "cone_degrees": 55,
+    "size_m": 1,
+    "casts_shadow_eevee": true,
+    "purpose": "Warm stage pool",
+    "direction_blender": [
+      0.05619760975241661,
+      -4.24533908471858e-07,
+      -0.9984196424484253
+    ],
+    "position_unity": [
+      1.100000023841858,
+      7.840000152587891,
+      -1.0
+    ],
+    "direction_unity": [
+      -0.05619760975241661,
+      -0.9984196424484253,
+      4.24533908471858e-07
+    ]
+  },
+  {
+    "name": "MK_Light_Spot_10",
+    "type": "Spot",
+    "position_blender": [
+      1.100000023841858,
+      1.0,
+      7.840000152587891
+    ],
+    "target_blender": [
+      0.7150000000000001,
+      1,
+      1
+    ],
+    "color": "#FFD18B",
+    "watts_blender": 1100,
+    "relative_intensity": 1.1,
+    "cone_degrees": 55,
+    "size_m": 1,
+    "casts_shadow_eevee": true,
+    "purpose": "Warm stage pool",
+    "direction_blender": [
+      -0.05619760975241661,
+      -4.24533908471858e-07,
+      -0.9984196424484253
+    ],
+    "position_unity": [
+      -1.100000023841858,
+      7.840000152587891,
+      -1.0
+    ],
+    "direction_unity": [
+      0.05619760975241661,
+      -0.9984196424484253,
+      4.24533908471858e-07
+    ]
+  },
+  {
+    "name": "MK_Light_Spot_11",
+    "type": "Spot",
+    "position_blender": [
+      3.4000000953674316,
+      1.0,
+      7.840000152587891
+    ],
+    "target_blender": [
+      2.21,
+      1,
+      1
+    ],
+    "color": "#C775FF",
+    "watts_blender": 1100,
+    "relative_intensity": 1.1,
+    "cone_degrees": 55,
+    "size_m": 1,
+    "casts_shadow_eevee": true,
+    "purpose": "Purple stage wash",
+    "direction_blender": [
+      -0.1714019626379013,
+      -2.3210662281059058e-09,
+      -0.9852011799812317
+    ],
+    "position_unity": [
+      -3.4000000953674316,
+      7.840000152587891,
+      -1.0
+    ],
+    "direction_unity": [
+      0.1714019626379013,
+      -0.9852011799812317,
+      2.3210662281059058e-09
+    ]
+  },
+  {
+    "name": "MK_Light_Spot_12",
+    "type": "Spot",
+    "position_blender": [
+      5.699999809265137,
+      1.0,
+      7.840000152587891
+    ],
+    "target_blender": [
+      3.705,
+      1,
+      1
+    ],
+    "color": "#FFD18B",
+    "watts_blender": 1100,
+    "relative_intensity": 1.1,
+    "cone_degrees": 55,
+    "size_m": 1,
+    "casts_shadow_eevee": true,
+    "purpose": "Warm stage pool",
+    "direction_blender": [
+      -0.2799999713897705,
+      -6.898281412759388e-08,
+      -0.9600000381469727
+    ],
+    "position_unity": [
+      -5.699999809265137,
+      7.840000152587891,
+      -1.0
+    ],
+    "direction_unity": [
+      0.2799999713897705,
+      -0.9600000381469727,
+      6.898281412759388e-08
+    ]
+  },
+  {
+    "name": "MK_Light_Spot_13",
+    "type": "Spot",
+    "position_blender": [
+      8.0,
+      1.0,
+      7.840000152587891
+    ],
+    "target_blender": [
+      5.2,
+      1,
+      1
+    ],
+    "color": "#FFD18B",
+    "watts_blender": 1100,
+    "relative_intensity": 1.1,
+    "cone_degrees": 55,
+    "size_m": 1,
+    "casts_shadow_eevee": true,
+    "purpose": "Warm stage pool",
+    "direction_blender": [
+      -0.37884360551834106,
+      -1.6559781101932458e-08,
+      -0.925460696220398
+    ],
+    "position_unity": [
+      -8.0,
+      7.840000152587891,
+      -1.0
+    ],
+    "direction_unity": [
+      0.37884360551834106,
+      -0.925460696220398,
+      1.6559781101932458e-08
+    ]
+  },
+  {
+    "name": "MK_Light_Spot_14",
+    "type": "Spot",
+    "position_blender": [
+      -9.0,
+      -2.0,
+      1.100000023841858
+    ],
+    "target_blender": [
+      -4.5,
+      4,
+      5
+    ],
+    "color": "#C775FF",
+    "watts_blender": 320,
+    "relative_intensity": 0.32,
+    "cone_degrees": 55,
+    "size_m": 1,
+    "casts_shadow_eevee": true,
+    "purpose": "Purple stage wash",
+    "direction_blender": [
+      0.5323300957679749,
+      0.7097734212875366,
+      0.46135273575782776
+    ],
+    "position_unity": [
+      9.0,
+      1.100000023841858,
+      2.0
+    ],
+    "direction_unity": [
+      -0.5323300957679749,
+      0.46135273575782776,
+      -0.7097734212875366
+    ]
+  },
+  {
+    "name": "MK_Light_Spot_15",
+    "type": "Spot",
+    "position_blender": [
+      9.0,
+      -2.0,
+      1.100000023841858
+    ],
+    "target_blender": [
+      4.5,
+      4,
+      5
+    ],
+    "color": "#FFD18B",
+    "watts_blender": 320,
+    "relative_intensity": 0.32,
+    "cone_degrees": 55,
+    "size_m": 1,
+    "casts_shadow_eevee": true,
+    "purpose": "Warm stage pool",
+    "direction_blender": [
+      -0.5323300957679749,
+      0.7097734212875366,
+      0.46135273575782776
+    ],
+    "position_unity": [
+      -9.0,
+      1.100000023841858,
+      2.0
+    ],
+    "direction_unity": [
+      0.5323300957679749,
+      0.46135273575782776,
+      -0.7097734212875366
+    ]
+  },
+  {
+    "name": "MK_Light_Spot_16",
+    "type": "Spot",
+    "position_blender": [
+      -7.0,
+      3.0,
+      1.100000023841858
+    ],
+    "target_blender": [
+      -3.5,
+      4,
+      5
+    ],
+    "color": "#FFD18B",
+    "watts_blender": 320,
+    "relative_intensity": 0.32,
+    "cone_degrees": 55,
+    "size_m": 1,
+    "casts_shadow_eevee": true,
+    "purpose": "Warm stage pool",
+    "direction_blender": [
+      0.6560706496238708,
+      0.18744885921478271,
+      0.7310500741004944
+    ],
+    "position_unity": [
+      7.0,
+      1.100000023841858,
+      -3.0
+    ],
+    "direction_unity": [
+      -0.6560706496238708,
+      0.7310500741004944,
+      -0.18744885921478271
+    ]
+  },
+  {
+    "name": "MK_Light_Spot_17",
+    "type": "Spot",
+    "position_blender": [
+      7.0,
+      3.0,
+      1.100000023841858
+    ],
+    "target_blender": [
+      3.5,
+      4,
+      5
+    ],
+    "color": "#C775FF",
+    "watts_blender": 320,
+    "relative_intensity": 0.32,
+    "cone_degrees": 55,
+    "size_m": 1,
+    "casts_shadow_eevee": true,
+    "purpose": "Purple stage wash",
+    "direction_blender": [
+      -0.6560706496238708,
+      0.18744885921478271,
+      0.7310500741004944
+    ],
+    "position_unity": [
+      -7.0,
+      1.100000023841858,
+      -3.0
+    ],
+    "direction_unity": [
+      0.6560706496238708,
+      0.7310500741004944,
+      -0.18744885921478271
+    ]
+  },
+  {
+    "name": "MK_Light_Point_18",
+    "type": "Point",
+    "position_blender": [
+      -13.75,
+      1.909999966621399,
+      6.019999980926514
+    ],
+    "target_blender": null,
+    "color": "#FFB85A",
+    "watts_blender": 65,
+    "relative_intensity": 0.065,
+    "cone_degrees": null,
+    "size_m": 0.22,
+    "casts_shadow_eevee": false,
+    "purpose": "Amber wall lantern; bake indirect light",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      13.75,
+      6.019999980926514,
+      -1.909999966621399
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Point_19",
+    "type": "Point",
+    "position_blender": [
+      -11.050000190734863,
+      1.909999966621399,
+      6.019999980926514
+    ],
+    "target_blender": null,
+    "color": "#FFB85A",
+    "watts_blender": 65,
+    "relative_intensity": 0.065,
+    "cone_degrees": null,
+    "size_m": 0.22,
+    "casts_shadow_eevee": false,
+    "purpose": "Amber wall lantern; bake indirect light",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      11.050000190734863,
+      6.019999980926514,
+      -1.909999966621399
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Point_20",
+    "type": "Point",
+    "position_blender": [
+      11.050000190734863,
+      1.909999966621399,
+      6.019999980926514
+    ],
+    "target_blender": null,
+    "color": "#FFB85A",
+    "watts_blender": 65,
+    "relative_intensity": 0.065,
+    "cone_degrees": null,
+    "size_m": 0.22,
+    "casts_shadow_eevee": false,
+    "purpose": "Amber wall lantern; bake indirect light",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      -11.050000190734863,
+      6.019999980926514,
+      -1.909999966621399
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Point_21",
+    "type": "Point",
+    "position_blender": [
+      13.75,
+      1.909999966621399,
+      6.019999980926514
+    ],
+    "target_blender": null,
+    "color": "#FFB85A",
+    "watts_blender": 65,
+    "relative_intensity": 0.065,
+    "cone_degrees": null,
+    "size_m": 0.22,
+    "casts_shadow_eevee": false,
+    "purpose": "Amber wall lantern; bake indirect light",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      -13.75,
+      6.019999980926514,
+      -1.909999966621399
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Point_22",
+    "type": "Point",
+    "position_blender": [
+      -13.210000038146973,
+      -7.75,
+      6.019999980926514
+    ],
+    "target_blender": null,
+    "color": "#FFB85A",
+    "watts_blender": 65,
+    "relative_intensity": 0.065,
+    "cone_degrees": null,
+    "size_m": 0.22,
+    "casts_shadow_eevee": false,
+    "purpose": "Amber wall lantern; bake indirect light",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      13.210000038146973,
+      6.019999980926514,
+      7.75
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Point_23",
+    "type": "Point",
+    "position_blender": [
+      -13.210000038146973,
+      -5.050000190734863,
+      6.019999980926514
+    ],
+    "target_blender": null,
+    "color": "#FFB85A",
+    "watts_blender": 65,
+    "relative_intensity": 0.065,
+    "cone_degrees": null,
+    "size_m": 0.22,
+    "casts_shadow_eevee": false,
+    "purpose": "Amber wall lantern; bake indirect light",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      13.210000038146973,
+      6.019999980926514,
+      5.050000190734863
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Point_24",
+    "type": "Point",
+    "position_blender": [
+      13.210000038146973,
+      -5.050000190734863,
+      6.019999980926514
+    ],
+    "target_blender": null,
+    "color": "#FFB85A",
+    "watts_blender": 65,
+    "relative_intensity": 0.065,
+    "cone_degrees": null,
+    "size_m": 0.22,
+    "casts_shadow_eevee": false,
+    "purpose": "Amber wall lantern; bake indirect light",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      -13.210000038146973,
+      6.019999980926514,
+      5.050000190734863
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Point_25",
+    "type": "Point",
+    "position_blender": [
+      13.210000038146973,
+      -7.75,
+      6.019999980926514
+    ],
+    "target_blender": null,
+    "color": "#FFB85A",
+    "watts_blender": 65,
+    "relative_intensity": 0.065,
+    "cone_degrees": null,
+    "size_m": 0.22,
+    "casts_shadow_eevee": false,
+    "purpose": "Amber wall lantern; bake indirect light",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      -13.210000038146973,
+      6.019999980926514,
+      7.75
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Point_26",
+    "type": "Point",
+    "position_blender": [
+      -11.0,
+      -24.799999237060547,
+      7.420000076293945
+    ],
+    "target_blender": null,
+    "color": "#FFB85A",
+    "watts_blender": 65,
+    "relative_intensity": 0.065,
+    "cone_degrees": null,
+    "size_m": 0.22,
+    "casts_shadow_eevee": false,
+    "purpose": "Amber wall lantern; bake indirect light",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      11.0,
+      7.420000076293945,
+      24.799999237060547
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Point_27",
+    "type": "Point",
+    "position_blender": [
+      -7.0,
+      -24.799999237060547,
+      7.420000076293945
+    ],
+    "target_blender": null,
+    "color": "#FFB85A",
+    "watts_blender": 65,
+    "relative_intensity": 0.065,
+    "cone_degrees": null,
+    "size_m": 0.22,
+    "casts_shadow_eevee": false,
+    "purpose": "Amber wall lantern; bake indirect light",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      7.0,
+      7.420000076293945,
+      24.799999237060547
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Point_28",
+    "type": "Point",
+    "position_blender": [
+      -3.0,
+      -24.799999237060547,
+      7.420000076293945
+    ],
+    "target_blender": null,
+    "color": "#FFB85A",
+    "watts_blender": 65,
+    "relative_intensity": 0.065,
+    "cone_degrees": null,
+    "size_m": 0.22,
+    "casts_shadow_eevee": false,
+    "purpose": "Amber wall lantern; bake indirect light",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      3.0,
+      7.420000076293945,
+      24.799999237060547
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Point_29",
+    "type": "Point",
+    "position_blender": [
+      1.0,
+      -24.799999237060547,
+      7.420000076293945
+    ],
+    "target_blender": null,
+    "color": "#FFB85A",
+    "watts_blender": 65,
+    "relative_intensity": 0.065,
+    "cone_degrees": null,
+    "size_m": 0.22,
+    "casts_shadow_eevee": false,
+    "purpose": "Amber wall lantern; bake indirect light",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      -1.0,
+      7.420000076293945,
+      24.799999237060547
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Point_30",
+    "type": "Point",
+    "position_blender": [
+      5.0,
+      -24.799999237060547,
+      7.420000076293945
+    ],
+    "target_blender": null,
+    "color": "#FFB85A",
+    "watts_blender": 65,
+    "relative_intensity": 0.065,
+    "cone_degrees": null,
+    "size_m": 0.22,
+    "casts_shadow_eevee": false,
+    "purpose": "Amber wall lantern; bake indirect light",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      -5.0,
+      7.420000076293945,
+      24.799999237060547
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Point_31",
+    "type": "Point",
+    "position_blender": [
+      9.0,
+      -24.799999237060547,
+      7.420000076293945
+    ],
+    "target_blender": null,
+    "color": "#FFB85A",
+    "watts_blender": 65,
+    "relative_intensity": 0.065,
+    "cone_degrees": null,
+    "size_m": 0.22,
+    "casts_shadow_eevee": false,
+    "purpose": "Amber wall lantern; bake indirect light",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      -9.0,
+      7.420000076293945,
+      24.799999237060547
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Point_32",
+    "type": "Point",
+    "position_blender": [
+      13.0,
+      -24.799999237060547,
+      7.420000076293945
+    ],
+    "target_blender": null,
+    "color": "#FFB85A",
+    "watts_blender": 65,
+    "relative_intensity": 0.065,
+    "cone_degrees": null,
+    "size_m": 0.22,
+    "casts_shadow_eevee": false,
+    "purpose": "Amber wall lantern; bake indirect light",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      -13.0,
+      7.420000076293945,
+      24.799999237060547
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Point_33",
+    "type": "Point",
+    "position_blender": [
+      -12.350000381469727,
+      -4.099999904632568,
+      2.619999885559082
+    ],
+    "target_blender": null,
+    "color": "#FFB85A",
+    "watts_blender": 65,
+    "relative_intensity": 0.065,
+    "cone_degrees": null,
+    "size_m": 0.22,
+    "casts_shadow_eevee": false,
+    "purpose": "Amber wall lantern; bake indirect light",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      12.350000381469727,
+      2.619999885559082,
+      4.099999904632568
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Point_34",
+    "type": "Point",
+    "position_blender": [
+      -12.350000381469727,
+      0.09999990463256836,
+      2.619999885559082
+    ],
+    "target_blender": null,
+    "color": "#FFB85A",
+    "watts_blender": 65,
+    "relative_intensity": 0.065,
+    "cone_degrees": null,
+    "size_m": 0.22,
+    "casts_shadow_eevee": false,
+    "purpose": "Amber wall lantern; bake indirect light",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      12.350000381469727,
+      2.619999885559082,
+      -0.09999990463256836
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Area_35",
+    "type": "Area",
+    "position_blender": [
+      0.0,
+      -3.0,
+      7.5
+    ],
+    "target_blender": [
+      0,
+      1,
+      0
+    ],
+    "color": "#FFD49D",
+    "watts_blender": 2300,
+    "relative_intensity": 2.3,
+    "cone_degrees": null,
+    "size_m": 9,
+    "casts_shadow_eevee": true,
+    "purpose": "Broad warm stage key, bake indirect",
+    "direction_blender": [
+      0.0,
+      0.4705883264541626,
+      -0.882352888584137
+    ],
+    "position_unity": [
+      -0.0,
+      7.5,
+      3.0
+    ],
+    "direction_unity": [
+      -0.0,
+      -0.882352888584137,
+      -0.4705883264541626
+    ]
+  },
+  {
+    "name": "MK_Light_Area_36",
+    "type": "Area",
+    "position_blender": [
+      -7.0,
+      -6.0,
+      5.0
+    ],
+    "target_blender": [
+      0,
+      1,
+      2
+    ],
+    "color": "#FFD0A0",
+    "watts_blender": 1200,
+    "relative_intensity": 1.2,
+    "cone_degrees": null,
+    "size_m": 6,
+    "casts_shadow_eevee": false,
+    "purpose": "Warm camera-left fill",
+    "direction_blender": [
+      0.6767154335975647,
+      0.676715612411499,
+      -0.29002100229263306
+    ],
+    "position_unity": [
+      7.0,
+      5.0,
+      6.0
+    ],
+    "direction_unity": [
+      -0.6767154335975647,
+      -0.29002100229263306,
+      -0.676715612411499
+    ]
+  },
+  {
+    "name": "MK_Light_Area_37",
+    "type": "Area",
+    "position_blender": [
+      6.0,
+      2.0,
+      6.800000190734863
+    ],
+    "target_blender": [
+      0,
+      0,
+      0.6
+    ],
+    "color": "#9A4CFF",
+    "watts_blender": 1500,
+    "relative_intensity": 1.5,
+    "cone_degrees": null,
+    "size_m": 5,
+    "casts_shadow_eevee": false,
+    "purpose": "Purple rim and wood reflections",
+    "direction_blender": [
+      -0.6774581074714661,
+      -0.22581931948661804,
+      -0.7000401020050049
+    ],
+    "position_unity": [
+      -6.0,
+      6.800000190734863,
+      -2.0
+    ],
+    "direction_unity": [
+      0.6774581074714661,
+      -0.7000401020050049,
+      0.22581931948661804
+    ]
+  },
+  {
+    "name": "MK_Light_Area_38",
+    "type": "Area",
+    "position_blender": [
+      0.0,
+      -15.0,
+      8.0
+    ],
+    "target_blender": [
+      0,
+      -13,
+      0
+    ],
+    "color": "#FFC489",
+    "watts_blender": 2400,
+    "relative_intensity": 2.4,
+    "cone_degrees": null,
+    "size_m": 10,
+    "casts_shadow_eevee": true,
+    "purpose": "Audience fill, preserve stage contrast",
+    "direction_blender": [
+      0.0,
+      0.24253545701503754,
+      -0.9701425433158875
+    ],
+    "position_unity": [
+      -0.0,
+      8.0,
+      15.0
+    ],
+    "direction_unity": [
+      -0.0,
+      -0.9701425433158875,
+      -0.24253545701503754
+    ]
+  },
+  {
+    "name": "MK_Light_Area_39",
+    "type": "Area",
+    "position_blender": [
+      0.0,
+      -23.0,
+      8.0
+    ],
+    "target_blender": [
+      0,
+      -20,
+      2
+    ],
+    "color": "#DFA778",
+    "watts_blender": 1000,
+    "relative_intensity": 1.0,
+    "cone_degrees": null,
+    "size_m": 8,
+    "casts_shadow_eevee": false,
+    "purpose": "Upper balcony soft fill",
+    "direction_blender": [
+      0.0,
+      0.44721370935440063,
+      -0.8944271206855774
+    ],
+    "position_unity": [
+      -0.0,
+      8.0,
+      23.0
+    ],
+    "direction_unity": [
+      -0.0,
+      -0.8944271206855774,
+      -0.44721370935440063
+    ]
+  },
+  {
+    "name": "MK_Light_Area_40",
+    "type": "Area",
+    "position_blender": [
+      -10.0,
+      -8.0,
+      7.5
+    ],
+    "target_blender": [
+      -13,
+      -2,
+      2.5
+    ],
+    "color": "#FFC78A",
+    "watts_blender": 1600,
+    "relative_intensity": 1.6,
+    "cone_degrees": null,
+    "size_m": 5,
+    "casts_shadow_eevee": false,
+    "purpose": "Lift and side balcony amber key",
+    "direction_blender": [
+      -0.3585685193538666,
+      0.7171370983123779,
+      -0.5976144075393677
+    ],
+    "position_unity": [
+      10.0,
+      7.5,
+      8.0
+    ],
+    "direction_unity": [
+      0.3585685193538666,
+      -0.5976144075393677,
+      -0.7171370983123779
+    ]
+  },
+  {
+    "name": "MK_Light_Area_41",
+    "type": "Area",
+    "position_blender": [
+      -9.0,
+      -5.0,
+      4.0
+    ],
+    "target_blender": [
+      -13,
+      -2,
+      1.5
+    ],
+    "color": "#FFDDAA",
+    "watts_blender": 500,
+    "relative_intensity": 0.5,
+    "cone_degrees": null,
+    "size_m": 3,
+    "casts_shadow_eevee": false,
+    "purpose": "Brushed gold lift door reflection key",
+    "direction_blender": [
+      -0.7155419588088989,
+      0.5366562604904175,
+      -0.447213351726532
+    ],
+    "position_unity": [
+      9.0,
+      4.0,
+      5.0
+    ],
+    "direction_unity": [
+      0.7155419588088989,
+      -0.447213351726532,
+      -0.5366562604904175
+    ]
+  },
+  {
+    "name": "MK_Light_Area_42",
+    "type": "Area",
+    "position_blender": [
+      7.0,
+      -18.0,
+      7.0
+    ],
+    "target_blender": [
+      0,
+      -23,
+      4.5
+    ],
+    "color": "#FFC78A",
+    "watts_blender": 950,
+    "relative_intensity": 0.95,
+    "cone_degrees": null,
+    "size_m": 6,
+    "casts_shadow_eevee": false,
+    "purpose": "Rear balcony and banner key",
+    "direction_blender": [
+      -0.7814038991928101,
+      -0.5581455826759338,
+      -0.2790725529193878
+    ],
+    "position_unity": [
+      -7.0,
+      7.0,
+      18.0
+    ],
+    "direction_unity": [
+      0.7814038991928101,
+      -0.2790725529193878,
+      0.5581455826759338
+    ]
+  },
+  {
+    "name": "MK_Light_Area_43",
+    "type": "Area",
+    "position_blender": [
+      -7.0,
+      -18.0,
+      7.0
+    ],
+    "target_blender": [
+      0,
+      -23,
+      4.5
+    ],
+    "color": "#FFC78A",
+    "watts_blender": 950,
+    "relative_intensity": 0.95,
+    "cone_degrees": null,
+    "size_m": 6,
+    "casts_shadow_eevee": false,
+    "purpose": "Rear balcony balancing fill",
+    "direction_blender": [
+      0.7814038991928101,
+      -0.5581455826759338,
+      -0.2790725529193878
+    ],
+    "position_unity": [
+      7.0,
+      7.0,
+      18.0
+    ],
+    "direction_unity": [
+      -0.7814038991928101,
+      -0.2790725529193878,
+      0.5581455826759338
+    ]
+  }
+]

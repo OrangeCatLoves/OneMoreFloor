@@ -1,0 +1,38 @@
+{
+  "problems": [],
+  "triangles_total": 901052,
+  "triangles_by_category": {
+    "Architecture and detail": 362164,
+    "Podiums": 36064,
+    "Curtains": 76128,
+    "Seats": 342872,
+    "Flowers": 83824
+  },
+  "camera_frustum_triangles_upper_bound_including_occluded_geometry": {
+    "view_1": 700732,
+    "view_2": 569438,
+    "view_3": 822478
+  },
+  "render_objects": 480,
+  "unique_meshes": 229,
+  "material_count": 24,
+  "scale": {
+    "player_height_m": 1.8,
+    "player_diameter_m": 0.8,
+    "lift_clear_opening_m": [
+      3.0,
+      2.5
+    ],
+    "head_clearance_m": 0.7,
+    "podium_clear_gap_m": 1.9590000000000003,
+    "stage_riser_m": 0.2,
+    "stage_tread_m": 0.3,
+    "steps_width_m": 3.0,
+    "cab_size_m": {
+      "width": 5.0,
+      "depth": 5.0,
+      "height": 3.5
+    },
+    "note": "Geometric checks only. Third-person camera comfort and crowd movement require the owner playtest in Claude Code integration."
+  }
+}

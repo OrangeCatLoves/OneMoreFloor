@@ -1,0 +1,15 @@
+{
+    "model": "Assets/_OneMoreFloor/Art/Floors/Trivia/SM_Trivia_Podium_Pilot.fbx",
+    "sizeMetres": [
+        1.4600000381469727,
+        1.812207579612732,
+        1.0800000429153443
+    ],
+    "renderMeshes": 6,
+    "triangles": 7694,
+    "colliders": 1,
+    "buttons": 4,
+    "lightMarkers": 1,
+    "screens": 1,
+    "problems": []
+}

@@ -1,0 +1,10 @@
+Source: ChatGPT, model unspecified by owner.
+Owner supplied provenance on 2026-11-06 (Asia/Singapore).
+The three reference images were selected by the owner from a set of 40.
+Original filenames trivia-1.png, trivia-2.png, trivia-3.png map respectively to
+trivia_tier1_game-show-wide_01.png, trivia_tier1_game-show-stage_02.png,
+trivia_tier1_game-show-reverse_03.png.
+The approved art brief, not this exploratory prompt, defines round 1 scope.
+
+Owner's exact prompt:
+Change of plans, right now I only want you to focus on the Trivia game room. There's ideas I have in mind for the room designs. 1) A normal room with a screen infront that shows the question and the text box on each player's screen where they have to input their answers inside that box 2) Another room where the floor will transform and it becomes 4 sections where players have to stand inside them to indicate their answer, something like circle, square, cross and triangle - like Kahoot. The screen show the question and the corresponding options that relates to the shapes.  3) Another room where 4 buttons spring up from the ground and they have to click the button to indicate their answer, but the idea is similar to 2) still. 4) They're on stage, the curtains open and there's a host asking them questions while a large audience is watching them and the place is rather festive. They have to answer by selecting the correct buttons out of 4 different options to indicate the correct answer. 5) You're free to generate just 1 more different design  I have given you 4 ideas and 1 for you to imagine and please be creative. Would be great if it's different from the rest. I want you to generate 8 images for each of the 5 scenarios for their designs. The 8 images should belong to the "same" room, meaning they're not 8 different designs of the same room design but rather the same design but with 8 different images of it - probably a different angle of the same design, a different orientation, etc. If you're in doubt, please clarify with me!

@@ -1,0 +1,67 @@
+# Trivia lighting sheet — round 01
+
+Source: `art-source/trivia/Trivia_Round01.blend`, EEVEE. Every actual Blender light has an exported marker. `lighting.json` carries exact positions and directions in both coordinate systems.
+
+## Mood and engine transfer
+
+Keep the stage warm and bright, the hall darker, and purple restricted to the stage fill and selected spots. Preserve the colour of the red velvet rather than raising the exposure until it washes out. Use soft highlight bloom sparingly. The draft Unity screenshot is an import check with approximate realtime lights, not a match to the final lighting.
+
+Blender watts are not Unity intensity values. Relative intensity below uses 1000 Blender W as 1.0; tune Unity after baking indirect light. Area lights should be baked. Bake wall lanterns and podium spill where possible; keep only selected stage spots realtime. The three marquee meshes have separate emissive sets for chasing; do not add a realtime light to every bulb. Emissive strips, columns and bulb materials share `M_Trivia_Bulb`.
+
+Use the supplied direction vector for a Unity `LookRotation`; do not assume that an imported FBX empty's local forward axis is the light direction. Add reflection probes covering the stage and hall, then use URP bloom and a restrained tone curve. URP/Lit approximates velvet sheen and wood clearcoat; those Blender lobes do not transfer. No light beams or confetti are included.
+
+## Lights
+
+| Marker | Type | Hex | Relative intensity | Cone | Unity position (m) | Purpose |
+|---|---|---|---:|---:|---|---|
+| `MK_Light_Point_01` | Point | #FFCF83 | 0.002 | — | 4.80, 0.85, 3.18 | Subtle podium practical spill on polished wood; bake |
+| `MK_Light_Point_02` | Point | #FFCF83 | 0.002 | — | 1.60, 0.85, 3.18 | Subtle podium practical spill on polished wood; bake |
+| `MK_Light_Point_03` | Point | #FFCF83 | 0.002 | — | -1.60, 0.85, 3.18 | Subtle podium practical spill on polished wood; bake |
+| `MK_Light_Point_04` | Point | #FFCF83 | 0.002 | — | -4.80, 0.85, 3.18 | Subtle podium practical spill on polished wood; bake |
+| `MK_Light_Area_05` | Area | #FFE1AD | 0.180 | — | -0.00, 5.60, -3.95 | Aggregate marquee bounce; bulbs use three emissive chase sets |
+| `MK_Light_Spot_06` | Spot | #FFD18B | 1.100 | 55 | 8.00, 7.84, -1.00 | Warm stage pool |
+| `MK_Light_Spot_07` | Spot | #FFD18B | 1.100 | 55 | 5.70, 7.84, -1.00 | Warm stage pool |
+| `MK_Light_Spot_08` | Spot | #C775FF | 1.100 | 55 | 3.40, 7.84, -1.00 | Purple stage wash |
+| `MK_Light_Spot_09` | Spot | #FFD18B | 1.100 | 55 | 1.10, 7.84, -1.00 | Warm stage pool |
+| `MK_Light_Spot_10` | Spot | #FFD18B | 1.100 | 55 | -1.10, 7.84, -1.00 | Warm stage pool |
+| `MK_Light_Spot_11` | Spot | #C775FF | 1.100 | 55 | -3.40, 7.84, -1.00 | Purple stage wash |
+| `MK_Light_Spot_12` | Spot | #FFD18B | 1.100 | 55 | -5.70, 7.84, -1.00 | Warm stage pool |
+| `MK_Light_Spot_13` | Spot | #FFD18B | 1.100 | 55 | -8.00, 7.84, -1.00 | Warm stage pool |
+| `MK_Light_Spot_14` | Spot | #C775FF | 0.320 | 55 | 9.00, 1.10, 2.00 | Purple stage wash |
+| `MK_Light_Spot_15` | Spot | #FFD18B | 0.320 | 55 | -9.00, 1.10, 2.00 | Warm stage pool |
+| `MK_Light_Spot_16` | Spot | #FFD18B | 0.320 | 55 | 7.00, 1.10, -3.00 | Warm stage pool |
+| `MK_Light_Spot_17` | Spot | #C775FF | 0.320 | 55 | -7.00, 1.10, -3.00 | Purple stage wash |
+| `MK_Light_Point_18` | Point | #FFB85A | 0.065 | — | 13.75, 6.02, -1.91 | Amber wall lantern; bake indirect light |
+| `MK_Light_Point_19` | Point | #FFB85A | 0.065 | — | 11.05, 6.02, -1.91 | Amber wall lantern; bake indirect light |
+| `MK_Light_Point_20` | Point | #FFB85A | 0.065 | — | -11.05, 6.02, -1.91 | Amber wall lantern; bake indirect light |
+| `MK_Light_Point_21` | Point | #FFB85A | 0.065 | — | -13.75, 6.02, -1.91 | Amber wall lantern; bake indirect light |
+| `MK_Light_Point_22` | Point | #FFB85A | 0.065 | — | 13.21, 6.02, 7.75 | Amber wall lantern; bake indirect light |
+| `MK_Light_Point_23` | Point | #FFB85A | 0.065 | — | 13.21, 6.02, 5.05 | Amber wall lantern; bake indirect light |
+| `MK_Light_Point_24` | Point | #FFB85A | 0.065 | — | -13.21, 6.02, 5.05 | Amber wall lantern; bake indirect light |
+| `MK_Light_Point_25` | Point | #FFB85A | 0.065 | — | -13.21, 6.02, 7.75 | Amber wall lantern; bake indirect light |
+| `MK_Light_Point_26` | Point | #FFB85A | 0.065 | — | 11.00, 7.42, 24.80 | Amber wall lantern; bake indirect light |
+| `MK_Light_Point_27` | Point | #FFB85A | 0.065 | — | 7.00, 7.42, 24.80 | Amber wall lantern; bake indirect light |
+| `MK_Light_Point_28` | Point | #FFB85A | 0.065 | — | 3.00, 7.42, 24.80 | Amber wall lantern; bake indirect light |
+| `MK_Light_Point_29` | Point | #FFB85A | 0.065 | — | -1.00, 7.42, 24.80 | Amber wall lantern; bake indirect light |
+| `MK_Light_Point_30` | Point | #FFB85A | 0.065 | — | -5.00, 7.42, 24.80 | Amber wall lantern; bake indirect light |
+| `MK_Light_Point_31` | Point | #FFB85A | 0.065 | — | -9.00, 7.42, 24.80 | Amber wall lantern; bake indirect light |
+| `MK_Light_Point_32` | Point | #FFB85A | 0.065 | — | -13.00, 7.42, 24.80 | Amber wall lantern; bake indirect light |
+| `MK_Light_Point_33` | Point | #FFB85A | 0.065 | — | 12.35, 2.62, 4.10 | Amber wall lantern; bake indirect light |
+| `MK_Light_Point_34` | Point | #FFB85A | 0.065 | — | 12.35, 2.62, -0.10 | Amber wall lantern; bake indirect light |
+| `MK_Light_Area_35` | Area | #FFD49D | 2.300 | — | -0.00, 7.50, 3.00 | Broad warm stage key, bake indirect |
+| `MK_Light_Area_36` | Area | #FFD0A0 | 1.200 | — | 7.00, 5.00, 6.00 | Warm camera-left fill |
+| `MK_Light_Area_37` | Area | #9A4CFF | 1.500 | — | -6.00, 6.80, -2.00 | Purple rim and wood reflections |
+| `MK_Light_Area_38` | Area | #FFC489 | 2.400 | — | -0.00, 8.00, 15.00 | Audience fill, preserve stage contrast |
+| `MK_Light_Area_39` | Area | #DFA778 | 1.000 | — | -0.00, 8.00, 23.00 | Upper balcony soft fill |
+| `MK_Light_Area_40` | Area | #FFC78A | 1.600 | — | 10.00, 7.50, 8.00 | Lift and side balcony amber key |
+| `MK_Light_Area_41` | Area | #FFDDAA | 0.500 | — | 9.00, 4.00, 5.00 | Brushed gold lift door reflection key |
+| `MK_Light_Area_42` | Area | #FFC78A | 0.950 | — | -7.00, 7.00, 18.00 | Rear balcony and banner key |
+| `MK_Light_Area_43` | Area | #FFC78A | 0.950 | — | 7.00, 7.00, 18.00 | Rear balcony balancing fill |
+
+## Review setup and limitations
+
+EEVEE uses 64 samples, AgX Medium High Contrast, exposure +0.6 and restrained Fog Glow. Only stage spots plus the main stage/audience area keys cast shadows; other sources provide fill. This avoids the shadow buffer exhaustion encountered in intermediate iterations. Exact per-light flags are in `lighting.json`.
+
+The Unity verification screenshot uses an extra unshadowed directional light outside the room to reveal imported colours through the ceiling. That diagnostic light is not in this sheet and must not become production lighting. The preview has no light bake or reflection probes. It verifies geometry, material bindings and scale; it is not an engine-quality approval.
+
+The measured FBX position conversion is Blender `(x, y, z)` to Unity `(-x, z, -y)`. Unity validation compares every imported light marker with this data. The EEVEE and Unity shading models differ, so the lighting match remains work for the integrated scene.
