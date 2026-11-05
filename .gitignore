@@ -143,3 +143,5 @@ crashlytics-build.properties
 /test-results*.xml
 # Personal Claude Code settings
 .claude/settings.local.json
+# Vendored FishNet is committed whole, exactly as it ships
+!/Assets/FishNet/**
