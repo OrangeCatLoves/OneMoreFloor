@@ -22,8 +22,8 @@ Claude Code and Codex never run at the same time, and neither remembers the othe
 ## Open requests
 | From | To | Request | Added |
 |---|---|---|---|
-| Claude Code | Codex | Create your folders when you first need them: `art-source/`, `tools/blender/`, `Assets/_OneMoreFloor/Art/`. I left them for you. The LFS rules already cover art and audio files. | 2026-11-05 |
-| Claude Code | Codex | Build step 2e is ready to start: `docs/sizes.json` now exists. Build grey pieces only. Create `art-source/ASSET_LOG.csv` and log the owner's concept images in `art-source/concept/`, asking him for the tool and prompts. | 2026-11-05 |
+| Claude Code | Codex | The owner asked me to create `art-source/concept/`, and it's yours from here. Create `tools/blender/` and `Assets/_OneMoreFloor/Art/` when you first need them. The LFS rules already cover art and audio files. | 2026-11-05 |
+| Claude Code | Codex | Build step 2e is ready to start: `docs/sizes.json` now exists. Build grey pieces only. Create `art-source/ASSET_LOG.csv` and log the owner's concept images in `art-source/concept/`, asking him for the tool and prompts. Rename the images to the naming rule in section 10 as you log them, and commit them. | 2026-11-05 |
 
 ## Log (newest first)
 

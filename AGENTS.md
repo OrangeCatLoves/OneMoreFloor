@@ -10,6 +10,7 @@ OneMoreFloor is a 3D co-op challenge game (1–4 players) for PC and Steam Deck,
 - Explain game-dev ideas in plain words. Define any jargon in one line.
 - For anything he must do in the Unity Editor, give exact steps: menu paths, Inspector fields, values.
 - Keep replies short and direct.
+- Don't ask him to do setup you can do yourself, such as creating folders. Do it and tell him the exact path.
 
 ## Handoff between agents
 - Only one agent runs at a time, and neither remembers the other's sessions. `HANDOFF.md` (project root) is how you pass information.

@@ -5,7 +5,7 @@ Version 0.11 · 5 Nov 2026 · Owner: Wei Bin (GitHub: OrangeCatLoves)
 The single source of truth for what the game is and how it is built. Written for the owner and for AI coding agents (Claude Code, Codex).
 
 - **Status:** pre-production. Build step 1 (project setup) is done. No game rules or gameplay yet.
-- **Current focus:** Phase P0, build step 2 (section 9). No backend work yet.
+- **Current focus:** Phase P0, build step 2 (section 9), on Trivia only. No backend work yet.
 - **Conflicts:** if this file disagrees with the code or with the owner's latest instruction, stop and ask.
 
 ---
@@ -18,6 +18,7 @@ These rules are repeated in `AGENTS.md`, which Claude Code and Codex load automa
   - Explain game-dev ideas in plain words. Define any jargon in one line.
   - For anything he must do in the Unity Editor, give exact steps: menu paths, Inspector fields, values.
 - Keep replies short and direct.
+- Don't ask the owner to do setup you can do yourself, such as creating folders. Do it and tell him the exact path.
 - **The owner designs the story, the setting and every floor's rules.** Never invent them. If something is missing or unclear, use a neutral placeholder and ask.
 - Ask before adding packages, assets, paid services or new top-level folders.
 - Never edit vendored code (`Assets/FishNet/`, third-party packages).
@@ -86,7 +87,7 @@ The higher the team climbs, the harder the floors get and the more epic they loo
 - Starting hearts = `heartsPerPlayer × players` *(tunable; default 10)* → 1p: 10, 2p: 20, 3p: 30, 4p: 40. Hearts grow in proportion to team size.
 - Why 10: every mistake costs hearts, so the pool must cover many mistakes. At about 1 mistake per player per floor, 10 hearts per player last about 10 floors; at ~90 s per floor that is 10 × 90 s = 15 min of play. Tune in playtests.
 - Each floor's spec says what costs hearts and how many. One mistake can cost more than 1 heart.
-- Hearts can be lost at any moment during a floor, not only at the end.
+- Hearts can be lost at any moment during a floor, not only at the end. They are only lost during play: a late hit after a floor is cleared, or anything during the title card, costs nothing *(default — confirm)*.
 - Hearts reach 0 → the run ends immediately, usually mid-floor → results screen → score submitted.
 - Future: some floors may give hearts back (the owner will design these). All heart changes go through the run manager, so adding this later is a small change.
 
@@ -138,7 +139,7 @@ The higher the team climbs, the harder the floors get and the more epic they loo
 
 ### Floor selection (the "director")
 - Random from the catalog, seeded per run.
-- Never the same floor or genre twice in a row.
+- Never the same floor or genre twice in a row. The one exception: a repeat is allowed when no other floor is available, which is always the case while only Trivia exists. The rule applies in full as soon as there is an alternative.
 - A floor only appears from its `minFloor` onward.
 - Uses the floor's room for the current visual tier. If the floor has no room for this tier, use its highest tier below.
 - Later: special floors every N floors, a daily seed shared by everyone.
@@ -149,7 +150,7 @@ The higher the team climbs, the harder the floors get and the more epic they loo
 
 **Launch target: 12–15 floors.** An average run is about 10 floors, so each floor shows up less than once per average run: 10 ÷ 12 ≈ 0.8 times, 10 ÷ 15 ≈ 0.7 times. The 6 starter floors below come first; the owner designs the rest.
 
-Build order (section 9): **Trivia → Collapse Escape → Monster Arena** first. Trivia is the simplest test of the Floor contract. Collapse Escape sets the movement sizes the art needs and is the vertical slice. Monster Arena adds shooting and monster AI. Spelling Bee, Parkour Run and Key Hunt come after.
+Build order (section 9): **Trivia → Collapse Escape → Monster Arena** first. Trivia is the simplest test of the Floor contract. Collapse Escape sets the movement sizes the art needs and is the vertical slice. Monster Arena adds shooting and monster AI. Spelling Bee, Parkour Run and Key Hunt come after. Trivia is seen through to completion before Collapse Escape starts.
 
 The owner writes each floor's spec before it is built, using `docs/floors/_TEMPLATE.md`. A spec covers: goal, clear rule, what costs hearts and how many, respawn or reset, anti-stall rule, how it gets harder per level, 1-player vs 4-player behaviour, controls (controller and Steam Deck), camera view (if the floor switches or limits it), size (in plain words), rooms per visual tier, assets needed.
 
@@ -268,7 +269,7 @@ Now: each client moves its own character; the host decides outcomes. Fine for co
 - `GameRules` asset: hearts per player, elevator ride length, intro and countdown lengths, respawn delay.
 - `MovementSettings` asset: run speed, jump height, gravity, air control — tuned by the owner in the Inspector.
 - Per floor: `FloorDefinition` + its settings asset (section 4).
-- `DirectorSettings`: weights, no-repeat rules, difficulty curve, visual tier ranges.
+- `DirectorSettings`: difficulty curve, visual tier ranges. (Selection weights are per floor, in `FloorDefinition`. The no-repeat rule is fixed, in `FloorPicker`.)
 - `Unlocks` asset: floor milestone → cosmetic.
 - Later: export the same data as versioned JSON on a CDN, so balance changes ship without a new build. Every run records the config version it used.
 
@@ -407,7 +408,7 @@ The step-by-step order, with who does what, is in section 9.
 
 | Phase | Scope | Online pieces |
 |---|---|---|
-| P0 Pre-production (now) | Project setup, core rules, your character in Unity, movement, game loop, greybox Trivia and Collapse Escape, style guide | None |
+| P0 Pre-production (now) | Project setup, core rules, your character in Unity, movement, game loop, greybox Trivia, style guide | None |
 | Vertical slice | Collapse Escape, the lobby and the elevator at final quality | None |
 | P1 Solo slice | Monster Arena, then Trivia, Collapse Escape and Monster Arena all at final quality; difficulty levels, menus, local best floor, full controller support | None (local host) |
 | P2 Online basics | Steam login, solo leaderboard, run tickets + checks, Steam Cloud saves | Steam leaderboards, or one Go service + Postgres + Redis |
@@ -468,8 +469,8 @@ First three floors, in this order: **Trivia → Collapse Escape → Monster Aren
 - **Done when:** Unity opens with no errors in the Console, the test passes from the command line, and the first commit is on GitHub.
 
 **Step 2 — Five jobs at once.** 2a and 2b don't need step 1; start them any time. The rest start once step 1 is done.
-- **2a. You — floor specs.** Write `docs/floors/trivia.md` and `docs/floors/collapse_escape.md` from `docs/floors/_TEMPLATE.md`. Trivia comes first, then Collapse Escape. Monster Arena's spec can wait until P1.
-  - **Done when:** Claude Code can build each floor without asking you a design question.
+- **2a. You — floor spec.** Write `docs/floors/trivia.md` from `docs/floors/_TEMPLATE.md`. Collapse Escape's spec comes after Trivia is complete. Monster Arena's spec can wait until P1.
+  - **Done when:** Claude Code can build the floor without asking you a design question.
 - **2b. You — 3 style tests.** In an image tool, make 3 sets of concept images, one set per style: the lobby, an ordinary office floor (tier 1) and an epic world (tier 3), with your character in each.
   - **Done when:** the 3 sets sit side by side, ready to compare.
 - **2c. Claude Code — core rules** in plain C# with unit tests: hearts pool, run phases, seeded floor picker (no repeats), difficulty levels, visual tiers, and the data assets that hold their numbers.
@@ -497,17 +498,17 @@ First three floors, in this order: **Trivia → Collapse Escape → Monster Aren
 - All text from the string tables; all menus work with a controller.
 - **Done when:** lobby → 3 test floors → game over → results → lobby works, solo and with 2 players.
 
-**Step 5 — Greybox the first two floors** (Claude Code builds, you playtest)
+**Step 5 — Greybox Trivia** (Claude Code builds, you playtest)
 - **5a. Trivia:** a plain room with a question screen, answering by keyboard or controller, the clear rule and heart costs from your spec, and a sample question file (you supply the real questions).
-- **5b. Collapse Escape:** a plain-box building section — corridors, stairs, doors — with the collapse, falling debris, checkpoints and the exit as your spec describes.
-- **5c. You:** playtest both, tune movement in `MovementSettings`, and say what feels too big or too small. Claude Code iterates on each floor's size and puts the real shared sizes in `docs/sizes.json`: corridor and door widths, stair step height, ceiling height, elevator size, and the widest gap and highest ledge a player can jump. Codex re-runs the generator scripts with them.
-- **Done when:** both floors can be cleared and can drain hearts to game over, solo and with 2 players, and `docs/sizes.json` holds the real numbers.
+- **5b. Collapse Escape (later, once Trivia is complete):** a plain-box building section — corridors, stairs, doors — with the collapse, falling debris, checkpoints and the exit as your spec describes.
+- **5c. You:** playtest Trivia, tune movement in `MovementSettings`, and say what feels too big or too small. Claude Code iterates on the floor's size and puts the real shared sizes in `docs/sizes.json` as they settle. Trivia settles the door, ceiling and elevator sizes; corridors, stairs and the widest gap and highest ledge a player can jump stay guesses until Collapse Escape. Codex re-runs the generator scripts with them.
+- **Done when:** Trivia can be cleared and can drain hearts to game over, solo and with 2 players, and you're happy with its size.
 
 **Step 6 — Pick the style** (You)
 - Pick one of the 3 style tests and write `docs/STYLE_GUIDE.md` (one page): palette, shapes, lighting mood, UI look, kit grid size (from 5c), and how the look changes per tier.
 - **Done when:** someone could make a matching asset from the page alone.
 
-**Gate:** Trivia and Collapse Escape playable start to finish in greybox with your character, solo and with 2 players in the editor.
+**Gate:** Trivia playable start to finish in greybox with your character, solo and with 2 players in the editor. Collapse Escape starts once Trivia is complete.
 
 ### Vertical slice — one floor at final quality
 7. **Claude Code:** import tools (`MK_` markers → anchors, `COL_` meshes → colliders) and a floor validator.
@@ -631,7 +632,8 @@ Concept images stay out of `Assets/`, where Unity would import every one. Name t
 - 5 Nov 2026 — Build step 1 confirmed by the owner.
 - 5 Nov 2026 — Camera: players start in third person. The scroll wheel zooms smoothly, and scrolling all the way in becomes first person, where a player sees only their arms.
 - 5 Nov 2026 — Sizes: `docs/sizes.json` holds only what every floor shares. Each floor has its own size, set by playtesting and the owner's feedback.
-- 5 Nov 2026 — The owner is focusing on Trivia first; its spec comes before Collapse Escape's.
+- 5 Nov 2026 — P0 focuses on Trivia: it is seen through to completion before Collapse Escape starts.
+- 5 Nov 2026 — While only one floor exists, the floor picker may repeat it. The no-repeat rule applies as soon as there is an alternative.
 
 ---
 
@@ -647,6 +649,8 @@ Concept images stay out of `Assets/`, where Unity would import every one. Name t
 8. Camera view: where do players choose it, and what changes view on a controller or Steam Deck (no scroll wheel)? Decide before build step 3.
 9. Camera view: third person can see around corners, and the leaderboards are shared. Should any floor (e.g. Key Hunt) or PvP limit the view?
 10. Repo: when should it go private? It is public for now, and the game will be sold, so anyone can read the code and art and build the game while it stays public.
+11. Controller and Steam Deck: keep them as a requirement, or go keyboard and mouse only for now? Steam doesn't require them. Sections 0, 5, 9 and 11 still assume them until this is decided.
+12. Trivia: does "complete" include final art? If so, Trivia becomes the first floor at final quality instead of Collapse Escape (section 9, vertical slice).
 
 ---
 
