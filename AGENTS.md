@@ -1,0 +1,69 @@
+# AGENTS.md — OneMoreFloor
+
+Always-on rules for AI agents (Claude Code and Codex). The full project context is in `docs/PROJECT_CONTEXT.md`: read it before starting any build step. These rules repeat its section 0; change both together.
+
+## The project
+OneMoreFloor is a 3D co-op challenge game (1–4 players) for PC and Steam Deck, sold on Steam. Each player chooses first-person or third-person view. Unity 6.3 LTS, URP, C#, FishNet. Players ride an elevator; every floor is a surprise challenge; the team shares one pool of hearts; score = floors cleared. The current phase and step are under "Current focus" at the top of `docs/PROJECT_CONTEXT.md`.
+
+## The owner
+- Strong software engineer, new to game development and Unity.
+- Explain game-dev ideas in plain words. Define any jargon in one line.
+- For anything he must do in the Unity Editor, give exact steps: menu paths, Inspector fields, values.
+- Keep replies short and direct.
+
+## Handoff between agents
+- Only one agent runs at a time, and neither remembers the other's sessions. `HANDOFF.md` (project root) is how you pass information.
+- **Start of every session:** read `HANDOFF.md` (its open requests and latest entry) before anything else.
+- **End of every session:** add your entry to `HANDOFF.md` (the format is inside the file), then commit.
+- Need something from the other agent? Add it to "Open requests" in `HANDOFF.md`.
+
+## How we work
+- Follow the build order (`docs/PROJECT_CONTEXT.md` section 9). One step at a time. Don't start work from a later phase until the current gate passes.
+- Before changing anything, show a short plan and wait for the owner's OK.
+- After each change, say what changed and exactly how to test it.
+- When something notable changes (a decision, a tech choice, the project's setup or build status), update the relevant Markdown files in the same session so they stay accurate. Record the owner's decisions; don't make them for him.
+- A build step is done only when the owner confirms it works.
+- End every session with a commit. If the owner hasn't confirmed the work yet, start the commit message with `WIP:`. Small commits, clear messages. The commit history lists only `OrangeCatLoves`: no co-author or AI attribution lines.
+- Pull before starting. Push after committing.
+
+## Who owns which folders
+- **Codex (art):** `art-source/`, `tools/blender/`, `Assets/_OneMoreFloor/Art/`.
+- **Claude Code (code):** everything else.
+- **Shared:** `HANDOFF.md`. Both agents write to it.
+- `docs/` belongs to the owner. Read it; edit it only when the owner asks or to record a notable change (see "How we work").
+- Never edit the other agent's folders. If you need a change there, add a request to `HANDOFF.md`.
+
+## Design rules
+- The owner designs the story, the setting and every floor's rules. Never invent them. If something is missing or unclear, use a neutral placeholder and ask.
+- Unclear design rule? Check `docs/PROJECT_CONTEXT.md` section 13 (open questions) and ask. Don't guess.
+
+## Code rules
+- Game rules (Core) are plain C# with no `UnityEngine` references, and have unit tests.
+- The host decides outcomes. Clients only send requests.
+- Solo = a local host with one player. Never write solo-only gameplay code.
+- All randomness comes from the run's seeded random generator. Never `UnityEngine.Random` in game rules.
+- Tunable numbers live in data assets (ScriptableObjects), not in code.
+- A floor never references another floor. Floors talk to the game only through the Floor contract (section 4).
+- Everything must work with a controller and on Steam Deck (section 5).
+- All on-screen text comes from the string tables. Never hard-code text.
+- Ask before adding packages, assets, paid services or new top-level folders. Anything the current build step lists is already approved.
+- Never edit vendored code (`Assets/FishNet/`, third-party packages).
+
+## Art rules (summary; full list in section 7)
+- 1 Blender unit = 1 m = 1 Unity unit. Player ≈ 1.8 m tall. Transforms applied. Models face +Z in Unity. FBX by default.
+- Names: `SM_` static mesh, `SK_` rigged mesh, `M_` material, `T_` texture, `A_` animation, `COL_` collision mesh, `MK_` marker.
+- Anything that moves or reacts is its own object. Never deliver a whole floor as one welded mesh.
+- Get one asset fully working in Unity before making many.
+- New files in `Assets/` need their Unity `.meta` files committed with them. Before committing new assets, ask the owner to click into Unity once so it creates them.
+- Log every AI-made asset in `art-source/ASSET_LOG.csv`: file, tool, prompt or source, licence, date.
+
+## Sizes
+- Every room, door, corridor, stair and elevator size comes from `docs/sizes.json` (metres). Don't hard-code these in scripts or models; read them from the file.
+- Game spaces are bigger than real ones: in third-person view the camera sits a few metres behind the player and needs room.
+- The numbers are starting guesses until build step 5. When the owner updates them, re-run the generator scripts.
+
+## Testing
+- Core rules: EditMode unit tests. Every floor: a PlayMode test that clears it, and one that drains hearts to game over.
+- From build step 4 on, test every floor with 2 players in the editor (Multiplayer Play Mode).
+- Test every floor in both first-person and third-person view, unless its spec limits the view.
+- Once the Unity CLI is set up, use it to compile and run tests yourself before asking the owner to check in the Editor.
