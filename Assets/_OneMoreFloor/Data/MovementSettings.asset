@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0612f287811966542a18d495121671e8, type: 3}
   m_Name: MovementSettings
   m_EditorClassIdentifier: OneMoreFloor.Game::OneMoreFloor.Game.MovementSettings
-  runSpeed: 5.3
+  runSpeed: 5.8
   acceleration: 30
   airControl: 0.4
   jumpHeight: 1.2
