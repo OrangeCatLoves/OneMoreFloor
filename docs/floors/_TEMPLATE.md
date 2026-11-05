@@ -32,7 +32,7 @@ What keeps costing hearts if the team stops making progress? Example: when the c
 What changes with more players, if anything. Who must finish? What do players who finish early do?
 
 ## Controls
-Keyboard/mouse and controller (Steam Deck). Any typing? Any aiming? Aim assist? Does this floor switch or limit the camera view (first or third person)?
+Keyboard and mouse. Any typing? Any aiming? Does this floor switch or limit the camera view (first or third person)?
 
 ## Size
 How big should it feel? Use plain words, not metres: how long a clean run takes, how many players must fit, what it should feel like. Claude Code turns this into metres, and you tune it by playing.

@@ -4,8 +4,8 @@ Version 0.11 · 5 Nov 2026 · Owner: Wei Bin (GitHub: OrangeCatLoves)
 
 The single source of truth for what the game is and how it is built. Written for the owner and for AI coding agents (Claude Code, Codex).
 
-- **Status:** pre-production. Build step 1 (project setup) is done. The core rules (step 2c) are built and tested, with nothing to play yet.
-- **Current focus:** Phase P0, build step 2 (section 9), on Trivia only. No backend work yet.
+- **Status:** pre-production. Build steps 1 and 2c are done, with nothing to play yet.
+- **Current focus:** Phase P0, on Trivia only, with build step 3 next (section 9). No backend work yet.
 - **Conflicts:** if this file disagrees with the code or with the owner's latest instruction, stop and ask.
 
 ---
@@ -19,6 +19,7 @@ These rules are repeated in `AGENTS.md`, which Claude Code and Codex load automa
   - For anything he must do in the Unity Editor, give exact steps: menu paths, Inspector fields, values.
 - Keep replies short and direct.
 - Don't ask the owner to do setup you can do yourself, such as creating folders. Do it and tell him the exact path.
+- The owner has handed technical decisions to the agents. Make them and report them. Design stays his.
 - **The owner designs the story, the setting and every floor's rules.** Never invent them. If something is missing or unclear, use a neutral placeholder and ask.
 - Ask before adding packages, assets, paid services or new top-level folders.
 - Never edit vendored code (`Assets/FishNet/`, third-party packages).
@@ -29,7 +30,7 @@ These rules are repeated in `AGENTS.md`, which Claude Code and Codex load automa
 - All randomness comes from the run's seeded random generator. Never `UnityEngine.Random` in game rules.
 - Tunable numbers live in data assets (ScriptableObjects), not in code.
 - A floor never references another floor. Floors talk to the game only through the Floor contract (section 4).
-- Everything must work with a controller and on Steam Deck (section 5).
+- The game is played with keyboard and mouse. Read input through Input System actions, not raw keys, so players can rebind controls and a controller could be added later.
 - All on-screen text comes from the string tables. Never hard-code text (section 5).
 - Follow the build order (section 9). Don't start work from a later phase until the current gate passes.
 - Only one agent runs at a time. Start every session by reading `HANDOFF.md`; end it by adding an entry there and committing (start the commit message with `WIP:` if the owner hasn't confirmed the work yet). The commit history lists only `OrangeCatLoves`: no co-author or AI attribution lines.
@@ -41,7 +42,7 @@ These rules are repeated in `AGENTS.md`, which Claude Code and Codex load automa
 
 ## 1. The game
 
-OneMoreFloor is a 3D challenge game on Steam for PC and Steam Deck, played solo or in co-op, in first-person or third-person view (each player's choice). Players ride an elevator up a building. Every floor is a surprise challenge from a different genre: trivia, escaping a collapsing building, shooting monsters, a spelling bee, parkour, finding keys while a monster hunts you. The team stays on a floor until it clears it, and every mistake costs hearts from one shared pool. When the pool hits zero, the run ends on the spot. Score = floors cleared. Two leaderboards — solo and multiplayer — show the highest floors.
+OneMoreFloor is a 3D challenge game on Steam for Windows PC, played with keyboard and mouse, solo or in co-op, in first-person or third-person view (each player's choice). Players ride an elevator up a building. Every floor is a surprise challenge from a different genre: trivia, escaping a collapsing building, shooting monsters, a spelling bee, parkour, finding keys while a monster hunts you. The team stays on a floor until it clears it, and every mistake costs hearts from one shared pool. When the pool hits zero, the run ends on the spot. Score = floors cleared. Two leaderboards — solo and multiplayer — show the highest floors.
 
 The higher the team climbs, the harder the floors get and the more epic they look: ordinary rooms at the bottom, other worlds further up.
 
@@ -77,7 +78,7 @@ The higher the team climbs, the harder the floors get and the more epic they loo
 
 ### Camera view
 - Each player chooses first-person or third-person view. Players start in third person.
-- The mouse scroll wheel zooms the camera smoothly, and scrolling all the way in becomes first person. Other custom controls can change the view too. Where players choose it and the controller default are still open (section 13, question 8).
+- The mouse scroll wheel zooms the camera smoothly, and scrolling all the way in becomes first person. The `V` key switches views, for laptops where scrolling is awkward, and players can rebind it. Players can change view at any time, so there is no separate menu for it.
 - In first person, a player sees only their own arms.
 - The view is personal: it changes only that player's camera. Teammates still see their full character.
 - A floor may switch the view when it needs to (e.g. a trivia screen). A floor's spec can also limit it.
@@ -150,9 +151,9 @@ The higher the team climbs, the harder the floors get and the more epic they loo
 
 **Launch target: 12–15 floors.** An average run is about 10 floors, so each floor shows up less than once per average run: 10 ÷ 12 ≈ 0.8 times, 10 ÷ 15 ≈ 0.7 times. The 6 starter floors below come first; the owner designs the rest.
 
-Build order (section 9): **Trivia → Collapse Escape → Monster Arena** first. Trivia is the simplest test of the Floor contract. Collapse Escape sets the movement sizes the art needs and is the vertical slice. Monster Arena adds shooting and monster AI. Spelling Bee, Parkour Run and Key Hunt come after. Trivia is seen through to completion before Collapse Escape starts.
+Build order (section 9): **Trivia → Collapse Escape → Monster Arena** first. Trivia is the simplest test of the Floor contract and the vertical slice: it is seen through to production quality before the next floor's design starts. Collapse Escape sets the movement sizes the art needs. Monster Arena adds shooting and monster AI. Spelling Bee, Parkour Run and Key Hunt come after.
 
-The owner writes each floor's spec before it is built, using `docs/floors/_TEMPLATE.md`. A spec covers: goal, clear rule, what costs hearts and how many, respawn or reset, anti-stall rule, how it gets harder per level, 1-player vs 4-player behaviour, controls (controller and Steam Deck), camera view (if the floor switches or limits it), size (in plain words), rooms per visual tier, assets needed.
+The owner writes each floor's spec before it is built, using `docs/floors/_TEMPLATE.md`. A spec covers: goal, clear rule, what costs hearts and how many, respawn or reset, anti-stall rule, how it gets harder per level, 1-player vs 4-player behaviour, controls, camera view (if the floor switches or limits it), size (in plain words), rooms per visual tier, assets needed.
 
 Rules marked TBD are placeholders until the owner's spec exists.
 
@@ -161,14 +162,12 @@ Rules marked TBD are placeholders until the owner's spec exists.
 | 1 | Trivia | Knowledge | TBD (e.g. team gets N answers right) | TBD (e.g. wrong answer) | UI, question bank |
 | 2 | Collapse Escape | Panic escape | TBD (e.g. every player gets out) | TBD (e.g. hit by debris, still inside at collapse) | Scripted collapse, timer, checkpoints |
 | 3 | Monster Arena | Shooting | TBD (e.g. all monsters dead) | TBD (e.g. hit by a monster) | Aiming, weapons, hit checks by the host, monster AI (NavMesh), animation, effects |
-| 4 | Spelling Bee | Listening + typing | **Every player passes at least twice (2 correct words each) — owner's rule** | TBD (e.g. misspelling) | Word audio clips, text input, on-screen keyboard |
+| 4 | Spelling Bee | Listening + typing | **Every player passes at least twice (2 correct words each) — owner's rule** | TBD (e.g. misspelling) | Word audio clips, text input |
 | 5 | Parkour Run | Movement | TBD (e.g. every player reaches the exit) | TBD (e.g. falling) | Movement tuning, checkpoints, fall zones |
 | 6 | Key Hunt | Stealth + puzzle | TBD (e.g. exit unlocked, everyone out) | TBD (e.g. caught by the monster) | Monster AI (reused from Monster Arena), keys, doors |
 
 - Question banks and word lists are data files (CSV/JSON) in English, with difficulty tags. No repeats within a run.
 - Spelling audio is pre-generated (one clip per word), not live text-to-speech.
-- Spelling Bee on a controller or Steam Deck: typing uses the on-screen keyboard, which is slower than a real keyboard. The spec's timers should allow for this.
-- Monster Arena on a controller or Steam Deck: aiming with sticks is slower than with a mouse, and the leaderboards are shared. The spec should decide on aim assist.
 - Both camera views: aiming (Monster Arena) and judging jumps (Parkour Run) play differently in first and third person, so their specs and playtests should cover both.
 
 ---
@@ -200,14 +199,14 @@ Rules:
 | Area | Choice | Why |
 |---|---|---|
 | Engine | Unity 6 LTS (newest LTS; 6.3 LTS at the time of writing) | Code is plain C# text that AI agents edit well; fast multiplayer testing; free below $200k yearly revenue + funding |
-| Rendering | URP | Runs well on mid-range PCs and Steam Deck; suits a stylized look |
+| Rendering | URP | Runs well on mid-range PCs and laptops; suits a stylized look |
 | Networking | FishNet | Free and royalty-free under its own licence (not MIT; it allows games you sell); the same code runs as host or dedicated server; client-side prediction built in (needed for PvP). Raycast lag compensation needs paid FishNet Pro — decide before PvP |
 | Transport | Tugboat (LAN, dev) → Steam via FishySteamworks (online) | Steam's relay and friend invites cost nothing extra on Steam |
-| Steam features | Steamworks.NET | Login, lobbies, leaderboards, Cloud saves, achievements, on-screen keyboard |
-| Platform | Windows PC + Steam Deck, on Steam | The Deck runs the Windows build through Proton |
+| Steam features | Steamworks.NET | Login, lobbies, leaderboards, Cloud saves, achievements |
+| Platform | Windows PC (desktops and laptops), on Steam | Keyboard and mouse only for now. Steam doesn't require controller support, and it could be added later |
 | Camera | First-person and third-person with Cinemachine. Each player chooses, starting in third person. The mouse scroll wheel zooms smoothly and scrolling all the way in becomes first person; other custom controls can change the view too; a floor may switch view (e.g. a trivia screen) | Players play the way they prefer; third person shows their character and makes parkour and fights easier |
-| Character controller | Starts from Unity's free *First Person + Third Person \| Character Controllers* package, adapted to FishNet | Working first-person and third-person controllers and cameras on day one instead of building from scratch |
-| Input | Unity Input System | One set of actions for keyboard/mouse and controller; supports custom controls, such as for changing camera view |
+| Character controller | Written for this project, using Cinemachine and FishNet | Built for smooth zoom from third to first person and for multiplayer from the start, with no Asset Store code in the public repo |
+| Input | Unity Input System | One set of actions for keyboard and mouse; supports custom controls, such as for changing camera view, and leaves room for a controller later |
 | Text | Unity Localization package (string tables) | English only at launch; more languages later without code changes |
 | Voice chat | Later, after launch | Pick the tool then: Steam's voice functions or a voice service |
 | Greyboxing | ProBuilder | Build test levels inside Unity |
@@ -216,14 +215,10 @@ Rules:
 | Agent tooling | Unity CLI (free) | Lets AI agents work with the open Unity Editor: compile, run tests, run builds. The owner doesn't have to copy errors back and forth |
 | Version control | Git + Git LFS on GitHub (public repo for now) | Watch LFS storage limits |
 
-### Steam Deck (planned from day one)
-Valve's checks for the "Deck Verified" badge, and what they mean here:
-- **Controls:** every action works on the Deck's controls with the default layout. No mouse-only menus. On-screen button prompts match the device in use (Valve recommends its Steam Input API for this).
-- **Typing:** any text entry (Spelling Bee, names) opens Steam's on-screen keyboard with `ShowFloatingGamepadTextInput` or `ShowGamepadTextInput`.
-- **Screen:** run at 1280×800 (Valve's preferred; 1280×720 also allowed). Smallest text at least 9 px tall at that size; aim for 12 px. Layouts must also work on other screen shapes (16:9, ultrawide).
-- **Speed:** at least 30 fps at 1280×800 on default settings (Valve's bar). Aim higher.
-- **No blockers:** no launcher, no "unsupported device" warnings, no middleware that fails under Proton (e.g. some anti-cheat). Matters when choosing PvP anti-cheat.
-- Profile on a real Deck early (see section 13, question 1).
+### Desktops and laptops
+- **Controls:** keyboard and mouse. A laptop's trackpad must also work.
+- **Screen:** layouts work from 1280×720 up, on 16:9 and ultrawide screens. Text stays readable on a small laptop.
+- **Speed:** at least 30 fps at 1280×720 on default settings on a mid-range laptop. Aim higher.
 
 Not chosen:
 - **Unreal Engine 5** — better graphics and strong built-in netcode, but its beginner scripting (Blueprints) is saved as binary files AI agents can't edit, C++ is slow to iterate, and the editor is heavy.
@@ -274,7 +269,7 @@ Now: each client moves its own character; the host decides outcomes. Fine for co
 - Later: export the same data as versioned JSON on a CDN, so balance changes ship without a new build. Every run records the config version it used.
 
 ### Player save
-- Holds unlocks, best floors and settings. Synced between devices with Steam Cloud (e.g. PC ↔ Steam Deck).
+- Holds unlocks, best floors and settings. Synced between devices with Steam Cloud (e.g. desktop ↔ laptop).
 - Once the backend exists (P2), the server's records are the source of truth for best floors.
 
 ---
@@ -291,7 +286,7 @@ A 3D model is a stage set: shapes and paint, no behaviour. A door from Blender c
 1. **Check the characters** against the checklist below. Fix what's needed before other art depends on them.
 2. **Three style explorations**, built around the owner's characters. For each style: concept images of the lobby, one tier-1 room and one tier-3 world, with the characters in the scene. Use the owner's setting if `docs/STORY.md` exists; otherwise a neutral building. The owner picks one style. This proves the style fits the characters and stretches from an ordinary office to an epic world.
 3. **Style guide** (`docs/STYLE_GUIDE.md`, one page) for the chosen style: palette, shapes, lighting mood, UI look, kit grid size, and how the look changes per tier.
-4. **2D concept images** in that style: lobby, elevator, each starter floor. Tier 1 first. Check each at Steam Deck size (1280×800): small details and thin text disappear.
+4. **2D concept images** in that style: lobby, elevator, each starter floor. Tier 1 first. Check each at small laptop size (1280×720): small details and thin text disappear.
 5. **Greybox** each floor in Unity with plain boxes. Play it. Fix gap widths, room sizes and paths until it's fun — they depend on how far the character runs and jumps.
 6. **Modular kits** that match the greybox: walls, floor tiles, stairs, door frames, railings, props. Tier 1 first.
 7. **Swap**: replace grey boxes with art; keep markers and colliders.
@@ -312,15 +307,15 @@ Decision: use the owner's existing Blender characters. Their look sets the art s
 
 Checklist before they go into the game:
 - [ ] **Rig:** a human-like skeleton that Unity's Humanoid type can map (hips, spine, head, arms, legs). Best: all characters share one skeleton, so every animation works on every character.
-- [ ] **Animations:** teammates and the third-person view show the character all the time, so it needs a full set — idle, walk, run, jump (take-off, in air, land), fall, climb, hit, knocked down, respawn, interact, aim and shoot, celebrate. Start with the animations from Unity's free character controller package (build step 2d); add a Humanoid pack with shooting animations for Monster Arena. Any Humanoid animation plays on any Humanoid rig.
+- [ ] **Animations:** teammates and the third-person view show the character all the time, so it needs a full set — idle, walk, run, jump (take-off, in air, land), fall, climb, hit, knocked down, respawn, interact, aim and shoot, celebrate. Start with a free Humanoid animation pack (build step 2d); add a pack with shooting animations for Monster Arena. Any Humanoid animation plays on any Humanoid rig.
 - [ ] **Materials:** Blender's node materials don't carry over to Unity. Bake them into texture images (colour, normal, roughness/metal), then rebuild them as URP materials.
 - [ ] **Colour areas:** a mask texture marks which parts take the player's colour, so team colours and colour unlocks need no new art.
 - [ ] **Same hitbox for everyone:** one capsule size for all characters, whatever they look like. Fair in co-op, required for PvP.
-- [ ] **Easy to tell apart:** distinct shapes plus a player colour, so 4 teammates are clear at a distance and on the Deck's small screen.
+- [ ] **Easy to tell apart:** distinct shapes plus a player colour, so 4 teammates are clear at a distance and on a small laptop screen.
 - [ ] **Unlockables fit:** extra characters and outfits use the same skeleton and hitbox.
 - [ ] **Loose parts** (capes, long hair, tails): need extra bones with physics, or they look stiff and poke through walls.
 - [ ] **First-person arms:** in first person a player sees only their own arms, taken from their character so its colour and outfit still show.
-- [ ] **Budget:** ≤ 20k triangles at full detail, 3 LODs (4 players + monsters on screen, on a Steam Deck).
+- [ ] **Budget:** ≤ 20k triangles at full detail, 3 LODs (4 players + monsters on screen, on a mid-range laptop).
 - [ ] **Export:** about 1.8 m tall, transforms applied, faces +Z in Unity.
 - [ ] **AI log:** if any AI tool helped make them, record it in `art-source/ASSET_LOG.csv` (for Steam's disclosure form).
 
@@ -336,8 +331,8 @@ Checklist before they go into the game:
   - `SM_` static mesh, `SK_` rigged mesh, `M_` material, `T_` texture, `A_` animation.
   - `COL_` simple collision mesh → the import script turns it into an invisible collider.
   - `MK_` empty marker → the import script turns it into the matching anchor: `MK_Spawn_01`, `MK_Exit`, `MK_Checkpoint_02`, `MK_Key_A`, `MK_MonsterSpawn_01`, `MK_Objective_01`, `MK_Hazard_01`.
-- Budgets *(defaults; profile on a Steam Deck and adjust)*: character ≤ 20k triangles at full detail, 3 LODs; a floor ≤ ~500k visible triangles; textures 1K–2K.
-- Share materials and combine static pieces where possible: fewer separate objects = faster, especially on the Deck.
+- Budgets *(defaults; profile on a mid-range laptop and adjust)*: character ≤ 20k triangles at full detail, 3 LODs; a floor ≤ ~500k visible triangles; textures 1K–2K.
+- Share materials and combine static pieces where possible: fewer separate objects = faster, especially on laptops.
 - Get one asset fully working in Unity (scale, names, colliders, markers) before making many.
 - New files in `Assets/` need their Unity `.meta` files (the ID Unity uses to find each file) committed with them. Before committing new assets, click into Unity once so it creates them.
 - Source files (`.blend`, concept art) live in `art-source/`, outside `Assets/`, in Git LFS.
@@ -409,13 +404,13 @@ The step-by-step order, with who does what, is in section 9.
 | Phase | Scope | Online pieces |
 |---|---|---|
 | P0 Pre-production (now) | Project setup, core rules, your character in Unity, movement, game loop, greybox Trivia, style guide | None |
-| Vertical slice | Collapse Escape, the lobby and the elevator at final quality | None |
-| P1 Solo slice | Monster Arena, then Trivia, Collapse Escape and Monster Arena all at final quality; difficulty levels, menus, local best floor, full controller support | None (local host) |
+| Vertical slice | Trivia, the lobby and the elevator at final quality | None |
+| P1 Solo slice | Collapse Escape and Monster Arena at final quality; difficulty levels, menus, local best floor | None (local host) |
 | P2 Online basics | Steam login, solo leaderboard, run tickets + checks, Steam Cloud saves | Steam leaderboards, or one Go service + Postgres + Redis |
 | P3 Co-op 2–4 | Steam lobbies and invites, shared hearts, team clear rules, disconnects, multiplayer leaderboard | + Steam relay |
-| Launch (MVP) | 12–15 floors, tier 2–3 rooms for some floors, cosmetic unlocks, Steam Deck check | — |
+| Launch (MVP) | 12–15 floors, tier 2–3 rooms for some floors, cosmetic unlocks | — |
 | P4 After launch | In-game voice chat, analytics (which floors drain the most hearts), remote balance, seasons, daily seed | + event stream, CDN config, voice tool |
-| P5 PvP | Dedicated servers, host-authoritative movement + prediction, lag compensation, Proton-friendly anti-cheat, matchmaking, skill rating | + server hosting, matchmaker |
+| P5 PvP | Dedicated servers, host-authoritative movement + prediction, lag compensation, anti-cheat, matchmaking, skill rating | + server hosting, matchmaker |
 
 The other floors (Spelling Bee, Parkour Run, Key Hunt, then new ones up to 12–15 in total) and tier 2–3 rooms are built alongside P2–P3.
 
@@ -432,7 +427,7 @@ Don't build before P4–P5: Kafka, Kubernetes, microservices, matchmaking.
 | NATS before Kafka | Simple start | A migration if volume grows |
 | Floors as data + modules | Designers tune safely; agents build floors in isolation | Framework work up front |
 | One room per visual tier, same mechanics | Floors get more epic without new code | More art per floor |
-| Steam Deck from day one | Bigger audience; no costly fixes later | Tighter art budgets; controller-first UI |
+| Keyboard and mouse only for now | Less work: no controller menus or Steam Deck testing | Fewer potential players and no "Deck Verified" badge; adding a controller later means extra menu work |
 | Cosmetic-only unlocks | Fair leaderboards | Fewer power rewards to chase |
 | Unity over Unreal | AI-editable code, fast iteration | Lower graphics ceiling (not needed) |
 | Player chooses first or third person | Players play the way they prefer | Two cameras to build; every floor tested in both; fairness to watch on shared leaderboards |
@@ -454,7 +449,7 @@ First three floors, in this order: **Trivia → Collapse Escape → Monster Aren
 
 ### Before step 1 — owner setup (done 4 Nov 2026)
 - Install Unity Hub, sign in, and install Unity 6.3 LTS (newest patch). Install Git, Git LFS and Blender.
-- Create an empty GitHub repo (no README, no .gitignore). It is public for now (section 13, question 10).
+- Create an empty GitHub repo (no README, no .gitignore). It is public for now (section 13, question 7).
 - In Unity Hub: New project → Universal 3D (URP) template → Create new local project, name OneMoreFloor → tick Use Unity CLI.
 - Put `AGENTS.md` and `CLAUDE.md` in the project folder, and `PROJECT_CONTEXT.md` in its `docs` folder. Open a terminal there and start Claude Code.
 - Install the Unity CLI: `winget install Unity.CLI`, then `unity auth login`. Ticking Use Unity CLI only adds the project's package, not the command itself (done 5 Nov 2026).
@@ -473,33 +468,32 @@ First three floors, in this order: **Trivia → Collapse Escape → Monster Aren
   - **Done when:** Claude Code can build the floor without asking you a design question.
 - **2b. You — 3 style tests.** In an image tool, make 3 sets of concept images, one set per style: the lobby, an ordinary office floor (tier 1) and an epic world (tier 3), with your character in each.
   - **Done when:** the 3 sets sit side by side, ready to compare.
-- **2c. Claude Code — core rules** (built 5 Nov 2026, waiting for the owner's OK) in plain C# with unit tests: hearts pool, run phases, seeded floor picker (no repeats), difficulty levels, visual tiers, and the data assets that hold their numbers.
+- **2c. Claude Code — core rules** (done 5 Nov 2026) in plain C# with unit tests: hearts pool, run phases, seeded floor picker (no repeats), difficulty levels, visual tiers, and the data assets that hold their numbers.
   - **Done when:** all EditMode tests pass from the command line.
-- **2d. Your character in Unity.**
+- **2d. Your character in Unity** (after the first Trivia playtests, which use a plain capsule stand-in).
   - **Codex:** a shared Blender export script that applies the asset rules (section 7); run it on one of your characters.
-  - **You:** download Unity's free *First Person + Third Person | Character Controllers* package from the Asset Store. Its first-person and third-person controllers are the starting point for step 3; its animations (or any free Humanoid pack) are used for this test.
-  - **Claude Code:** import your character as Humanoid and play those animations on it.
+  - **Claude Code:** import your character as Humanoid and play a free Humanoid animation pack on it.
   - **Done when:** your character idles, runs and jumps in Unity at the right size (~1.8 m), with nothing stretched or broken.
 - **2e. Codex — generator scripts.** Blender scripts in `tools/blender/` that build the elevator and a basic room kit (wall pieces, floor tiles, door frames, stairs) from the numbers in `docs/sizes.json`, following the asset rules (doors as separate objects, `MK_` markers, `COL_` shapes). For now they make plain grey versions; Claude Code may use them in steps 4–5 instead of its own boxes.
   - **Done when:** changing a number in `docs/sizes.json` and re-running the script gives a new elevator that imports into Unity at the right scale, with its doors as separate objects.
 
 **Step 3 — Movement and camera** (Claude Code)
-- First-person and third-person controller and cameras, built from the package in 2d and adapted to FishNet: each player moves their own character, and everyone sees everyone.
-- Players start in third person. The mouse scroll wheel zooms smoothly, scrolling all the way in becomes first person (arms only), and other custom controls can change the view too (section 2).
-- The camera doesn't clip through walls in either view. Keyboard/mouse and controller both work.
+- First-person and third-person controller and cameras, written for this project using Cinemachine and FishNet: each player moves their own character, and everyone sees everyone. A plain capsule stands in until your character arrives.
+- Players start in third person. The mouse scroll wheel zooms smoothly, scrolling all the way in becomes first person (arms only, once your character arrives), and the `V` key switches views (section 2).
+- The camera doesn't clip through walls in either view.
 - Movement numbers (run speed, jump height, gravity) live in the `MovementSettings` asset, which you tune in the Inspector.
-- **Done when:** in both views, you can run, jump, look around and change view with a keyboard and mouse and with a controller, and 2 players in the editor see each other move smoothly.
+- **Done when:** in both views, you can run, jump, look around and change view with a keyboard and mouse, and 2 players in the editor see each other move smoothly.
 
 **Step 4 — Game loop** (Claude Code)
 - Lobby → ready up → elevator ride (doors close, next floor loads) → title card → play → floor cleared → back in the elevator, floor count +1.
 - Hearts on screen; game over at 0 hearts, even mid-floor; results screen; back to the lobby.
 - A placeholder test floor: one button clears it, one button costs a heart.
 - Runs as a local host. From here on, every test also runs with 2 players in the editor.
-- All text from the string tables; all menus work with a controller.
+- All text from the string tables.
 - **Done when:** lobby → 3 test floors → game over → results → lobby works, solo and with 2 players.
 
 **Step 5 — Greybox Trivia** (Claude Code builds, you playtest)
-- **5a. Trivia:** a plain room with a question screen, answering by keyboard or controller, the clear rule and heart costs from your spec, and a sample question file (you supply the real questions).
+- **5a. Trivia:** a plain room with a question screen, answering by keyboard or mouse, the clear rule and heart costs from your spec, and a sample question file (you supply the real questions).
 - **5b. Collapse Escape (later, once Trivia is complete):** a plain-box building section — corridors, stairs, doors — with the collapse, falling debris, checkpoints and the exit as your spec describes.
 - **5c. You:** playtest Trivia, tune movement in `MovementSettings`, and say what feels too big or too small. Claude Code iterates on the floor's size and puts the real shared sizes in `docs/sizes.json` as they settle. Trivia settles the door, ceiling and elevator sizes; corridors, stairs and the widest gap and highest ledge a player can jump stay guesses until Collapse Escape. Codex re-runs the generator scripts with them.
 - **Done when:** Trivia can be cleared and can drain hearts to game over, solo and with 2 players, and you're happy with its size.
@@ -510,19 +504,19 @@ First three floors, in this order: **Trivia → Collapse Escape → Monster Aren
 
 **Gate:** Trivia playable start to finish in greybox with your character, solo and with 2 players in the editor. Collapse Escape starts once Trivia is complete.
 
-### Vertical slice — one floor at final quality
+### Vertical slice — Trivia at final quality
 7. **Claude Code:** import tools (`MK_` markers → anchors, `COL_` meshes → colliders) and a floor validator.
-8. **Codex + Astra:** the tier-1 building kit for Collapse Escape (walls, floors, stairs, doors and breakable pieces): the generator scripts from 2e, re-run with the real sizes and given the chosen style. Then its props (AI 3D tools, then cleanup), the lobby and the elevator.
-9. **Everyone:** Collapse Escape, lobby and elevator with final art, lighting, sound and collapse effects (dust, debris, camera shake). Fix every pipeline problem here: scale, names, materials, colliders.
+8. **Codex + Astra:** the tier-1 building kit for Trivia's room: the generator scripts from 2e, re-run with the real sizes and given the chosen style. Then its props (AI 3D tools, then cleanup), the lobby and the elevator.
+9. **Everyone:** Trivia, lobby and elevator with final art, lighting and sound. Fix every pipeline problem here: scale, names, materials, colliders.
 
-**Gate:** one floor looks and plays like the final game. Only now mass-produce art.
+**Gate:** you are satisfied with everything about Trivia, including its final art and logic, and comfortable releasing it to production. Only then does the next floor's design start, and only then mass-produce art.
 
 ### P1 — Solo slice
-10. **Monster Arena** (shooting): your spec → greybox → playtest → art. Covers aiming, weapons, hit checks done by the host, monster AI (NavMesh), animations and effects. Then the art pass for Trivia.
-11. **Claude Code:** difficulty levels in play, menus, settings (including camera view and its controls), local best floor, full controller support. Test on a Steam Deck.
+10. **Collapse Escape**, then **Monster Arena** (shooting): your spec → greybox → playtest → art for each. Collapse Escape covers the scripted collapse, checkpoints and the remaining shared sizes. Monster Arena covers aiming, weapons, hit checks done by the host, monster AI (NavMesh), animations and effects.
+11. **Claude Code:** difficulty levels in play, menus, settings (including camera view and its controls), local best floor.
 12. **You:** register on Steamworks and put the Steam page up with final-looking screenshots and a short trailer, so wishlists start building.
 
-**Gate:** Trivia, Collapse Escape and Monster Arena at final quality, fun solo, playable with only a controller.
+**Gate:** Trivia, Collapse Escape and Monster Arena at final quality, fun solo.
 
 ### P2 — Online basics
 13. Steam login, solo leaderboard, Steam Cloud saves. Start with Steam's built-in leaderboards; add the Go service with run checks (section 8) when cheating appears or Steam's version isn't enough.
@@ -533,7 +527,7 @@ First three floors, in this order: **Trivia → Collapse Escape → Monster Aren
 Alongside P2–P3: the other floors — Spelling Bee, Parkour Run, Key Hunt, then new ones up to 12–15 in total (same loop: spec → greybox → playtest → art) — and tier 2–3 rooms.
 
 ### Launch
-15. Cosmetic unlocks, hearts and difficulty balance, achievements, Steam Deck check, closed playtests, a demo for Steam Next Fest, then release.
+15. Cosmetic unlocks, hearts and difficulty balance, achievements, closed playtests, a demo for Steam Next Fest, then release.
 
 ### After launch
 16. P4: voice chat, analytics, remote balance, daily seed, seasons.
@@ -583,15 +577,14 @@ Concept images stay out of `Assets/`, where Unity would import every one. Name t
 
 - Run EditMode tests from the command line with Unity closed: `unity test . --mode EditMode`. Exit code 0 = passed, 8 = a test failed, 6 = the run never finished (e.g. compile errors; the reason is in `%LOCALAPPDATA%\Unity\Editor\Editor.log`).
 - Agents can also check an open Unity through the CLI: `unity open .`, wait for `unity status` to say `ready`, then `unity command console status`, `console get --level error`, `package list`, `test run --mode editor`, `editor.playmode start` and `stop`, and `capture game_view --output-path <file>` for a screenshot. Close it with `unity command editor quit`. Don't use `editor save_all` while the open scene has never been saved: it opens a Save dialog that blocks Unity until someone closes it.
-- What agents can't judge, and the owner tests: how it feels, looks and plays, and real hardware (controller in hand, Steam Deck).
+- What agents can't judge, and the owner tests: how it feels, looks and plays.
 - Core rules: EditMode unit tests — hearts maths, multi-heart mistakes, game over mid-floor, floor order from a seed, difficulty level and visual tier for a floor number, unlock milestones.
 - Every floor: a PlayMode smoke test that clears it, and one that drains hearts to game over — at level 1 and at its hardest level.
 - Every floor follows its spec's numbers (e.g. Spelling Bee clears only after 2 passes per player).
 - From build step 4 on, every floor is tested with 2 players in Multiplayer Play Mode, even before co-op ships. Networking changes: test with 2–4 players.
 - Same seed → same floor order, every time.
-- Controller only: play a full run without touching mouse or keyboard.
 - Camera views: every floor works in first-person and third-person view, unless its spec limits the view.
-- Before closing a milestone: test a standalone build, not just the editor. From P1 on, also on a Steam Deck: at least 30 fps, text readable, on-screen keyboard works.
+- Before closing a milestone: test a standalone build, not just the editor. From P1 on, also on a mid-range laptop: at least 30 fps, text readable.
 
 ---
 
@@ -617,7 +610,7 @@ Concept images stay out of `Assets/`, where Unity would import every one. Name t
 - 3 Nov 2026 — In-game voice chat later, not at launch.
 - 3 Nov 2026 — 12–15 floors at launch.
 - 3 Nov 2026 — Floors get harder as the team climbs; each floor's spec says how.
-- 3 Nov 2026 — Steam Deck planned from day one.
+- 3 Nov 2026 — Steam Deck planned from day one (replaced on 5 Nov: keyboard and mouse only).
 - 3 Nov 2026 — Between runs: cosmetic unlocks only. No power upgrades.
 - 4 Nov 2026 — Owner setup done: Unity 6.3 LTS project (Universal 3D, local, Unity CLI on).
 - 4 Nov 2026 — First three floors: Trivia → Collapse Escape → Monster Arena. Spelling Bee, Parkour Run and Key Hunt come after.
@@ -632,25 +625,25 @@ Concept images stay out of `Assets/`, where Unity would import every one. Name t
 - 5 Nov 2026 — Build step 1 confirmed by the owner.
 - 5 Nov 2026 — Camera: players start in third person. The scroll wheel zooms smoothly, and scrolling all the way in becomes first person, where a player sees only their arms.
 - 5 Nov 2026 — Sizes: `docs/sizes.json` holds only what every floor shares. Each floor has its own size, set by playtesting and the owner's feedback.
-- 5 Nov 2026 — P0 focuses on Trivia: it is seen through to completion before Collapse Escape starts.
+- 5 Nov 2026 — P0 focuses on Trivia. It is the vertical slice: "complete" means the owner is satisfied with its final art, logic and everything else, and comfortable releasing it to production. Only then does the next floor's design start.
 - 5 Nov 2026 — While only one floor exists, the floor picker may repeat it. The no-repeat rule applies as soon as there is an alternative.
+- 5 Nov 2026 — Build step 2c confirmed by the owner.
+- 5 Nov 2026 — Keyboard and mouse only for now, on desktops and laptops. Controller support and Steam Deck are no longer requirements.
+- 5 Nov 2026 — Camera: the scroll wheel zooms, the `V` key switches views, and players can change view at any time.
+- 5 Nov 2026 — Movement and camera are written for this project instead of starting from the Asset Store package, which can't be downloaded from the command line. A capsule stands in until the owner's character arrives.
+- 5 Nov 2026 — The owner has handed technical decisions to the agents. Design stays his.
 
 ---
 
 ## 13. Open questions
 
-1. Do you have a Steam Deck to test on? Needed by the end of P1.
-2. Voice chat (later): does the whole team hear everyone, or only nearby players?
-3. Heart rewards (later): is there a maximum, e.g. the starting amount?
-4. Multiplayer tie-break: lower total time (default)? Decide with the leaderboard design.
-5. PvP format: race the same floors, 1v1, or team vs team? (Later.)
-6. Monster Arena: aim assist for controller and Steam Deck players? Decide in its spec.
-7. Defaults to confirm: lobby contents (section 2); no joining mid-run; a run's board is set by its starting team size; difficulty +1 level every 5 floors.
-8. Camera view: where do players choose it, and what changes view on a controller or Steam Deck (no scroll wheel)? Decide before build step 3.
-9. Camera view: third person can see around corners, and the leaderboards are shared. Should any floor (e.g. Key Hunt) or PvP limit the view?
-10. Repo: when should it go private? It is public for now, and the game will be sold, so anyone can read the code and art and build the game while it stays public.
-11. Controller and Steam Deck: keep them as a requirement, or go keyboard and mouse only for now? Steam doesn't require them. Sections 0, 5, 9 and 11 still assume them until this is decided.
-12. Trivia: does "complete" include final art? If so, Trivia becomes the first floor at final quality instead of Collapse Escape (section 9, vertical slice).
+1. Voice chat (later): does the whole team hear everyone, or only nearby players?
+2. Heart rewards (later): is there a maximum, e.g. the starting amount?
+3. Multiplayer tie-break: lower total time (default)? Decide with the leaderboard design.
+4. PvP format: race the same floors, 1v1, or team vs team? (Later.)
+5. Defaults to confirm: hearts are only lost during play; lobby contents (section 2); no joining mid-run; a run's board is set by its starting team size; difficulty +1 level every 5 floors.
+6. Camera view: third person can see around corners, and the leaderboards are shared. Should any floor (e.g. Key Hunt) or PvP limit the view?
+7. Repo: when should it go private? It is public for now, and the game will be sold, so anyone can read the code and art and build the game while it stays public.
 
 ---
 
@@ -663,7 +656,6 @@ Concept images stay out of `Assets/`, where Unity would import every one. Name t
 - **Gate** — the check that must pass before the next phase starts (section 9).
 - **Visual tier** — the look band a floor number falls in (section 2).
 - **Difficulty level** — a number worked out from the floor number that tells a floor how hard to be (section 2).
-- **Aim assist** — the game gently pulls a controller player's aim toward targets, so sticks can compete with a mouse.
 - **Host / listen server** — one player's game also acts as the server.
 - **Dedicated server** — a server program with no player, running in the cloud.
 - **Relay** — a middleman that passes traffic when players can't connect directly.
@@ -678,7 +670,6 @@ Concept images stay out of `Assets/`, where Unity would import every one. Name t
 - **Cinemachine** — Unity's camera package; handles the first-person camera and a third-person follow camera that doesn't clip through walls.
 - **First-person / third-person view** — seeing through the character's eyes / from a camera behind the character. Also called POV (point of view).
 - **String table** — a list of all on-screen text, one entry per line of text, so it can be translated without touching code.
-- **Proton** — Valve's layer that runs Windows games on Steam Deck.
 - **Steam Cloud** — Steam's save sync between a player's devices.
 - **asmdef** — Unity assembly definition; splits code into modules and blocks unwanted dependencies.
 - **URP** — Universal Render Pipeline, Unity's general-purpose renderer.
@@ -690,12 +681,10 @@ Concept images stay out of `Assets/`, where Unity would import every one. Name t
 - Unity plans and pricing: https://unity.com/products/pricing-updates
 - Unity 6 LTS versions and support dates: https://unity.com/ja/releases/unity-6/support
 - Unity CLI (replaces the old Unity MCP server): https://docs.unity.com/en-us/unity-cli/replace-mcp-server-unity-cli
-- Unity's free character controller package (First Person + Third Person | Character Controllers, URP, works with 6.3): https://assetstore.unity.com/packages/slug/196526
+- Unity's free character controller package, a possible source of animations for step 2d (First Person + Third Person | Character Controllers, URP, works with 6.3; its licence is listed as a non-standard EULA, so check it before committing anything from it): https://assetstore.unity.com/packages/slug/196526
 - Unreal Engine licence: https://www.unrealengine.com/license
 - FishNet features (prediction; Pro features): https://fish-networking.gitbook.io/docs/overview/readme/features
 - FishNet licence: https://github.com/FirstGearGames/FishNet/blob/main/LICENSE.md
 - Unity Multiplay handover: https://docs.unity.com/multiplay-hosting/concepts/ecosystem
-- Steam Deck compatibility checks: https://partner.steamgames.com/doc/steamdeck/compat
-- Steam Deck developer recommendations (on-screen keyboard): https://partner.steamgames.com/doc/steamdeck/recommendations
 - Steam AI disclosure (Jan 2026 rewrite): https://videogameschronicle.com/news/valve-has-significantly-rewritten-steams-rules-for-how-developers-much-disclose-ai-use
 - Claude Code CLAUDE.md / AGENTS.md: https://code.claude.com/docs/en/memory.md

@@ -27,6 +27,13 @@ Claude Code and Codex never run at the same time, and neither remembers the othe
 
 ## Log (newest first)
 
+### 2026-11-05 — Claude Code — after build step 2c
+- Did: the owner confirmed 2c. Removed the controller and Steam Deck requirements: the game is keyboard and mouse only for now. Made Trivia the vertical slice, so it is finished to production quality before the next floor's design starts. Dropped the Asset Store package: I write movement and camera myself, with a capsule standing in until the owner's character arrives.
+- Files: `AGENTS.md`, `HANDOFF.md`, `docs/`.
+- Other agent needs to know: art budgets now target a mid-range laptop instead of a Steam Deck, and concept images are checked at 1280×720. Your final art work (step 8) is Trivia's room, the lobby and the elevator, not Collapse Escape.
+- Owner to check: write `docs/floors/trivia.md`. Put concept images in `art-source/concept/floors/trivia/`.
+- Next: Codex does 2e. Claude Code does step 3.
+
 ### 2026-11-05 — Claude Code — build step 2c
 - Did: built the core rules in `Core`: hearts pool, run phases, seeded random generator, floor picker, difficulty levels and visual tiers. Added the `GameRules` and `DirectorSettings` data assets. All 64 EditMode tests pass from the command line. P0 now focuses on Trivia, seen through to completion before Collapse Escape starts.
 - Files: `Assets/_OneMoreFloor/Core/`, `Game/`, `Data/`, `Tests/EditMode/`, `art-source/concept/`, `AGENTS.md`, `HANDOFF.md`, `docs/`.

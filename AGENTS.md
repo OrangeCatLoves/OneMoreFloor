@@ -3,7 +3,7 @@
 Always-on rules for AI agents (Claude Code and Codex). The full project context is in `docs/PROJECT_CONTEXT.md`: read it before starting any build step. These rules repeat its section 0; change both together.
 
 ## The project
-OneMoreFloor is a 3D co-op challenge game (1–4 players) for PC and Steam Deck, sold on Steam. Each player chooses first-person or third-person view. Unity 6.3 LTS, URP, C#, FishNet. Players ride an elevator; every floor is a surprise challenge; the team shares one pool of hearts; score = floors cleared. The current phase and step are under "Current focus" at the top of `docs/PROJECT_CONTEXT.md`.
+OneMoreFloor is a 3D co-op challenge game (1–4 players) for Windows PC (desktops and laptops, keyboard and mouse), sold on Steam. Each player chooses first-person or third-person view. Unity 6.3 LTS, URP, C#, FishNet. Players ride an elevator; every floor is a surprise challenge; the team shares one pool of hearts; score = floors cleared. The current phase and step are under "Current focus" at the top of `docs/PROJECT_CONTEXT.md`.
 
 ## The owner
 - Strong software engineer, new to game development and Unity.
@@ -11,6 +11,7 @@ OneMoreFloor is a 3D co-op challenge game (1–4 players) for PC and Steam Deck,
 - For anything he must do in the Unity Editor, give exact steps: menu paths, Inspector fields, values.
 - Keep replies short and direct.
 - Don't ask him to do setup you can do yourself, such as creating folders. Do it and tell him the exact path.
+- He has handed technical decisions to the agents. Make them and report them. Design stays his.
 
 ## Handoff between agents
 - Only one agent runs at a time, and neither remembers the other's sessions. `HANDOFF.md` (project root) is how you pass information.
@@ -46,7 +47,7 @@ OneMoreFloor is a 3D co-op challenge game (1–4 players) for PC and Steam Deck,
 - All randomness comes from the run's seeded random generator. Never `UnityEngine.Random` in game rules.
 - Tunable numbers live in data assets (ScriptableObjects), not in code.
 - A floor never references another floor. Floors talk to the game only through the Floor contract (section 4).
-- Everything must work with a controller and on Steam Deck (section 5).
+- The game is played with keyboard and mouse. Read input through Input System actions, not raw keys, so players can rebind controls and a controller could be added later.
 - All on-screen text comes from the string tables. Never hard-code text.
 - Ask before adding packages, assets, paid services or new top-level folders. Anything the current build step lists is already approved.
 - Never edit vendored code (`Assets/FishNet/`, third-party packages).
