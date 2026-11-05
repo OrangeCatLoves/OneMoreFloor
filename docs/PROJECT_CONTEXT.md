@@ -4,8 +4,8 @@ Version 0.10 · 5 Nov 2026 · Owner: Wei Bin (GitHub: OrangeCatLoves)
 
 The single source of truth for what the game is and how it is built. Written for the owner and for AI coding agents (Claude Code, Codex).
 
-- **Status:** pre-production. Build step 1 (project setup) is built and waiting for the owner's check. No game rules or gameplay yet.
-- **Current focus:** Phase P0, finishing build step 1 (section 9). No backend work yet.
+- **Status:** pre-production. Build step 1 (project setup) is done. No game rules or gameplay yet.
+- **Current focus:** Phase P0, build step 2 (section 9). No backend work yet.
 - **Conflicts:** if this file disagrees with the code or with the owner's latest instruction, stop and ask.
 
 ---
@@ -32,7 +32,7 @@ These rules are repeated in `AGENTS.md`, which Claude Code and Codex load automa
 - All on-screen text comes from the string tables. Never hard-code text (section 5).
 - Follow the build order (section 9). Don't start work from a later phase until the current gate passes.
 - Only one agent runs at a time. Start every session by reading `HANDOFF.md`; end it by adding an entry there and committing (start the commit message with `WIP:` if the owner hasn't confirmed the work yet). The commit history lists only `OrangeCatLoves`: no co-author or AI attribution lines.
-- Work in small steps. After each change: what changed, and how to test it in the editor.
+- Work in small steps. After each change: what changed, what you checked and the results. Run every check you can yourself; ask the owner to test only what needs a person (how it feels, looks and plays, or hardware you can't reach).
 - When something notable changes (a decision, a tech choice, the project's setup or build status), update the relevant Markdown files in the same session so they stay accurate. Record the owner's decisions; don't make them for him.
 - Unclear design rule? Check section 13 and ask. Don't guess.
 
@@ -212,7 +212,7 @@ Rules:
 | Monster AI | AI Navigation package (NavMesh) | Pathfinding |
 | Tests | Unity Test Framework (EditMode, PlayMode); Multiplayer Play Mode for 2–4 players in the editor | |
 | Agent tooling | Unity CLI (free) | Lets AI agents work with the open Unity Editor: compile, run tests, run builds. The owner doesn't have to copy errors back and forth |
-| Version control | Git + Git LFS on GitHub | Watch LFS storage limits |
+| Version control | Git + Git LFS on GitHub (public repo for now) | Watch LFS storage limits |
 
 ### Steam Deck (planned from day one)
 Valve's checks for the "Deck Verified" badge, and what they mean here:
@@ -451,14 +451,14 @@ First three floors, in this order: **Trivia → Collapse Escape → Monster Aren
 
 ### Before step 1 — owner setup (done 4 Nov 2026)
 - Install Unity Hub, sign in, and install Unity 6.3 LTS (newest patch). Install Git, Git LFS and Blender.
-- Create an empty private GitHub repo (no README, no .gitignore).
+- Create an empty GitHub repo (no README, no .gitignore). It is public for now (section 13, question 12).
 - In Unity Hub: New project → Universal 3D (URP) template → Create new local project, name OneMoreFloor → tick Use Unity CLI.
 - Put `AGENTS.md` and `CLAUDE.md` in the project folder, and `PROJECT_CONTEXT.md` in its `docs` folder. Open a terminal there and start Claude Code.
 - Install the Unity CLI: `winget install Unity.CLI`, then `unity auth login`. Ticking Use Unity CLI only adds the project's package, not the command itself (done 5 Nov 2026).
 
 ### P0 — Foundations (now)
 
-**Step 1 — Project setup** (Claude Code)
+**Step 1 — Project setup** (Claude Code) — done 5 Nov 2026
 - Git: Unity `.gitignore`, Git LFS rules for art and audio files, connected to the GitHub repo.
 - Packages: Input System, Cinemachine, ProBuilder, AI Navigation, Localization, Test Framework, Multiplayer Play Mode, FishNet.
 - The folder layout (section 10) and the asmdef layers (section 6).
@@ -575,6 +575,8 @@ Empty folders hold a `.gitkeep` so Git keeps them; delete it when real files arr
 ## 11. Testing
 
 - Run EditMode tests from the command line with Unity closed: `unity test . --mode EditMode`. Exit code 0 = passed, 8 = a test failed, 6 = the run never finished (e.g. compile errors; the reason is in `%LOCALAPPDATA%\Unity\Editor\Editor.log`).
+- Agents can also check an open Unity through the CLI: `unity open .`, wait for `unity status` to say `ready`, then `unity command console status`, `console get --level error`, `package list`, `test run --mode editor`, `editor.playmode start` and `stop`, and `capture game_view --output-path <file>` for a screenshot. Close it with `unity command editor quit`.
+- What agents can't judge, and the owner tests: how it feels, looks and plays, and real hardware (controller in hand, Steam Deck).
 - Core rules: EditMode unit tests — hearts maths, multi-heart mistakes, game over mid-floor, floor order from a seed, difficulty level and visual tier for a floor number, unlock milestones.
 - Every floor: a PlayMode smoke test that clears it, and one that drains hearts to game over — at level 1 and at its hardest level.
 - Every floor follows its spec's numbers (e.g. Spelling Bee clears only after 2 passes per player).
@@ -618,6 +620,9 @@ Empty folders hold a `.gitkeep` so Git keeps them; delete it when real files arr
 - 5 Nov 2026 — Correction: FishNet's licence is its own, not MIT. It is free and royalty-free and allows games you sell.
 - 5 Nov 2026 — Agents update the relevant Markdown files whenever something notable changes.
 - 5 Nov 2026 — The commit history lists only `OrangeCatLoves`, with no co-author or AI attribution lines.
+- 5 Nov 2026 — The GitHub repo stays public for now.
+- 5 Nov 2026 — Agents run every check they can; the owner tests only what needs a person.
+- 5 Nov 2026 — Build step 1 confirmed by the owner.
 
 ---
 
@@ -634,6 +639,7 @@ Empty folders hold a `.gitkeep` so Git keeps them; delete it when real files arr
 9. Camera view: which view do players start in, where do they choose it, and what changes view on a controller or Steam Deck (no scroll wheel)? Decide before build step 3.
 10. First-person view: what do players see of their own body, arms only or the full body? Decide before build step 3.
 11. Camera view: third person can see around corners, and the leaderboards are shared. Should any floor (e.g. Key Hunt) or PvP limit the view?
+12. Repo: when should it go private? It is public for now, and the game will be sold, so anyone can read the code and art and build the game while it stays public.
 
 ---
 

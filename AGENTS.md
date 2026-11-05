@@ -20,9 +20,10 @@ OneMoreFloor is a 3D co-op challenge game (1–4 players) for PC and Steam Deck,
 ## How we work
 - Follow the build order (`docs/PROJECT_CONTEXT.md` section 9). One step at a time. Don't start work from a later phase until the current gate passes.
 - Before changing anything, show a short plan and wait for the owner's OK.
-- After each change, say what changed and exactly how to test it.
+- Run every check you can yourself (compile, tests, Console, packages, Play mode, screenshots) so the owner doesn't have to repeat them. Ask him to test only what needs a person: how it feels, looks and plays, or hardware you can't reach.
+- After each change, say what changed, what you checked and the results.
 - When something notable changes (a decision, a tech choice, the project's setup or build status), update the relevant Markdown files in the same session so they stay accurate. Record the owner's decisions; don't make them for him.
-- A build step is done only when the owner confirms it works.
+- A build step is done only when the owner confirms it, based on your report and any checks only a person can do.
 - End every session with a commit. If the owner hasn't confirmed the work yet, start the commit message with `WIP:`. Small commits, clear messages. The commit history lists only `OrangeCatLoves`: no co-author or AI attribution lines.
 - Pull before starting. Push after committing.
 
@@ -67,3 +68,4 @@ OneMoreFloor is a 3D co-op challenge game (1–4 players) for PC and Steam Deck,
 - From build step 4 on, test every floor with 2 players in the editor (Multiplayer Play Mode).
 - Test every floor in both first-person and third-person view, unless its spec limits the view.
 - Use the Unity CLI to compile and run tests yourself before asking the owner to check in the Editor. With Unity closed: `unity test . --mode EditMode`. Exit code 0 = passed, 8 = a test failed, 6 = the run never finished (the reason is in `%LOCALAPPDATA%\Unity\Editor\Editor.log`).
+- With the project open (`unity open .`, then wait for `unity status` to say `ready`), use `unity command`: `console status`, `console get --level error`, `package list`, `test run --mode editor`, `editor.playmode start` and `stop`, `capture game_view --output-path <file>`. Close Unity afterwards with `unity command editor quit`.
