@@ -22,7 +22,7 @@ These rules are repeated in `AGENTS.md`, which Claude Code and Codex load automa
 - The owner has handed technical decisions to the agents. Make them and report them. Design stays his.
 - **The owner designs the story, the setting and every floor's rules.** Never invent them. If something is missing or unclear, use a neutral placeholder and ask.
 - Ask before adding packages, assets, paid services or new top-level folders.
-- Never edit vendored code (`Assets/FishNet/`, third-party packages).
+- Never edit vendored code (`Assets/FishNet/`, `Assets/Starter Assets/`, third-party packages).
 - `docs/` belongs to the owner. Read it; edit it only when the owner asks or to record a notable change (see the rule on notable changes below).
 - Doors, corridors, stairs, ceilings and the elevator get their sizes from `docs/sizes.json` (metres). Don't hard-code these in scripts or models. Each floor's overall size starts from its spec and is tuned by playing.
 - Game rules are plain C# with no `UnityEngine` references, and have unit tests.
@@ -159,7 +159,7 @@ Rules marked TBD are placeholders until the owner's spec exists.
 
 | # | Floor | Genre | Clear rule | Costs hearts | Main tech |
 |---|---|---|---|---|---|
-| 1 | Trivia | Knowledge | TBD (e.g. team gets N answers right) | TBD (e.g. wrong answer) | UI, question bank |
+| 1 | Trivia | Q&A | **The team goes through all the questions for its level, answering each by majority vote — owner's rule** | **Wrong team answer, or nobody answers: 1 heart — owner's rule** | UI, question bank |
 | 2 | Collapse Escape | Panic escape | TBD (e.g. every player gets out) | TBD (e.g. hit by debris, still inside at collapse) | Scripted collapse, timer, checkpoints |
 | 3 | Monster Arena | Shooting | TBD (e.g. all monsters dead) | TBD (e.g. hit by a monster) | Aiming, weapons, hit checks by the host, monster AI (NavMesh), animation, effects |
 | 4 | Spelling Bee | Listening + typing | **Every player passes at least twice (2 correct words each) — owner's rule** | TBD (e.g. misspelling) | Word audio clips, text input |
@@ -473,7 +473,7 @@ First three floors, in this order: **Trivia → Collapse Escape → Monster Aren
 - **2d. A real character in Unity.** Playtests never use a plain capsule. The package's character stands in until yours is ready.
   - **You:** add Unity's free *First Person + Third Person | Character Controllers* package to your account and download it (needed before step 3).
   - **Codex:** a shared Blender export script that applies the asset rules (section 7); run it on one of your characters.
-  - **Claude Code:** import the package, then import your character as Humanoid and play the package's animations on it.
+  - **Claude Code:** import the package's `Runtime` folder, then import your character as Humanoid and play the package's animations on it. The package stays out of Git, because its licence isn't confirmed for a public repo. After a fresh clone, re-import it: `unity assets import "<file>" --include "Assets/Starter Assets/Runtime/**"`. Don't import the whole package: it includes a `Packages/manifest.json`.
   - **Done when:** your character idles, runs and jumps in Unity at the right size (~1.8 m), with nothing stretched or broken.
 - **2e. Codex — generator scripts.** Blender scripts in `tools/blender/` that build the elevator and a basic room kit (wall pieces, floor tiles, door frames, stairs) from the numbers in `docs/sizes.json`, following the asset rules (doors as separate objects, `MK_` markers, `COL_` shapes). For now they make plain grey versions; Claude Code may use them in steps 4–5 instead of its own boxes.
   - **Done when:** changing a number in `docs/sizes.json` and re-running the script gives a new elevator that imports into Unity at the right scale, with its doors as separate objects.
@@ -494,7 +494,7 @@ First three floors, in this order: **Trivia → Collapse Escape → Monster Aren
 - **Done when:** lobby → 3 test floors → game over → results → lobby works, solo and with 2 players.
 
 **Step 5 — Greybox Trivia** (Claude Code builds, you playtest)
-- **5a. Trivia:** a plain room with a question screen, answering by keyboard or mouse, the clear rule and heart costs from your spec, and a sample question file (you supply the real questions).
+- **5a. Trivia:** a plain-box stage with a question screen and 4 podiums, team voting by keyboard or mouse, the clear rule and heart costs from your spec, and a sample question file (you supply the real questions).
 - **5b. Collapse Escape (later, once Trivia is complete):** a plain-box building section — corridors, stairs, doors — with the collapse, falling debris, checkpoints and the exit as your spec describes.
 - **5c. You:** playtest Trivia, tune movement in `MovementSettings`, and say what feels too big or too small. Claude Code iterates on the floor's size and puts the real shared sizes in `docs/sizes.json` as they settle. Trivia settles the door, ceiling and elevator sizes; corridors, stairs and the widest gap and highest ledge a player can jump stay guesses until Collapse Escape. Codex re-runs the generator scripts with them.
 - **Done when:** Trivia can be cleared and can drain hearts to game over, solo and with 2 players, and you're happy with its size.
@@ -564,6 +564,7 @@ OneMoreFloor/
     Editor/                 validators, import tools
     Tests/                  EditMode, PlayMode
   Assets/FishNet/           vendored, read-only
+  Assets/Starter Assets/    Unity's character package, read-only, local only (not in Git)
   Assets/DefaultPrefabObjects.asset   generated by FishNet
 backend/                    later (may become its own repo): Go services, DB migrations, docker-compose
 ```
@@ -633,6 +634,8 @@ Concept images stay out of `Assets/`, where Unity would import every one. Name t
 - 5 Nov 2026 — Camera: the scroll wheel zooms, the `V` key switches views, and players can change view at any time.
 - 5 Nov 2026 — Movement and camera are written for this project. Playtests use a real character, not a capsule: the owner downloads Unity's free character package, and its character stands in until his own is ready. The package's licence decides whether it can be committed to the public repo.
 - 5 Nov 2026 — The owner has handed technical decisions to the agents. Design stays his.
+- 5 Nov 2026 — Trivia: one variant first, the game-show stage with an audience (for Trivia only), answered as a team by majority vote. See `docs/floors/trivia.md`.
+- 5 Nov 2026 — First playtests use the package's robot. The final host and audience must look realistic and move and jump around as if it's real.
 
 ---
 

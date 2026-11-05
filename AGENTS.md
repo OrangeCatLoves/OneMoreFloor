@@ -50,7 +50,7 @@ OneMoreFloor is a 3D co-op challenge game (1–4 players) for Windows PC (deskto
 - The game is played with keyboard and mouse. Read input through Input System actions, not raw keys, so players can rebind controls and a controller could be added later.
 - All on-screen text comes from the string tables. Never hard-code text.
 - Ask before adding packages, assets, paid services or new top-level folders. Anything the current build step lists is already approved.
-- Never edit vendored code (`Assets/FishNet/`, third-party packages).
+- Never edit vendored code (`Assets/FishNet/`, `Assets/Starter Assets/`, third-party packages).
 
 ## Art rules (summary; full list in section 7)
 - 1 Blender unit = 1 m = 1 Unity unit. Player ≈ 1.8 m tall. Transforms applied. Models face +Z in Unity. FBX by default.

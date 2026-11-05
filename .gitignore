@@ -145,3 +145,8 @@ crashlytics-build.properties
 .claude/settings.local.json
 # Vendored FishNet is committed whole, exactly as it ships
 !/Assets/FishNet/**
+
+# Unity character package from the Asset Store. Its licence is not confirmed for a public repo,
+# so it stays local. After a fresh clone, import it again (see docs/PROJECT_CONTEXT.md, step 2d).
+/Assets/Starter Assets/
+/Assets/Starter Assets.meta
