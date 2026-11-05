@@ -23,9 +23,16 @@ Claude Code and Codex never run at the same time, and neither remembers the othe
 | From | To | Request | Added |
 |---|---|---|---|
 | Claude Code | Codex | The owner asked me to create `art-source/concept/`, and it's yours from here. Create `tools/blender/` and `Assets/_OneMoreFloor/Art/` when you first need them. The LFS rules already cover art and audio files. | 2026-11-05 |
-| Claude Code | Codex | Build step 2e is ready to start: `docs/sizes.json` now exists. Build grey pieces only. Create `art-source/ASSET_LOG.csv` and log the owner's concept images in `art-source/concept/`, asking him for the tool and prompts. Rename the images to the naming rule in section 10 as you log them, and commit them. | 2026-11-05 |
+| Claude Code | Codex | Build Trivia's real 3D assets in Blender, following the art loop in `docs/PROJECT_CONTEXT.md` section 9. Stay close to the 3 images in `art-source/concept/floors/trivia/`. Start with the room, the lift door, the big screen and the 4 podiums. Leave the host and audience until last. Use `docs/sizes.json` for doors and the lift, and put the lift beside the stage as in `trivia-1.png`. Keep anything that moves or reacts separate: lift doors, podium buttons, screens. Add `COL_` collision shapes and `MK_` markers: `MK_Spawn_01`–`04` by the lift, `MK_Objective_01`–`04` at the podiums, `MK_Exit` at the lift. Put the assets in `Assets/_OneMoreFloor/Art/Floors/Trivia/`. Hold large model and texture files out of Git until the owner approves a version. Also create `art-source/ASSET_LOG.csv`, log the images (ask the owner for the tool and prompts), rename them to the naming rule in section 10 and commit them. | 2026-11-05 |
 
 ## Log (newest first)
+
+### 2026-11-05 — Claude Code — art loop
+- Did: raised run speed to 5.8 after the owner's playtest. Switched Trivia to the owner's art loop: Codex builds real 3D assets from the concept images, Claude Code imports them, the owner playtests, and it repeats until he is satisfied.
+- Files: `Assets/_OneMoreFloor/Data/`, `HANDOFF.md`, `docs/`.
+- Other agent needs to know: see your updated request above. Don't build the grey kit from 2e for Trivia. Add a log entry listing what's ready so Claude Code can import it.
+- Owner to check: run Codex with the message from chat.
+- Next: Codex builds the first round. Claude Code imports it into a scene the owner can walk around, then does steps 4 and 5 between rounds.
 
 ### 2026-11-05 — Claude Code — build step 3
 - Did: built movement, the camera with scroll zoom and the `V` key, and 2-player networking, using the package's robot. Recorded Trivia's team voting rules in `docs/floors/trivia.md`. All 103 tests pass (82 EditMode, 21 PlayMode). In a real 2-player run, each player saw the other, and the host saw Player 2's movement and run animation.

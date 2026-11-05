@@ -284,6 +284,8 @@ A 3D model is a stage set: shapes and paint, no behaviour. A door from Blender c
 - Never deliver a whole floor as one welded mesh. Anything that moves or reacts is its own object — including every piece of a building that is meant to collapse.
 
 ### Order of work (art track; how it fits with code: section 9)
+For Trivia, the art loop in section 9 replaces this order. It still applies to later floors unless the owner says otherwise.
+
 1. **Check the characters** against the checklist below. Fix what's needed before other art depends on them.
 2. **Three style explorations**, built around the owner's characters. For each style: concept images of the lobby, one tier-1 room and one tier-3 world, with the characters in the scene. Use the owner's setting if `docs/STORY.md` exists; otherwise a neutral building. The owner picks one style. This proves the style fits the characters and stretches from an ordinary office to an epic world.
 3. **Style guide** (`docs/STYLE_GUIDE.md`, one page) for the chosen style: palette, shapes, lighting mood, UI look, kit grid size, and how the look changes per tier.
@@ -404,7 +406,7 @@ The step-by-step order, with who does what, is in section 9.
 
 | Phase | Scope | Online pieces |
 |---|---|---|
-| P0 Pre-production (now) | Project setup, core rules, your character in Unity, movement, game loop, greybox Trivia, style guide | None |
+| P0 Pre-production (now) | Project setup, core rules, your character in Unity, movement, game loop, Trivia's logic | None |
 | Vertical slice | Trivia, the lobby and the elevator at final quality | None |
 | P1 Solo slice | Collapse Escape and Monster Arena at final quality; difficulty levels, menus, local best floor | None (local host) |
 | P2 Online basics | Steam login, solo leaderboard, run tickets + checks, Steam Cloud saves | Steam leaderboards, or one Go service + Postgres + Redis |
@@ -457,6 +459,8 @@ First three floors, in this order: **Trivia → Collapse Escape → Monster Aren
 
 ### P0 — Foundations (now)
 
+**Trivia's art loop (owner's decision, 5 Nov 2026).** Codex builds Trivia's real 3D assets in Blender from the concept images → Claude Code imports them → the owner playtests → Codex reworks what he dislikes → repeat until he is satisfied with the whole floor. For Trivia this replaces the style tests (2b), the grey kit (2e) and the style guide (step 6). The room, lift, big screen and podiums come first; the host and audience come last, because animated people are the hardest part. Large model and texture files stay out of Git until the owner approves a version, because Git LFS keeps every committed version.
+
 **Step 1 — Project setup** (Claude Code) — done 5 Nov 2026
 - Git: Unity `.gitignore`, Git LFS rules for art and audio files, connected to the GitHub repo.
 - Packages: Input System, Cinemachine, ProBuilder, AI Navigation, Localization, Test Framework, Multiplayer Play Mode, FishNet.
@@ -467,7 +471,7 @@ First three floors, in this order: **Trivia → Collapse Escape → Monster Aren
 **Step 2 — Five jobs at once.** 2a and 2b don't need step 1; start them any time. The rest start once step 1 is done.
 - **2a. You — floor spec.** Write `docs/floors/trivia.md` from `docs/floors/_TEMPLATE.md`. Collapse Escape's spec comes after Trivia is complete. Monster Arena's spec can wait until P1.
   - **Done when:** Claude Code can build the floor without asking you a design question.
-- **2b. You — 3 style tests.** In an image tool, make 3 sets of concept images, one set per style: the lobby, an ordinary office floor (tier 1) and an epic world (tier 3), with your character in each.
+- **2b. You — 3 style tests** (not needed for Trivia: see the art loop). In an image tool, make 3 sets of concept images, one set per style: the lobby, an ordinary office floor (tier 1) and an epic world (tier 3), with your character in each.
   - **Done when:** the 3 sets sit side by side, ready to compare.
 - **2c. Claude Code — core rules** (done 5 Nov 2026) in plain C# with unit tests: hearts pool, run phases, seeded floor picker (no repeats), difficulty levels, visual tiers, and the data assets that hold their numbers.
   - **Done when:** all EditMode tests pass from the command line.
@@ -476,7 +480,7 @@ First three floors, in this order: **Trivia → Collapse Escape → Monster Aren
   - **Codex:** a shared Blender export script that applies the asset rules (section 7); run it on one of your characters.
   - **Claude Code:** import the package's `Runtime` folder, then import your character as Humanoid and play the package's animations on it. The package stays out of Git, because its licence isn't confirmed for a public repo. After a fresh clone, re-import it: `unity assets import "<file>" --include "Assets/Starter Assets/Runtime/**"`. Don't import the whole package: it includes a `Packages/manifest.json`.
   - **Done when:** your character idles, runs and jumps in Unity at the right size (~1.8 m), with nothing stretched or broken.
-- **2e. Codex — generator scripts.** Blender scripts in `tools/blender/` that build the elevator and a basic room kit (wall pieces, floor tiles, door frames, stairs) from the numbers in `docs/sizes.json`, following the asset rules (doors as separate objects, `MK_` markers, `COL_` shapes). For now they make plain grey versions; Claude Code may use them in steps 4–5 instead of its own boxes.
+- **2e. Codex — generator scripts** (not needed for Trivia: see the art loop). Blender scripts in `tools/blender/` that build the elevator and a basic room kit (wall pieces, floor tiles, door frames, stairs) from the numbers in `docs/sizes.json`, following the asset rules (doors as separate objects, `MK_` markers, `COL_` shapes). For now they make plain grey versions; Claude Code may use them in steps 4–5 instead of its own boxes.
   - **Done when:** changing a number in `docs/sizes.json` and re-running the script gives a new elevator that imports into Unity at the right scale, with its doors as separate objects.
 
 **Step 3 — Movement and camera** (Claude Code) — built 5 Nov 2026, waiting for the owner to try it
@@ -494,21 +498,21 @@ First three floors, in this order: **Trivia → Collapse Escape → Monster Aren
 - All text from the string tables.
 - **Done when:** lobby → 3 test floors → game over → results → lobby works, solo and with 2 players.
 
-**Step 5 — Greybox Trivia** (Claude Code builds, you playtest)
-- **5a. Trivia:** a plain-box stage with a question screen and 4 podiums, team voting by keyboard or mouse, the clear rule and heart costs from your spec, and a sample question file (you supply the real questions).
+**Step 5 — Trivia's logic** (Claude Code builds, you playtest)
+- **5a. Trivia:** the question screen, 4 podiums and team voting by keyboard or mouse, built on Codex's room, with plain boxes standing in for anything not ready yet, the clear rule and heart costs from your spec, and a sample question file (you supply the real questions).
 - **5b. Collapse Escape (later, once Trivia is complete):** a plain-box building section — corridors, stairs, doors — with the collapse, falling debris, checkpoints and the exit as your spec describes.
 - **5c. You:** playtest Trivia, tune movement in `MovementSettings`, and say what feels too big or too small. Claude Code iterates on the floor's size and puts the real shared sizes in `docs/sizes.json` as they settle. Trivia settles the door, ceiling and elevator sizes; corridors, stairs and the widest gap and highest ledge a player can jump stay guesses until Collapse Escape. Codex re-runs the generator scripts with them.
 - **Done when:** Trivia can be cleared and can drain hearts to game over, solo and with 2 players, and you're happy with its size.
 
-**Step 6 — Pick the style** (You)
+**Step 6 — Pick the style** (You; not needed for Trivia: see the art loop)
 - Pick one of the 3 style tests and write `docs/STYLE_GUIDE.md` (one page): palette, shapes, lighting mood, UI look, kit grid size (from 5c), and how the look changes per tier.
 - **Done when:** someone could make a matching asset from the page alone.
 
-**Gate:** Trivia playable start to finish in greybox with your character, solo and with 2 players in the editor. Collapse Escape starts once Trivia is complete.
+**Gate:** Trivia playable start to finish with your character, solo and with 2 players in the editor. Collapse Escape starts once Trivia is complete.
 
 ### Vertical slice — Trivia at final quality
 7. **Claude Code:** import tools (`MK_` markers → anchors, `COL_` meshes → colliders) and a floor validator.
-8. **Codex + Astra:** the tier-1 building kit for Trivia's room: the generator scripts from 2e, re-run with the real sizes and given the chosen style. Then its props (AI 3D tools, then cleanup), the lobby and the elevator.
+8. **Codex + Astra:** Trivia's room and props through the art loop, then the lobby and the elevator. For later floors: the tier-1 building kit from the generator scripts in 2e, given the chosen style.
 9. **Everyone:** Trivia, lobby and elevator with final art, lighting and sound. Fix every pipeline problem here: scale, names, materials, colliders.
 
 **Gate:** you are satisfied with everything about Trivia, including its final art and logic, and comfortable releasing it to production. Only then does the next floor's design start, and only then mass-produce art.
@@ -641,6 +645,7 @@ Concept images stay out of `Assets/`, where Unity would import every one. Name t
 - 5 Nov 2026 — The owner has handed technical decisions to the agents. Design stays his.
 - 5 Nov 2026 — Trivia: one variant first, the game-show stage with an audience (for Trivia only), answered as a team by majority vote. See `docs/floors/trivia.md`.
 - 5 Nov 2026 — Run In Background is on, so a co-op host who alt-tabs doesn't freeze the game for the team.
+- 5 Nov 2026 — Trivia's art is built directly in 3D from the concept images and reworked through playtests until the owner is satisfied (section 9, art loop). The owner cares more about the design than the room size, which is easy to change.
 - 5 Nov 2026 — First playtests use the package's robot. The final host and audience must look realistic and move and jump around as if it's real.
 
 ---
