@@ -333,7 +333,7 @@ Checklist before they go into the game:
 - Names:
   - `SM_` static mesh, `SK_` rigged mesh, `M_` material, `T_` texture, `A_` animation.
   - `COL_` simple collision mesh → the import script turns it into an invisible collider.
-  - `MK_` empty marker → the import script turns it into the matching anchor: `MK_Spawn_01`, `MK_Exit`, `MK_Checkpoint_02`, `MK_Key_A`, `MK_MonsterSpawn_01`, `MK_Objective_01`, `MK_Hazard_01`.
+  - `MK_` empty marker → the import script turns it into the matching anchor: `MK_Spawn_01`, `MK_Exit`, `MK_Checkpoint_02`, `MK_Key_A`, `MK_MonsterSpawn_01`, `MK_Objective_01`, `MK_Hazard_01`, `MK_Host`, `MK_Light_Spot_01`.
 - Budgets *(defaults; profile on a mid-range laptop and adjust)*: character ≤ 20k triangles at full detail, 3 LODs; a floor ≤ ~500k visible triangles; textures 1K–2K.
 - Share materials and combine static pieces where possible: fewer separate objects = faster, especially on laptops.
 - Get one asset fully working in Unity (scale, names, colliders, markers) before making many.
@@ -459,7 +459,7 @@ First three floors, in this order: **Trivia → Collapse Escape → Monster Aren
 
 ### P0 — Foundations (now)
 
-**Trivia's art loop (owner's decision, 5 Nov 2026).** Codex builds Trivia's real 3D assets in Blender from the concept images → Claude Code imports them → the owner playtests → Codex reworks what he dislikes → repeat until he is satisfied with the whole floor. For Trivia this replaces the style tests (2b), the grey kit (2e) and the style guide (step 6). The room, lift, big screen and podiums come first; the host and audience come last, because animated people are the hardest part. Large model and texture files stay out of Git until the owner approves a version, because Git LFS keeps every committed version.
+**Trivia's art loop (owner's decision, 5 Nov 2026).** Codex builds Trivia's real 3D assets in Blender from the concept images → Claude Code imports them → the owner playtests → Codex reworks what he dislikes → repeat until he is satisfied with the whole floor. For Trivia this replaces the style tests (2b), the grey kit (2e) and the style guide (step 6). The room, lift, big screen and podiums come first; the host and audience come last, because animated people are the hardest part. Large model and texture files stay out of Git until the owner approves a version, because Git LFS keeps every committed version. Codex's brief is `docs/floors/trivia_art_brief.md`.
 
 **Step 1 — Project setup** (Claude Code) — done 5 Nov 2026
 - Git: Unity `.gitignore`, Git LFS rules for art and audio files, connected to the GitHub repo.

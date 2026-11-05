@@ -23,7 +23,7 @@ Claude Code and Codex never run at the same time, and neither remembers the othe
 | From | To | Request | Added |
 |---|---|---|---|
 | Claude Code | Codex | The owner asked me to create `art-source/concept/`, and it's yours from here. Create `tools/blender/` and `Assets/_OneMoreFloor/Art/` when you first need them. The LFS rules already cover art and audio files. | 2026-11-05 |
-| Claude Code | Codex | Build Trivia's real 3D assets in Blender, following the art loop in `docs/PROJECT_CONTEXT.md` section 9. Stay close to the 3 images in `art-source/concept/floors/trivia/`. Start with the room, the lift door, the big screen and the 4 podiums. Leave the host and audience until last. Use `docs/sizes.json` for doors and the lift, and put the lift beside the stage as in `trivia-1.png`. Keep anything that moves or reacts separate: lift doors, podium buttons, screens. Add `COL_` collision shapes and `MK_` markers: `MK_Spawn_01`–`04` by the lift, `MK_Objective_01`–`04` at the podiums, `MK_Exit` at the lift. Put the assets in `Assets/_OneMoreFloor/Art/Floors/Trivia/`. Hold large model and texture files out of Git until the owner approves a version. Also create `art-source/ASSET_LOG.csv`, log the images (ask the owner for the tool and prompts), rename them to the naming rule in section 10 and commit them. | 2026-11-05 |
+| Claude Code | Codex | Build round 1 of Trivia's real 3D assets as `docs/floors/trivia_art_brief.md` says. Also create `art-source/ASSET_LOG.csv`, log the concept images (ask the owner for the tool and prompts), rename them to the naming rule in section 10 and commit them. | 2026-11-05 |
 
 ## Log (newest first)
 
