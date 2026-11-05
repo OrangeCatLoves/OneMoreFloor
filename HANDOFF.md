@@ -27,6 +27,13 @@ Claude Code and Codex never run at the same time, and neither remembers the othe
 
 ## Log (newest first)
 
+### 2026-11-05 — Claude Code — before build step 3
+- Did: the owner wrote the Trivia spec and added 3 concept images. Renamed the spec to `docs/floors/trivia.md`, filled in its id and drafted its asset list from the images. Playtests now use a real character instead of a capsule: the owner is downloading Unity's character package.
+- Files: `HANDOFF.md`, `docs/`.
+- Other agent needs to know: the concept images are in `art-source/concept/floors/trivia/` and are not committed yet: rename them, log them and commit them (see Open requests). They show one design, a game-show stage. Final art for it waits for the greybox playtests and the style choice.
+- Owner to check: answer the open points on the Trivia spec. Download the package.
+- Next: Claude Code imports the package, checks its licence, then does steps 3 and 4.
+
 ### 2026-11-05 — Claude Code — after build step 2c
 - Did: the owner confirmed 2c. Removed the controller and Steam Deck requirements: the game is keyboard and mouse only for now. Made Trivia the vertical slice, so it is finished to production quality before the next floor's design starts. Dropped the Asset Store package: I write movement and camera myself, with a capsule standing in until the owner's character arrives.
 - Files: `AGENTS.md`, `HANDOFF.md`, `docs/`.

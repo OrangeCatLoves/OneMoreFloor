@@ -205,7 +205,7 @@ Rules:
 | Steam features | Steamworks.NET | Login, lobbies, leaderboards, Cloud saves, achievements |
 | Platform | Windows PC (desktops and laptops), on Steam | Keyboard and mouse only for now. Steam doesn't require controller support, and it could be added later |
 | Camera | First-person and third-person with Cinemachine. Each player chooses, starting in third person. The mouse scroll wheel zooms smoothly and scrolling all the way in becomes first person; other custom controls can change the view too; a floor may switch view (e.g. a trivia screen) | Players play the way they prefer; third person shows their character and makes parkour and fights easier |
-| Character controller | Written for this project, using Cinemachine and FishNet | Built for smooth zoom from third to first person and for multiplayer from the start, with no Asset Store code in the public repo |
+| Character controller | Written for this project, using Cinemachine and FishNet. Unity's free *First Person + Third Person \| Character Controllers* package supplies a stand-in character and animations | Built for smooth zoom from third to first person and for multiplayer from the start |
 | Input | Unity Input System | One set of actions for keyboard and mouse; supports custom controls, such as for changing camera view, and leaves room for a controller later |
 | Text | Unity Localization package (string tables) | English only at launch; more languages later without code changes |
 | Voice chat | Later, after launch | Pick the tool then: Steam's voice functions or a voice service |
@@ -307,7 +307,7 @@ Decision: use the owner's existing Blender characters. Their look sets the art s
 
 Checklist before they go into the game:
 - [ ] **Rig:** a human-like skeleton that Unity's Humanoid type can map (hips, spine, head, arms, legs). Best: all characters share one skeleton, so every animation works on every character.
-- [ ] **Animations:** teammates and the third-person view show the character all the time, so it needs a full set — idle, walk, run, jump (take-off, in air, land), fall, climb, hit, knocked down, respawn, interact, aim and shoot, celebrate. Start with a free Humanoid animation pack (build step 2d); add a pack with shooting animations for Monster Arena. Any Humanoid animation plays on any Humanoid rig.
+- [ ] **Animations:** teammates and the third-person view show the character all the time, so it needs a full set — idle, walk, run, jump (take-off, in air, land), fall, climb, hit, knocked down, respawn, interact, aim and shoot, celebrate. Start with the animations from Unity's free character package (build step 2d); add a Humanoid pack with shooting animations for Monster Arena. Any Humanoid animation plays on any Humanoid rig.
 - [ ] **Materials:** Blender's node materials don't carry over to Unity. Bake them into texture images (colour, normal, roughness/metal), then rebuild them as URP materials.
 - [ ] **Colour areas:** a mask texture marks which parts take the player's colour, so team colours and colour unlocks need no new art.
 - [ ] **Same hitbox for everyone:** one capsule size for all characters, whatever they look like. Fair in co-op, required for PvP.
@@ -470,15 +470,16 @@ First three floors, in this order: **Trivia → Collapse Escape → Monster Aren
   - **Done when:** the 3 sets sit side by side, ready to compare.
 - **2c. Claude Code — core rules** (done 5 Nov 2026) in plain C# with unit tests: hearts pool, run phases, seeded floor picker (no repeats), difficulty levels, visual tiers, and the data assets that hold their numbers.
   - **Done when:** all EditMode tests pass from the command line.
-- **2d. Your character in Unity** (after the first Trivia playtests, which use a plain capsule stand-in).
+- **2d. A real character in Unity.** Playtests never use a plain capsule. The package's character stands in until yours is ready.
+  - **You:** add Unity's free *First Person + Third Person | Character Controllers* package to your account and download it (needed before step 3).
   - **Codex:** a shared Blender export script that applies the asset rules (section 7); run it on one of your characters.
-  - **Claude Code:** import your character as Humanoid and play a free Humanoid animation pack on it.
+  - **Claude Code:** import the package, then import your character as Humanoid and play the package's animations on it.
   - **Done when:** your character idles, runs and jumps in Unity at the right size (~1.8 m), with nothing stretched or broken.
 - **2e. Codex — generator scripts.** Blender scripts in `tools/blender/` that build the elevator and a basic room kit (wall pieces, floor tiles, door frames, stairs) from the numbers in `docs/sizes.json`, following the asset rules (doors as separate objects, `MK_` markers, `COL_` shapes). For now they make plain grey versions; Claude Code may use them in steps 4–5 instead of its own boxes.
   - **Done when:** changing a number in `docs/sizes.json` and re-running the script gives a new elevator that imports into Unity at the right scale, with its doors as separate objects.
 
 **Step 3 — Movement and camera** (Claude Code)
-- First-person and third-person controller and cameras, written for this project using Cinemachine and FishNet: each player moves their own character, and everyone sees everyone. A plain capsule stands in until your character arrives.
+- First-person and third-person controller and cameras, written for this project using Cinemachine and FishNet: each player moves their own character, and everyone sees everyone. The package's character stands in until yours arrives.
 - Players start in third person. The mouse scroll wheel zooms smoothly, scrolling all the way in becomes first person (arms only, once your character arrives), and the `V` key switches views (section 2).
 - The camera doesn't clip through walls in either view.
 - Movement numbers (run speed, jump height, gravity) live in the `MovementSettings` asset, which you tune in the Inspector.
@@ -630,7 +631,7 @@ Concept images stay out of `Assets/`, where Unity would import every one. Name t
 - 5 Nov 2026 — Build step 2c confirmed by the owner.
 - 5 Nov 2026 — Keyboard and mouse only for now, on desktops and laptops. Controller support and Steam Deck are no longer requirements.
 - 5 Nov 2026 — Camera: the scroll wheel zooms, the `V` key switches views, and players can change view at any time.
-- 5 Nov 2026 — Movement and camera are written for this project instead of starting from the Asset Store package, which can't be downloaded from the command line. A capsule stands in until the owner's character arrives.
+- 5 Nov 2026 — Movement and camera are written for this project. Playtests use a real character, not a capsule: the owner downloads Unity's free character package, and its character stands in until his own is ready. The package's licence decides whether it can be committed to the public repo.
 - 5 Nov 2026 — The owner has handed technical decisions to the agents. Design stays his.
 
 ---
@@ -681,7 +682,7 @@ Concept images stay out of `Assets/`, where Unity would import every one. Name t
 - Unity plans and pricing: https://unity.com/products/pricing-updates
 - Unity 6 LTS versions and support dates: https://unity.com/ja/releases/unity-6/support
 - Unity CLI (replaces the old Unity MCP server): https://docs.unity.com/en-us/unity-cli/replace-mcp-server-unity-cli
-- Unity's free character controller package, a possible source of animations for step 2d (First Person + Third Person | Character Controllers, URP, works with 6.3; its licence is listed as a non-standard EULA, so check it before committing anything from it): https://assetstore.unity.com/packages/slug/196526
+- Unity's free character package, the source of the stand-in character and animations (First Person + Third Person | Character Controllers, URP, works with 6.3; its licence is listed as a non-standard EULA, so check it before committing anything from it): https://assetstore.unity.com/packages/slug/196526
 - Unreal Engine licence: https://www.unrealengine.com/license
 - FishNet features (prediction; Pro features): https://fish-networking.gitbook.io/docs/overview/readme/features
 - FishNet licence: https://github.com/FirstGearGames/FishNet/blob/main/LICENSE.md
