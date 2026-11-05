@@ -54,7 +54,7 @@ OneMoreFloor is a 3D co-op challenge game (1–4 players) for PC and Steam Deck,
 - Names: `SM_` static mesh, `SK_` rigged mesh, `M_` material, `T_` texture, `A_` animation, `COL_` collision mesh, `MK_` marker.
 - Anything that moves or reacts is its own object. Never deliver a whole floor as one welded mesh.
 - Get one asset fully working in Unity before making many.
-- New files in `Assets/` need their Unity `.meta` files committed with them. Before committing new assets, ask the owner to click into Unity once so it creates them.
+- New files in `Assets/` need their Unity `.meta` files committed with them. Before committing new assets, make Unity import them so it creates those files: running `unity test` does this, or ask the owner to click into Unity once.
 - Log every AI-made asset in `art-source/ASSET_LOG.csv`: file, tool, prompt or source, licence, date.
 
 ## Sizes
@@ -66,4 +66,4 @@ OneMoreFloor is a 3D co-op challenge game (1–4 players) for PC and Steam Deck,
 - Core rules: EditMode unit tests. Every floor: a PlayMode test that clears it, and one that drains hearts to game over.
 - From build step 4 on, test every floor with 2 players in the editor (Multiplayer Play Mode).
 - Test every floor in both first-person and third-person view, unless its spec limits the view.
-- Once the Unity CLI is set up, use it to compile and run tests yourself before asking the owner to check in the Editor.
+- Use the Unity CLI to compile and run tests yourself before asking the owner to check in the Editor. With Unity closed: `unity test . --mode EditMode`. Exit code 0 = passed, 8 = a test failed, 6 = the run never finished (the reason is in `%LOCALAPPDATA%\Unity\Editor\Editor.log`).
