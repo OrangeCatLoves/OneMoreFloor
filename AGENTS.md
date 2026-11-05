@@ -57,11 +57,13 @@ OneMoreFloor is a 3D co-op challenge game (1–4 players) for PC and Steam Deck,
 - Get one asset fully working in Unity before making many.
 - New files in `Assets/` need their Unity `.meta` files committed with them. Before committing new assets, make Unity import them so it creates those files: running `unity test` does this, or ask the owner to click into Unity once.
 - Log every AI-made asset in `art-source/ASSET_LOG.csv`: file, tool, prompt or source, licence, date.
+- Concept images go in `art-source/concept/` (`style-tests/<style>/` or `floors/<floor-id>/`), never in `Assets/`. They are reference only.
 
 ## Sizes
-- Every room, door, corridor, stair and elevator size comes from `docs/sizes.json` (metres). Don't hard-code these in scripts or models; read them from the file.
-- Game spaces are bigger than real ones: in third-person view the camera sits a few metres behind the player and needs room.
-- The numbers are starting guesses until build step 5. When the owner updates them, re-run the generator scripts.
+- Doors, corridors, stairs, ceilings and the elevator get their sizes from `docs/sizes.json` (metres). Don't hard-code these in scripts or models; read them from the file.
+- These spaces are bigger than real ones: in third-person view the camera sits a few metres behind the player and needs room.
+- The numbers are starting guesses until build step 5. When they change, re-run the generator scripts.
+- Each floor has its own overall size: its spec describes it in plain words, Claude Code turns that into metres, and the owner tunes it by playing.
 
 ## Testing
 - Core rules: EditMode unit tests. Every floor: a PlayMode test that clears it, and one that drains hearts to game over.

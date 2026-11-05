@@ -34,6 +34,9 @@ What changes with more players, if anything. Who must finish? What do players wh
 ## Controls
 Keyboard/mouse and controller (Steam Deck). Any typing? Any aiming? Aim assist? Does this floor switch or limit the camera view (first or third person)?
 
+## Size
+How big should it feel? Use plain words, not metres: how long a clean run takes, how many players must fit, what it should feel like. Claude Code turns this into metres, and you tune it by playing.
+
 ## Rooms
 - Tier 1 (floors 1–10): the ordinary-building version.
 - Tier 2–3 (optional for now): ideas for the epic versions.

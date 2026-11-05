@@ -1,6 +1,6 @@
 # OneMoreFloor — Project Context
 
-Version 0.10 · 5 Nov 2026 · Owner: Wei Bin (GitHub: OrangeCatLoves)
+Version 0.11 · 5 Nov 2026 · Owner: Wei Bin (GitHub: OrangeCatLoves)
 
 The single source of truth for what the game is and how it is built. Written for the owner and for AI coding agents (Claude Code, Codex).
 
@@ -22,7 +22,7 @@ These rules are repeated in `AGENTS.md`, which Claude Code and Codex load automa
 - Ask before adding packages, assets, paid services or new top-level folders.
 - Never edit vendored code (`Assets/FishNet/`, third-party packages).
 - `docs/` belongs to the owner. Read it; edit it only when the owner asks or to record a notable change (see the rule on notable changes below).
-- Every room, door, corridor, stair and elevator size comes from `docs/sizes.json` (metres). Don't hard-code these in scripts or models.
+- Doors, corridors, stairs, ceilings and the elevator get their sizes from `docs/sizes.json` (metres). Don't hard-code these in scripts or models. Each floor's overall size starts from its spec and is tuned by playing.
 - Game rules are plain C# with no `UnityEngine` references, and have unit tests.
 - The host decides outcomes. Clients only send requests.
 - All randomness comes from the run's seeded random generator. Never `UnityEngine.Random` in game rules.
@@ -75,8 +75,9 @@ The higher the team climbs, the harder the floors get and the more epic they loo
 - Players join in the lobby only, never mid-run *(default — confirm)*.
 
 ### Camera view
-- Each player chooses first-person or third-person view.
-- Players can change it with the mouse scroll wheel or other custom controls. Exact behaviour and the controller default are still open (section 13, questions 8–9).
+- Each player chooses first-person or third-person view. Players start in third person.
+- The mouse scroll wheel zooms the camera smoothly, and scrolling all the way in becomes first person. Other custom controls can change the view too. Where players choose it and the controller default are still open (section 13, question 8).
+- In first person, a player sees only their own arms.
 - The view is personal: it changes only that player's camera. Teammates still see their full character.
 - A floor may switch the view when it needs to (e.g. a trivia screen). A floor's spec can also limit it.
 
@@ -150,7 +151,7 @@ The higher the team climbs, the harder the floors get and the more epic they loo
 
 Build order (section 9): **Trivia → Collapse Escape → Monster Arena** first. Trivia is the simplest test of the Floor contract. Collapse Escape sets the movement sizes the art needs and is the vertical slice. Monster Arena adds shooting and monster AI. Spelling Bee, Parkour Run and Key Hunt come after.
 
-The owner writes each floor's spec before it is built, using `docs/floors/_TEMPLATE.md`. A spec covers: goal, clear rule, what costs hearts and how many, respawn or reset, anti-stall rule, how it gets harder per level, 1-player vs 4-player behaviour, controls (controller and Steam Deck), camera view (if the floor switches or limits it), rooms per visual tier, assets needed.
+The owner writes each floor's spec before it is built, using `docs/floors/_TEMPLATE.md`. A spec covers: goal, clear rule, what costs hearts and how many, respawn or reset, anti-stall rule, how it gets harder per level, 1-player vs 4-player behaviour, controls (controller and Steam Deck), camera view (if the floor switches or limits it), size (in plain words), rooms per visual tier, assets needed.
 
 Rules marked TBD are placeholders until the owner's spec exists.
 
@@ -203,7 +204,7 @@ Rules:
 | Transport | Tugboat (LAN, dev) → Steam via FishySteamworks (online) | Steam's relay and friend invites cost nothing extra on Steam |
 | Steam features | Steamworks.NET | Login, lobbies, leaderboards, Cloud saves, achievements, on-screen keyboard |
 | Platform | Windows PC + Steam Deck, on Steam | The Deck runs the Windows build through Proton |
-| Camera | First-person and third-person with Cinemachine. Each player chooses and can change view with the mouse scroll wheel or other custom controls; a floor may switch view (e.g. a trivia screen) | Players play the way they prefer; third person shows their character and makes parkour and fights easier |
+| Camera | First-person and third-person with Cinemachine. Each player chooses, starting in third person. The mouse scroll wheel zooms smoothly and scrolling all the way in becomes first person; other custom controls can change the view too; a floor may switch view (e.g. a trivia screen) | Players play the way they prefer; third person shows their character and makes parkour and fights easier |
 | Character controller | Starts from Unity's free *First Person + Third Person \| Character Controllers* package, adapted to FishNet | Working first-person and third-person controllers and cameras on day one instead of building from scratch |
 | Input | Unity Input System | One set of actions for keyboard/mouse and controller; supports custom controls, such as for changing camera view |
 | Text | Unity Localization package (string tables) | English only at launch; more languages later without code changes |
@@ -317,13 +318,14 @@ Checklist before they go into the game:
 - [ ] **Easy to tell apart:** distinct shapes plus a player colour, so 4 teammates are clear at a distance and on the Deck's small screen.
 - [ ] **Unlockables fit:** extra characters and outfits use the same skeleton and hitbox.
 - [ ] **Loose parts** (capes, long hair, tails): need extra bones with physics, or they look stiff and poke through walls.
-- [ ] **First-person body:** what a player sees of their own character in first person (section 13, question 10).
+- [ ] **First-person arms:** in first person a player sees only their own arms, taken from their character so its colour and outfit still show.
 - [ ] **Budget:** ≤ 20k triangles at full detail, 3 LODs (4 players + monsters on screen, on a Steam Deck).
 - [ ] **Export:** about 1.8 m tall, transforms applied, faces +Z in Unity.
 - [ ] **AI log:** if any AI tool helped make them, record it in `art-source/ASSET_LOG.csv` (for Steam's disclosure form).
 
 ### Rules for every asset
-- Sizes: every room, door, corridor, stair and elevator size comes from `docs/sizes.json` (metres). Game spaces are bigger than real ones, because in third-person view the camera sits a few metres behind the player and needs room. The numbers are starting guesses until build step 5.
+- Sizes: doors, corridors, stairs, ceilings and the elevator get their sizes from `docs/sizes.json` (metres). These spaces are bigger than real ones, because in third-person view the camera sits a few metres behind the player and needs room. The numbers are starting guesses until build step 5.
+- Each floor has its own overall size, from a small trivia room to a long race track or a whole world. Its spec describes the size in plain words (how long a clean run takes, how many players must fit). Claude Code turns that into metres, and the owner tunes it by playing. In a world-sized floor, only the area players can reach gets built; scenery beyond it makes the world look endless.
 - Scale: 1 Blender unit = 1 m = 1 Unity unit. Player ≈ 1.8 m tall.
 - Kit pieces snap to one grid (size set in the style guide).
 - Origin: bottom centre for props; one fixed corner for kit pieces.
@@ -451,7 +453,7 @@ First three floors, in this order: **Trivia → Collapse Escape → Monster Aren
 
 ### Before step 1 — owner setup (done 4 Nov 2026)
 - Install Unity Hub, sign in, and install Unity 6.3 LTS (newest patch). Install Git, Git LFS and Blender.
-- Create an empty GitHub repo (no README, no .gitignore). It is public for now (section 13, question 12).
+- Create an empty GitHub repo (no README, no .gitignore). It is public for now (section 13, question 10).
 - In Unity Hub: New project → Universal 3D (URP) template → Create new local project, name OneMoreFloor → tick Use Unity CLI.
 - Put `AGENTS.md` and `CLAUDE.md` in the project folder, and `PROJECT_CONTEXT.md` in its `docs` folder. Open a terminal there and start Claude Code.
 - Install the Unity CLI: `winget install Unity.CLI`, then `unity auth login`. Ticking Use Unity CLI only adds the project's package, not the command itself (done 5 Nov 2026).
@@ -466,7 +468,7 @@ First three floors, in this order: **Trivia → Collapse Escape → Monster Aren
 - **Done when:** Unity opens with no errors in the Console, the test passes from the command line, and the first commit is on GitHub.
 
 **Step 2 — Five jobs at once.** 2a and 2b don't need step 1; start them any time. The rest start once step 1 is done.
-- **2a. You — floor specs.** Write `docs/floors/trivia.md` and `docs/floors/collapse_escape.md` from `docs/floors/_TEMPLATE.md`. Monster Arena's spec can wait until P1.
+- **2a. You — floor specs.** Write `docs/floors/trivia.md` and `docs/floors/collapse_escape.md` from `docs/floors/_TEMPLATE.md`. Trivia comes first, then Collapse Escape. Monster Arena's spec can wait until P1.
   - **Done when:** Claude Code can build each floor without asking you a design question.
 - **2b. You — 3 style tests.** In an image tool, make 3 sets of concept images, one set per style: the lobby, an ordinary office floor (tier 1) and an epic world (tier 3), with your character in each.
   - **Done when:** the 3 sets sit side by side, ready to compare.
@@ -482,7 +484,7 @@ First three floors, in this order: **Trivia → Collapse Escape → Monster Aren
 
 **Step 3 — Movement and camera** (Claude Code)
 - First-person and third-person controller and cameras, built from the package in 2d and adapted to FishNet: each player moves their own character, and everyone sees everyone.
-- Each player chooses their view and can change it with the mouse scroll wheel or other custom controls (section 2).
+- Players start in third person. The mouse scroll wheel zooms smoothly, scrolling all the way in becomes first person (arms only), and other custom controls can change the view too (section 2).
 - The camera doesn't clip through walls in either view. Keyboard/mouse and controller both work.
 - Movement numbers (run speed, jump height, gravity) live in the `MovementSettings` asset, which you tune in the Inspector.
 - **Done when:** in both views, you can run, jump, look around and change view with a keyboard and mouse and with a controller, and 2 players in the editor see each other move smoothly.
@@ -498,7 +500,7 @@ First three floors, in this order: **Trivia → Collapse Escape → Monster Aren
 **Step 5 — Greybox the first two floors** (Claude Code builds, you playtest)
 - **5a. Trivia:** a plain room with a question screen, answering by keyboard or controller, the clear rule and heart costs from your spec, and a sample question file (you supply the real questions).
 - **5b. Collapse Escape:** a plain-box building section — corridors, stairs, doors — with the collapse, falling debris, checkpoints and the exit as your spec describes.
-- **5c. You:** playtest both and tune movement in `MovementSettings`. Then put the real sizes in `docs/sizes.json`: corridor and door widths, stair step height, ceiling height, elevator size, and the widest gap and highest ledge a player can jump. Codex re-runs the generator scripts with them.
+- **5c. You:** playtest both, tune movement in `MovementSettings`, and say what feels too big or too small. Claude Code iterates on each floor's size and puts the real shared sizes in `docs/sizes.json`: corridor and door widths, stair step height, ceiling height, elevator size, and the widest gap and highest ledge a player can jump. Codex re-runs the generator scripts with them.
 - **Done when:** both floors can be cleared and can drain hearts to game over, solo and with 2 players, and `docs/sizes.json` holds the real numbers.
 
 **Step 6 — Pick the style** (You)
@@ -555,6 +557,8 @@ OneMoreFloor/
     floors/_TEMPLATE.md     blank floor spec
     floors/<floor-id>.md    one-page spec per floor, written by the owner
   art-source/               .blend files, concept art, ASSET_LOG.csv (Git LFS)
+    concept/style-tests/<style>/   one folder per style test
+    concept/floors/<floor-id>/     concept images for one floor
   tools/blender/            Blender scripts: export, kit builders (Codex)
   Assets/_OneMoreFloor/
     Core/ FloorSDK/ Floors/<Name>/ Game/ Services/
@@ -569,6 +573,8 @@ backend/                    later (may become its own repo): Go services, DB mig
 ```
 
 Empty folders hold a `.gitkeep` so Git keeps them; delete it when real files arrive. Codex creates its own folders (`art-source/`, `tools/blender/`, `Assets/_OneMoreFloor/Art/`) when it first needs them.
+
+Concept images stay out of `Assets/`, where Unity would import every one. Name them `<floor-id>_tier<N>_<what-it-shows>_<NN>.png`, for example `trivia_tier1_quiz-room_01.png`, and keep only the ones worth referring back to, because Git LFS keeps every committed file for good.
 
 ---
 
@@ -623,6 +629,9 @@ Empty folders hold a `.gitkeep` so Git keeps them; delete it when real files arr
 - 5 Nov 2026 — The GitHub repo stays public for now.
 - 5 Nov 2026 — Agents run every check they can; the owner tests only what needs a person.
 - 5 Nov 2026 — Build step 1 confirmed by the owner.
+- 5 Nov 2026 — Camera: players start in third person. The scroll wheel zooms smoothly, and scrolling all the way in becomes first person, where a player sees only their arms.
+- 5 Nov 2026 — Sizes: `docs/sizes.json` holds only what every floor shares. Each floor has its own size, set by playtesting and the owner's feedback.
+- 5 Nov 2026 — The owner is focusing on Trivia first; its spec comes before Collapse Escape's.
 
 ---
 
@@ -635,11 +644,9 @@ Empty folders hold a `.gitkeep` so Git keeps them; delete it when real files arr
 5. PvP format: race the same floors, 1v1, or team vs team? (Later.)
 6. Monster Arena: aim assist for controller and Steam Deck players? Decide in its spec.
 7. Defaults to confirm: lobby contents (section 2); no joining mid-run; a run's board is set by its starting team size; difficulty +1 level every 5 floors.
-8. Camera view: does the scroll wheel jump between first and third person, or zoom smoothly between them? Decide before build step 3.
-9. Camera view: which view do players start in, where do they choose it, and what changes view on a controller or Steam Deck (no scroll wheel)? Decide before build step 3.
-10. First-person view: what do players see of their own body, arms only or the full body? Decide before build step 3.
-11. Camera view: third person can see around corners, and the leaderboards are shared. Should any floor (e.g. Key Hunt) or PvP limit the view?
-12. Repo: when should it go private? It is public for now, and the game will be sold, so anyone can read the code and art and build the game while it stays public.
+8. Camera view: where do players choose it, and what changes view on a controller or Steam Deck (no scroll wheel)? Decide before build step 3.
+9. Camera view: third person can see around corners, and the leaderboards are shared. Should any floor (e.g. Key Hunt) or PvP limit the view?
+10. Repo: when should it go private? It is public for now, and the game will be sold, so anyone can read the code and art and build the game while it stays public.
 
 ---
 
