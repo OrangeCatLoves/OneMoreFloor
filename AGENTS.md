@@ -71,5 +71,6 @@ OneMoreFloor is a 3D co-op challenge game (1–4 players) for Windows PC (deskto
 - Core rules: EditMode unit tests. Every floor: a PlayMode test that clears it, and one that drains hearts to game over.
 - From build step 4 on, test every floor with 2 players in the editor (Multiplayer Play Mode).
 - Test every floor in both first-person and third-person view, unless its spec limits the view.
+- PlayMode tests: `unity test . --mode PlayMode`. For 2 players, see `docs/PROJECT_CONTEXT.md` section 11.
 - Use the Unity CLI to compile and run tests yourself before asking the owner to check in the Editor. With Unity closed: `unity test . --mode EditMode`. Exit code 0 = passed, 8 = a test failed, 6 = the run never finished (the reason is in `%LOCALAPPDATA%\Unity\Editor\Editor.log`).
 - With the project open (`unity open .`, then wait for `unity status` to say `ready`), use `unity command`: `console status`, `console get --level error`, `package list`, `test run --mode editor`, `editor.playmode start` and `stop`, `capture game_view --output-path <file>`. Close Unity afterwards with `unity command editor quit`. Don't use `editor save_all` while the open scene has never been saved: it opens a Save dialog that blocks Unity until someone closes it.

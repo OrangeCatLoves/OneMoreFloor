@@ -1,7 +1,7 @@
 {
     "name": "OneMoreFloor.Editor",
     "rootNamespace": "OneMoreFloor.EditorTools",
-    "references": ["OneMoreFloor.Core", "OneMoreFloor.FloorSDK", "OneMoreFloor.Game", "OneMoreFloor.Services"],
+    "references": ["OneMoreFloor.Core", "OneMoreFloor.FloorSDK", "OneMoreFloor.Game", "OneMoreFloor.Services", "FishNet.Runtime", "GameKit.Dependencies", "Unity.Cinemachine", "Unity.InputSystem"],
     "includePlatforms": ["Editor"],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

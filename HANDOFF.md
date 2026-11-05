@@ -27,6 +27,13 @@ Claude Code and Codex never run at the same time, and neither remembers the othe
 
 ## Log (newest first)
 
+### 2026-11-05 — Claude Code — build step 3
+- Did: built movement, the camera with scroll zoom and the `V` key, and 2-player networking, using the package's robot. Recorded Trivia's team voting rules in `docs/floors/trivia.md`. All 103 tests pass (82 EditMode, 21 PlayMode). In a real 2-player run, each player saw the other, and the host saw Player 2's movement and run animation.
+- Files: `Assets/_OneMoreFloor/Game/`, `Editor/`, `Tests/`, `Data/`, `Assets/Settings/PlayMode/`, `ProjectSettings/`, `AGENTS.md`, `HANDOFF.md`, `docs/`.
+- Other agent needs to know: Unity's character package is in `Assets/Starter Assets/`, local only and not in Git. The player layer is `Player`. The test arena reads `docs/sizes.json`, so re-run its builder after those numbers change.
+- Owner to check: press Play and try the controls for feel. Answer the open questions in `docs/floors/trivia.md`.
+- Next: the owner tries step 3, then Claude Code does step 4 (game loop). Codex can do 2e while Claude Code isn't working.
+
 ### 2026-11-05 — Claude Code — before build step 3
 - Did: the owner wrote the Trivia spec and added 3 concept images. Renamed the spec to `docs/floors/trivia.md`, filled in its id and drafted its asset list from the images. Playtests now use a real character instead of a capsule: the owner is downloading Unity's character package.
 - Files: `HANDOFF.md`, `docs/`.

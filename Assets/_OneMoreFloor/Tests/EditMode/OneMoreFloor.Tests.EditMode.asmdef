@@ -1,7 +1,7 @@
 {
     "name": "OneMoreFloor.Tests.EditMode",
     "rootNamespace": "OneMoreFloor.Tests.EditMode",
-    "references": ["UnityEngine.TestRunner", "UnityEditor.TestRunner", "OneMoreFloor.Core", "OneMoreFloor.Game"],
+    "references": ["UnityEngine.TestRunner", "UnityEditor.TestRunner", "OneMoreFloor.Core", "OneMoreFloor.Game", "FishNet.Runtime", "Unity.InputSystem"],
     "includePlatforms": ["Editor"],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

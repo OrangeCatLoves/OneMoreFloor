@@ -1,0 +1,32 @@
+{
+    "name": "PlayerControls",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e01",
+            "actions": [
+                { "name": "Move", "type": "Value", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e02", "expectedControlType": "Vector2", "processors": "", "interactions": "", "initialStateCheck": true },
+                { "name": "Look", "type": "Value", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e03", "expectedControlType": "Vector2", "processors": "", "interactions": "", "initialStateCheck": true },
+                { "name": "Jump", "type": "Button", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e04", "expectedControlType": "Button", "processors": "", "interactions": "", "initialStateCheck": false },
+                { "name": "Zoom", "type": "Value", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e05", "expectedControlType": "Axis", "processors": "", "interactions": "", "initialStateCheck": true },
+                { "name": "ToggleView", "type": "Button", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e06", "expectedControlType": "Button", "processors": "", "interactions": "", "initialStateCheck": false },
+                { "name": "ReleaseCursor", "type": "Button", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e07", "expectedControlType": "Button", "processors": "", "interactions": "", "initialStateCheck": false },
+                { "name": "CaptureCursor", "type": "Button", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e08", "expectedControlType": "Button", "processors": "", "interactions": "", "initialStateCheck": false }
+            ],
+            "bindings": [
+                { "name": "WASD", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e11", "path": "2DVector", "interactions": "", "processors": "", "groups": "", "action": "Move", "isComposite": true, "isPartOfComposite": false },
+                { "name": "up", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e12", "path": "<Keyboard>/w", "interactions": "", "processors": "", "groups": "", "action": "Move", "isComposite": false, "isPartOfComposite": true },
+                { "name": "down", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e13", "path": "<Keyboard>/s", "interactions": "", "processors": "", "groups": "", "action": "Move", "isComposite": false, "isPartOfComposite": true },
+                { "name": "left", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e14", "path": "<Keyboard>/a", "interactions": "", "processors": "", "groups": "", "action": "Move", "isComposite": false, "isPartOfComposite": true },
+                { "name": "right", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e15", "path": "<Keyboard>/d", "interactions": "", "processors": "", "groups": "", "action": "Move", "isComposite": false, "isPartOfComposite": true },
+                { "name": "", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e16", "path": "<Mouse>/delta", "interactions": "", "processors": "", "groups": "", "action": "Look", "isComposite": false, "isPartOfComposite": false },
+                { "name": "", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e17", "path": "<Keyboard>/space", "interactions": "", "processors": "", "groups": "", "action": "Jump", "isComposite": false, "isPartOfComposite": false },
+                { "name": "", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e18", "path": "<Mouse>/scroll/y", "interactions": "", "processors": "", "groups": "", "action": "Zoom", "isComposite": false, "isPartOfComposite": false },
+                { "name": "", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e19", "path": "<Keyboard>/v", "interactions": "", "processors": "", "groups": "", "action": "ToggleView", "isComposite": false, "isPartOfComposite": false },
+                { "name": "", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e20", "path": "<Keyboard>/escape", "interactions": "", "processors": "", "groups": "", "action": "ReleaseCursor", "isComposite": false, "isPartOfComposite": false },
+                { "name": "", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e21", "path": "<Mouse>/leftButton", "interactions": "", "processors": "", "groups": "", "action": "CaptureCursor", "isComposite": false, "isPartOfComposite": false }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
