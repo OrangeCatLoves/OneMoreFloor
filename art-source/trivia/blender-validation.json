@@ -1,17 +1,17 @@
 {
   "problems": [],
-  "triangles_total": 901052,
+  "triangles_total": 1004028,
   "triangles_by_category": {
-    "Architecture and detail": 362164,
+    "Architecture and detail": 362740,
     "Podiums": 36064,
     "Curtains": 76128,
     "Seats": 342872,
-    "Flowers": 83824
+    "Flowers": 186224
   },
   "camera_frustum_triangles_upper_bound_including_occluded_geometry": {
-    "view_1": 700732,
-    "view_2": 569438,
-    "view_3": 822478
+    "view_1": 803708,
+    "view_2": 672414,
+    "view_3": 925454
   },
   "render_objects": 480,
   "unique_meshes": 229,
@@ -33,6 +33,36 @@
       "depth": 5.0,
       "height": 3.5
     },
-    "note": "Geometric checks only. Third-person camera comfort and crowd movement require the owner playtest in Claude Code integration."
+    "note": "Geometric checks only. The separate Unity smoke test walks the lift-to-stage route; camera comfort and crowd movement require human playtesting."
+  },
+  "local_review_reflection_probes": {
+    "T_Trivia_Hall_Reflections.exr": {
+      "rgb_min": [
+        0.0016622543334960938,
+        0.001476287841796875,
+        0.0007543563842773438
+      ],
+      "rgb_max": [
+        50.625,
+        11.34375,
+        1.3662109375
+      ],
+      "maximum_channel_range": 50.62333679199219,
+      "nonempty": true
+    },
+    "T_Trivia_Stage_Reflections.exr": {
+      "rgb_min": [
+        0.0013971328735351562,
+        0.0015668869018554688,
+        0.0014362335205078125
+      ],
+      "rgb_max": [
+        39.53125,
+        7.2109375,
+        2.662109375
+      ],
+      "maximum_channel_range": 39.52985382080078,
+      "nonempty": true
+    }
   }
 }

@@ -232,7 +232,11 @@ winding so both lift indicators face the room in Unity.
 The final Unity close-up also required two-sided petal materials: backface
 culling otherwise opened holes where the undersides face the camera.
 
-## Latest assessment — WIP, visual gate remains open
+## Round 1 assessment — WIP, visual gate remains open
+
+The subsequent anti-aliasing/polish review is in `../round-02/review.md` and
+the latest three reference comparisons are iteration 16. Counts and test
+results below record the earlier iteration 14 checkpoint.
 
 The deliverable contains the requested room elements and is technically
 importable. Fourteen render passes are not themselves evidence that the

@@ -1,10 +1,34 @@
 # Trivia round 1 — art review and import notes
 
 This is a WIP art review, not owner acceptance or a completed game floor. The
-latest three comparisons are iteration 14 in `../renders/trivia/round-01/`.
+latest three comparisons are iteration 16 in `../renders/trivia/round-01/`.
 `review.md` there records the rejected passes and remaining visual differences.
 The owner’s “only minor differences” quality gate must not be treated as passed
 merely because the technical import checks pass.
+
+## Playtest this iteration
+
+In Unity, choose **OneMoreFloor > Art > Open Trivia Review**, then press **Play**
+and click the Game view. Walk out of the open lift, turn toward the middle aisle,
+and climb the three illuminated stage steps. **WASD** moves, **mouse** looks,
+**Space** jumps, **V** switches first/third person, **scroll** adjusts camera
+distance, and **Escape** releases the cursor. This uses the existing local-host
+player and camera from MovementTest; questions and answer interactions are not
+implemented in this art scene.
+
+The scene is `Assets/_OneMoreFloor/Art/Floors/Trivia/Review/TriviaArtReview.unity`.
+It contains colliders, four spawn markers, open display-pose doors, 43 review
+lights, two baked reflection probes and ACES grading. Only four lights cast
+realtime shadows. Its temporary URP clone enables 4x MSAA and High SMAA at native
+resolution; it restores the previous pipeline/AA settings when disabled.
+The project's shared graphics assets are unchanged. Camera smoothing settings
+are serialized in the review scene; the pipeline override takes effect in Play.
+
+Use **OneMoreFloor > Art > Build and Open Trivia Review** to regenerate after
+exporting a changed room. This replaces the art review scene and its local probe
+and grading assets; do not keep manual scene edits there. Runtime integration
+still belongs to Claude Code. Review evidence and remaining limitations are in
+`../renders/trivia/round-02/review.md`.
 
 ## Local deliverables
 
@@ -52,15 +76,16 @@ FBX/blend proves the initial pipeline; use the full theatre for current geometry
    the bulb material initially: use per-renderer emission overrides for chasing
    so other room bulbs do not change. Instantiate actual Unity lights at the
    supplied markers, using the JSON direction with `Quaternion.LookRotation`.
-8. Rebuild/bake the theatrical lighting and add reflection probes, then compare
+8. Rebuild/bake the theatrical lighting, then compare
    against EEVEE. Area sources are bake targets. Use only selected stage spots
    as realtime shadow lights. The diagnostic Unity preview is deliberately not
    a production lighting setup; its extra unshadowed directional fill reveals
    textures through the ceiling. Do not copy that fill into the game scene.
 
-The helper's `Preview` method creates an unsaved import-check scene and writes
-local screenshots. It does not create gameplay or a walkable review scene.
-Runtime scene integration remains in Claude Code's folders.
+The helper's `Preview` method still creates an unsaved diagnostic import-check
+scene. `TriviaReviewSceneBuilder.Build` creates the separate playable art scene
+described above. Its two reflection probes improve metal response, but it has
+no baked indirect illumination. Do not treat either preview as final lighting.
 
 ## Materials and performance
 
@@ -72,6 +97,8 @@ Runtime scene integration remains in Claude Code's folders.
   are thin surfaces. All other materials use backface culling.
 - Sixteen material sets use 2048 × 2048 maps. Eight simple monitor/screen,
   emissive and button sets use 64 × 64 maps. No 4K textures are used.
+- Texture imports use mipmaps, trilinear filtering and anisotropic level 8 to
+  reduce shimmer on surfaces viewed at an angle.
 - Image maps are deterministic procedural bakes. They are not high-to-low
   sculpt bakes or downloaded materials. Fine carved normals, recess wear and
   stitching remain weaker than the concepts. Repeated pieces share materials;
@@ -85,9 +112,11 @@ Runtime scene integration remains in Claude Code's folders.
   frustum counts that also include occluded geometry. Neither is a measured
   GPU frame-time benchmark. The 500k visible-triangle target still needs Unity
   profiling with occlusion, lights and shadows enabled.
-- Latest totals are 846,661 imported triangles, 480 render meshes, 79 collision
-  meshes, 16 buttons, 5 screens and 43 light markers. The source has 901,052
+- Latest totals are 945,460 imported triangles, 480 render meshes, 79 collision
+  meshes, 16 buttons, 5 screens and 43 light markers. The source has 1,004,028
   triangles before Unity's removal of degenerate faces and triangulation.
+  Smoother petals account for most of the increase; flowers need production
+  distance LODs before the laptop budget can be accepted.
 - URP/Lit does not reproduce Blender's velvet sheen or wood clearcoat exactly.
   Baked lighting and reflection probes are necessary before judging the engine
   match; shader work may still be needed after that comparison.
@@ -105,12 +134,14 @@ Shared sizes come from `docs/sizes.json`: player 1.8 m, lift opening 3 × 2.5 m,
 cab 5 × 5 × 3.5 m, steps 0.2 m high × 0.3 m deep × 3 m wide. The final podium
 width is 1.241 m, leaving 1.959 m between neighboring lecterns. Local Unity
 screenshots put the existing KyleRobot at measured 1.8 m beside a podium and
-the lift. This checks static fit; first/third-person camera comfort and four
-players moving together need a playable integration and human assessment.
+the lift. The new PlayMode test also walks from the lift to the stage using the
+existing player motor and captures both views with AA enabled. Camera comfort
+and several players moving together still require human assessment.
 
-All 82 EditMode and 21 PlayMode tests passed during this session. They test the
-existing project, not Trivia gameplay that has not been implemented yet. Test
-summaries and art validation reports are alongside this file.
+All 82 EditMode and 22 PlayMode tests passed during this iteration. The extra
+PlayMode test exercises the art review route; it skips if the local binary scene
+has not been generated on a fresh clone. These tests do not cover Trivia rules,
+which have not been implemented yet. Summaries and validation reports are here.
 
 The brief requested an AI 3D provider for flowers. No suitable connected provider
 was available in the plugin search. These flowers were constructed in Blender

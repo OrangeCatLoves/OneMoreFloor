@@ -1,5 +1,6 @@
 """Validate the saved art contract and write reproducible lighting/scale reports."""
 import bpy,bmesh,json,math
+import numpy as np
 from pathlib import Path
 from mathutils import Vector
 root=Path(__file__).resolve().parents[2];source=root/'art-source/trivia'
@@ -49,11 +50,20 @@ scale={'player_height_m':sizes['player']['height'],'player_diameter_m':2*sizes['
  'podium_clear_gap_m':3.2-1.46*.85,'stage_riser_m':sizes['stairs']['stepHeight'],
  'stage_tread_m':sizes['stairs']['stepDepth'],'steps_width_m':sizes['stairs']['width'],
  'cab_size_m':sizes['elevator']['interior'],
- 'note':'Geometric checks only. Third-person camera comfort and crowd movement require the owner playtest in Claude Code integration.'}
+ 'note':'Geometric checks only. The separate Unity smoke test walks the lift-to-stage route; camera comfort and crowd movement require human playtesting.'}
 report={'problems':problems,'triangles_total':sum(counts.values()),'triangles_by_category':groups,
  'camera_frustum_triangles_upper_bound_including_occluded_geometry':frustum,
  'render_objects':len(meshes),'unique_meshes':len({o.data.name for o in meshes}),
  'material_count':len([m for m in bpy.data.materials if m.name.startswith('M_Trivia_')]),'scale':scale}
+# A successful bake call can still write an empty cubemap when the imported
+# scenery lacks ReflectionProbeStatic. Check actual HDR pixels when available.
+probes={}
+for path in (root/'Assets/_OneMoreFloor/Art/Floors/Trivia/Review').glob('*_Reflections.exr'):
+    pixels=np.asarray(bpy.data.images.load(str(path)).pixels,dtype=np.float32).reshape(-1,4)[:,:3]
+    span=float(np.ptp(pixels,axis=0).max())
+    probes[path.name]={'rgb_min':pixels.min(axis=0).tolist(),'rgb_max':pixels.max(axis=0).tolist(),'maximum_channel_range':span,'nonempty':span>.01}
+    if span<=.01:problems.append(path.name+': reflection bake contains only a flat background')
+report['local_review_reflection_probes']=probes
 (source/'blender-validation.json').write_text(json.dumps(report,indent=2))
 lights=json.loads((source/'lighting.json').read_text())
 lines=['# Trivia lighting sheet — round 01','','Source: `art-source/trivia/Trivia_Round01.blend`, EEVEE. Every actual Blender light has an exported marker. `lighting.json` carries exact positions and directions in both coordinate systems.','','## Mood and engine transfer','','Keep the stage warm and bright, the hall darker, and purple restricted to the stage fill and selected spots. Preserve the colour of the red velvet rather than raising the exposure until it washes out. Use soft highlight bloom sparingly. The draft Unity screenshot is an import check with approximate realtime lights, not a match to the final lighting.','','Blender watts are not Unity intensity values. Relative intensity below uses 1000 Blender W as 1.0; tune Unity after baking indirect light. Area lights should be baked. Bake wall lanterns and podium spill where possible; keep only selected stage spots realtime. The three marquee meshes have separate emissive sets for chasing; do not add a realtime light to every bulb. Emissive strips, columns and bulb materials share `M_Trivia_Bulb`.','','Use the supplied direction vector for a Unity `LookRotation`; do not assume that an imported FBX empty\'s local forward axis is the light direction. Add reflection probes covering the stage and hall, then use URP bloom and a restrained tone curve. URP/Lit approximates velvet sheen and wood clearcoat; those Blender lobes do not transfer. No light beams or confetti are included.','','## Lights','','| Marker | Type | Hex | Relative intensity | Cone | Unity position (m) | Purpose |','|---|---|---|---:|---:|---|---|']
@@ -61,8 +71,8 @@ for l in lights:
     pos=', '.join(f'{v:.2f}' for v in l['position_unity'])
     lines.append(f"| `{l['name']}` | {l['type']} | {l['color']} | {l['relative_intensity']:.3f} | {l['cone_degrees'] or '—'} | {pos} | {l['purpose']} |")
 lines += ['', '## Review setup and limitations', '',
- 'EEVEE uses 64 samples, AgX Medium High Contrast, exposure +0.6 and restrained Fog Glow. Only stage spots plus the main stage/audience area keys cast shadows; other sources provide fill. This avoids the shadow buffer exhaustion encountered in intermediate iterations. Exact per-light flags are in `lighting.json`.', '',
- 'The Unity verification screenshot uses an extra unshadowed directional light outside the room to reveal imported colours through the ceiling. That diagnostic light is not in this sheet and must not become production lighting. The preview has no light bake or reflection probes. It verifies geometry, material bindings and scale; it is not an engine-quality approval.', '',
+ 'Iteration 16 uses EEVEE with 192 samples at 3344 x 1882, resolved to 1672 x 941, AgX Medium High Contrast, exposure +0.6 and restrained Fog Glow. Shadow pool: 1024 MB; resolution scale: 0.75. Only stage spots plus the main stage/audience area keys cast shadows; other sources provide fill. Exact per-light flags are in `lighting.json`.', '',
+ 'The diagnostic Unity import screenshot uses an extra unshadowed directional fill outside the room, with no probes. Do not copy that fill into production. The separate playable Art/Floors/Trivia/Review scene uses the 43 marker lights, four shadow sources, warm ambient fill, ACES and two baked 128-pixel reflection probes. It has no baked indirect illumination yet. Its light intensities are a review approximation, not a physical conversion of Blender watts. It uses a temporary pipeline clone with 4x MSAA plus High SMAA; shared graphics assets remain unchanged.', '',
  'The measured FBX position conversion is Blender `(x, y, z)` to Unity `(-x, z, -y)`. Unity validation compares every imported light marker with this data. The EEVEE and Unity shading models differ, so the lighting match remains work for the integrated scene.']
 (root/'art-source/renders/trivia/lighting_sheet.md').write_text('\n'.join(lines)+'\n',encoding='utf-8')
 print(json.dumps(report,indent=2))

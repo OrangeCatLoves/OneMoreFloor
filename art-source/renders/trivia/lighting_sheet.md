@@ -60,8 +60,8 @@ Use the supplied direction vector for a Unity `LookRotation`; do not assume that
 
 ## Review setup and limitations
 
-EEVEE uses 64 samples, AgX Medium High Contrast, exposure +0.6 and restrained Fog Glow. Only stage spots plus the main stage/audience area keys cast shadows; other sources provide fill. This avoids the shadow buffer exhaustion encountered in intermediate iterations. Exact per-light flags are in `lighting.json`.
+Iteration 16 uses EEVEE with 192 samples at 3344 x 1882, resolved to 1672 x 941, AgX Medium High Contrast, exposure +0.6 and restrained Fog Glow. Shadow pool: 1024 MB; resolution scale: 0.75. Only stage spots plus the main stage/audience area keys cast shadows; other sources provide fill. Exact per-light flags are in `lighting.json`.
 
-The Unity verification screenshot uses an extra unshadowed directional light outside the room to reveal imported colours through the ceiling. That diagnostic light is not in this sheet and must not become production lighting. The preview has no light bake or reflection probes. It verifies geometry, material bindings and scale; it is not an engine-quality approval.
+The diagnostic Unity import screenshot uses an extra unshadowed directional fill outside the room, with no probes. Do not copy that fill into production. The separate playable Art/Floors/Trivia/Review scene uses the 43 marker lights, four shadow sources, warm ambient fill, ACES and two baked 128-pixel reflection probes. It has no baked indirect illumination yet. Its light intensities are a review approximation, not a physical conversion of Blender watts. It uses a temporary pipeline clone with 4x MSAA plus High SMAA; shared graphics assets remain unchanged.
 
 The measured FBX position conversion is Blender `(x, y, z)` to Unity `(-x, z, -y)`. Unity validation compares every imported light marker with this data. The EEVEE and Unity shading models differ, so the lighting match remains work for the integrated scene.

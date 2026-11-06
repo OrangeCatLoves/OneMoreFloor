@@ -26,11 +26,11 @@ def build_materials(folder, size=2048, refresh=False):
     slow=(np.sin(x*37+np.sin(y*23))*np.sin(y*41+x*8)+np.sin(y*73+x*57))*.25
     grain=np.sin(y*140+np.sin(x*12)*4+np.sin(x*31)*.8)
     specs={
-      'StageWood':((.33,.135,.060),.04,.31,'wood'),
+      'StageWood':((.33,.145,.065),.04,.35,'wood'),
       'Walnut':((.15,.042,.017),.02,.30,'wood'),
       'BurgundyWood':((.24,.025,.042),.02,.42,'wood'),
       'Gold':((.77,.49,.18),.90,.27,'metal'),
-      'InlayGold':((.83,.52,.12),.55,.30,'metal'),
+      'InlayGold':((.83,.52,.08),.28,.43,'metal'),
       'GoldDark':((.39,.23,.08),.85,.31,'metal'),
       'VelvetRed':((.37,.012,.037),0,.82,'cloth'),
       'VelvetSeat':((.34,.012,.043),0,.79,'cloth'),
@@ -40,7 +40,7 @@ def build_materials(folder, size=2048, refresh=False):
       'BlackMetal':((.012,.014,.018),.65,.31,'metal'),
       'Monitor':((.013,.008,.024),.05,.24,'plain'),
       'Screen':((.88,.76,.56),0,.6,'plain'),
-      'Leaves':((.035,.115,.025),0,.5,'leaf'),
+      'Leaves':((.055,.15,.032),0,.64,'leaf'),
       'PetalPurple':((.31,.055,.48),0,.58,'leaf'),
       'PetalCream':((.85,.65,.37),0,.55,'leaf'),
       'PetalWhite':((.81,.75,.66),0,.56,'leaf'),
@@ -110,7 +110,7 @@ def build_materials(folder, size=2048, refresh=False):
             bs.inputs['Sheen Weight'].default_value=.22;bs.inputs['Sheen Roughness'].default_value=.6
             bs.inputs['Sheen Tint'].default_value=(*col,1)
             bs.inputs['Specular IOR Level'].default_value=.18
-        if kind=='wood': bs.inputs['Coat Weight'].default_value=.35; bs.inputs['Coat Roughness'].default_value=.26
+        if kind=='wood': bs.inputs['Coat Weight'].default_value=.22; bs.inputs['Coat Roughness'].default_value=.30
         if 'Emission' in maps:
             node=nodes.new('ShaderNodeTexImage'); node.image=maps['Emission']
             links.new(node.outputs[0],bs.inputs['Emission Color'])

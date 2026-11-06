@@ -107,6 +107,7 @@ namespace OneMoreFloor.ArtReview
 
         public static void Preview()
         {
+            using var quality = new TriviaReviewRenderScope();
             Run();
             EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
             var model = AssetDatabase.LoadAssetAtPath<GameObject>(Root + "/SM_Trivia_Theatre.fbx");
@@ -152,13 +153,14 @@ namespace OneMoreFloor.ArtReview
             var camera = new GameObject("Trivia_Review_Camera").AddComponent<Camera>();
             camera.tag = "MainCamera";camera.nearClipPlane = .05f;camera.farClipPlane = 150;
             camera.clearFlags = CameraClearFlags.SolidColor;camera.backgroundColor = new Color(.02f,.01f,.025f);
-            camera.allowHDR = true;camera.GetUniversalAdditionalCameraData().renderPostProcessing = true;
+            TriviaReviewRenderScope.ConfigureCamera(camera);
             var cam = (JObject)JObject.Parse(File.ReadAllText("art-source/trivia/review_settings.json"))["cameras"][1];
             var pos = Vector(cam["position"]);var target = Vector(cam["target"]);
             camera.transform.position = new Vector3(-pos.x,pos.z,-pos.y);
             camera.transform.LookAt(new Vector3(-target.x,target.z,-target.y));
             camera.fieldOfView = 2 * Mathf.Atan(36f * 720 / 1280 / (2 * (float)cam["lens"])) * Mathf.Rad2Deg;
-            var rt = new RenderTexture(1280,720,24,RenderTextureFormat.ARGB32);rt.Create();
+            var rt = new RenderTexture(1280,720,24,RenderTextureFormat.ARGB32) { antiAliasing = 4 };rt.Create();
+            var resolved = new RenderTexture(1280,720,0,RenderTextureFormat.ARGB32);resolved.Create();
             try
             {
                 void Capture(string name)
@@ -166,7 +168,8 @@ namespace OneMoreFloor.ArtReview
                     var request = new UniversalRenderPipeline.SingleCameraRequest { destination = rt };
                     RenderPipeline.SubmitRenderRequest(camera, request);
                     RenderPipeline.SubmitRenderRequest(camera, request);
-                    RenderTexture.active = rt;
+                    Graphics.Blit(rt, resolved);
+                    RenderTexture.active = resolved;
                     var image = new Texture2D(1280,720,TextureFormat.RGB24,false);
                     image.ReadPixels(new Rect(0,0,1280,720),0,0);image.Apply();
                     File.WriteAllBytes("art-source/renders/trivia/round-01/" + name + ".png",image.EncodeToPNG());
@@ -201,10 +204,18 @@ namespace OneMoreFloor.ArtReview
                     camera.transform.position = atLift + new Vector3(-4,2.4f,3.8f);
                     camera.transform.LookAt(atLift + Vector3.up * 1.2f);camera.fieldOfView = 43;
                     Capture("unity-scale-lift");
+                    // Same geometry, materials, lights and camera: AA alone changes.
+                    Directory.CreateDirectory("art-source/renders/trivia/round-02");
+                    File.Copy("art-source/renders/trivia/round-01/unity-scale-lift.png", "art-source/renders/trivia/round-02/unity-aa-on.png", true);
+                    camera.GetUniversalAdditionalCameraData().antialiasing = AntialiasingMode.None;
+                    quality.Pipeline.msaaSampleCount = 1;
+                    rt.Release();rt.antiAliasing = 1;rt.Create();
+                    Capture("unity-aa-off");
+                    File.Copy("art-source/renders/trivia/round-01/unity-aa-off.png", "art-source/renders/trivia/round-02/unity-aa-off.png", true);
                     File.WriteAllText("art-source/trivia/unity-scale-check.json", "{\"stand_in\":\"Existing local KyleRobot prefab\",\"measured_height_m\":" + RobotBounds().size.y.ToString("R", System.Globalization.CultureInfo.InvariantCulture) + ",\"scope\":\"Static art fit check; not a movement playtest\"}");
                 }
             }
-            finally { RenderTexture.active = null;rt.Release();UnityEngine.Object.DestroyImmediate(rt); }
+            finally { RenderTexture.active = null;rt.Release();resolved.Release();UnityEngine.Object.DestroyImmediate(rt);UnityEngine.Object.DestroyImmediate(resolved); }
             Debug.Log("TRIVIA_UNITY_PREVIEW saved; diagnostic directional fill plus approximate realtime lighting, no light bake or reflection probes");
         }
 
@@ -243,10 +254,13 @@ namespace OneMoreFloor.ArtReview
                     bool normal = map.Name == "Normal";
                     bool srgb = map.Name == "BaseColor" || map.Name == "Emission";
                     var type = normal ? TextureImporterType.NormalMap : TextureImporterType.Default;
-                    if (textureImporter.textureType != type || textureImporter.sRGBTexture != srgb)
+                    if (textureImporter.textureType != type || textureImporter.sRGBTexture != srgb || !textureImporter.mipmapEnabled || textureImporter.filterMode != FilterMode.Trilinear || textureImporter.anisoLevel != 8)
                     {
                         textureImporter.textureType = type;
                         textureImporter.sRGBTexture = srgb;
+                        textureImporter.mipmapEnabled = true;
+                        textureImporter.filterMode = FilterMode.Trilinear;
+                        textureImporter.anisoLevel = 8;
                         textureImporter.SaveAndReimport();
                     }
                     var texture = AssetDatabase.LoadAssetAtPath<Texture2D>(texturePath);

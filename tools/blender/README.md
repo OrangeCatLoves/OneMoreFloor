@@ -4,10 +4,15 @@ Run from the project root with Blender 5.2 LTS installed. No downloaded mesh,
 texture pack, Python package or paid service is required.
 
 ```powershell
-& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --python-exit-code 1 --python tools/blender/build_trivia.py -- --render --iteration 14 --width 1672
+& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --python-exit-code 1 --python tools/blender/build_trivia.py -- --refresh-textures --iteration 16 --width 1672
+& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --python-exit-code 1 --python tools/blender/render_trivia.py -- --iteration 16 --width 3344 --save
+powershell -NoProfile -ExecutionPolicy Bypass -File tools/blender/review_images.ps1 -Iteration 16 -Downsample
 & 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --python-exit-code 1 --python tools/blender/audit_trivia.py
-unity run . --timeout 240 -- -executeMethod OneMoreFloor.ArtReview.TriviaArtValidation.Preview
-powershell -NoProfile -ExecutionPolicy Bypass -File tools/blender/compare_trivia.ps1 -Iteration 14
+unity run . --timeout 360 -- -executeMethod OneMoreFloor.ArtReview.TriviaReviewSceneBuilder.BuildAndPreview
+& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --python-exit-code 1 --python tools/blender/audit_trivia.py
+unity test . --mode PlayMode
+powershell -NoProfile -ExecutionPolicy Bypass -File tools/blender/review_images.ps1 -Evidence
+powershell -NoProfile -ExecutionPolicy Bypass -File tools/blender/compare_trivia.ps1 -Iteration 16
 & 'C:/Program Files/Blender Foundation/Blender 5.2/5.2/python/bin/python.exe' tools/blender/log_trivia_assets.py
 ```
 
@@ -28,9 +33,14 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools/blender/compare_trivia
   without rebuilding geometry. `--views 2` selects one view. Light multipliers
   are applied to the loaded saved lights, not cumulatively across normal runs.
 - `audit_trivia.py`: validates geometry contracts, inventories triangle counts,
-  checks clear dimensions and writes the lighting sheet.
+  checks clear dimensions and writes the lighting sheet. If Unity review probe
+  EXRs exist, it also checks their HDR pixels to reject empty reflection bakes.
 - `compare_trivia.ps1`: places the unaltered reference beside its EEVEE render.
   Windows System.Drawing only resizes the images and adds comparison labels.
+- `review_images.ps1`: resolves 2x supersampled Blender renders with bicubic
+  filtering while retaining the raw PNGs locally. It also assembles native
+  Unity AA-off/on crops enlarged with nearest-neighbour filtering, and the
+  actual first/third-person playtest captures.
 - `log_trivia_assets.py`: explicit per-file asset provenance register.
 
 Generated deliverables:
@@ -41,12 +51,17 @@ Generated deliverables:
 - `Assets/_OneMoreFloor/Art/Floors/Trivia/Materials/` after the Unity validator
 - `art-source/renders/trivia/round-01/`
 - `art-source/renders/trivia/lighting_sheet.md`
+- `Assets/_OneMoreFloor/Art/Floors/Trivia/Review/TriviaArtReview.unity`
+- `art-source/renders/trivia/round-02/`
 
 The Blender and FBX/texture/material binaries stay local until the owner approves
 a version. Their `.meta` files stay with them locally. Scripts, reference images,
 comparison evidence, provenance and reports are committed. Do not use `git add -f`
 to bypass these review exclusions.
 
-The Unity helper lives under the owned Art/Editor folder. It verifies and maps
-art only; it does not create floor gameplay, register a floor definition, replace
-the movement test scene, or implement Claude Code's runtime marker importer.
+Unity art helpers live under the owned Art folder. The scene builder copies the
+existing MovementTest setup into a separate art scene, assembles collision and
+review lighting, and bakes two reflection probes. It does not replace the
+movement scene, create Trivia rules or register a floor definition. The test
+reuses the existing player/controller and local host. Generated review scenes,
+probe textures and grading assets stay local with the unapproved model.

@@ -7,7 +7,7 @@
       "Roughness": "T_Trivia_StageWood_Roughness.png"
     },
     "metallic": 0.04,
-    "roughness": 0.31,
+    "roughness": 0.35,
     "size": 2048,
     "emission_strength": 0.0
   },
@@ -54,8 +54,8 @@
       "MetallicSmoothness": "T_Trivia_InlayGold_MetallicSmoothness.png",
       "Roughness": "T_Trivia_InlayGold_Roughness.png"
     },
-    "metallic": 0.55,
-    "roughness": 0.3,
+    "metallic": 0.28,
+    "roughness": 0.43,
     "size": 2048,
     "emission_strength": 0.0
   },
@@ -175,7 +175,7 @@
       "Roughness": "T_Trivia_Leaves_Roughness.png"
     },
     "metallic": 0,
-    "roughness": 0.5,
+    "roughness": 0.64,
     "size": 2048,
     "emission_strength": 0.0
   },

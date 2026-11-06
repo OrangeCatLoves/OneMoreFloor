@@ -71,7 +71,7 @@ def pedestal(x,y,z=0):
             for k in range(count):
                 a=k*math.tau/count+layer*.5
                 petal_rotation=rotation@Quaternion((0,0,1),a)
-                verts=[];rows=4;cols=3;length=[.15,.11,.065][layer]
+                verts=[];rows=8;cols=4;length=[.15,.11,.065][layer]
                 for row in range(rows+1):
                     t=row/rows
                     for col in range(cols+1):
@@ -82,7 +82,8 @@ def pedestal(x,y,z=0):
                 p=mesh('SM_Trivia_Petal',verts,faces,color,True)
                 for polygon in p.data.polygons:polygon.use_smooth=True
         sphere('SM_Trivia_FlowerHeart',Vector(c)+normal*.065,(.025,.025,.025),'PetalCream',8,4)
-        leaf=sphere('SM_Trivia_Leaf',(x+math.cos(angle)*.36,y+math.sin(angle)*.36,z+1.79+RNG.uniform(-.08,.12)),(.10,.18,.025),'Leaves',8,4);leaf.rotation_euler=(.35,0,angle);apply(leaf)
+        leaf=sphere('SM_Trivia_Leaf',(x+math.cos(angle)*.34,y+math.sin(angle)*.34,z+1.79+RNG.uniform(-.08,.12)),(.09,.18,.025),'Leaves',12,6)
+        leaf.rotation_euler=(RNG.uniform(.20,.55),0,angle-math.pi/2+RNG.uniform(-.15,.15));apply(leaf)
     o=join_objects(list(set(bpy.data.objects)-start),'SM_Trivia_FlowerUrn');origin_bottom(o)
     collider('Trivia_Plinth',(x,y,z+.57),(.85,.85,1.14))
 
@@ -271,12 +272,12 @@ def stage():
         o=mesh(f'COL_Trivia_StageApron_{i:02}',[(x,y,z) for z in [0,STAGE] for x,y in p],[(0,2,1),(3,4,5),(0,1,4,3),(1,2,5,4),(2,0,3,5)],None);o.hide_render=True;o.hide_set(True)
     sw=S['stairs']['width'];sd=S['stairs']['stepDepth'];sh=S['stairs']['stepHeight']
     for i in range(3):
-        yy=-5.6-(3-i)*sd
+        yy=-5.6-(3-i-.5)*sd
         box('SM_Trivia_StageStep',(0,yy,sh*(i+1)/2),(sw,sd+.02,sh*(i+1)),'Walnut',.045)
         tube('SM_Trivia_StepLight',[(-sw/2+.08,yy-sd/2-.01,sh*(i+1)-.05),(sw/2-.08,yy-sd/2-.01,sh*(i+1)-.05)],.02,'Bulb')
         collider('Trivia_Step',(0,yy,sh*(i+1)/2),(sw,sd,sh*(i+1)))
     star('SM_Trivia_HostCompass',(0,.5,STAGE+.002),1.05,'InlayGold',plane='XY')
-    tube('SM_Trivia_HostCompassRing',[(1.3*math.sin(i*math.tau/80),.5+1.3*math.cos(i*math.tau/80),STAGE+.003) for i in range(80)],.018,'Gold',True)
+    tube('SM_Trivia_HostCompassRing',[(1.3*math.sin(i*math.tau/128),.5+1.3*math.cos(i*math.tau/128),STAGE+.003) for i in range(128)],.018,'InlayGold',True)
     empty('MK_Host',(0,.5,STAGE))
     for i,x in enumerate([-4.8,-1.6,1.6,4.8]):podium(i+1,x,-2.5,STAGE)
 
@@ -554,8 +555,8 @@ def hall():
             for col in range(11):clone(far_prototype,f'SM_Trivia_UpperSeat_{side}_{row}_{col}',(side*(2.3+col*.85),-24-row*1.0,4.85+row*.2))
         for row in range(2):
             for col in range(12):
-                seat=clone(far_prototype,f'SM_Trivia_UpperSeat_Side_{side}_{row}_{col}',(side*(13+row*.8),-10+col*.95,4.85+row*.2))
-                seat.rotation_euler.z=math.atan2(side*(13+row*.8),4-(-10+col*.95))
+                seat=clone(far_prototype,f'SM_Trivia_UpperSeat_Side_{side}_{row}_{col}',(side*(13.25+row*.65),-10+col*.95,4.85+row*.2))
+                seat.rotation_euler.z=math.atan2(side*(13.25+row*.65),4-(-10+col*.95))
     bpy.data.objects.remove(prototype,do_unlink=True)
     bpy.data.objects.remove(far_prototype,do_unlink=True)
     # Gold grille pair and lantern-lit lift to stage-left.
@@ -656,8 +657,9 @@ def finalize():
     scene.world.use_nodes=True;scene.world.node_tree.nodes['Background'].inputs[0].default_value=(.09,.065,.12,1);scene.world.node_tree.nodes['Background'].inputs[1].default_value=.25
     scene.view_settings.view_transform='AgX';scene.view_settings.look='AgX - Medium High Contrast';scene.view_settings.exposure=.6
     if hasattr(scene,'eevee'):
-        scene.eevee.taa_render_samples=64
-        scene.eevee.shadow_pool_size='512'
+        scene.eevee.taa_render_samples=192
+        scene.eevee.shadow_pool_size='1024'
+        scene.eevee.shadow_resolution_scale=.75
         if hasattr(scene.eevee,'use_raytracing'):scene.eevee.use_raytracing=True
     # Compositor soft highlight glow, retained in all reference comparisons.
     scene.use_nodes=True

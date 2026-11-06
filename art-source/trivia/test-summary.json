@@ -1,20 +1,20 @@
-﻿{
+{
     "editmode":  {
                      "passed":  82,
-                     "start_utc":  "2026-11-05 17:58:19Z",
+                     "start_utc":  "2026-11-06 09:05:10Z",
                      "failed":  0,
                      "total":  82,
                      "result":  "Passed",
                      "skipped":  0,
-                     "end_utc":  "2026-11-05 17:58:19Z"
+                     "end_utc":  "2026-11-06 09:05:11Z"
                  },
     "playmode":  {
-                     "passed":  21,
-                     "start_utc":  "2026-11-05 17:59:28Z",
+                     "passed":  22,
+                     "start_utc":  "2026-11-06 09:12:42Z",
                      "failed":  0,
-                     "total":  21,
+                     "total":  22,
                      "result":  "Passed",
                      "skipped":  0,
-                     "end_utc":  "2026-11-05 17:59:44Z"
+                     "end_utc":  "2026-11-06 09:13:03Z"
                  }
 }

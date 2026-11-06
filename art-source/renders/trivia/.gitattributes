@@ -1,0 +1,5 @@
+# Small review evidence stays in ordinary Git: the remote LFS budget was
+# exhausted during this iteration. Do not change model/texture LFS policy.
+round-01/comparison-16_view-*.jpg -filter -diff -merge -text
+round-02/aa-detail-comparison.png -filter -diff -merge -text
+round-02/playtest-both-views.jpg -filter -diff -merge -text

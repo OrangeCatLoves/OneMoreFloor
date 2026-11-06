@@ -15,7 +15,8 @@ for o in bpy.data.objects:
     if o.type=='LIGHT':o.data.energy*=settings.get('light_multiplier',1)
 scene.render.resolution_x=a.width;scene.render.resolution_y=round(a.width*941/1672)
 scene.eevee.taa_render_samples=settings.get('samples',48)
-scene.eevee.shadow_pool_size='512'
+scene.eevee.shadow_pool_size='1024'
+scene.eevee.shadow_resolution_scale=.75
 if a.save:bpy.ops.wm.save_as_mainfile(filepath=str(root/'art-source/trivia/Trivia_Round01.blend'))
 for i in a.views.split(','):
     print('RENDER view '+i,flush=True)

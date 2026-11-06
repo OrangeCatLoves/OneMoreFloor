@@ -1,0 +1,9 @@
+{
+  "name": "OneMoreFloor.ArtReview.PlayMode",
+  "references": ["UnityEngine.TestRunner", "UnityEditor.TestRunner", "OneMoreFloor.Game", "FishNet.Runtime", "Unity.InputSystem", "Unity.RenderPipelines.Universal.Runtime", "Unity.RenderPipelines.Core.Runtime"],
+  "includePlatforms": [],
+  "overrideReferences": true,
+  "precompiledReferences": ["nunit.framework.dll"],
+  "autoReferenced": false,
+  "defineConstraints": ["UNITY_INCLUDE_TESTS"]
+}
