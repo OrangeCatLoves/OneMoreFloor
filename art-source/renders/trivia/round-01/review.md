@@ -234,9 +234,11 @@ culling otherwise opened holes where the undersides face the camera.
 
 ## Round 1 assessment — WIP, visual gate remains open
 
-The subsequent anti-aliasing/polish review is in `../round-02/review.md` and
-the latest three reference comparisons are iteration 16. Counts and test
-results below record the earlier iteration 14 checkpoint.
+The subsequent anti-aliasing/polish review is in `../round-02/review.md`.
+The latest refinement is iteration 21: all three concept comparisons are here,
+and `../round-03/review.md` records its before/after images, close-ups, actual
+Unity comparisons and current differences. Counts and test results below
+record the earlier iteration 14 checkpoint.
 
 The deliverable contains the requested room elements and is technically
 importable. Fourteen render passes are not themselves evidence that the

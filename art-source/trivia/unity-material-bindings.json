@@ -35,6 +35,15 @@
         ]
       },
       {
+        "name": "M_Trivia_GoldDark",
+        "baseMap": "T_Trivia_GoldDark_BaseColor",
+        "metallicMap": "T_Trivia_GoldDark_MetallicSmoothness",
+        "keywords": [
+          "_METALLICSPECGLOSSMAP",
+          "_NORMALMAP"
+        ]
+      },
+      {
         "name": "M_Trivia_Bulb",
         "baseMap": "T_Trivia_Bulb_BaseColor",
         "metallicMap": "T_Trivia_Bulb_MetallicSmoothness",

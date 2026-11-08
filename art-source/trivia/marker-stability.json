@@ -1,8 +1,6 @@
 {
-    "before_count":  77,
-    "source":  "Unity imported markers compared to committed round-1 import; includes positions and forward/up axes",
-    "after_count":  77,
-    "changed_markers":  [
-
-                        ]
+  "source": "Unity imported marker positions and forward/up axes compared with the saved iteration-16 import",
+  "before_count": 77,
+  "after_count": 77,
+  "changed_markers": []
 }

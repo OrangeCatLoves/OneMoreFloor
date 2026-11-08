@@ -1,0 +1,6 @@
+{
+  "scene_reopened": true,
+  "reflection_probe_count": 2,
+  "persistent_cubemap_assignments": true,
+  "indoor_fallback": "T_Trivia_Stage_Reflections"
+}

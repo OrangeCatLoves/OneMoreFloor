@@ -3,3 +3,7 @@
 round-01/comparison-16_view-*.jpg -filter -diff -merge -text
 round-02/aa-detail-comparison.png -filter -diff -merge -text
 round-02/playtest-both-views.jpg -filter -diff -merge -text
+round-01/comparison-1[789]_view-*.jpg -filter -diff -merge -text
+round-03/*.jpg -filter -diff -merge -text
+round-01/comparison-20_view-*.jpg -filter -diff -merge -text
+round-01/comparison-21_view-*.jpg -filter -diff -merge -text

@@ -1,12 +1,17 @@
 # Trivia round 1 — art review and import notes
 
 This is a WIP art review, not owner acceptance or a completed game floor. The
-latest three comparisons are iteration 16 in `../renders/trivia/round-01/`.
+latest three comparisons are iteration 21 in `../renders/trivia/round-01/`.
 `review.md` there records the rejected passes and remaining visual differences.
 The owner’s “only minor differences” quality gate must not be treated as passed
 merely because the technical import checks pass.
 
-## Playtest this iteration
+The owner deferred playtesting and requested this refinement first. Current
+before/after images, close-ups, engine comparisons and the review journal are in
+`../renders/trivia/round-03/`. Room layout and interaction positions are frozen
+pending the owner's later feedback.
+
+## Review scene (for a later playtest)
 
 In Unity, choose **OneMoreFloor > Art > Open Trivia Review**, then press **Play**
 and click the Game view. Walk out of the open lift, turn toward the middle aisle,
@@ -23,12 +28,16 @@ realtime shadows. Its temporary URP clone enables 4x MSAA and High SMAA at nativ
 resolution; it restores the previous pipeline/AA settings when disabled.
 The project's shared graphics assets are unchanged. Camera smoothing settings
 are serialized in the review scene; the pipeline override takes effect in Play.
+The separately baked reflection maps are assigned in **Custom** probe mode so
+their references survive a scene reload. The stage cubemap also supplies the
+indoor fallback outside the probe volumes. Do not change these to a temporary
+`bakedTexture` assignment without a complete LightingDataAsset bake.
 
 Use **OneMoreFloor > Art > Build and Open Trivia Review** to regenerate after
 exporting a changed room. This replaces the art review scene and its local probe
 and grading assets; do not keep manual scene edits there. Runtime integration
 still belongs to Claude Code. Review evidence and remaining limitations are in
-`../renders/trivia/round-02/review.md`.
+`../renders/trivia/round-03/review.md`.
 
 ## Local deliverables
 
@@ -36,8 +45,8 @@ still belongs to Claude Code. Review evidence and remaining limitations are in
 |---|---|
 | `art-source/trivia/Trivia_Round01.blend` | Editable metre-scale room, image-backed materials, 3 review cameras and EEVEE lighting |
 | `Assets/_OneMoreFloor/Art/Floors/Trivia/SM_Trivia_Theatre.fbx` | Room assembly with separate reactive parts, collision meshes and markers |
-| `Assets/_OneMoreFloor/Art/Floors/Trivia/Textures/` | 102 PNG maps across 24 shared materials |
-| `Assets/_OneMoreFloor/Art/Floors/Trivia/Materials/` | 24 generated URP/Lit material assets with texture bindings |
+| `Assets/_OneMoreFloor/Art/Floors/Trivia/Textures/` | 106 PNG maps across 25 shared materials |
+| `Assets/_OneMoreFloor/Art/Floors/Trivia/Materials/` | 25 generated URP/Lit material assets with texture bindings |
 | `art-source/renders/trivia/lighting_sheet.md` | Light colours, relative power, cone angles and Unity placement |
 | `art-source/trivia/lighting.json` | Machine-readable light positions/directions and EEVEE shadow flags |
 | `art-source/trivia/material_manifest.json` | Exact material names, map filenames, resolutions and surface settings |
@@ -95,7 +104,7 @@ no baked indirect illumination. Do not treat either preview as final lighting.
   are supplied for Blender/rebaking, not plugged directly into URP/Lit.
 - Petal materials use Render Face = Both (`_Cull = 0`) because the curled petals
   are thin surfaces. All other materials use backface culling.
-- Sixteen material sets use 2048 × 2048 maps. Eight simple monitor/screen,
+- Seventeen material sets use 2048 × 2048 maps. Eight simple monitor/screen,
   emissive and button sets use 64 × 64 maps. No 4K textures are used.
 - Texture imports use mipmaps, trilinear filtering and anisotropic level 8 to
   reduce shimmer on surfaces viewed at an angle.
@@ -112,11 +121,13 @@ no baked indirect illumination. Do not treat either preview as final lighting.
   frustum counts that also include occluded geometry. Neither is a measured
   GPU frame-time benchmark. The 500k visible-triangle target still needs Unity
   profiling with occlusion, lights and shadows enabled.
-- Latest totals are 945,460 imported triangles, 480 render meshes, 79 collision
-  meshes, 16 buttons, 5 screens and 43 light markers. The source has 1,004,028
+- Latest totals are 1,379,764 imported triangles, 520 render meshes, 79 collision
+  meshes, 16 buttons, 5 screens and 43 light markers. The source has 1,420,860
   triangles before Unity's removal of degenerate faces and triangulation.
-  Smoother petals account for most of the increase; flowers need production
-  distance LODs before the laptop budget can be accepted.
+  This is 434,304 more imported triangles (+46%) than iteration 16. Flowers,
+  curtain folds, carved trim, upholstery and smoother fixture silhouettes add
+  real geometry. Flowers and seats need production distance LODs before the
+  laptop budget can be accepted; no frame-time result is claimed.
 - URP/Lit does not reproduce Blender's velvet sheen or wood clearcoat exactly.
   Baked lighting and reflection probes are necessary before judging the engine
   match; shader work may still be needed after that comparison.
@@ -145,6 +156,8 @@ which have not been implemented yet. Summaries and validation reports are here.
 
 The brief requested an AI 3D provider for flowers. No suitable connected provider
 was available in the plugin search. These flowers were constructed in Blender
-as a documented substitute; there is no invented tool or licence claim. Their
-repetition and limited petal shapes are a remaining quality issue. The owner's
+as a documented substitute; there is no invented tool or licence claim. The
+refinement uses curved rose petals with rolled centres, small sprays, separate
+leaves and local seeded variation. Botanical realism still falls short of a
+sculpted reference-quality asset. The owner's
 exact ChatGPT concept prompt is preserved in `../concept/floors/trivia/provenance.txt`.

@@ -11,7 +11,9 @@ from mathutils import Vector, Quaternion
 ROOT=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(Path(__file__).parent))
 import trivia_geometry as g
+import trivia_refinement as detail
 from trivia_geometry import *
+from trivia_refinement import curtain, laurel
 from trivia_materials import build_materials
 from export_unity import export_selection
 ARGS=argparse.ArgumentParser()
@@ -47,6 +49,7 @@ def light(kind,loc,color,power,target=None,size=1,cone=50,purpose=''):
     return o
 
 def pedestal(x,y,z=0):
+    print('BUILD bouquet at',x,y,flush=True)
     start=set(bpy.data.objects)
     box('SM_Trivia_PlinthFoot',(x,y,z+.09),(.85,.85,.18),'Marble',.025)
     box('SM_Trivia_Plinth',(x,y,z+.59),(.65,.65,.9),'Marble',.025)
@@ -54,36 +57,15 @@ def pedestal(x,y,z=0):
         box('SM_Trivia_PlinthInset',(x+side*.33,y,z+.60),(.025,.45,.64),'Ivory',.02)
         box('SM_Trivia_PlinthInset',(x,y+side*.33,z+.60),(.45,.025,.64),'Ivory',.02)
     box('SM_Trivia_PlinthCap',(x,y,z+1.09),(.8,.8,.15),'Marble',.02)
+    for zz,ww in [(.21,.72),(.97,.69),(1.025,.76)]:
+        box('SM_Trivia_PlinthMoulding',(x,y,z+zz),(ww,ww,.045),'Ivory',.012)
+    for side in [-1,1]:
+        tube('SM_Trivia_PlinthGiltInset',rounded_rect(x,y+side*.344,z+.59,.45,.65,.035,4),.008,'GoldDark',True,sides=5)
+    detail.lathe('SM_Trivia_UrnGadroons',(x,y,z),[(.12,1.29),(.18,1.32),(.27,1.37),(.345,1.48),(.35,1.56),(.35,1.60),(.32,1.62),(.30,1.57),(.10,1.32)],'Gold',64,16)
     cylinder('SM_Trivia_UrnFoot',(x,y,z+1.20),.25,.1,'Gold',24)
     cylinder('SM_Trivia_UrnStem',(x,y,z+1.32),.12,.2,'Gold',16)
-    sphere('SM_Trivia_UrnBowl',(x,y,z+1.48),(.34,.34,.25),'Gold',24,12)
     tube('SM_Trivia_UrnRim',[(x+.35*math.cos(i*math.tau/40),y+.35*math.sin(i*math.tau/40),z+1.60) for i in range(40)],.028,'Gold',True)
-    sphere('SM_Trivia_BouquetFoliage',(x,y,z+1.80),(.40,.40,.25),'Leaves',16,8)
-    for j in range(32):
-        angle=j*2.4;r=.47*math.sqrt(j/31);h=1.93+.32*(1-j/31)+RNG.uniform(-.07,.07)
-        c=(x+math.cos(angle)*r,y+math.sin(angle)*r,z+h)
-        tube('SM_Trivia_FlowerStem',[(x,y,z+1.55),c],.009,'Leaves',sides=4)
-        color=['PetalPurple','PetalCream','PetalPurple','PetalWhite'][j%4]
-        normal=Vector((math.cos(angle)*.7,math.sin(angle)*.7,.8)).normalized()
-        rotation=normal.to_track_quat('Z','Y')
-        for layer in range(3):
-            count=[7,6,5][layer]
-            for k in range(count):
-                a=k*math.tau/count+layer*.5
-                petal_rotation=rotation@Quaternion((0,0,1),a)
-                verts=[];rows=8;cols=4;length=[.15,.11,.065][layer]
-                for row in range(rows+1):
-                    t=row/rows
-                    for col in range(cols+1):
-                        u=col/cols*2-1
-                        local=Vector((u*length*.56*math.sin(math.pi*t)**.55,.02+t*length,layer*.025+.065*t*t+.018*u*u*math.sin(math.pi*t)))
-                        verts.append(Vector(c)+petal_rotation@local)
-                faces=[(row*(cols+1)+col,row*(cols+1)+col+1,(row+1)*(cols+1)+col+1,(row+1)*(cols+1)+col) for row in range(rows) for col in range(cols)]
-                p=mesh('SM_Trivia_Petal',verts,faces,color,True)
-                for polygon in p.data.polygons:polygon.use_smooth=True
-        sphere('SM_Trivia_FlowerHeart',Vector(c)+normal*.065,(.025,.025,.025),'PetalCream',8,4)
-        leaf=sphere('SM_Trivia_Leaf',(x+math.cos(angle)*.34,y+math.sin(angle)*.34,z+1.79+RNG.uniform(-.08,.12)),(.09,.18,.025),'Leaves',12,6)
-        leaf.rotation_euler=(RNG.uniform(.20,.55),0,angle-math.pi/2+RNG.uniform(-.15,.15));apply(leaf)
+    detail.bouquet(x,y,z,round((x+20)*100+(y+10)*47))
     o=join_objects(list(set(bpy.data.objects)-start),'SM_Trivia_FlowerUrn');origin_bottom(o)
     collider('Trivia_Plinth',(x,y,z+.57),(.85,.85,1.14))
 
@@ -94,7 +76,10 @@ def podium(index,x,y,z):
     for side in [-1,1]:
         box('SM_Trivia_PodiumFrontPanel',(x,y+side*.405,z+.50),(.91,.026,.64),'Walnut',.015)
         tube('SM_Trivia_PodiumPanelTrim',rounded_rect(x,y+side*.425,z+.5,.96,.67,.04,4),.014,'Gold',True)
-        laurel(x,y+side*.445,z+.53,.215,'SM_Trivia_PodiumLaurel')
+        crest=laurel(x,y+side*.445,z+.53,.215,'SM_Trivia_PodiumLaurel')
+        if side>0:
+            for v in crest.data.vertices:v.co.y=2*(y+side*.445)-v.co.y
+            for face in crest.data.polygons:face.flip()
         for xx in [-.61,.61]:
             cylinder('SM_Trivia_PodiumColumn',(x+xx,y+side*.405,z+.51),.065,.71,'Bulb',12)
             for zz in [.18,.52,.84]:cylinder('SM_Trivia_PodiumCollar',(x+xx,y+side*.405,z+zz),.085,.05,'Gold',12)
@@ -152,28 +137,6 @@ def podium(index,x,y,z):
     light('Point',(x,y-.68,z+.25),'#FFCF83',2,size=.3,purpose='Subtle podium practical spill on polished wood; bake')
     return static
 
-def curtain(name,x0,x1,y,bottom,top,pull=0):
-    folds=max(5,round((x1-x0)/.40));nx=folds*8;nz=24;verts=[]
-    for j in range(nz+1):
-        v=j/nz; pinch=math.exp(-((v-.32)/.21)**2)*pull
-        for i in range(nx+1):
-            u=i/nx; xx=x0+(x1-x0)*u
-            xx+=(.5-u)*pinch
-            phase=u*math.tau*folds+.26*math.sin(v*5+u*30)+.22*math.sin(u*37)
-            amplitude=.22+.035*math.cos(u*23)+.025*math.cos(v*4+u*17)
-            yy=y+amplitude*math.cos(phase)+.04*math.cos(phase*2)+.035*math.sin(v*8+u*5)
-            if pull:yy-=.22*math.sin(v*math.pi)
-            zz=bottom+(top-bottom)*v+(.025*math.cos(phase)+.04*math.sin(u*17))*(1-v)
-            verts.append((xx,yy,zz))
-    faces=[(j*(nx+1)+i,j*(nx+1)+i+1,(j+1)*(nx+1)+i+1,(j+1)*(nx+1)+i) for j in range(nz) for i in range(nx)]
-    o=mesh(name,verts,faces,'VelvetRed')
-    uv=o.data.uv_layers.new()
-    for p in o.data.polygons:
-        p.use_smooth=True
-        for li in p.loop_indices:
-            vi=o.data.loops[li].vertex_index;uv.data[li].uv=((vi%(nx+1))/nx*3,(vi//(nx+1))/nz*3)
-    for dz in [.04,.09,.14]:tube(name+'_Fringe',[(a,b-.02,c+dz) for a,b,c in verts[:nx+1]],.018,'Gold',sides=5)
-    return o
 
 def shield(x,y,z,w=1.2,starred=False):
     pts=[(x-w/2,y,z+w*.5),(x+w/2,y,z+w*.5),(x+w/2,y,z-w*.3),(x,y,z-w*.65),(x-w/2,y,z-w*.3)]
@@ -232,10 +195,11 @@ def moving_light(x,y,z,index,floor=False):
     head=cylinder(f'SM_Trivia_Spotlight_{index:02}_Head',(0,0,0),.21,.42,'BlackMetal',20)
     head.rotation_euler.x=math.radians(30 if floor else -22);apply(head)
     head.parent=tilt
-    lens=cylinder(f'SM_Trivia_Spotlight_{index:02}_Lens',(0,-(.11 if floor else -.09),(.19 if floor else -.19)),.17,.025,'Bulb',20)
+    lens=cylinder(f'SM_Trivia_Spotlight_{index:02}_Lens',(0,-(.11 if floor else -.09),(.19 if floor else -.19)),.17,.025,'BlackMetal',20)
     lens.rotation_euler.x=math.radians(30 if floor else -22);apply(lens);lens.parent=tilt
+    detail.fixture_detail(head,index,floor)
     target=(x*.65,1,1) if not floor else (x*.5,4,5)
-    light('Spot',(x,y,z+h),'#C775FF' if index%3==0 else '#FFD18B',1100 if not floor else 320,target,cone=55,purpose='Purple stage wash' if index%3==0 else 'Warm stage pool')
+    light('Spot',(x,y,z+h),'#B78DFF' if index%3==0 else '#FFE0AD',650 if not floor else 260,target,cone=44,purpose='Purple stage wash' if index%3==0 else 'Warm stage pool')
 
 def stage():
     # Rear is straight; the stage apron follows a wide ellipse.
@@ -254,7 +218,7 @@ def stage():
         while xx<half-.02:
             length=min(RNG.uniform(1.1,2.5),half-xx)
             if length>.04:
-                plank=box('SM_Trivia_StagePlank',(xx+length/2,yy+.13,STAGE-.0125),(length-.009,.267,.025),'StageWood',.004)
+                plank=box('SM_Trivia_StagePlank',(xx+length/2,yy+.13,STAGE-.0125),(length-.003,.276,.025),'StageWood',.0017)
                 du,dv=RNG.random(),RNG.random()
                 for loop in plank.data.uv_layers.active.data:loop.uv.x+=du;loop.uv.y+=dv
             xx+=length
@@ -287,10 +251,25 @@ def screen_and_arch():
     cx=0;y=4.25;cz=5.4;w=12.3;h=4.25
     border=rounded_rect(cx,y,cz,w,h,.65,14)
     mesh('SM_Trivia_QuestionSurround',border,[tuple(range(len(border)))],'RoyalPurple',True)
-    for d,r in [(0,.075),(-.17,.025),(.17,.055)]:tube('SM_Trivia_QuestionFrame',rounded_rect(cx,y-.055,cz,w+d,h+d,.65,14),r,'Gold',True,sides=10)
+    for d,r in [(0,.075),(-.17,.025),(.17,.055)]:tube('SM_Trivia_QuestionFrame',rounded_rect(cx,y-.055,cz,w+d,h+d,.65,14),r,'Gold',True,sides=16)
     panel('SM_Trivia_QuestionScreen',0,y-.10,cz,9.5,3.55,'Screen')
     tube('SM_Trivia_InnerQuestionFrame',rounded_rect(0,y-.13,cz,9.6,3.65,.25,8),.035,'Gold',True)
-    for x in [-5.35,5.35]:laurel(x,y-.13,cz,.65,'SM_Trivia_ScreenLaurel')
+    for sx in [-1,1]:
+        for sz in [-1,1]:
+            # Small carved corner flourishes sit outside the live-screen inset.
+            x=sx*4.71;z=cz+sz*1.79
+            for k in range(3):
+                a=k*.35+.20
+                detail.carved_leaf('SM_Trivia_ScreenCornerCarving',(x,y-.18,z),(x+sx*.24*math.sin(a),y-.18,z+sz*.24*math.cos(a)),.045,depth=.025)
+    for x in [-5.35,5.35]:laurel(x,y-.13,cz,.49,'SM_Trivia_ScreenLaurel')
+    # Pearl-and-reel moulding gives the broad surround a carved inner layer.
+    for side in [-1,1]:
+        for i in range(47):
+            xx=-4.65+i*.202
+            sphere('SM_Trivia_FramePearl',(xx,y-.16,cz+side*1.94),(.035,.022,.026),'GoldDark',8,4)
+        for sx in [-1,1]:
+            detail.rosette(sx*5.58,y-.17,cz+side*1.43,.145)
+            scrollwork(sx*5.22,y-.16,cz+side*1.48,.22,sx)
     for sx in [-1,1]:
         for sz in [-1,1]:
             scrollwork(sx*5.65,y-.15,cz+sz*1.6,.18,sx)
@@ -305,7 +284,7 @@ def screen_and_arch():
             if distance<=segment:
                 pts.append(Vector(perimeter[i]).lerp(Vector(perimeter[(i+1)%len(perimeter)]),distance/segment));break
             distance-=segment
-    for i,p in enumerate(pts):groups[i%3].append(sphere('SM_Trivia_MarqueeBulb',p,(.055,.055,.055),'Bulb',10,6))
+    for i,p in enumerate(pts):groups[i%3].append(sphere('SM_Trivia_MarqueeBulb',p,(.055,.055,.055),'Bulb',20,10))
     for i,grp in enumerate(groups):join_objects(grp,f'SM_Trivia_MarqueeChase_{i+1:02}')
     light('Area',(0,3.95,5.6),'#FFE1AD',180,(0,-3,2.4),size=8,purpose='Aggregate marquee bounce; bulbs use three emissive chase sets')
     # Layered columns and a shallow arched cornice, carved with leaves and beads.
@@ -320,17 +299,20 @@ def screen_and_arch():
             pts=[]
             for i in range(121):
                 t=i/120;phase=t*math.tau*12+strand*math.tau/3
-                pts.append((side*(8.1+t*1.725),3.53+math.cos(phase)*.035,2.9+.15*math.sin(t*math.pi)+math.sin(phase)*.035))
+                pts.append((side*(9.0+t*.88),3.53+math.cos(phase)*.035,2.9+.15*math.sin(t*math.pi)+math.sin(phase)*.035))
             tube('SM_Trivia_GoldTieback',pts,.022,'Gold',sides=6)
-        tx=side*8.3
-        sphere('SM_Trivia_TasselKnot',(tx,3.48,2.86),(.10,.10,.14),'Gold',12,8)
-        for j in range(14):
-            a=j*math.tau/14;tube('SM_Trivia_Tassel',[(tx+.04*math.cos(a),3.48+.04*math.sin(a),2.76),(tx+.12*math.cos(a),3.48+.12*math.sin(a),2.2)],.012,'Gold',sides=5)
+        detail.tassel(side*9.0,3.45,2.89)
+        for zz in [1.4,7.65]:
+            detail.rosette(x,3.69,zz,.22)
+        for zz in [2.4,5.75]:
+            tube('SM_Trivia_PilasterRaisedPanel',rounded_rect(x,3.70,zz,.65,2.3,.08,5),.022,'GoldDark',True)
+            acanthus(x,3.65,zz+.50,.65)
     arch=[(-10.5+21*i/100,4.0,8.85+.75*math.sin(i*math.pi/100)) for i in range(101)]
     for dz,r,ma in [(0,.19,'Gold'),(.23,.17,'Ivory'),(.44,.12,'Gold'),(-.2,.045,'Bulb')]:tube('SM_Trivia_ProsceniumArch',[(x,y,z+dz) for x,y,z in arch],r,ma,sides=10)
     for i in range(43):
         a=i/42;x=-10.2+a*20.4;z=8.85+.75*math.sin(a*math.pi)
-        sphere('SM_Trivia_ArchRosette',(x,3.77,z),(.09,.04,.12),'GoldDark',8,6)
+        if i%3==0:detail.rosette(x,3.77,z,.12)
+        else:sphere('SM_Trivia_ArchRosette',(x,3.77,z),(.045,.025,.05),'GoldDark',8,4)
     for i in range(18):
         x=-9.35+i*1.1;acanthus(x,3.74,8.85+.75*math.sin((x+10.5)/21*math.pi)-.03,.6)
     shield(0,3.62,9.03,1.8,True)
@@ -344,7 +326,15 @@ def screen_and_arch():
     tube('SM_Trivia_BuntingCord',rope,.018,'Gold')
     for i in range(22):
         u=(i+.5)/22;x=-9+18*u;z=8.5-.7*math.sin(u*math.pi)**2
-        mesh('SM_Trivia_Bunting',[(x-.32,3.58,z),(x+.32,3.58,z),(x+.15,3.55,z-.55)],[(0,2,1)],'RoyalPurple' if i%3==0 else 'Gold',True)
+        verts=[];rows=5;cols=4
+        for j in range(rows+1):
+            t=j/rows
+            for k in range(cols+1):
+                v=k/cols*2-1
+                verts.append((x+v*.32*(1-t)+.10*t,3.58-.065*math.sin(math.pi*t)*math.cos(v*2+i),z-.55*t))
+        flag=detail.smooth(mesh('SM_Trivia_Bunting',verts,[(j*(cols+1)+k,j*(cols+1)+k+1,(j+1)*(cols+1)+k+1,(j+1)*(cols+1)+k) for j in range(rows) for k in range(cols)],'RoyalPurple' if i%3==0 else 'BuntingGold',True))
+        for face in flag.data.polygons:face.flip()
+        solid=flag.modifiers.new('Fabric thickness','SOLIDIFY');solid.thickness=.003
     for o in set(bpy.data.objects)-arch_start:o.location.y-=2.0
     for i,x in enumerate([-8,-5.7,-3.4,-1.1,1.1,3.4,5.7,8]):moving_light(x,1.0,8.2,i+1)
     for i,(x,y) in enumerate([(-9,-2),(9,-2),(-7,3),(7,3)]):moving_light(x,y,STAGE+.14,i+9,True)
@@ -353,6 +343,7 @@ def seat_template(distant=False):
     start=set(bpy.data.objects)
     box('SM_Trivia_SeatCushion',(0,0,.47),(.66,.61,.18),'VelvetSeat',.075)
     back=box('SM_Trivia_SeatBack',(0,-.26,.87),(.68,.15,.77),'VelvetSeat',.09)
+    detail.upholstered_back(distant)
     tube('SM_Trivia_SeatPiping',rounded_rect(0,-.345,.89,.62,.69,.10,5),.012,'Gold',True)
     for s in [-1,1]:
         box('SM_Trivia_SeatArm',(s*.37,0,.65),(.105,.65,.1),'Gold',.035)
@@ -381,7 +372,13 @@ def grille(x,y,z,w=1.0,h=1.35):
     for i in range(9):
         for j in range(10):
             xx=x-w*.43+i*w*.105;zz=z-h*.43+j*h*.095
-            tube('SM_Trivia_GrilleMotif',[(xx-.045,y-.08,zz),(xx,y-.08,zz+.055),(xx+.045,y-.08,zz),(xx,y-.08,zz-.055)],.009,'Gold',True,sides=4)
+            motif=[]
+            for k in range(12):
+                a=k*math.tau/12;r=.044*(1+.23*math.cos(4*a))
+                motif.append((xx+r*math.cos(a),y-.08,zz+r*1.16*math.sin(a)))
+            tube('SM_Trivia_GrilleMotif',motif,.007,'GoldDark',True,sides=4)
+    for d,r in [(.06,.014),(-.07,.012)]:
+        tube('SM_Trivia_GrilleReededBorder',rounded_rect(x,y-.11,z,w+d,h+d,.06,4),r,'Gold',True,sides=6)
 
 def theatre_box(x,y):
     # Facade planes face the stage and main audience; an actual recess behind.
@@ -403,8 +400,7 @@ def theatre_box(x,y):
         for zz in [2.4,5.7]:tube('SM_Trivia_BoxPilasterInset',rounded_rect(x+dx,y-.37,zz,.21,2.1,.035,3),.012,'Gold',True)
         acanthus(x+dx,y-.4,6.65,.6)
     # Side swags above the upper box, layered fabric loops.
-    for side in [-1,1]:
-        for k in range(4):tube('SM_Trivia_BoxSwag',[(x+side*(i/20),y-.35,6.95-.48*math.sin(i/20*math.pi)-k*.07) for i in range(21)],.055,'VelvetRed',sides=6)
+    for side in [-1,1]:detail.swag(x+side*.51,y-.35,7.03,1.04,.35)
     box('SM_Trivia_BoxFascia',(x,y-.2,4.3),(2.45,.65,.56),'Ivory',.08)
     rail([(x-1.12+i*2.24/20,y-.58) for i in range(21)],5.18)
     shield(x,y-.64,4.35,.85)
@@ -623,6 +619,7 @@ def cameras():
     return settings
 
 def finalize():
+    print('FINALIZE',len(bpy.data.objects),'objects',flush=True)
     # Apply mesh rotations and scales. Curves are already meshes.
     for o in list(bpy.context.scene.objects):
         if o.type=='MESH':apply(o)
@@ -636,6 +633,7 @@ def finalize():
         groups.setdefault(key,[]).append(o)
     for key,group in groups.items():
         if len(group)>1:join_objects(group,key)
+    print('BATCHED static details',flush=True)
     bpy.context.view_layer.update()
     meshes=[o for o in bpy.context.scene.objects if o.type=='MESH' and not o.name.startswith('COL_')]
     deps=bpy.context.evaluated_depsgraph_get()
@@ -696,11 +694,11 @@ else:
     print('BUILD stage and podiums',flush=True);stage()
     print('BUILD screen, curtains and proscenium',flush=True);screen_and_arch()
     print('BUILD hall, seating and lift',flush=True);hall();cameras()
-    light('Area',(0,-3,7.5),'#FFD49D',2300,(0,1,0),size=9,purpose='Broad warm stage key, bake indirect')
-    light('Area',(-7,-6,5),'#FFD0A0',1200,(0,1,2),size=6,purpose='Warm camera-left fill')
-    light('Area',(6,2,6.8),'#9A4CFF',1500,(0,0,.6),size=5,purpose='Purple rim and wood reflections')
-    light('Area',(0,-15,8),'#FFC489',2400,(0,-13,0),size=10,purpose='Audience fill, preserve stage contrast')
-    light('Area',(0,-23,8),'#DFA778',1000,(0,-20,2),size=8,purpose='Upper balcony soft fill')
+    light('Area',(0,-3,7.5),'#FFE0B0',1800,(0,1,0),size=5,purpose='Broad warm stage key, bake indirect')
+    light('Area',(-7,-6,5),'#FFD6AF',650,(0,1,2),size=4,purpose='Warm camera-left fill')
+    light('Area',(6,2,6.8),'#AD83FF',450,(0,0,.6),size=3.5,purpose='Purple rim and wood reflections')
+    light('Area',(0,-15,8),'#FFD6AD',1050,(0,-13,0),size=8,purpose='Audience fill, preserve stage contrast')
+    light('Area',(0,-23,8),'#DFA778',450,(0,-20,2),size=6,purpose='Upper balcony soft fill')
     light('Area',(-10,-8,7.5),'#FFC78A',1600,(-13,-2,2.5),size=5,purpose='Lift and side balcony amber key')
     light('Area',(-9,-5,4),'#FFDDAA',500,(-13,-2,1.5),size=3,purpose='Brushed gold lift door reflection key')
     light('Area',(7,-18,7),'#FFC78A',950,(0,-23,4.5),size=6,purpose='Rear balcony and banner key')

@@ -6,8 +6,8 @@
       "MetallicSmoothness": "T_Trivia_StageWood_MetallicSmoothness.png",
       "Roughness": "T_Trivia_StageWood_Roughness.png"
     },
-    "metallic": 0.04,
-    "roughness": 0.35,
+    "metallic": 0.02,
+    "roughness": 0.3,
     "size": 2048,
     "emission_strength": 0.0
   },
@@ -42,8 +42,8 @@
       "MetallicSmoothness": "T_Trivia_Gold_MetallicSmoothness.png",
       "Roughness": "T_Trivia_Gold_Roughness.png"
     },
-    "metallic": 0.9,
-    "roughness": 0.27,
+    "metallic": 0.88,
+    "roughness": 0.29,
     "size": 2048,
     "emission_strength": 0.0
   },
@@ -79,7 +79,7 @@
       "Roughness": "T_Trivia_VelvetRed_Roughness.png"
     },
     "metallic": 0,
-    "roughness": 0.82,
+    "roughness": 0.88,
     "size": 2048,
     "emission_strength": 0.0
   },
@@ -91,7 +91,7 @@
       "Roughness": "T_Trivia_VelvetSeat_Roughness.png"
     },
     "metallic": 0,
-    "roughness": 0.79,
+    "roughness": 0.84,
     "size": 2048,
     "emission_strength": 0.0
   },
@@ -102,8 +102,20 @@
       "MetallicSmoothness": "T_Trivia_RoyalPurple_MetallicSmoothness.png",
       "Roughness": "T_Trivia_RoyalPurple_Roughness.png"
     },
-    "metallic": 0.02,
-    "roughness": 0.62,
+    "metallic": 0.0,
+    "roughness": 0.72,
+    "size": 2048,
+    "emission_strength": 0.0
+  },
+  "M_Trivia_BuntingGold": {
+    "maps": {
+      "BaseColor": "T_Trivia_BuntingGold_BaseColor.png",
+      "Normal": "T_Trivia_BuntingGold_Normal.png",
+      "MetallicSmoothness": "T_Trivia_BuntingGold_MetallicSmoothness.png",
+      "Roughness": "T_Trivia_BuntingGold_Roughness.png"
+    },
+    "metallic": 0.0,
+    "roughness": 0.72,
     "size": 2048,
     "emission_strength": 0.0
   },
@@ -175,7 +187,7 @@
       "Roughness": "T_Trivia_Leaves_Roughness.png"
     },
     "metallic": 0,
-    "roughness": 0.64,
+    "roughness": 0.74,
     "size": 2048,
     "emission_strength": 0.0
   },
@@ -187,7 +199,7 @@
       "Roughness": "T_Trivia_PetalPurple_Roughness.png"
     },
     "metallic": 0,
-    "roughness": 0.58,
+    "roughness": 0.65,
     "size": 2048,
     "emission_strength": 0.0
   },
@@ -199,7 +211,7 @@
       "Roughness": "T_Trivia_PetalCream_Roughness.png"
     },
     "metallic": 0,
-    "roughness": 0.55,
+    "roughness": 0.68,
     "size": 2048,
     "emission_strength": 0.0
   },
@@ -211,7 +223,7 @@
       "Roughness": "T_Trivia_PetalWhite_Roughness.png"
     },
     "metallic": 0,
-    "roughness": 0.56,
+    "roughness": 0.66,
     "size": 2048,
     "emission_strength": 0.0
   },
@@ -226,7 +238,7 @@
     "metallic": 0,
     "roughness": 0.22,
     "size": 64,
-    "emission_strength": 3.0
+    "emission_strength": 2.200000047683716
   },
   "M_Trivia_Red": {
     "maps": {
@@ -239,7 +251,7 @@
     "metallic": 0.08,
     "roughness": 0.22,
     "size": 64,
-    "emission_strength": 0.5
+    "emission_strength": 0.3199999928474426
   },
   "M_Trivia_Blue": {
     "maps": {
@@ -252,7 +264,7 @@
     "metallic": 0.08,
     "roughness": 0.22,
     "size": 64,
-    "emission_strength": 0.5
+    "emission_strength": 0.3199999928474426
   },
   "M_Trivia_Yellow": {
     "maps": {
@@ -265,7 +277,7 @@
     "metallic": 0.08,
     "roughness": 0.22,
     "size": 64,
-    "emission_strength": 0.5
+    "emission_strength": 0.3199999928474426
   },
   "M_Trivia_Green": {
     "maps": {
@@ -278,7 +290,7 @@
     "metallic": 0.08,
     "roughness": 0.22,
     "size": 64,
-    "emission_strength": 0.5
+    "emission_strength": 0.3199999928474426
   },
   "M_Trivia_Symbol": {
     "maps": {
@@ -291,6 +303,6 @@
     "metallic": 0,
     "roughness": 0.25,
     "size": 64,
-    "emission_strength": 2.0
+    "emission_strength": 1.2999999523162842
   }
 }

@@ -21,6 +21,7 @@ namespace OneMoreFloor.ArtReview.Tests
     public class TriviaReviewWalkthroughTests
     {
         const string ScenePath = "Assets/_OneMoreFloor/Art/Floors/Trivia/Review/TriviaArtReview.unity";
+        const string EvidenceFolder = "art-source/renders/trivia/round-03";
 
         [UnityTest]
         public IEnumerator LocalHost_CanLeaveLift_ClimbStage_AndInspectBothViewsWithAA()
@@ -47,6 +48,10 @@ namespace OneMoreFloor.ArtReview.Tests
                 var pipeline = (UniversalRenderPipelineAsset)GraphicsSettings.currentRenderPipeline;
                 Assert.That(pipeline.msaaSampleCount,Is.EqualTo(4));
                 Assert.That(Camera.main.GetUniversalAdditionalCameraData().antialiasing,Is.EqualTo(AntialiasingMode.SubpixelMorphologicalAntiAliasing));
+                var probes=Object.FindObjectsByType<ReflectionProbe>(FindObjectsSortMode.None);
+                Assert.That(probes.Length,Is.EqualTo(2));
+                Assert.That(probes.All(p => p.mode==ReflectionProbeMode.Custom && p.customBakedTexture),Is.True,"Baked cubemap assignments must survive loading the saved scene.");
+                Assert.That(RenderSettings.customReflectionTexture,Is.Not.Null,"Outside probe bounds must use the indoor fallback.");
 
                 // Exercise real input through the existing controller on exit.
                 float originalX = player.transform.position.x;
@@ -111,7 +116,7 @@ namespace OneMoreFloor.ArtReview.Tests
 
         static void Capture(string name)
         {
-            Directory.CreateDirectory("art-source/renders/trivia/round-02");
+            Directory.CreateDirectory(EvidenceFolder);
             var render = new RenderTexture(1280,720,24,RenderTextureFormat.ARGB32) {antiAliasing=4};render.Create();
             var resolved = new RenderTexture(1280,720,0,RenderTextureFormat.ARGB32);resolved.Create();
             var previous = RenderTexture.active;
@@ -126,7 +131,7 @@ namespace OneMoreFloor.ArtReview.Tests
                 Graphics.Blit(render,resolved);RenderTexture.active=resolved;
                 var image=new Texture2D(1280,720,TextureFormat.RGB24,false);
                 image.ReadPixels(new Rect(0,0,1280,720),0,0);image.Apply();
-                File.WriteAllBytes("art-source/renders/trivia/round-02/"+name+".png",image.EncodeToPNG());Object.Destroy(image);
+                File.WriteAllBytes(EvidenceFolder+"/"+name+".png",image.EncodeToPNG());Object.Destroy(image);
             }
             finally {ShaderUtil.allowAsyncCompilation=asyncCompilation;RenderTexture.active=previous;render.Release();resolved.Release();Object.Destroy(render);Object.Destroy(resolved);}
         }

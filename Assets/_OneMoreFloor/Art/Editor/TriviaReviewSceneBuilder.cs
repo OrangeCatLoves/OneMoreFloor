@@ -33,6 +33,68 @@ namespace OneMoreFloor.ArtReview
             EditorSceneManager.OpenScene(ScenePath);
         }
 
+        public static void BuildAndCapture()
+        {
+            Build();
+            CaptureReview();
+        }
+
+        public static void CaptureReview()
+        {
+            // Capture the actual review lighting, without the separate import
+            // validator's diagnostic directional light.
+            EditorSceneManager.OpenScene(ScenePath);
+            ValidateSavedReflections();
+            CaptureCurrentReview("unity-reference-view-");
+        }
+
+        public static void CaptureLightingStudy()
+        {
+            EditorSceneManager.OpenScene(ScenePath);
+            foreach (var light in Object.FindObjectsByType<Light>(FindObjectsSortMode.None)) light.shadows=LightShadows.None;
+            CaptureCurrentReview("unity-no-shadow-study-view-");
+            EditorSceneManager.OpenScene(ScenePath);
+            foreach (var probe in Object.FindObjectsByType<ReflectionProbe>(FindObjectsSortMode.None)) probe.intensity=0;
+            RenderSettings.reflectionIntensity=0;
+            CaptureCurrentReview("unity-no-reflection-study-view-");
+        }
+
+        static void CaptureCurrentReview(string prefix)
+        {
+            using var quality = new TriviaReviewRenderScope();
+            var camera=Camera.main;
+            var position=camera.transform.position;var rotation=camera.transform.rotation;float fov=camera.fieldOfView;
+            bool asyncCompilation=ShaderUtil.allowAsyncCompilation;
+            var previous=RenderTexture.active;
+            var render=new RenderTexture(1280,720,24,RenderTextureFormat.ARGB32) {antiAliasing=4};render.Create();
+            var resolved=new RenderTexture(1280,720,0,RenderTextureFormat.ARGB32);resolved.Create();
+            Directory.CreateDirectory("art-source/renders/trivia/round-03");
+            try
+            {
+                ShaderUtil.allowAsyncCompilation=false;
+                int view=0;
+                foreach (var spec in JObject.Parse(File.ReadAllText("art-source/trivia/review_settings.json"))["cameras"])
+                {
+                    Vector3 p=V(spec["position"]),t=V(spec["target"]);
+                    camera.transform.position=new Vector3(-p.x,p.z,-p.y);
+                    camera.transform.LookAt(new Vector3(-t.x,t.z,-t.y));
+                    camera.fieldOfView=2*Mathf.Atan(36f*720/1280/(2*(float)spec["lens"]))*Mathf.Rad2Deg;
+                    for (int i=0;i<3;i++) RenderPipeline.SubmitRenderRequest(camera,new UniversalRenderPipeline.SingleCameraRequest {destination=render});
+                    Graphics.Blit(render,resolved);RenderTexture.active=resolved;
+                    var pixels=new Texture2D(1280,720,TextureFormat.RGB24,false);
+                    pixels.ReadPixels(new Rect(0,0,1280,720),0,0);pixels.Apply();
+                    File.WriteAllBytes("art-source/renders/trivia/round-03/"+prefix+(++view)+".png",pixels.EncodeToPNG());
+                    Object.DestroyImmediate(pixels);
+                }
+            }
+            finally
+            {
+                ShaderUtil.allowAsyncCompilation=asyncCompilation;RenderTexture.active=previous;
+                camera.transform.SetPositionAndRotation(position,rotation);camera.fieldOfView=fov;
+                render.Release();resolved.Release();Object.DestroyImmediate(render);Object.DestroyImmediate(resolved);
+            }
+        }
+
         [MenuItem("OneMoreFloor/Art/Build and Open Trivia Review")]
         public static void Build()
         {
@@ -115,7 +177,7 @@ namespace OneMoreFloor.ArtReview
                 light.type = type == "Point" ? LightType.Point : LightType.Spot;
                 light.spotAngle = type == "Area" ? 135 : type == "Spot" ? (float)spec["cone_degrees"] : 60;
                 light.innerSpotAngle = light.spotAngle * .6f;
-                light.intensity = (float)spec["watts_blender"] / (type == "Point" ? 35f : 30f);
+                light.intensity = (float)spec["watts_blender"] / (type == "Point" ? 35f : type == "Area" ? 18f : 24f);
                 light.range = type == "Point" ? 6 : 35;
                 string purpose = (string)spec["purpose"];
                 // Limit realtime shadows to four sources for this review. The
@@ -156,7 +218,29 @@ namespace OneMoreFloor.ArtReview
             }
             finally {ShaderUtil.allowAsyncCompilation = asyncCompilation;}
             AssetDatabase.ImportAsset(path,ImportAssetOptions.ForceSynchronousImport);
-            probe.bakedTexture = AssetDatabase.LoadAssetAtPath<Texture>(path);
+            // A direct bakedTexture assignment is not serialized without a
+            // LightingDataAsset bake. Custom mode retains this independently
+            // baked cubemap when the local review scene is reopened.
+            probe.mode = ReflectionProbeMode.Custom;
+            probe.customBakedTexture = AssetDatabase.LoadAssetAtPath<Cubemap>(path);
+            if (!probe.customBakedTexture) throw new Exception("Missing baked cubemap " + path);
+            if (name == "Stage")
+            {
+                RenderSettings.defaultReflectionMode = DefaultReflectionMode.Custom;
+                RenderSettings.customReflectionTexture = probe.customBakedTexture;
+            }
+        }
+
+        static void ValidateSavedReflections()
+        {
+            var probes=Object.FindObjectsByType<ReflectionProbe>(FindObjectsSortMode.None);
+            bool valid=probes.Length==2 && probes.All(p => p.mode==ReflectionProbeMode.Custom && p.customBakedTexture) && RenderSettings.customReflectionTexture;
+            File.WriteAllText("art-source/trivia/review-lighting-validation.json",new JObject {
+                ["scene_reopened"]=true,["reflection_probe_count"]=probes.Length,
+                ["persistent_cubemap_assignments"]=valid,
+                ["indoor_fallback"]=RenderSettings.customReflectionTexture ? RenderSettings.customReflectionTexture.name : "missing"
+            }.ToString());
+            if (!valid) throw new Exception("Saved art review scene lost its baked reflection cubemaps");
         }
 
         static Vector3 V(JToken t) => new Vector3((float)t[0],(float)t[1],(float)t[2]);
