@@ -1,20 +1,20 @@
-﻿{
-    "editmode":  {
-                     "passed":  82,
-                     "start_utc":  "2026-11-08 10:01:36Z",
-                     "failed":  0,
-                     "total":  82,
-                     "result":  "Passed",
-                     "skipped":  0,
-                     "end_utc":  "2026-11-08 10:01:37Z"
-                 },
-    "playmode":  {
-                     "passed":  22,
-                     "start_utc":  "2026-11-08 10:03:08Z",
-                     "failed":  0,
-                     "total":  22,
-                     "result":  "Passed",
-                     "skipped":  0,
-                     "end_utc":  "2026-11-08 10:03:32Z"
-                 }
+{
+  "editmode": {
+    "passed": 82,
+    "failed": 0,
+    "total": 82,
+    "skipped": 0,
+    "result": "Passed",
+    "start_utc": "2026-11-09 04:37:59Z",
+    "end_utc": "2026-11-09 04:37:59Z"
+  },
+  "playmode": {
+    "passed": 22,
+    "failed": 0,
+    "total": 22,
+    "skipped": 0,
+    "result": "Passed",
+    "start_utc": "2026-11-09 04:36:55Z",
+    "end_utc": "2026-11-09 04:37:17Z"
+  }
 }

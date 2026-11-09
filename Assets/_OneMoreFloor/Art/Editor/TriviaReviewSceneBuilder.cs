@@ -63,15 +63,16 @@ namespace OneMoreFloor.ArtReview
         {
             using var quality = new TriviaReviewRenderScope();
             var camera=Camera.main;
-            var position=camera.transform.position;var rotation=camera.transform.rotation;float fov=camera.fieldOfView;
+            var position=camera.transform.position;var rotation=camera.transform.rotation;float fov=camera.fieldOfView;float aspect=camera.aspect;
             bool asyncCompilation=ShaderUtil.allowAsyncCompilation;
             var previous=RenderTexture.active;
             var render=new RenderTexture(1280,720,24,RenderTextureFormat.ARGB32) {antiAliasing=4};render.Create();
             var resolved=new RenderTexture(1280,720,0,RenderTextureFormat.ARGB32);resolved.Create();
-            Directory.CreateDirectory("art-source/renders/trivia/round-03");
+            Directory.CreateDirectory("art-source/renders/trivia/round-04");
             try
             {
                 ShaderUtil.allowAsyncCompilation=false;
+                camera.aspect=1280f/720;
                 int view=0;
                 foreach (var spec in JObject.Parse(File.ReadAllText("art-source/trivia/review_settings.json"))["cameras"])
                 {
@@ -83,14 +84,14 @@ namespace OneMoreFloor.ArtReview
                     Graphics.Blit(render,resolved);RenderTexture.active=resolved;
                     var pixels=new Texture2D(1280,720,TextureFormat.RGB24,false);
                     pixels.ReadPixels(new Rect(0,0,1280,720),0,0);pixels.Apply();
-                    File.WriteAllBytes("art-source/renders/trivia/round-03/"+prefix+(++view)+".png",pixels.EncodeToPNG());
+                    File.WriteAllBytes("art-source/renders/trivia/round-04/"+prefix+(++view)+".png",pixels.EncodeToPNG());
                     Object.DestroyImmediate(pixels);
                 }
             }
             finally
             {
                 ShaderUtil.allowAsyncCompilation=asyncCompilation;RenderTexture.active=previous;
-                camera.transform.SetPositionAndRotation(position,rotation);camera.fieldOfView=fov;
+                camera.transform.SetPositionAndRotation(position,rotation);camera.fieldOfView=fov;camera.aspect=aspect;
                 render.Release();resolved.Release();Object.DestroyImmediate(render);Object.DestroyImmediate(resolved);
             }
         }
@@ -148,11 +149,8 @@ namespace OneMoreFloor.ArtReview
             camera.clearFlags = CameraClearFlags.SolidColor;camera.backgroundColor = new Color(.035f,.018f,.03f);
             new GameObject("TriviaReviewQuality").AddComponent<TriviaReviewQuality>();
             AddLighting();
-            using (var quality = new TriviaReviewRenderScope())
-            {
-                BakeProbe("Stage", new Vector3(0,3.2f,0), new Vector3(24,10,14));
-                BakeProbe("Hall", new Vector3(0,4,15), new Vector3(29,11,24));
-            }
+            TriviaReviewBaking.Bake(room);
+            BakeReviewReflections();
             EditorSceneManager.SaveScene(scene, ScenePath);
             AssetDatabase.SaveAssets();
             Debug.Log("TRIVIA_REVIEW_SCENE_READY " + ScenePath);
@@ -203,6 +201,36 @@ namespace OneMoreFloor.ArtReview
             var volume = new GameObject("Trivia_ReviewGrading").AddComponent<Volume>();volume.isGlobal = true;volume.sharedProfile = profile;
         }
 
+        public static void RebakeReflectionsAndCapture()
+        {
+            EditorSceneManager.OpenScene(ScenePath);
+            foreach (var probe in Object.FindObjectsByType<ReflectionProbe>(FindObjectsSortMode.None))
+                if (probe.name.StartsWith("Trivia_")) Object.DestroyImmediate(probe.gameObject);
+            BakeReviewReflections();
+            EditorSceneManager.SaveScene(SceneManager.GetActiveScene());AssetDatabase.SaveAssets();
+            CaptureReview();
+        }
+
+        static void BakeReviewReflections()
+        {
+            using var quality = new TriviaReviewRenderScope();
+            // Bake first-bounce reflection maps without feeding the previously
+            // assigned cubemap (or the first new probe) into the next capture.
+            RenderSettings.customReflectionTexture=null;
+            RenderSettings.defaultReflectionMode=DefaultReflectionMode.Skybox;
+            RenderSettings.reflectionIntensity=0;
+            try
+            {
+                BakeProbe("Stage",new Vector3(0,3.2f,0),new Vector3(24,10,14));
+                BakeProbe("Hall",new Vector3(0,4,15),new Vector3(29,11,24));
+            }
+            finally
+            {
+                RenderSettings.reflectionIntensity=1;
+                foreach (var probe in Object.FindObjectsByType<ReflectionProbe>(FindObjectsSortMode.None)) probe.enabled=true;
+            }
+        }
+
         static void BakeProbe(string name, Vector3 position, Vector3 size)
         {
             var probe = new GameObject("Trivia_" + name + "_Reflections").AddComponent<ReflectionProbe>();
@@ -218,11 +246,16 @@ namespace OneMoreFloor.ArtReview
             }
             finally {ShaderUtil.allowAsyncCompilation = asyncCompilation;}
             AssetDatabase.ImportAsset(path,ImportAssetOptions.ForceSynchronousImport);
+            var importer=(TextureImporter)AssetImporter.GetAtPath(path);
+            importer.sRGBTexture=false;
+            importer.textureCompression=TextureImporterCompression.Uncompressed;
+            importer.SaveAndReimport();
             // A direct bakedTexture assignment is not serialized without a
             // LightingDataAsset bake. Custom mode retains this independently
             // baked cubemap when the local review scene is reopened.
             probe.mode = ReflectionProbeMode.Custom;
             probe.customBakedTexture = AssetDatabase.LoadAssetAtPath<Cubemap>(path);
+            probe.enabled=false;
             if (!probe.customBakedTexture) throw new Exception("Missing baked cubemap " + path);
             if (name == "Stage")
             {

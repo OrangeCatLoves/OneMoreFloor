@@ -80,8 +80,8 @@ namespace OneMoreFloor.ArtReview
                     if (volume <= 0) problems.Add(collider.name + ": collider winding is inward or has no volume");
                 }
                 foreach (var renderer in renderers)
-                    if (renderer.sharedMaterials.Any(m => !m || m.shader.name != "Universal Render Pipeline/Lit"))
-                        problems.Add(renderer.name + ": material not mapped to URP/Lit");
+                    if (renderer.sharedMaterials.Any(m => !m || (m.shader.name != "Universal Render Pipeline/Lit" && m.shader.name != "Universal Render Pipeline/Complex Lit" && !(m.name == "M_Trivia_Screen" && m.shader.name == "Universal Render Pipeline/Unlit"))))
+                        problems.Add(renderer.name + ": material not mapped to the expected URP shaders");
                 var report = new Report {
                     model = modelPath, sizeMetres = new[] { bounds.size.x, bounds.size.y, bounds.size.z },
                     renderMeshes = renderers.Length,
@@ -97,7 +97,7 @@ namespace OneMoreFloor.ArtReview
                 }, true));
                 if (full) File.WriteAllText("art-source/trivia/unity-material-bindings.json", Newtonsoft.Json.JsonConvert.SerializeObject(
                     renderers.Where(r => r.name == "SM_Trivia_StagePlank" || r.name == "SM_Trivia_BackCurtain" || r.name == "SM_Trivia_Podium_01").Select(r => new {
-                        renderer = r.name, materials = r.sharedMaterials.Select(m => new { name = m.name, baseMap = m.GetTexture("_BaseMap")?.name, metallicMap = m.GetTexture("_MetallicGlossMap")?.name, keywords = m.shaderKeywords })
+                        renderer = r.name, materials = r.sharedMaterials.Select(m => new { name = m.name, shader=m.shader.name, baseMap = m.GetTexture("_BaseMap")?.name, metallicMap = m.GetTexture("_MetallicGlossMap")?.name, specularMap=m.GetTexture("_SpecGlossMap")?.name, keywords = m.shaderKeywords })
                     }), Newtonsoft.Json.Formatting.Indented));
                 Debug.Log("TRIVIA_ART_VALIDATION " + JsonUtility.ToJson(report));
                 if (problems.Count > 0) throw new Exception(string.Join("; ", problems));
@@ -234,10 +234,15 @@ namespace OneMoreFloor.ArtReview
             foreach (var entry in manifest.Properties())
             {
                 var spec = (JObject)entry.Value;
+                bool display=entry.Name=="M_Trivia_Screen";
+                bool wood=(string)spec["surface_type"]=="wood";
+                bool cloth=(string)spec["surface_type"]=="cloth";
+                var targetShader=display ? Shader.Find("Universal Render Pipeline/Unlit") : wood ? Shader.Find("Universal Render Pipeline/Complex Lit") : shader;
+                if (!targetShader) throw new Exception("Required URP material shader is missing");
                 string path = materialFolder + "/" + entry.Name + ".mat";
                 var material = AssetDatabase.LoadAssetAtPath<Material>(path);
                 if (!material) { material = new Material(shader); AssetDatabase.CreateAsset(material, path); }
-                material.shader = shader;
+                material.shader = targetShader;
                 material.enableInstancing = true;
                 // Petals are curved thin surfaces, visible from both sides in
                 // Blender. Preserve that behavior in URP instead of culling
@@ -264,12 +269,32 @@ namespace OneMoreFloor.ArtReview
                         textureImporter.SaveAndReimport();
                     }
                     var texture = AssetDatabase.LoadAssetAtPath<Texture2D>(texturePath);
-                    string slot = map.Name == "BaseColor" ? "_BaseMap" : map.Name == "Normal" ? "_BumpMap" : map.Name == "MetallicSmoothness" ? "_MetallicGlossMap" : map.Name == "Emission" ? "_EmissionMap" : null;
-                    if (slot != null) material.SetTexture(slot, texture);
+                    string slot = map.Name == "BaseColor" ? "_BaseMap" : map.Name == "Normal" ? "_BumpMap" : map.Name == "MetallicSmoothness" ? "_MetallicGlossMap" : map.Name == "SpecularSmoothness" ? "_SpecGlossMap" : map.Name == "Emission" ? "_EmissionMap" : null;
+                    if (slot != null && material.HasProperty(slot)) material.SetTexture(slot, texture);
                 }
                 material.SetColor("_BaseColor", Color.white);
+                if (display)
+                {
+                    // A live display supplies its own colour; theatrical bounce
+                    // must not turn the blank cream placeholder yellow.
+                    material.SetColor("_BaseColor",new Color(1.06f,1.18f,1.5f,1));
+                    material.shaderKeywords=Array.Empty<string>();
+                    material.globalIlluminationFlags=MaterialGlobalIlluminationFlags.EmissiveIsBlack;
+                    EditorUtility.SetDirty(material);
+                    importer.AddRemap(new AssetImporter.SourceAssetIdentifier(typeof(Material), entry.Name), material);
+                    continue;
+                }
                 material.SetFloat("_Metallic", (float)spec["metallic"]);
                 material.SetFloat("_Smoothness", 1);
+                material.SetFloat("_WorkflowMode",cloth ? 0 : 1);
+                if (cloth) material.EnableKeyword("_SPECULAR_SETUP"); else material.DisableKeyword("_SPECULAR_SETUP");
+                if (wood)
+                {
+                    material.SetFloat("_ClearCoat",1);
+                    material.SetFloat("_ClearCoatMask",(float)spec["coat_weight"]);
+                    material.SetFloat("_ClearCoatSmoothness",1-(float)spec["coat_roughness"]);
+                    material.EnableKeyword("_CLEARCOAT");
+                }
                 material.EnableKeyword("_METALLICSPECGLOSSMAP");
                 material.EnableKeyword("_NORMALMAP");
                 float emission = (float)spec["emission_strength"];

@@ -21,7 +21,7 @@ namespace OneMoreFloor.ArtReview.Tests
     public class TriviaReviewWalkthroughTests
     {
         const string ScenePath = "Assets/_OneMoreFloor/Art/Floors/Trivia/Review/TriviaArtReview.unity";
-        const string EvidenceFolder = "art-source/renders/trivia/round-03";
+        const string EvidenceFolder = "art-source/renders/trivia/round-04";
 
         [UnityTest]
         public IEnumerator LocalHost_CanLeaveLift_ClimbStage_AndInspectBothViewsWithAA()
@@ -51,6 +51,8 @@ namespace OneMoreFloor.ArtReview.Tests
                 var probes=Object.FindObjectsByType<ReflectionProbe>(FindObjectsSortMode.None);
                 Assert.That(probes.Length,Is.EqualTo(2));
                 Assert.That(probes.All(p => p.mode==ReflectionProbeMode.Custom && p.customBakedTexture),Is.True,"Baked cubemap assignments must survive loading the saved scene.");
+                Assert.That(LightmapSettings.lightmaps.Length,Is.GreaterThan(0),"Baked room lighting must survive loading the saved scene.");
+                Assert.That(LightmapSettings.lightProbes.bakedProbes.Length,Is.EqualTo(113),"The player and moving props need the baked probe volume.");
                 Assert.That(RenderSettings.customReflectionTexture,Is.Not.Null,"Outside probe bounds must use the indoor fallback.");
 
                 // Exercise real input through the existing controller on exit.

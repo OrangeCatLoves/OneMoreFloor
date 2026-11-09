@@ -36,7 +36,7 @@ if a.unity_before:
             differences.append(name);continue
         if any(abs(old[name][field][axis]-new[name][field][axis])>1e-4 for field in ('position','forward','up') for axis in ('x','y','z')):
             differences.append(name)
-    result={'source':'Unity imported marker positions and forward/up axes compared with the saved iteration-16 import','before_count':len(old),'after_count':len(new),'changed_markers':differences}
+    result={'source':f'Unity imported marker positions and forward/up axes compared with {a.unity_before}','before_count':len(old),'after_count':len(new),'changed_markers':differences}
     (root/'art-source/trivia/marker-stability.json').write_text(json.dumps(result,indent=2)+'\n')
     print(json.dumps(result,indent=2))
     if differences:raise RuntimeError('Refinement changed imported markers')

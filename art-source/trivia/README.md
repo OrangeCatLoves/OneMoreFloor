@@ -1,14 +1,14 @@
 # Trivia round 1 — art review and import notes
 
 This is a WIP art review, not owner acceptance or a completed game floor. The
-latest three comparisons are iteration 21 in `../renders/trivia/round-01/`.
+latest three comparisons are iteration 22 in `../renders/trivia/round-01/`.
 `review.md` there records the rejected passes and remaining visual differences.
 The owner’s “only minor differences” quality gate must not be treated as passed
 merely because the technical import checks pass.
 
 The owner deferred playtesting and requested this refinement first. Current
 before/after images, close-ups, engine comparisons and the review journal are in
-`../renders/trivia/round-03/`. Room layout and interaction positions are frozen
+`../renders/trivia/round-04/`. Room layout and interaction positions are frozen
 pending the owner's later feedback.
 
 ## Review scene (for a later playtest)
@@ -22,22 +22,27 @@ player and camera from MovementTest; questions and answer interactions are not
 implemented in this art scene.
 
 The scene is `Assets/_OneMoreFloor/Art/Floors/Trivia/Review/TriviaArtReview.unity`.
-It contains colliders, four spawn markers, open display-pose doors, 43 review
-lights, two baked reflection probes and ACES grading. Only four lights cast
-realtime shadows. Its temporary URP clone enables 4x MSAA and High SMAA at native
+It contains colliders, four spawn markers, open display-pose doors, 43 light markers, baked area lighting and bounce, two reflection maps and ACES
+grading. The scene instantiates 53 lights including derived highlight fills.
+Ten area sources and 21 points are baked; 12 stage spots remain realtime,
+plus 10 derived spot fills at 65% of the old area stand-in intensity. Four
+lights cast realtime shadows. There are 319 lightmapped renderers and 113 light
+probes for moving objects. Its temporary URP clone enables 4x MSAA and High SMAA at native
 resolution; it restores the previous pipeline/AA settings when disabled.
 The project's shared graphics assets are unchanged. Camera smoothing settings
 are serialized in the review scene; the pipeline override takes effect in Play.
 The separately baked reflection maps are assigned in **Custom** probe mode so
 their references survive a scene reload. The stage cubemap also supplies the
-indoor fallback outside the probe volumes. Do not change these to a temporary
+indoor fallback outside the probe volumes. Both maps are captured with
+reflection feedback disabled, then imported as linear, uncompressed HDR. The
+audit rejects empty, nonfinite and implausibly bright maps. Do not change these to a temporary
 `bakedTexture` assignment without a complete LightingDataAsset bake.
 
 Use **OneMoreFloor > Art > Build and Open Trivia Review** to regenerate after
-exporting a changed room. This replaces the art review scene and its local probe
-and grading assets; do not keep manual scene edits there. Runtime integration
+exporting a changed room. This also bakes lighting (allow several minutes). It
+replaces the art review scene, UV2 mesh copies, maps, probe and grading assets; do not keep manual scene edits there. Runtime integration
 still belongs to Claude Code. Review evidence and remaining limitations are in
-`../renders/trivia/round-03/review.md`.
+`../renders/trivia/round-04/review.md`.
 
 ## Local deliverables
 
@@ -45,12 +50,13 @@ still belongs to Claude Code. Review evidence and remaining limitations are in
 |---|---|
 | `art-source/trivia/Trivia_Round01.blend` | Editable metre-scale room, image-backed materials, 3 review cameras and EEVEE lighting |
 | `Assets/_OneMoreFloor/Art/Floors/Trivia/SM_Trivia_Theatre.fbx` | Room assembly with separate reactive parts, collision meshes and markers |
-| `Assets/_OneMoreFloor/Art/Floors/Trivia/Textures/` | 106 PNG maps across 25 shared materials |
-| `Assets/_OneMoreFloor/Art/Floors/Trivia/Materials/` | 25 generated URP/Lit material assets with texture bindings |
+| `Assets/_OneMoreFloor/Art/Floors/Trivia/Textures/` | 110 PNG material maps across 25 shared materials |
+| `Assets/_OneMoreFloor/Art/Floors/Trivia/Materials/` | 25 generated URP Lit/Complex Lit/Unlit material assets with texture bindings |
 | `art-source/renders/trivia/lighting_sheet.md` | Light colours, relative power, cone angles and Unity placement |
 | `art-source/trivia/lighting.json` | Machine-readable light positions/directions and EEVEE shadow flags |
 | `art-source/trivia/material_manifest.json` | Exact material names, map filenames, resolutions and surface settings |
 | `art-source/trivia/unity-markers.json` | Actual imported Unity marker transforms |
+| `Assets/_OneMoreFloor/Art/Floors/Trivia/Review/` | Local review scene, UV2 mesh copies, lightmaps, 113 light probes and 2 reflection cubemaps |
 
 The large model, texture and material files and their `.meta` files are local,
 excluded from Git pending owner approval as the brief requires. A fresh checkout
@@ -93,15 +99,22 @@ FBX/blend proves the initial pipeline; use the full theatre for current geometry
 
 The helper's `Preview` method still creates an unsaved diagnostic import-check
 scene. `TriviaReviewSceneBuilder.Build` creates the separate playable art scene
-described above. Its two reflection probes improve metal response, but it has
-no baked indirect illumination. Do not treat either preview as final lighting.
+described above. It now includes baked indirect lighting and rectangular area
+sources. It is still an art review, not an integrated production-lighting setup.
+The 79 generated UV2 meshes and LightingDataAsset remain with the local scene;
+rebake after changing geometry, materials or static light placement.
 
 ## Materials and performance
 
-- BaseColor/Emission are sRGB; Normal, Roughness and MetallicSmoothness are
+- BaseColor/Emission are sRGB; Normal, Roughness, SpecularSmoothness and MetallicSmoothness are
   linear data. Unity uses MetallicSmoothness R for metal and A for smoothness,
   with the material smoothness multiplier set to 1. Separate Roughness maps
-  are supplied for Blender/rebaking, not plugged directly into URP/Lit.
+  are supplied for Blender/rebaking, not plugged directly into URP/Lit. Four
+  cloth materials use low-F0 specular maps (RGB 0.008, A smoothness) to reduce
+  broad plastic-like highlights. Wood uses Complex Lit with clearcoat weight
+  0.24 and smoothness 0.76; cloth still lacks an exact velvet-sheen counterpart.
+- The cream live-screen placeholder uses URP Unlit, so stage illumination does
+  not tint its display colour. Gameplay will supply the live question texture.
 - Petal materials use Render Face = Both (`_Cull = 0`) because the curled petals
   are thin surfaces. All other materials use backface culling.
 - Seventeen material sets use 2048 × 2048 maps. Eight simple monitor/screen,
@@ -121,16 +134,16 @@ no baked indirect illumination. Do not treat either preview as final lighting.
   frustum counts that also include occluded geometry. Neither is a measured
   GPU frame-time benchmark. The 500k visible-triangle target still needs Unity
   profiling with occlusion, lights and shadows enabled.
-- Latest totals are 1,379,764 imported triangles, 520 render meshes, 79 collision
-  meshes, 16 buttons, 5 screens and 43 light markers. The source has 1,420,860
+- Latest totals are 1,549,521 imported triangles, 520 render meshes, 79 collision
+  meshes, 16 buttons, 5 screens and 43 light markers. The source has 1,605,549
   triangles before Unity's removal of degenerate faces and triangulation.
-  This is 434,304 more imported triangles (+46%) than iteration 16. Flowers,
-  curtain folds, carved trim, upholstery and smoother fixture silhouettes add
-  real geometry. Flowers and seats need production distance LODs before the
+  This is 169,757 more imported triangles (+12.3%) than iteration 21. Flowers,
+  rounded rose whorls and finer carved leaves account for this pass's increase;
+  the heavier cloth/upholstery work remains from iteration 21. Flowers and seats need production distance LODs before the
   laptop budget can be accepted; no frame-time result is claimed.
-- URP/Lit does not reproduce Blender's velvet sheen or wood clearcoat exactly.
-  Baked lighting and reflection probes are necessary before judging the engine
-  match; shader work may still be needed after that comparison.
+- Baked area lighting, bounce and wood clearcoat narrow the engine gap.
+  Blender and URP still differ in tone mapping, velvet sheen and reflections;
+  a custom cloth shader and production reflection setup may be needed.
 
 ## Verification and limits
 
@@ -157,7 +170,7 @@ which have not been implemented yet. Summaries and validation reports are here.
 The brief requested an AI 3D provider for flowers. No suitable connected provider
 was available in the plugin search. These flowers were constructed in Blender
 as a documented substitute; there is no invented tool or licence claim. The
-refinement uses curved rose petals with rolled centres, small sprays, separate
-leaves and local seeded variation. Botanical realism still falls short of a
+refinement uses overlapping convex rose whorls with closed centres, clustered
+phlox, veined leaves and local seeded variation. Botanical realism still falls short of a
 sculpted reference-quality asset. The owner's
 exact ChatGPT concept prompt is preserved in `../concept/floors/trivia/provenance.txt`.

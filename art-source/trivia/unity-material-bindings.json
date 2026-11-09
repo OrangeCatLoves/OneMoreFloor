@@ -4,11 +4,14 @@
     "materials": [
       {
         "name": "M_Trivia_VelvetRed",
+        "shader": "Universal Render Pipeline/Lit",
         "baseMap": "T_Trivia_VelvetRed_BaseColor",
         "metallicMap": "T_Trivia_VelvetRed_MetallicSmoothness",
+        "specularMap": "T_Trivia_VelvetRed_SpecularSmoothness",
         "keywords": [
           "_METALLICSPECGLOSSMAP",
-          "_NORMALMAP"
+          "_NORMALMAP",
+          "_SPECULAR_SETUP"
         ]
       }
     ]
@@ -18,17 +21,10 @@
     "materials": [
       {
         "name": "M_Trivia_Gold",
+        "shader": "Universal Render Pipeline/Lit",
         "baseMap": "T_Trivia_Gold_BaseColor",
         "metallicMap": "T_Trivia_Gold_MetallicSmoothness",
-        "keywords": [
-          "_METALLICSPECGLOSSMAP",
-          "_NORMALMAP"
-        ]
-      },
-      {
-        "name": "M_Trivia_Walnut",
-        "baseMap": "T_Trivia_Walnut_BaseColor",
-        "metallicMap": "T_Trivia_Walnut_MetallicSmoothness",
+        "specularMap": null,
         "keywords": [
           "_METALLICSPECGLOSSMAP",
           "_NORMALMAP"
@@ -36,17 +32,33 @@
       },
       {
         "name": "M_Trivia_GoldDark",
+        "shader": "Universal Render Pipeline/Lit",
         "baseMap": "T_Trivia_GoldDark_BaseColor",
         "metallicMap": "T_Trivia_GoldDark_MetallicSmoothness",
+        "specularMap": null,
         "keywords": [
           "_METALLICSPECGLOSSMAP",
           "_NORMALMAP"
         ]
       },
       {
+        "name": "M_Trivia_Walnut",
+        "shader": "Universal Render Pipeline/Complex Lit",
+        "baseMap": "T_Trivia_Walnut_BaseColor",
+        "metallicMap": "T_Trivia_Walnut_MetallicSmoothness",
+        "specularMap": null,
+        "keywords": [
+          "_CLEARCOAT",
+          "_METALLICSPECGLOSSMAP",
+          "_NORMALMAP"
+        ]
+      },
+      {
         "name": "M_Trivia_Bulb",
+        "shader": "Universal Render Pipeline/Lit",
         "baseMap": "T_Trivia_Bulb_BaseColor",
         "metallicMap": "T_Trivia_Bulb_MetallicSmoothness",
+        "specularMap": null,
         "keywords": [
           "_EMISSION",
           "_METALLICSPECGLOSSMAP",
@@ -55,8 +67,10 @@
       },
       {
         "name": "M_Trivia_Monitor",
+        "shader": "Universal Render Pipeline/Lit",
         "baseMap": "T_Trivia_Monitor_BaseColor",
         "metallicMap": "T_Trivia_Monitor_MetallicSmoothness",
+        "specularMap": null,
         "keywords": [
           "_METALLICSPECGLOSSMAP",
           "_NORMALMAP"
@@ -69,9 +83,12 @@
     "materials": [
       {
         "name": "M_Trivia_StageWood",
+        "shader": "Universal Render Pipeline/Complex Lit",
         "baseMap": "T_Trivia_StageWood_BaseColor",
         "metallicMap": "T_Trivia_StageWood_MetallicSmoothness",
+        "specularMap": null,
         "keywords": [
+          "_CLEARCOAT",
           "_METALLICSPECGLOSSMAP",
           "_NORMALMAP"
         ]

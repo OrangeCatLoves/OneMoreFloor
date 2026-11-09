@@ -45,7 +45,7 @@ def build_materials(folder, size=2048, refresh=False):
       'PetalPurple':((.38,.10,.61),0,.65,'leaf'),
       'PetalCream':((.85,.72,.49),0,.68,'leaf'),
       'PetalWhite':((.85,.83,.74),0,.66,'leaf'),
-      'Bulb':((1,.64,.22),0,.22,'emission'),
+      'Bulb':((1,.82,.53),0,.22,'emission'),
       'Red':((.7,.006,.015),.08,.22,'button'),
       'Blue':((.005,.10,.75),.08,.22,'button'),
       'Yellow':((.95,.5,.005),.08,.22,'button'),
@@ -94,8 +94,23 @@ def build_materials(folder, size=2048, refresh=False):
             height=hair*.000005
         elif kind=='leaf':
             variation=1+ss*.14+nn*.04
-            height=ss*.00008 if name=='Leaves' else np.zeros((n,n),np.float32)
+            if name=='Leaves':
+                midrib=np.exp(-((x-.5)/.018)**2)
+                branches=np.exp(-(np.sin(y*36+np.abs(x-.5)*35)/.15)**2)
+                height=midrib*.00035+branches*.00008+ss*.00003
+                variation=1+midrib*.16+branches*.035+ss*.12
+            else:
+                vein=np.sin((x-.5)*85/(.6+y))*.5+.5
+                height=vein*.000018*np.sin(y*math.pi)**2
         rgb=np.asarray(col,np.float32)[None,None,:]*variation[:,:,None]
+        if name.startswith('Petal'):
+            # Explicit petal UVs: darker throat, softly lighter rim and faint
+            # longitudinal veins. This is colour, not baked illumination.
+            root_color={'PetalPurple':(.22,.035,.34),'PetalCream':(.62,.41,.18),'PetalWhite':(.62,.57,.48)}[name]
+            tip_color={'PetalPurple':(.49,.22,.65),'PetalCream':(.86,.75,.55),'PetalWhite':(.88,.85,.79)}[name]
+            blend=np.clip(y**.65*.88+.10,0,1)[:,:,None]
+            rgb=(np.asarray(root_color)[None,None,:]*(1-blend)+np.asarray(tip_color)[None,None,:]*blend)
+            rgb*=1+ss[:,:,None]*.025+vein[:,:,None]*.016
         roughness=np.clip(rough+ss*.055+nn*.025,.08,.95)
         if kind=='metal':roughness=np.clip(rough+patina*.12+nn*.008,.08,.95)
         if kind=='wood':roughness=np.clip(rough+ss*.035+nn*.008,.08,.95)
@@ -109,6 +124,8 @@ def build_materials(folder, size=2048, refresh=False):
                 'Normal':(normal*.5+.5,'Non-Color',None),
                 'MetallicSmoothness':(np.full((n,n,3),metal,np.float32),'Non-Color',1-roughness),
                 'Roughness':(np.repeat(roughness[:,:,None],3,axis=2),'Non-Color',None)}
+        if kind=='cloth':
+            arrays['SpecularSmoothness']=(np.full((n,n,3),.008,np.float32),'Non-Color',1-roughness)
         if kind in ('emission','button'):
             arrays['Emission']=(np.broadcast_to(np.asarray(col),(n,n,3)),'sRGB',None)
         for suffix,(pixels,space,a) in arrays.items():
@@ -136,5 +153,5 @@ def build_materials(folder, size=2048, refresh=False):
             bs.inputs['Emission Strength'].default_value=2.2 if name=='Bulb' else (1.3 if name=='Symbol' else .32)
         if name=='Screen': bs.inputs['Emission Color'].default_value=(*col,1); bs.inputs['Emission Strength'].default_value=.18
         result[name]=m
-        manifest[m.name]={'maps':{k:Path(v.filepath_raw).name for k,v in maps.items()},'metallic':metal,'roughness':rough,'size':n,'emission_strength':bs.inputs['Emission Strength'].default_value}
+        manifest[m.name]={'maps':{k:Path(v.filepath_raw).name for k,v in maps.items()},'metallic':metal,'roughness':rough,'size':n,'emission_strength':bs.inputs['Emission Strength'].default_value,'surface_type':kind,'coat_weight':.24 if kind=='wood' else 0,'coat_roughness':.24}
     return result,manifest

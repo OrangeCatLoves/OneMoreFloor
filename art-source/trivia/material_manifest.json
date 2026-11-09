@@ -9,7 +9,10 @@
     "metallic": 0.02,
     "roughness": 0.3,
     "size": 2048,
-    "emission_strength": 0.0
+    "emission_strength": 0.0,
+    "surface_type": "wood",
+    "coat_weight": 0.24,
+    "coat_roughness": 0.24
   },
   "M_Trivia_Walnut": {
     "maps": {
@@ -21,7 +24,10 @@
     "metallic": 0.02,
     "roughness": 0.3,
     "size": 2048,
-    "emission_strength": 0.0
+    "emission_strength": 0.0,
+    "surface_type": "wood",
+    "coat_weight": 0.24,
+    "coat_roughness": 0.24
   },
   "M_Trivia_BurgundyWood": {
     "maps": {
@@ -33,7 +39,10 @@
     "metallic": 0.02,
     "roughness": 0.42,
     "size": 2048,
-    "emission_strength": 0.0
+    "emission_strength": 0.0,
+    "surface_type": "wood",
+    "coat_weight": 0.24,
+    "coat_roughness": 0.24
   },
   "M_Trivia_Gold": {
     "maps": {
@@ -45,7 +54,10 @@
     "metallic": 0.88,
     "roughness": 0.29,
     "size": 2048,
-    "emission_strength": 0.0
+    "emission_strength": 0.0,
+    "surface_type": "metal",
+    "coat_weight": 0,
+    "coat_roughness": 0.24
   },
   "M_Trivia_InlayGold": {
     "maps": {
@@ -57,7 +69,10 @@
     "metallic": 0.28,
     "roughness": 0.43,
     "size": 2048,
-    "emission_strength": 0.0
+    "emission_strength": 0.0,
+    "surface_type": "metal",
+    "coat_weight": 0,
+    "coat_roughness": 0.24
   },
   "M_Trivia_GoldDark": {
     "maps": {
@@ -69,55 +84,74 @@
     "metallic": 0.85,
     "roughness": 0.31,
     "size": 2048,
-    "emission_strength": 0.0
+    "emission_strength": 0.0,
+    "surface_type": "metal",
+    "coat_weight": 0,
+    "coat_roughness": 0.24
   },
   "M_Trivia_VelvetRed": {
     "maps": {
       "BaseColor": "T_Trivia_VelvetRed_BaseColor.png",
       "Normal": "T_Trivia_VelvetRed_Normal.png",
       "MetallicSmoothness": "T_Trivia_VelvetRed_MetallicSmoothness.png",
-      "Roughness": "T_Trivia_VelvetRed_Roughness.png"
+      "Roughness": "T_Trivia_VelvetRed_Roughness.png",
+      "SpecularSmoothness": "T_Trivia_VelvetRed_SpecularSmoothness.png"
     },
     "metallic": 0,
     "roughness": 0.88,
     "size": 2048,
-    "emission_strength": 0.0
+    "emission_strength": 0.0,
+    "surface_type": "cloth",
+    "coat_weight": 0,
+    "coat_roughness": 0.24
   },
   "M_Trivia_VelvetSeat": {
     "maps": {
       "BaseColor": "T_Trivia_VelvetSeat_BaseColor.png",
       "Normal": "T_Trivia_VelvetSeat_Normal.png",
       "MetallicSmoothness": "T_Trivia_VelvetSeat_MetallicSmoothness.png",
-      "Roughness": "T_Trivia_VelvetSeat_Roughness.png"
+      "Roughness": "T_Trivia_VelvetSeat_Roughness.png",
+      "SpecularSmoothness": "T_Trivia_VelvetSeat_SpecularSmoothness.png"
     },
     "metallic": 0,
     "roughness": 0.84,
     "size": 2048,
-    "emission_strength": 0.0
+    "emission_strength": 0.0,
+    "surface_type": "cloth",
+    "coat_weight": 0,
+    "coat_roughness": 0.24
   },
   "M_Trivia_RoyalPurple": {
     "maps": {
       "BaseColor": "T_Trivia_RoyalPurple_BaseColor.png",
       "Normal": "T_Trivia_RoyalPurple_Normal.png",
       "MetallicSmoothness": "T_Trivia_RoyalPurple_MetallicSmoothness.png",
-      "Roughness": "T_Trivia_RoyalPurple_Roughness.png"
+      "Roughness": "T_Trivia_RoyalPurple_Roughness.png",
+      "SpecularSmoothness": "T_Trivia_RoyalPurple_SpecularSmoothness.png"
     },
     "metallic": 0.0,
     "roughness": 0.72,
     "size": 2048,
-    "emission_strength": 0.0
+    "emission_strength": 0.0,
+    "surface_type": "cloth",
+    "coat_weight": 0,
+    "coat_roughness": 0.24
   },
   "M_Trivia_BuntingGold": {
     "maps": {
       "BaseColor": "T_Trivia_BuntingGold_BaseColor.png",
       "Normal": "T_Trivia_BuntingGold_Normal.png",
       "MetallicSmoothness": "T_Trivia_BuntingGold_MetallicSmoothness.png",
-      "Roughness": "T_Trivia_BuntingGold_Roughness.png"
+      "Roughness": "T_Trivia_BuntingGold_Roughness.png",
+      "SpecularSmoothness": "T_Trivia_BuntingGold_SpecularSmoothness.png"
     },
     "metallic": 0.0,
     "roughness": 0.72,
     "size": 2048,
-    "emission_strength": 0.0
+    "emission_strength": 0.0,
+    "surface_type": "cloth",
+    "coat_weight": 0,
+    "coat_roughness": 0.24
   },
   "M_Trivia_Ivory": {
     "maps": {
@@ -129,7 +163,10 @@
     "metallic": 0.0,
     "roughness": 0.48,
     "size": 2048,
-    "emission_strength": 0.0
+    "emission_strength": 0.0,
+    "surface_type": "stone",
+    "coat_weight": 0,
+    "coat_roughness": 0.24
   },
   "M_Trivia_Marble": {
     "maps": {
@@ -141,7 +178,10 @@
     "metallic": 0.0,
     "roughness": 0.26,
     "size": 2048,
-    "emission_strength": 0.0
+    "emission_strength": 0.0,
+    "surface_type": "stone",
+    "coat_weight": 0,
+    "coat_roughness": 0.24
   },
   "M_Trivia_BlackMetal": {
     "maps": {
@@ -153,7 +193,10 @@
     "metallic": 0.65,
     "roughness": 0.31,
     "size": 2048,
-    "emission_strength": 0.0
+    "emission_strength": 0.0,
+    "surface_type": "metal",
+    "coat_weight": 0,
+    "coat_roughness": 0.24
   },
   "M_Trivia_Monitor": {
     "maps": {
@@ -165,7 +208,10 @@
     "metallic": 0.05,
     "roughness": 0.24,
     "size": 64,
-    "emission_strength": 0.0
+    "emission_strength": 0.0,
+    "surface_type": "plain",
+    "coat_weight": 0,
+    "coat_roughness": 0.24
   },
   "M_Trivia_Screen": {
     "maps": {
@@ -177,7 +223,10 @@
     "metallic": 0,
     "roughness": 0.6,
     "size": 64,
-    "emission_strength": 0.18000000715255737
+    "emission_strength": 0.18000000715255737,
+    "surface_type": "plain",
+    "coat_weight": 0,
+    "coat_roughness": 0.24
   },
   "M_Trivia_Leaves": {
     "maps": {
@@ -189,7 +238,10 @@
     "metallic": 0,
     "roughness": 0.74,
     "size": 2048,
-    "emission_strength": 0.0
+    "emission_strength": 0.0,
+    "surface_type": "leaf",
+    "coat_weight": 0,
+    "coat_roughness": 0.24
   },
   "M_Trivia_PetalPurple": {
     "maps": {
@@ -201,7 +253,10 @@
     "metallic": 0,
     "roughness": 0.65,
     "size": 2048,
-    "emission_strength": 0.0
+    "emission_strength": 0.0,
+    "surface_type": "leaf",
+    "coat_weight": 0,
+    "coat_roughness": 0.24
   },
   "M_Trivia_PetalCream": {
     "maps": {
@@ -213,7 +268,10 @@
     "metallic": 0,
     "roughness": 0.68,
     "size": 2048,
-    "emission_strength": 0.0
+    "emission_strength": 0.0,
+    "surface_type": "leaf",
+    "coat_weight": 0,
+    "coat_roughness": 0.24
   },
   "M_Trivia_PetalWhite": {
     "maps": {
@@ -225,7 +283,10 @@
     "metallic": 0,
     "roughness": 0.66,
     "size": 2048,
-    "emission_strength": 0.0
+    "emission_strength": 0.0,
+    "surface_type": "leaf",
+    "coat_weight": 0,
+    "coat_roughness": 0.24
   },
   "M_Trivia_Bulb": {
     "maps": {
@@ -238,7 +299,10 @@
     "metallic": 0,
     "roughness": 0.22,
     "size": 64,
-    "emission_strength": 2.200000047683716
+    "emission_strength": 2.200000047683716,
+    "surface_type": "emission",
+    "coat_weight": 0,
+    "coat_roughness": 0.24
   },
   "M_Trivia_Red": {
     "maps": {
@@ -251,7 +315,10 @@
     "metallic": 0.08,
     "roughness": 0.22,
     "size": 64,
-    "emission_strength": 0.3199999928474426
+    "emission_strength": 0.3199999928474426,
+    "surface_type": "button",
+    "coat_weight": 0,
+    "coat_roughness": 0.24
   },
   "M_Trivia_Blue": {
     "maps": {
@@ -264,7 +331,10 @@
     "metallic": 0.08,
     "roughness": 0.22,
     "size": 64,
-    "emission_strength": 0.3199999928474426
+    "emission_strength": 0.3199999928474426,
+    "surface_type": "button",
+    "coat_weight": 0,
+    "coat_roughness": 0.24
   },
   "M_Trivia_Yellow": {
     "maps": {
@@ -277,7 +347,10 @@
     "metallic": 0.08,
     "roughness": 0.22,
     "size": 64,
-    "emission_strength": 0.3199999928474426
+    "emission_strength": 0.3199999928474426,
+    "surface_type": "button",
+    "coat_weight": 0,
+    "coat_roughness": 0.24
   },
   "M_Trivia_Green": {
     "maps": {
@@ -290,7 +363,10 @@
     "metallic": 0.08,
     "roughness": 0.22,
     "size": 64,
-    "emission_strength": 0.3199999928474426
+    "emission_strength": 0.3199999928474426,
+    "surface_type": "button",
+    "coat_weight": 0,
+    "coat_roughness": 0.24
   },
   "M_Trivia_Symbol": {
     "maps": {
@@ -303,6 +379,9 @@
     "metallic": 0,
     "roughness": 0.25,
     "size": 64,
-    "emission_strength": 1.2999999523162842
+    "emission_strength": 1.2999999523162842,
+    "surface_type": "emission",
+    "coat_weight": 0,
+    "coat_roughness": 0.24
   }
 }

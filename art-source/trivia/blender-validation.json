@@ -1,17 +1,17 @@
 {
   "problems": [],
-  "triangles_total": 1420860,
+  "triangles_total": 1605549,
   "triangles_by_category": {
-    "Architecture and detail": 543542,
-    "Podiums": 48352,
+    "Architecture and detail": 588342,
+    "Podiums": 66784,
     "Curtains": 108304,
     "Seats": 407896,
-    "Flowers": 312766
+    "Flowers": 434223
   },
   "camera_frustum_triangles_upper_bound_including_occluded_geometry": {
-    "view_1": 1192828,
-    "view_2": 1032238,
-    "view_3": 1314612
+    "view_1": 1377517,
+    "view_2": 1216927,
+    "view_3": 1493925
   },
   "render_objects": 520,
   "unique_meshes": 269,
@@ -38,31 +38,35 @@
   "local_review_reflection_probes": {
     "T_Trivia_Hall_Reflections.exr": {
       "rgb_min": [
-        0.0016412734985351562,
-        0.0006890296936035156,
-        0.0002601146697998047
+        0.000102996826171875,
+        2.664327621459961e-05,
+        2.2649765014648438e-06
       ],
       "rgb_max": [
-        45.125,
-        11.046875,
-        1.3203125
+        18.71875,
+        4.12109375,
+        1.0966796875
       ],
-      "maximum_channel_range": 45.12335968017578,
-      "nonempty": true
+      "maximum_channel_range": 18.718647003173828,
+      "nonempty": true,
+      "finite": true,
+      "peak_below_review_limit": true
     },
     "T_Trivia_Stage_Reflections.exr": {
       "rgb_min": [
-        0.001453399658203125,
-        0.0014858245849609375,
-        0.0013170242309570312
+        0.00010180473327636719,
+        1.806020736694336e-05,
+        1.1742115020751953e-05
       ],
       "rgb_max": [
-        37.46875,
-        6.48046875,
-        1.884765625
+        19.59375,
+        4.046875,
+        1.4384765625
       ],
-      "maximum_channel_range": 37.4672966003418,
-      "nonempty": true
+      "maximum_channel_range": 19.59364891052246,
+      "nonempty": true,
+      "finite": true,
+      "peak_below_review_limit": true
     }
   }
 }

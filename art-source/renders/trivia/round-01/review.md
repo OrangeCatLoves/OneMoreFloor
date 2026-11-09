@@ -1,5 +1,9 @@
 # Trivia round 1 — comparison journal
 
+Latest: **iteration 22**, 9 November 2026. See `../round-04/review.md` for
+the current refinement, actual Unity bake comparisons and remaining differences.
+Earlier entries below are historical checkpoints.
+
 The references are owner-selected ChatGPT images. Image 1 controls geometry where
 they disagree. All comparisons use the same actual 3D room and EEVEE, with no
 paint-over, generated replacement image, or composited reference imagery.

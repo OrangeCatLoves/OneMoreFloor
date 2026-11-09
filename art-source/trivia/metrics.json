@@ -1,9 +1,9 @@
 {
-  "triangles_total_render_meshes": 1420860,
+  "triangles_total_render_meshes": 1605549,
   "mesh_objects": 520,
   "unique_meshes": 269,
   "materials": 25,
-  "textures": 106,
+  "textures": 110,
   "shared_sizes": {
     "_note": "Sizes every floor shares, in metres. These are starting guesses; the real numbers come from playtests in build step 5. A floor's overall size is not here: it starts from the floor's spec and is tuned by playing.",
     "player": {
