@@ -561,6 +561,7 @@ OneMoreFloor/
     concept/style-tests/<style>/   one folder per style test
     concept/floors/<floor-id>/     concept images for one floor
   tools/blender/            Blender scripts: export, kit builders (Codex)
+  tools/homepc/             sends the project to the owner's home PC for playtests (Claude Code)
   Assets/_OneMoreFloor/
     Core/ FloorSDK/ Floors/<Name>/ Game/ Services/
     Game/Player/ Game/Networking/ Game/Scenes/ Game/Greybox/
@@ -589,6 +590,11 @@ Concept images stay out of `Assets/`, where Unity would import every one. Name t
 - Agents can test 2 players too: with the `TwoPlayers` scenario active, `unity command editor.playmode start_scenario`, then send each command with `--instance "Main Editor"` or `--instance "Player 2"` (the host's port changes on entering Play mode). To simulate input in a window without focus, add a new virtual keyboard rather than using the real one, which stays off. Stop with `editor.playmode stop_scenario`.
 - The movement test arena and player are built by code: `unity run . -- -executeMethod OneMoreFloor.EditorTools.MovementTestBuilder.Build`, or the **OneMoreFloor** menu in Unity. Re-run it after changing `docs/sizes.json`.
 - What agents can't judge, and the owner tests: how it feels, looks and plays.
+- Owner playtests run on his home PC (RTX 3060), which he views from the laptop through Parsec. All work and files stay on the laptop; the home PC holds a copy at `C:\OneMoreFloor`.
+  - Before a playtest, run `tools/homepc/sync.sh` from the project root in Git Bash. It sends only changed files, including the local-only ones (Starter Assets and Trivia's art), and never touches the home PC's `Library` folder.
+  - The laptop reaches the home PC over SSH on the home network only, as the host `homepc` in `~/.ssh/config` (192.168.1.207, key `~/.ssh/onemorefloor_homepc`). `ssh homepc "unity ..."` runs Unity CLI commands there.
+  - A program started over SSH has no visible window, so the owner opens Unity himself with the shortcut **OneMoreFloor - 2 Open Unity** on the home PC's desktop (its desktop folder is `D:\`). Agents can then drive that Editor with `ssh homepc "unity command ..."`.
+  - Never edit the copy on the home PC: the next sync overwrites it.
 - Core rules: EditMode unit tests — hearts maths, multi-heart mistakes, game over mid-floor, floor order from a seed, difficulty level and visual tier for a floor number, unlock milestones.
 - Every floor: a PlayMode smoke test that clears it, and one that drains hearts to game over — at level 1 and at its hardest level.
 - Every floor follows its spec's numbers (e.g. Spelling Bee clears only after 2 passes per player).
@@ -647,7 +653,7 @@ Concept images stay out of `Assets/`, where Unity would import every one. Name t
 - 5 Nov 2026 — Run In Background is on, so a co-op host who alt-tabs doesn't freeze the game for the team.
 - 5 Nov 2026 — Trivia's art is built directly in 3D from the concept images and reworked through playtests until the owner is satisfied (section 9, art loop). The owner cares more about the design than the room size, which is easy to change.
 - 5 Nov 2026 — First playtests use the package's robot. The final host and audience must look realistic and move and jump around as if it's real.
-- 10 Nov 2026 — The owner playtests only on his home PC (RTX 3060), reached from the laptop through Parsec, never on the laptop's Intel graphics. Unity has to run on the home PC for this; how the project gets there is not set up yet (section 13, question 8). The game's performance target is still a mid-range laptop, so agents keep checking that separately.
+- 10 Nov 2026 — The owner playtests only on his home PC (RTX 3060), reached from the laptop through Parsec, never on the laptop's Intel graphics. Unity runs on the home PC for this, on a copy of the project sent from the laptop over SSH (section 11). The agents and all files stay on the laptop. The game's performance target is still a mid-range laptop, so agents keep checking that separately.
 
 ---
 
@@ -660,7 +666,7 @@ Concept images stay out of `Assets/`, where Unity would import every one. Name t
 5. Defaults to confirm: hearts are only lost during play; lobby contents (section 2); no joining mid-run; a run's board is set by its starting team size; difficulty +1 level every 5 floors.
 6. Camera view: third person can see around corners, and the leaderboards are shared. Should any floor (e.g. Key Hunt) or PvP limit the view?
 7. Repo: when should it go private? It is public for now, and the game will be sold, so anyone can read the code and art and build the game while it stays public.
-8. Home PC: how does the project get there, and do the agents work there too? A fresh clone is missing the local-only files (`Assets/Starter Assets/` and Trivia's art in `Assets/_OneMoreFloor/Art/Floors/Trivia/`).
+8. Home PC: the laptop can only reach it on the home network. Does the owner also need to playtest when away from home? That would need a private link between the two machines, such as Tailscale.
 9. Git LFS: GitHub's LFS budget for the repo is used up (checked 10 Nov 2026), so a fresh clone can't download any of the 63 LFS files. Raise the budget, or move those files out of LFS?
 
 ---
