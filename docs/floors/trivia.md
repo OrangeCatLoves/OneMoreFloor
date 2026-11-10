@@ -8,9 +8,9 @@ Items marked *(default — confirm)* were filled in by Claude Code so the floor 
 Trivia - Time to put your knowledge to a test
 
 ## How it plays
-The lift door opens onto a game-show stage with a host and a cheering audience. The goal line plays and shows on each player's screen. Players walk to the 4 podiums. A Ready button sits at the center of the screen, and any player can hit it to start. If nobody does, the game starts by itself after 30 seconds *(default — confirm)*.
+The lift door opens onto a game-show stage with a host and a cheering audience. The goal line plays and shows on each player's screen. Players walk from the lift up the steps beside it to the 4 podiums, where they stand facing the audience. A Ready button sits at the center of the screen, and any player can hit it to start. If nobody does, the game starts by itself after 30 seconds *(default — confirm)*.
 
-Each question and its 4 answers show on the big screen and on the podium screens. Each player votes with their podium's buttons: red circle, blue square, yellow X, green triangle. The team's final answer is decided by the majority of the votes.
+Each question and its 4 answers show on the big screen behind the players, on the podium screens, and on one TV at the front of the stage that faces the players and shows the same content as the big screen. Each player votes with their podium's buttons: red circle, blue square, yellow X, green triangle. The team's final answer is decided by the majority of the votes.
 
 ## The vote
 - **Right answer:** the team moves onto the next question.
@@ -45,7 +45,7 @@ Past level 3 it stays at 12 questions.
 There's no difference between solo and multiplayer. A solo player's vote is the team's answer. All 4 podiums are there even with fewer players.
 
 ## Controls
-Keyboard and mouse. No typing. At a podium, the camera moves to a fixed view of the podium and the big screen, and a player clicks a button or presses 1–4 *(default — confirm)*.
+Keyboard and mouse. No typing. At a podium, the camera moves to a fixed view of the podium and the players' TV, and a player clicks a button or presses 1–4 *(default — confirm)*.
 
 ## Size
 A stage big enough for 4 podiums and the host, in a hall with an audience around it. Tuned by playing.
@@ -56,8 +56,9 @@ A game-show stage with an audience watching, as if on a live television show (`a
 ## Assets needed
 Drafted by Claude Code from the concept images. Change anything.
 - Room: curtains, balconies, stage lights and a gold lift door.
-- A big question screen with a lit frame.
-- 4 podiums, each with a small screen and 4 buttons.
+- A big question screen with a lit frame. The white screen fills the whole frame, with no side panels.
+- One TV for the players, not too big, at the centre of the stage front.
+- 4 podiums, each with a small screen and 4 buttons, turned so the players face the audience.
 - A host in a purple jacket with a microphone, and an audience in rows of seats. The owner wants them to look realistic and to move and jump around as if it's real, like the image.
 - Effects: confetti and moving spotlights.
 - Sounds: applause, right and wrong answer stings, button presses, music.

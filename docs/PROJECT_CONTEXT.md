@@ -654,6 +654,7 @@ Concept images stay out of `Assets/`, where Unity would import every one. Name t
 - 5 Nov 2026 — Trivia's art is built directly in 3D from the concept images and reworked through playtests until the owner is satisfied (section 9, art loop). The owner cares more about the design than the room size, which is easy to change.
 - 5 Nov 2026 — First playtests use the package's robot. The final host and audience must look realistic and move and jump around as if it's real.
 - 10 Nov 2026 — The owner playtests only on his home PC (RTX 3060), reached from the laptop through Parsec, never on the laptop's Intel graphics. Unity runs on the home PC for this, on a copy of the project sent from the laptop over SSH (section 11). The agents and all files stay on the laptop. The game's performance target is still a mid-range laptop, so agents keep checking that separately.
+- 11 Nov 2026 — Trivia room, after the owner's first playtest: its size is fine. The players face the audience at the podiums. One TV for the players sits at the centre of the stage front and shows the same content as the big screen. The stage steps move to the lift side. The big screen loses its side panels. The 4 floor lamps stay, aimed upward. Every object must have a purpose and follow good interior design, not only match the concept images. Details: `docs/floors/trivia_art_feedback.md`.
 
 ---
 

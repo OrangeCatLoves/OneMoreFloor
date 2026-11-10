@@ -1,6 +1,8 @@
 # Art brief — Trivia, game-show stage
 
-For Codex. This covers round 1 of the art loop (`docs/PROJECT_CONTEXT.md` section 9). Read it with `AGENTS.md` and `docs/floors/trivia.md`.
+For Codex. This is the standing brief for the art loop (`docs/PROJECT_CONTEXT.md` section 9). Read it with `AGENTS.md` and `docs/floors/trivia.md`.
+
+The owner's playtest feedback is in `trivia_art_feedback.md`. Where the two files differ, the feedback wins. The lines below that it changed are already updated.
 
 ## The quality bar
 The owner's 3 concept images are the target, not loose inspiration: `art-source/concept/floors/trivia/` (`trivia-1.png` to `trivia-3.png`, or their new names once logged). Someone seeing your work next to them should say it is the same place. The lighting, the richness of detail and the mood matter as much as the shapes.
@@ -26,21 +28,22 @@ Where the images disagree, `trivia-1.png` wins.
 - A curved stage front with gold trim and a lit edge, raised above the hall.
 - Polished warm wood planks, glossy enough to show clear reflections.
 - A gold star-compass inlay in a gold ring at centre stage, where the host stands.
-- Steps with lit risers at the centre front, meeting the aisle.
-- Compact floor-standing stage lights at the corners of the stage.
+- Steps with lit risers on the side of the stage nearest the lift, on the direct route from the lift doors.
+- One low TV for the players at the centre of the stage front, facing them and tilted up, showing the same content as the big screen.
+- Compact floor-standing stage lights at the corners of the stage, each tilted up at a specific target.
 
 **Proscenium and backdrop**
 - A grand gilded proscenium arch with carved mouldings, topped by a purple-and-gold shield crest with a gold star.
-- Deep crimson velvet drapes with heavy, sculpted folds, gold fringe, and thick gold rope tiebacks with tassels.
+- Deep crimson velvet drapes with heavy, sculpted folds and gold fringe. Thick gold rope tiebacks with tassels wrap around the gathered curtains and tie off to the wall.
 - Gold and purple triangular bunting strung across the top.
 - An exposed lighting truss with moving-head spotlights.
 
 **Big question screen**
 - A large ornate frame behind the host: gilded, with a running marquee of round bulbs all the way around.
-- Purple side panels with gold laurel wreaths.
-- A central cream panel, left blank (see "Rules for the game to work").
+- A cream panel that fills the whole inside of the frame, with no side panels, left blank (see "Rules for the game to work").
 
 **4 podiums, spaced across the stage**
+- Turned so the players face the audience: the players stand on the big-screen side, and the emblem faces the hall.
 - Warm wood lecterns with brass trim and a gold laurel emblem on the front.
 - Glowing vertical light columns at the front corners.
 - An angled, gold-framed dark monitor on top, left blank.
@@ -48,7 +51,7 @@ Where the images disagree, `trivia-1.png` wins.
 
 **Hall**
 - Tiered rows of burgundy velvet seats with gold trim, empty for now.
-- A red carpet aisle with gold stars, leading to the stage steps.
+- A red carpet aisle with gold stars, leading to the stage front.
 - Gold handrails along the front of the seating sections.
 - A curved upper balcony with a cream fascia lined with small bulbs, and purple banners and gold-star shields along it.
 - Theatre boxes on the side walls, with arches, drapes and gold lanterns.
@@ -82,7 +85,7 @@ Blender lights don't transfer to the game, so the room's lighting is rebuilt in 
 - Each moving-head spotlight, able to pan and tilt.
 - Marquee bulbs grouped into at least 3 repeating sets, so they can chase.
 
-**Blank screens.** The big screen's central panel and each podium monitor are separate flat meshes with clean 0–1 UVs and no text, so the game can show live questions. Don't bake any words into textures.
+**Blank screens.** The big screen's panel, the players' TV and each podium monitor are separate flat meshes with clean 0–1 UVs and no text, so the game can show live questions. Don't bake any words into textures.
 
 **Collision.** Add simple `COL_` meshes for floors, stage, steps, walls, seating, podiums and plinths.
 

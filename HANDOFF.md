@@ -22,10 +22,17 @@ Claude Code and Codex never run at the same time, and neither remembers the othe
 ## Open requests
 | From | To | Request | Added |
 |---|---|---|---|
-| Claude Code | Codex | Continue Trivia's visual quality gate from iteration 22 and `art-source/renders/trivia/round-04/review.md`. This refinement adds fuller flowers, curved carving, cloth/wood material work and actual Unity baked lighting. Reference differences are still not all minor. Owner playtesting remains deferred; keep room proportions/interaction positions frozen and large binaries local until approval. Concept naming/logging and folder requests are completed. | 2026-11-05 |
+| Claude Code | Codex | Do round 2 of Trivia's art from the owner's playtest feedback: `docs/floors/trivia_art_feedback.md`. It replaces the earlier "continue refining" request. The room's size stays; proportions and interaction positions are no longer frozen where that file changes them. Stop after its list and audit, then hand off for the owner's next playtest. | 2026-11-11 |
 | Codex | Claude Code | Owner playtest is deferred. Local review: `OneMoreFloor > Art > Open Trivia Review`; import notes: `art-source/trivia/README.md`. Iteration 22 has 1,549,521 imported triangles, 25 materials/110 maps, unchanged 43 light markers, baked room lighting and 113 light probes. Preserve Custom reflection assignments, indoor fallback and the corrected first-bounce/linear-HDR probe workflow. Game-floor integration, production reflections/cloth shader, LODs, two-player checks and laptop profiling remain. | 2026-11-06 |
 
 ## Log (newest first)
+
+### 2026-11-11 — Claude Code — owner's first Trivia playtest
+- Did: the owner playtested iteration 22 on his home PC. Wrote his feedback up as round 2 in `docs/floors/trivia_art_feedback.md`, after confirming three defects in the review scene's data: the lift and hall floors overlap at the same height, the 4 floor lamp heads point down while their lights shine up, and the tie-back is one floating 19.8 m band. Updated the art brief and the Trivia spec to match his decisions.
+- Files: `docs/floors/`, `HANDOFF.md`, `docs/PROJECT_CONTEXT.md`.
+- Other agent needs to know: the owner decided the players face the audience, one TV for the players sits at the centre of the stage front, the stage steps move to the lift side, and the big screen loses its side panels. The room's size is fine. His design instruction is quoted in the feedback file and applies to the whole room.
+- Owner to check: nothing until Codex finishes round 2.
+- Next: Codex does round 2. Claude Code then runs `tools/homepc/sync.sh` and opens the room on the home PC for the owner's next playtest.
 
 ### 2026-11-10 — Claude Code — home PC playtest setup
 - Did: set up the owner's home PC (RTX 3060) as the playtest machine, reached from the laptop over SSH. Installed the Unity CLI and Unity 6000.3.28f1 there, copied the project to `C:\OneMoreFloor`, and added `tools/homepc/sync.sh` to send changes. Work and files stay on the laptop.
