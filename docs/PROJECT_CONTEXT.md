@@ -593,7 +593,7 @@ Concept images stay out of `Assets/`, where Unity would import every one. Name t
 - Owner playtests run on his home PC (RTX 3060), which he views from the laptop through Parsec. All work and files stay on the laptop; the home PC holds a copy at `C:\OneMoreFloor`.
   - Before a playtest, run `tools/homepc/sync.sh` from the project root in Git Bash. It sends only changed files, including the local-only ones (Starter Assets and Trivia's art), and never touches the home PC's `Library` folder.
   - The laptop reaches the home PC over SSH on the home network only, as the host `homepc` in `~/.ssh/config` (192.168.1.207, key `~/.ssh/onemorefloor_homepc`). `ssh homepc "unity ..."` runs Unity CLI commands there.
-  - A program started over SSH has no visible window, so the owner opens Unity himself with the shortcut **OneMoreFloor - 2 Open Unity** on the home PC's desktop (its desktop folder is `D:\`). Agents can then drive that Editor with `ssh homepc "unity command ..."`.
+  - A program started over SSH has no visible window, so the owner opens Unity himself: from Unity Hub on the home PC, or with the shortcut **OneMoreFloor - 2 Open Unity** on its desktop (its desktop folder is `D:\`). The project was added to that Hub with **Add > Add project from disk**. Agents can then drive that Editor with `ssh homepc "unity command --project-path C:\OneMoreFloor ..."`.
   - Never edit the copy on the home PC: the next sync overwrites it.
 - Core rules: EditMode unit tests — hearts maths, multi-heart mistakes, game over mid-floor, floor order from a seed, difficulty level and visual tier for a floor number, unlock milestones.
 - Every floor: a PlayMode smoke test that clears it, and one that drains hearts to game over — at level 1 and at its hardest level.
