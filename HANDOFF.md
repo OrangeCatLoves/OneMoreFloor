@@ -31,8 +31,9 @@ Claude Code and Codex never run at the same time, and neither remembers the othe
 - Did: set up the owner's home PC (RTX 3060) as the playtest machine, reached from the laptop over SSH. Installed the Unity CLI and Unity 6000.3.28f1 there, copied the project to `C:\OneMoreFloor`, and added `tools/homepc/sync.sh` to send changes. Work and files stay on the laptop.
 - Files: `tools/homepc/`, `HANDOFF.md`, `docs/PROJECT_CONTEXT.md`.
 - Other agent needs to know: how it works is in `docs/PROJECT_CONTEXT.md` section 11. After an art round, run `tools/homepc/sync.sh` before the owner playtests; it also sends the local-only art. Never edit the copy on the home PC.
-- Owner to check: on the home PC, sign in to Unity and open the project with the two desktop shortcuts. Unity has not been opened there yet, so the first import and the Trivia review scene are untested on that machine.
-- Next: Claude Code opens the Trivia review scene on the home PC once Unity is running there, then the owner playtests and gives feedback.
+- Checks: the owner opened the project there through Unity Hub (**Add > Add project from disk**, `C:\OneMoreFloor`). Claude Code opened the Trivia review scene and pressed Play over SSH: Unity reports the RTX 3060, 319 lightmapped renderers and 2 lightmaps loaded, no broken materials, no Console errors, about 230–245 fps with one player.
+- Owner to check: playtest the Trivia review scene on the home PC and give feedback on the room's look and size.
+- Next: Claude Code passes the owner's feedback to Codex as an open request. The Trivia rule questions in `docs/floors/trivia.md` still need answers before build step 5.
 
 ### 2026-11-10 — Claude Code — review of Trivia art, iteration 22
 - Did: reviewed Codex's iteration 22 (journal, comparisons, import notes). Recorded the owner's decision to playtest only on his home PC (RTX 3060) through Parsec. Confirmed that a fresh clone can't download LFS files: GitHub answers "This repository exceeded its LFS budget". No code or art changed.
