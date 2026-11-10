@@ -213,7 +213,7 @@ Rules:
 | Monster AI | AI Navigation package (NavMesh) | Pathfinding |
 | Tests | Unity Test Framework (EditMode, PlayMode); Multiplayer Play Mode for 2–4 players in the editor | |
 | Agent tooling | Unity CLI (free) | Lets AI agents work with the open Unity Editor: compile, run tests, run builds. The owner doesn't have to copy errors back and forth |
-| Version control | Git + Git LFS on GitHub (public repo for now) | Watch LFS storage limits |
+| Version control | Git + Git LFS on GitHub (public repo for now) | Watch LFS storage limits. The LFS budget ran out on 6 Nov 2026 (section 13, question 9) |
 
 ### Desktops and laptops
 - **Controls:** keyboard and mouse. A laptop's trackpad must also work.
@@ -647,6 +647,7 @@ Concept images stay out of `Assets/`, where Unity would import every one. Name t
 - 5 Nov 2026 — Run In Background is on, so a co-op host who alt-tabs doesn't freeze the game for the team.
 - 5 Nov 2026 — Trivia's art is built directly in 3D from the concept images and reworked through playtests until the owner is satisfied (section 9, art loop). The owner cares more about the design than the room size, which is easy to change.
 - 5 Nov 2026 — First playtests use the package's robot. The final host and audience must look realistic and move and jump around as if it's real.
+- 10 Nov 2026 — The owner playtests only on his home PC (RTX 3060), reached from the laptop through Parsec, never on the laptop's Intel graphics. Unity has to run on the home PC for this; how the project gets there is not set up yet (section 13, question 8). The game's performance target is still a mid-range laptop, so agents keep checking that separately.
 
 ---
 
@@ -659,6 +660,8 @@ Concept images stay out of `Assets/`, where Unity would import every one. Name t
 5. Defaults to confirm: hearts are only lost during play; lobby contents (section 2); no joining mid-run; a run's board is set by its starting team size; difficulty +1 level every 5 floors.
 6. Camera view: third person can see around corners, and the leaderboards are shared. Should any floor (e.g. Key Hunt) or PvP limit the view?
 7. Repo: when should it go private? It is public for now, and the game will be sold, so anyone can read the code and art and build the game while it stays public.
+8. Home PC: how does the project get there, and do the agents work there too? A fresh clone is missing the local-only files (`Assets/Starter Assets/` and Trivia's art in `Assets/_OneMoreFloor/Art/Floors/Trivia/`).
+9. Git LFS: GitHub's LFS budget for the repo is used up (checked 10 Nov 2026), so a fresh clone can't download any of the 63 LFS files. Raise the budget, or move those files out of LFS?
 
 ---
 

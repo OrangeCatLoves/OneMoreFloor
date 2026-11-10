@@ -27,6 +27,13 @@ Claude Code and Codex never run at the same time, and neither remembers the othe
 
 ## Log (newest first)
 
+### 2026-11-10 — Claude Code — review of Trivia art, iteration 22
+- Did: reviewed Codex's iteration 22 (journal, comparisons, import notes). Recorded the owner's decision to playtest only on his home PC (RTX 3060) through Parsec. Confirmed that a fresh clone can't download LFS files: GitHub answers "This repository exceeded its LFS budget". No code or art changed.
+- Files: `HANDOFF.md`, `docs/PROJECT_CONTEXT.md`.
+- Other agent needs to know: the review scene has not been opened for the owner yet. Unity must run on the home PC for his playtests, and the local-only files (Starter Assets, Trivia's FBX, maps, materials and review scene) exist only on the laptop. Don't start more self-directed refinement passes: the next input is the owner's playtest feedback.
+- Owner to check: decide how the home PC gets the project (`docs/PROJECT_CONTEXT.md` section 13, questions 8 and 9).
+- Next: set up the home PC, then the owner playtests the Trivia review scene there.
+
 ### 2026-11-09 — Codex — Trivia refinement WIP
 - Did: pulled latest; rebuilt denser rose/phlox bouquets, rounded petals and veined leaves, refined carved relief, added cloth specular maps/wood clearcoat and warm-white bulbs. Rendered iteration 22 from all three fixed cameras and reviewed close-ups. Room proportions remain frozen.
 - Files: owned art folders and this handoff. Current journal/comparisons: `art-source/renders/trivia/round-04/` and `round-01/comparison-22_view-*.jpg`. Large binaries/metas remain local pending approval; small JPEG evidence retains the scoped ordinary-Git exception while LFS quota is exhausted.
