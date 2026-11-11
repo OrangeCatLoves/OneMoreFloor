@@ -1,7 +1,7 @@
 {
-  "triangles_total_render_meshes": 1605549,
-  "mesh_objects": 520,
-  "unique_meshes": 269,
+  "triangles_total_render_meshes": 1039074,
+  "mesh_objects": 397,
+  "unique_meshes": 223,
   "materials": 25,
   "textures": 110,
   "shared_sizes": {

@@ -28,7 +28,7 @@ namespace OneMoreFloor.ArtReview
                 string n=renderer.name;
                 bool moving=n.Contains("_Button_") || n.Contains("Screen") || n.Contains("LiftDoor") || n.Contains("Spotlight") || n.Contains("MarqueeChase");
                 GameObjectUtility.SetStaticEditorFlags(renderer.gameObject,StaticEditorFlags.ReflectionProbeStatic | (moving ? 0 : StaticEditorFlags.ContributeGI));
-                bool mapped=!moving && (n.Contains("Wall") || n.Contains("Floor") || n.Contains("Ceiling") || n.Contains("Curtain") || n.Contains("StagePlank") || n.Contains("Seat") || n.StartsWith("SM_Trivia_Podium_"));
+                bool mapped=!moving && (n.Contains("Wall") || n.Contains("Floor") || n.Contains("Ceiling") || n.Contains("Curtain") || n.Contains("StagePlank") || n.Contains("Seat") || n.Contains("Deck") || n.Contains("Step") || n.Contains("Landing") || n.Contains("Aisle") || n.Contains("ControlDesk") || n.StartsWith("SM_Trivia_Podium_"));
                 renderer.receiveGI=mapped ? ReceiveGI.Lightmaps : ReceiveGI.LightProbes;
                 renderer.lightProbeUsage=LightProbeUsage.BlendProbes;
                 if (!mapped) continue;

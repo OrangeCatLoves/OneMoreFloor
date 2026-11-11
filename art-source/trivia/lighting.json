@@ -3,8 +3,8 @@
     "name": "MK_Light_Point_01",
     "type": "Point",
     "position_blender": [
-      -4.800000190734863,
-      -3.180000066757202,
+      -4.799999713897705,
+      -1.8199999332427979,
       0.8500000238418579
     ],
     "target_blender": null,
@@ -21,9 +21,9 @@
       -1.0
     ],
     "position_unity": [
-      4.800000190734863,
+      4.799999713897705,
       0.8500000238418579,
-      3.180000066757202
+      1.8199999332427979
     ],
     "direction_unity": [
       -0.0,
@@ -36,7 +36,7 @@
     "type": "Point",
     "position_blender": [
       -1.600000023841858,
-      -3.180000066757202,
+      -1.8200000524520874,
       0.8500000238418579
     ],
     "target_blender": null,
@@ -55,7 +55,7 @@
     "position_unity": [
       1.600000023841858,
       0.8500000238418579,
-      3.180000066757202
+      1.8200000524520874
     ],
     "direction_unity": [
       -0.0,
@@ -68,7 +68,7 @@
     "type": "Point",
     "position_blender": [
       1.600000023841858,
-      -3.180000066757202,
+      -1.8199998140335083,
       0.8500000238418579
     ],
     "target_blender": null,
@@ -87,7 +87,7 @@
     "position_unity": [
       -1.600000023841858,
       0.8500000238418579,
-      3.180000066757202
+      1.8199998140335083
     ],
     "direction_unity": [
       -0.0,
@@ -99,8 +99,8 @@
     "name": "MK_Light_Point_04",
     "type": "Point",
     "position_blender": [
-      4.800000190734863,
-      -3.180000066757202,
+      4.8000006675720215,
+      -1.8199999332427979,
       0.8500000238418579
     ],
     "target_blender": null,
@@ -117,9 +117,9 @@
       -1.0
     ],
     "position_unity": [
-      -4.800000190734863,
+      -4.8000006675720215,
       0.8500000238418579,
-      3.180000066757202
+      1.8199999332427979
     ],
     "direction_unity": [
       -0.0,
@@ -167,14 +167,14 @@
     "name": "MK_Light_Spot_06",
     "type": "Spot",
     "position_blender": [
-      -8.0,
-      1.0,
-      7.840000152587891
+      -7.888943195343018,
+      0.9149719476699829,
+      7.630379676818848
     ],
     "target_blender": [
-      -5.2,
-      1,
-      1
+      -4.8,
+      -1.45,
+      1.8
     ],
     "color": "#FFE0AD",
     "watts_blender": 650,
@@ -182,35 +182,41 @@
     "cone_degrees": 44,
     "size_m": 1,
     "casts_shadow_eevee": true,
-    "purpose": "Warm stage pool",
+    "purpose": "Fixture 01: player standing line key",
+    "fixture_axis": "MK_Trivia_Spotlight_01_OpticalAxis",
+    "target_unity": [
+      4.8,
+      1.8,
+      1.45
+    ],
     "direction_blender": [
-      0.37884360551834106,
-      -1.6559781101932458e-08,
-      -0.925460696220398
+      0.4407024085521698,
+      -0.33741283416748047,
+      -0.8318256735801697
     ],
     "position_unity": [
-      8.0,
-      7.840000152587891,
-      -1.0
+      7.888943195343018,
+      7.630379676818848,
+      -0.9149719476699829
     ],
     "direction_unity": [
-      -0.37884360551834106,
-      -0.925460696220398,
-      1.6559781101932458e-08
+      -0.4407024085521698,
+      -0.8318256735801697,
+      0.33741283416748047
     ]
   },
   {
     "name": "MK_Light_Spot_07",
     "type": "Spot",
     "position_blender": [
-      -5.699999809265137,
-      1.0,
-      7.840000152587891
+      -5.616793632507324,
+      0.9105898141860962,
+      7.6195759773254395
     ],
     "target_blender": [
-      -3.705,
-      1,
-      1
+      -3.42,
+      -1.45,
+      1.8
     ],
     "color": "#FFE0AD",
     "watts_blender": 650,
@@ -218,35 +224,41 @@
     "cone_degrees": 44,
     "size_m": 1,
     "casts_shadow_eevee": true,
-    "purpose": "Warm stage pool",
+    "purpose": "Fixture 02: player standing line key",
+    "fixture_axis": "MK_Trivia_Spotlight_02_OpticalAxis",
+    "target_unity": [
+      3.42,
+      1.8,
+      1.45
+    ],
     "direction_blender": [
-      0.2799999713897705,
-      -6.898281412759388e-08,
-      -0.9600000381469727
+      0.3301835060119629,
+      -0.3548024296760559,
+      -0.8746965527534485
     ],
     "position_unity": [
-      5.699999809265137,
-      7.840000152587891,
-      -1.0
+      5.616793632507324,
+      7.6195759773254395,
+      -0.9105898141860962
     ],
     "direction_unity": [
-      -0.2799999713897705,
-      -0.9600000381469727,
-      6.898281412759388e-08
+      -0.3301835060119629,
+      -0.8746965527534485,
+      0.3548024296760559
     ]
   },
   {
     "name": "MK_Light_Spot_08",
     "type": "Spot",
     "position_blender": [
-      -3.4000000953674316,
-      1.0,
-      7.840000152587891
+      -3.3485279083251953,
+      0.9072743654251099,
+      7.61140251159668
     ],
     "target_blender": [
-      -2.21,
-      1,
-      1
+      -2.04,
+      -1.45,
+      1.8
     ],
     "color": "#B78DFF",
     "watts_blender": 650,
@@ -254,35 +266,41 @@
     "cone_degrees": 44,
     "size_m": 1,
     "casts_shadow_eevee": true,
-    "purpose": "Purple stage wash",
+    "purpose": "Fixture 03: player standing line key",
+    "fixture_axis": "MK_Trivia_Spotlight_03_OpticalAxis",
+    "target_unity": [
+      2.04,
+      1.8,
+      1.45
+    ],
     "direction_blender": [
-      0.1714019626379013,
-      -2.3210662281059058e-09,
-      -0.9852011799812317
+      0.20425474643707275,
+      -0.36795884370803833,
+      -0.907130777835846
     ],
     "position_unity": [
-      3.4000000953674316,
-      7.840000152587891,
-      -1.0
+      3.3485279083251953,
+      7.61140251159668,
+      -0.9072743654251099
     ],
     "direction_unity": [
-      -0.1714019626379013,
-      -0.9852011799812317,
-      2.3210662281059058e-09
+      -0.20425474643707275,
+      -0.907130777835846,
+      0.36795884370803833
     ]
   },
   {
     "name": "MK_Light_Spot_09",
     "type": "Spot",
     "position_blender": [
-      -1.100000023841858,
-      1.0,
-      7.840000152587891
+      -1.0830272436141968,
+      0.9054925441741943,
+      7.6070098876953125
     ],
     "target_blender": [
-      -0.7150000000000001,
-      1,
-      1
+      -0.66,
+      -1.45,
+      1.8
     ],
     "color": "#FFE0AD",
     "watts_blender": 650,
@@ -290,35 +308,41 @@
     "cone_degrees": 44,
     "size_m": 1,
     "casts_shadow_eevee": true,
-    "purpose": "Warm stage pool",
+    "purpose": "Fixture 04: player standing line key",
+    "fixture_axis": "MK_Trivia_Spotlight_04_OpticalAxis",
+    "target_unity": [
+      0.66,
+      1.8,
+      1.45
+    ],
     "direction_blender": [
-      0.05619760975241661,
-      -4.24533908471858e-07,
-      -0.9984196424484253
+      0.06735226511955261,
+      -0.3750297427177429,
+      -0.9245628118515015
     ],
     "position_unity": [
-      1.100000023841858,
-      7.840000152587891,
-      -1.0
+      1.0830272436141968,
+      7.6070098876953125,
+      -0.9054925441741943
     ],
     "direction_unity": [
-      -0.05619760975241661,
-      -0.9984196424484253,
-      4.24533908471858e-07
+      -0.06735226511955261,
+      -0.9245628118515015,
+      0.3750297427177429
     ]
   },
   {
     "name": "MK_Light_Spot_10",
     "type": "Spot",
     "position_blender": [
-      1.100000023841858,
-      1.0,
-      7.840000152587891
+      1.0830272436141968,
+      0.9054925441741943,
+      7.6070098876953125
     ],
     "target_blender": [
-      0.7150000000000001,
-      1,
-      1
+      0.66,
+      -1.45,
+      1.8
     ],
     "color": "#FFE0AD",
     "watts_blender": 650,
@@ -326,35 +350,41 @@
     "cone_degrees": 44,
     "size_m": 1,
     "casts_shadow_eevee": true,
-    "purpose": "Warm stage pool",
+    "purpose": "Fixture 05: player standing line key",
+    "fixture_axis": "MK_Trivia_Spotlight_05_OpticalAxis",
+    "target_unity": [
+      -0.66,
+      1.8,
+      1.45
+    ],
     "direction_blender": [
-      -0.05619760975241661,
-      -4.24533908471858e-07,
-      -0.9984196424484253
+      -0.06735226511955261,
+      -0.3750297427177429,
+      -0.9245628118515015
     ],
     "position_unity": [
-      -1.100000023841858,
-      7.840000152587891,
-      -1.0
+      -1.0830272436141968,
+      7.6070098876953125,
+      -0.9054925441741943
     ],
     "direction_unity": [
-      0.05619760975241661,
-      -0.9984196424484253,
-      4.24533908471858e-07
+      0.06735226511955261,
+      -0.9245628118515015,
+      0.3750297427177429
     ]
   },
   {
     "name": "MK_Light_Spot_11",
     "type": "Spot",
     "position_blender": [
-      3.4000000953674316,
-      1.0,
-      7.840000152587891
+      3.3485279083251953,
+      0.9072743654251099,
+      7.61140251159668
     ],
     "target_blender": [
-      2.21,
-      1,
-      1
+      2.04,
+      -1.45,
+      1.8
     ],
     "color": "#B78DFF",
     "watts_blender": 650,
@@ -362,35 +392,41 @@
     "cone_degrees": 44,
     "size_m": 1,
     "casts_shadow_eevee": true,
-    "purpose": "Purple stage wash",
+    "purpose": "Fixture 06: player standing line key",
+    "fixture_axis": "MK_Trivia_Spotlight_06_OpticalAxis",
+    "target_unity": [
+      -2.04,
+      1.8,
+      1.45
+    ],
     "direction_blender": [
-      -0.1714019626379013,
-      -2.3210662281059058e-09,
-      -0.9852011799812317
+      -0.20425474643707275,
+      -0.36795884370803833,
+      -0.907130777835846
     ],
     "position_unity": [
-      -3.4000000953674316,
-      7.840000152587891,
-      -1.0
+      -3.3485279083251953,
+      7.61140251159668,
+      -0.9072743654251099
     ],
     "direction_unity": [
-      0.1714019626379013,
-      -0.9852011799812317,
-      2.3210662281059058e-09
+      0.20425474643707275,
+      -0.907130777835846,
+      0.36795884370803833
     ]
   },
   {
     "name": "MK_Light_Spot_12",
     "type": "Spot",
     "position_blender": [
-      5.699999809265137,
-      1.0,
-      7.840000152587891
+      5.616793632507324,
+      0.9105898141860962,
+      7.6195759773254395
     ],
     "target_blender": [
-      3.705,
-      1,
-      1
+      3.42,
+      -1.45,
+      1.8
     ],
     "color": "#FFE0AD",
     "watts_blender": 650,
@@ -398,35 +434,41 @@
     "cone_degrees": 44,
     "size_m": 1,
     "casts_shadow_eevee": true,
-    "purpose": "Warm stage pool",
+    "purpose": "Fixture 07: player standing line key",
+    "fixture_axis": "MK_Trivia_Spotlight_07_OpticalAxis",
+    "target_unity": [
+      -3.42,
+      1.8,
+      1.45
+    ],
     "direction_blender": [
-      -0.2799999713897705,
-      -6.898281412759388e-08,
-      -0.9600000381469727
+      -0.3301835060119629,
+      -0.3548024296760559,
+      -0.8746965527534485
     ],
     "position_unity": [
-      -5.699999809265137,
-      7.840000152587891,
-      -1.0
+      -5.616793632507324,
+      7.6195759773254395,
+      -0.9105898141860962
     ],
     "direction_unity": [
-      0.2799999713897705,
-      -0.9600000381469727,
-      6.898281412759388e-08
+      0.3301835060119629,
+      -0.8746965527534485,
+      0.3548024296760559
     ]
   },
   {
     "name": "MK_Light_Spot_13",
     "type": "Spot",
     "position_blender": [
-      8.0,
-      1.0,
-      7.840000152587891
+      7.888943195343018,
+      0.9149719476699829,
+      7.630379676818848
     ],
     "target_blender": [
-      5.2,
-      1,
-      1
+      4.8,
+      -1.45,
+      1.8
     ],
     "color": "#FFE0AD",
     "watts_blender": 650,
@@ -434,35 +476,41 @@
     "cone_degrees": 44,
     "size_m": 1,
     "casts_shadow_eevee": true,
-    "purpose": "Warm stage pool",
+    "purpose": "Fixture 08: player standing line key",
+    "fixture_axis": "MK_Trivia_Spotlight_08_OpticalAxis",
+    "target_unity": [
+      -4.8,
+      1.8,
+      1.45
+    ],
     "direction_blender": [
-      -0.37884360551834106,
-      -1.6559781101932458e-08,
-      -0.925460696220398
+      -0.4407024085521698,
+      -0.33741283416748047,
+      -0.8318256735801697
     ],
     "position_unity": [
-      -8.0,
-      7.840000152587891,
-      -1.0
+      -7.888943195343018,
+      7.630379676818848,
+      -0.9149719476699829
     ],
     "direction_unity": [
-      0.37884360551834106,
-      -0.925460696220398,
-      1.6559781101932458e-08
+      0.4407024085521698,
+      -0.8318256735801697,
+      0.33741283416748047
     ]
   },
   {
     "name": "MK_Light_Spot_14",
     "type": "Spot",
     "position_blender": [
-      -9.0,
-      -2.0,
-      1.100000023841858
+      -8.961448669433594,
+      -1.8372266292572021,
+      1.288474440574646
     ],
     "target_blender": [
-      -4.5,
-      4,
-      5
+      -8.1,
+      1.8,
+      5.5
     ],
     "color": "#B78DFF",
     "watts_blender": 260,
@@ -470,35 +518,41 @@
     "cone_degrees": 44,
     "size_m": 1,
     "casts_shadow_eevee": true,
-    "purpose": "Purple stage wash",
+    "purpose": "Fixture 09: gathered side curtain wash",
+    "fixture_axis": "MK_Trivia_Spotlight_09_OpticalAxis",
+    "target_unity": [
+      8.1,
+      5.5,
+      -1.8
+    ],
     "direction_blender": [
-      0.5323300957679749,
-      0.7097734212875366,
-      0.46135273575782776
+      0.15298247337341309,
+      0.6459258198738098,
+      0.7479146122932434
     ],
     "position_unity": [
-      9.0,
-      1.100000023841858,
-      2.0
+      8.961448669433594,
+      1.288474440574646,
+      1.8372266292572021
     ],
     "direction_unity": [
-      -0.5323300957679749,
-      0.46135273575782776,
-      -0.7097734212875366
+      -0.15298247337341309,
+      0.7479146122932434,
+      -0.6459258198738098
     ]
   },
   {
     "name": "MK_Light_Spot_15",
     "type": "Spot",
     "position_blender": [
-      9.0,
-      -2.0,
-      1.100000023841858
+      8.961448669433594,
+      -1.8372266292572021,
+      1.288474440574646
     ],
     "target_blender": [
-      4.5,
-      4,
-      5
+      8.1,
+      1.8,
+      5.5
     ],
     "color": "#FFE0AD",
     "watts_blender": 260,
@@ -506,35 +560,41 @@
     "cone_degrees": 44,
     "size_m": 1,
     "casts_shadow_eevee": true,
-    "purpose": "Warm stage pool",
+    "purpose": "Fixture 10: gathered side curtain wash",
+    "fixture_axis": "MK_Trivia_Spotlight_10_OpticalAxis",
+    "target_unity": [
+      -8.1,
+      5.5,
+      -1.8
+    ],
     "direction_blender": [
-      -0.5323300957679749,
-      0.7097734212875366,
-      0.46135273575782776
+      -0.15298247337341309,
+      0.6459258198738098,
+      0.7479146122932434
     ],
     "position_unity": [
-      -9.0,
-      1.100000023841858,
-      2.0
+      -8.961448669433594,
+      1.288474440574646,
+      1.8372266292572021
     ],
     "direction_unity": [
-      0.5323300957679749,
-      0.46135273575782776,
-      -0.7097734212875366
+      0.15298247337341309,
+      0.7479146122932434,
+      -0.6459258198738098
     ]
   },
   {
     "name": "MK_Light_Spot_16",
     "type": "Spot",
     "position_blender": [
-      -7.0,
-      3.0,
-      1.100000023841858
+      -6.904001712799072,
+      3.0783658027648926,
+      1.3194245100021362
     ],
     "target_blender": [
-      -3.5,
-      4,
-      5
+      -4.55,
+      5.0,
+      6.7
     ],
     "color": "#FFE0AD",
     "watts_blender": 260,
@@ -542,35 +602,41 @@
     "cone_degrees": 44,
     "size_m": 1,
     "casts_shadow_eevee": true,
-    "purpose": "Warm stage pool",
+    "purpose": "Fixture 11: rear curtain wash",
+    "fixture_axis": "MK_Trivia_Spotlight_11_OpticalAxis",
+    "target_unity": [
+      4.55,
+      6.7,
+      -5.0
+    ],
     "direction_blender": [
-      0.6560706496238708,
-      0.18744885921478271,
-      0.7310500741004944
+      0.38094526529312134,
+      0.31097593903541565,
+      0.8707322478294373
     ],
     "position_unity": [
-      7.0,
-      1.100000023841858,
-      -3.0
+      6.904001712799072,
+      1.3194245100021362,
+      -3.0783658027648926
     ],
     "direction_unity": [
-      -0.6560706496238708,
-      0.7310500741004944,
-      -0.18744885921478271
+      -0.38094526529312134,
+      0.8707322478294373,
+      -0.31097593903541565
     ]
   },
   {
     "name": "MK_Light_Spot_17",
     "type": "Spot",
     "position_blender": [
-      7.0,
-      3.0,
-      1.100000023841858
+      6.904001712799072,
+      3.0783658027648926,
+      1.3194245100021362
     ],
     "target_blender": [
-      3.5,
-      4,
-      5
+      4.55,
+      5.0,
+      6.7
     ],
     "color": "#B78DFF",
     "watts_blender": 260,
@@ -578,21 +644,27 @@
     "cone_degrees": 44,
     "size_m": 1,
     "casts_shadow_eevee": true,
-    "purpose": "Purple stage wash",
+    "purpose": "Fixture 12: rear curtain wash",
+    "fixture_axis": "MK_Trivia_Spotlight_12_OpticalAxis",
+    "target_unity": [
+      -4.55,
+      6.7,
+      -5.0
+    ],
     "direction_blender": [
-      -0.6560706496238708,
-      0.18744885921478271,
-      0.7310500741004944
+      -0.38094526529312134,
+      0.31097593903541565,
+      0.8707322478294373
     ],
     "position_unity": [
-      -7.0,
-      1.100000023841858,
-      -3.0
+      -6.904001712799072,
+      1.3194245100021362,
+      -3.0783658027648926
     ],
     "direction_unity": [
-      0.6560706496238708,
-      0.7310500741004944,
-      -0.18744885921478271
+      0.38094526529312134,
+      0.8707322478294373,
+      -0.31097593903541565
     ]
   },
   {
@@ -727,9 +799,9 @@
     "name": "MK_Light_Point_22",
     "type": "Point",
     "position_blender": [
-      -13.210000038146973,
+      -13.3100004196167,
       -7.75,
-      6.019999980926514
+      7.420000076293945
     ],
     "target_blender": null,
     "color": "#FFB85A",
@@ -745,8 +817,8 @@
       -1.0
     ],
     "position_unity": [
-      13.210000038146973,
-      6.019999980926514,
+      13.3100004196167,
+      7.420000076293945,
       7.75
     ],
     "direction_unity": [
@@ -759,9 +831,9 @@
     "name": "MK_Light_Point_23",
     "type": "Point",
     "position_blender": [
-      -13.210000038146973,
+      -13.3100004196167,
       -5.050000190734863,
-      6.019999980926514
+      7.420000076293945
     ],
     "target_blender": null,
     "color": "#FFB85A",
@@ -777,8 +849,8 @@
       -1.0
     ],
     "position_unity": [
-      13.210000038146973,
-      6.019999980926514,
+      13.3100004196167,
+      7.420000076293945,
       5.050000190734863
     ],
     "direction_unity": [
@@ -791,9 +863,9 @@
     "name": "MK_Light_Point_24",
     "type": "Point",
     "position_blender": [
-      13.210000038146973,
+      13.3100004196167,
       -5.050000190734863,
-      6.019999980926514
+      7.420000076293945
     ],
     "target_blender": null,
     "color": "#FFB85A",
@@ -809,8 +881,8 @@
       -1.0
     ],
     "position_unity": [
-      -13.210000038146973,
-      6.019999980926514,
+      -13.3100004196167,
+      7.420000076293945,
       5.050000190734863
     ],
     "direction_unity": [
@@ -823,9 +895,9 @@
     "name": "MK_Light_Point_25",
     "type": "Point",
     "position_blender": [
-      13.210000038146973,
+      13.3100004196167,
       -7.75,
-      6.019999980926514
+      7.420000076293945
     ],
     "target_blender": null,
     "color": "#FFB85A",
@@ -841,8 +913,8 @@
       -1.0
     ],
     "position_unity": [
-      -13.210000038146973,
-      6.019999980926514,
+      -13.3100004196167,
+      7.420000076293945,
       7.75
     ],
     "direction_unity": [
@@ -1461,6 +1533,234 @@
       -0.7814038991928101,
       -0.2790725529193878,
       0.5581455826759338
+    ]
+  },
+  {
+    "name": "MK_Light_Point_44",
+    "type": "Point",
+    "position_blender": [
+      13.979999542236328,
+      -10.0,
+      3.4000000953674316
+    ],
+    "target_blender": null,
+    "color": "#FFD3A0",
+    "watts_blender": 45,
+    "relative_intensity": 0.045,
+    "cone_degrees": null,
+    "size_m": 0.25,
+    "casts_shadow_eevee": false,
+    "purpose": "Side aisle wall sconce, Unity x=-14.2, z=10; diffuse practical, bake",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      -13.979999542236328,
+      3.4000000953674316,
+      10.0
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Point_45",
+    "type": "Point",
+    "position_blender": [
+      13.979999542236328,
+      -15.0,
+      3.4000000953674316
+    ],
+    "target_blender": null,
+    "color": "#FFD3A0",
+    "watts_blender": 45,
+    "relative_intensity": 0.045,
+    "cone_degrees": null,
+    "size_m": 0.25,
+    "casts_shadow_eevee": false,
+    "purpose": "Side aisle wall sconce, Unity x=-14.2, z=15; diffuse practical, bake",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      -13.979999542236328,
+      3.4000000953674316,
+      15.0
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Point_46",
+    "type": "Point",
+    "position_blender": [
+      13.979999542236328,
+      -20.0,
+      3.4000000953674316
+    ],
+    "target_blender": null,
+    "color": "#FFD3A0",
+    "watts_blender": 45,
+    "relative_intensity": 0.045,
+    "cone_degrees": null,
+    "size_m": 0.25,
+    "casts_shadow_eevee": false,
+    "purpose": "Side aisle wall sconce, Unity x=-14.2, z=20; diffuse practical, bake",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      -13.979999542236328,
+      3.4000000953674316,
+      20.0
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Point_47",
+    "type": "Point",
+    "position_blender": [
+      -13.979999542236328,
+      -10.0,
+      3.4000000953674316
+    ],
+    "target_blender": null,
+    "color": "#FFD3A0",
+    "watts_blender": 45,
+    "relative_intensity": 0.045,
+    "cone_degrees": null,
+    "size_m": 0.25,
+    "casts_shadow_eevee": false,
+    "purpose": "Side aisle wall sconce, Unity x=14.2, z=10; diffuse practical, bake",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      13.979999542236328,
+      3.4000000953674316,
+      10.0
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Point_48",
+    "type": "Point",
+    "position_blender": [
+      -13.979999542236328,
+      -15.0,
+      3.4000000953674316
+    ],
+    "target_blender": null,
+    "color": "#FFD3A0",
+    "watts_blender": 45,
+    "relative_intensity": 0.045,
+    "cone_degrees": null,
+    "size_m": 0.25,
+    "casts_shadow_eevee": false,
+    "purpose": "Side aisle wall sconce, Unity x=14.2, z=15; diffuse practical, bake",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      13.979999542236328,
+      3.4000000953674316,
+      15.0
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Point_49",
+    "type": "Point",
+    "position_blender": [
+      -13.979999542236328,
+      -20.0,
+      3.4000000953674316
+    ],
+    "target_blender": null,
+    "color": "#FFD3A0",
+    "watts_blender": 45,
+    "relative_intensity": 0.045,
+    "cone_degrees": null,
+    "size_m": 0.25,
+    "casts_shadow_eevee": false,
+    "purpose": "Side aisle wall sconce, Unity x=14.2, z=20; diffuse practical, bake",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      13.979999542236328,
+      3.4000000953674316,
+      20.0
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Area_50",
+    "type": "Area",
+    "position_blender": [
+      0.0,
+      -23.799999237060547,
+      4.349999904632568
+    ],
+    "target_blender": [
+      0.0,
+      -23.299999237060547,
+      1.399999976158142
+    ],
+    "color": "#FFD9B3",
+    "watts_blender": 180,
+    "relative_intensity": 0.18,
+    "cone_degrees": null,
+    "size_m": 3,
+    "casts_shadow_eevee": false,
+    "purpose": "Rear control working light; bake, below balcony",
+    "direction_blender": [
+      0.0,
+      0.16710792481899261,
+      -0.9859386086463928
+    ],
+    "position_unity": [
+      -0.0,
+      4.349999904632568,
+      23.799999237060547
+    ],
+    "direction_unity": [
+      -0.0,
+      -0.9859386086463928,
+      -0.16710792481899261
     ]
   }
 ]

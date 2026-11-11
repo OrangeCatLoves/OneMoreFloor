@@ -45,7 +45,7 @@ def light(kind,loc,color,power,target=None,size=1,cone=50,purpose=''):
     if kind=='Point':d.shadow_soft_size=size
     if kind=='Spot':d.spot_size=math.radians(cone);d.spot_blend=.5;d.shadow_soft_size=.15
     l=bpy.data.objects.new(d.name,d);bpy.context.collection.objects.link(l);l.location=o.location;l.rotation_euler=o.rotation_euler
-    LIGHTS.append({'name':name,'type':kind,'position_blender':list(loc),'target_blender':target,'color':color,'watts_blender':power,'relative_intensity':power/1000,'cone_degrees':cone if kind=='Spot' else None,'size_m':size,'casts_shadow_eevee':d.use_shadow,'purpose':purpose})
+    LIGHTS.append({'name':name,'type':kind,'position_blender':list(loc),'target_blender':list(target) if target is not None else None,'color':color,'watts_blender':power,'relative_intensity':power/1000,'cone_degrees':cone if kind=='Spot' else None,'size_m':size,'casts_shadow_eevee':d.use_shadow,'purpose':purpose})
     return o
 
 def pedestal(x,y,z=0):
@@ -85,19 +85,25 @@ def podium(index,x,y,z):
             for zz in [.18,.52,.84]:cylinder('SM_Trivia_PodiumCollar',(x+xx,y+side*.405,z+zz),.085,.05,'Gold',12)
     box('SM_Trivia_PodiumDeskRim',(x,y,z+.96),(1.46,1.02,.16),'Gold',.07)
     box('SM_Trivia_PodiumDesk',(x,y,z+1.045),(1.33,.91,.045),'Walnut',.035)
-    # Monitor is inclined toward the player on the audience (-Y) side.
-    box('SM_Trivia_MonitorNeck',(x,y+.22,z+1.16),(.18,.15,.24),'Gold',.02)
-    rim=box('SM_Trivia_MonitorFrame',(x,y+.22,z+1.48),(1.12,.10,.69),'Gold',.045)
-    rim.rotation_euler.x=math.radians(17);apply(rim)
-    screen=panel(f'SM_Trivia_PodiumScreen_{tag}',x,y+.165,z+1.48,1.01,.59,'Monitor')
-    back=panel(f'SM_Trivia_MonitorBackHousing_{tag}',x,y+.275,z+1.48,1.01,.59,'Monitor')
+    # The status monitor sits outboard, leaving a sightline to the shared TV.
+    monitor_start=set(bpy.data.objects)
+    mx=x-math.copysign(.5,x) if x else x
+    box('SM_Trivia_MonitorNeck',(mx,y+.22,z+1.16),(.18,.15,.24),'Gold',.02)
+    rim=box('SM_Trivia_MonitorFrame',(mx,y+.22,z+1.48),(1.12,.10,.69),'Gold',.045)
+    rim.rotation_euler.x=math.radians(-17);apply(rim)
+    screen=panel(f'SM_Trivia_PodiumScreen_{tag}',mx,y+.165,z+1.48,1.01,.59,'Monitor')
+    back=panel(f'SM_Trivia_MonitorBackHousing_{tag}',mx,y+.275,z+1.48,1.01,.59,'Monitor')
     for p in back.data.polygons:p.flip()
     # rotate about monitor center, leaving exact 0..1 UVs intact.
     for part in [screen,back]:
         for v in part.data.vertices:
             yy=v.co.y-(y+.22);zz=v.co.z-(z+1.48)
-            v.co.y=y+.22+yy*math.cos(math.radians(17))-zz*math.sin(math.radians(17))
-            v.co.z=z+1.48+yy*math.sin(math.radians(17))+zz*math.cos(math.radians(17))
+            v.co.y=y+.22+yy*math.cos(math.radians(-17))-zz*math.sin(math.radians(-17))
+            v.co.z=z+1.48+yy*math.sin(math.radians(-17))+zz*math.cos(math.radians(-17))
+    from trivia_round_two import turn
+    for part in set(bpy.data.objects)-monitor_start:
+        turn(part,(mx,y+.22,z+1.48),math.copysign(math.radians(18),x) if x else 0)
+        apply(part)
     dynamic=[screen]
     deck_start=set(bpy.data.objects)
     box('SM_Trivia_ButtonDeck',(x,y-.275,z+1.055),(1.02,.70,.045),'Gold',.025)
@@ -116,7 +122,7 @@ def podium(index,x,y,z):
     # Lift the back of the button deck toward the monitor. Buttons remain
     # separate, with their press direction recorded for the importer.
     bpy.context.view_layer.update()
-    angle=math.radians(18)
+    angle=math.radians(12)
     for part in set(bpy.data.objects)-deck_start:
         transform=part.matrix_world.copy();part.data=part.data.copy()
         for v in part.data.vertices:
@@ -125,7 +131,7 @@ def podium(index,x,y,z):
         part.location=(0,0,0)
         if '_Button_' in part.name:
             origin_bottom(part);part['press_direction_unity']=[0,-math.cos(angle),-math.sin(angle)]
-    mesh('SM_Trivia_ButtonDeckSupport',[(x+dx,y+dy,z+zz) for dx,dy,zz in [(-.49,-.62,1.05),(.49,-.62,1.05),(-.49,.03,1.05),(.49,.03,1.05),(-.49,-.62,1.06),(.49,-.62,1.06),(-.49,.03,1.27),(.49,.03,1.27)]],[(0,2,3,1),(4,5,7,6),(0,1,5,4),(2,6,7,3),(0,4,6,2),(1,3,7,5)],'Walnut',True)
+    mesh('SM_Trivia_ButtonDeckSupport',[(x+dx,y+dy,z+zz) for dx,dy,zz in [(-.49,-.62,1.05),(.49,-.62,1.05),(-.49,.03,1.05),(.49,.03,1.05),(-.49,-.62,1.06),(.49,-.62,1.06),(-.49,.03,1.194),(.49,.03,1.194)]],[(0,2,3,1),(4,5,7,6),(0,1,5,4),(2,6,7,3),(0,4,6,2),(1,3,7,5)],'Walnut',True)
     static=join_objects([o for o in set(bpy.data.objects)-start if o not in dynamic],f'SM_Trivia_Podium_{tag}');origin_bottom(static)
     # Match the reference's slender lectern proportions without changing height.
     for part in [static]+dynamic:
@@ -193,13 +199,20 @@ def moving_light(x,y,z,index,floor=False):
         yoke.parent=root
     tilt=empty(f'MK_Trivia_Spotlight_{index:02}_Tilt',(0,0,h));tilt.parent=root
     head=cylinder(f'SM_Trivia_Spotlight_{index:02}_Head',(0,0,0),.21,.42,'BlackMetal',20)
-    head.rotation_euler.x=math.radians(30 if floor else -22);apply(head)
     head.parent=tilt
-    lens=cylinder(f'SM_Trivia_Spotlight_{index:02}_Lens',(0,-(.11 if floor else -.09),(.19 if floor else -.19)),.17,.025,'BlackMetal',20)
-    lens.rotation_euler.x=math.radians(30 if floor else -22);apply(lens);lens.parent=tilt
+    lens=cylinder(f'SM_Trivia_Spotlight_{index:02}_Lens',(0,0,-.23),.17,.025,'BlackMetal',20)
+    lens.parent=tilt
     detail.fixture_detail(head,index,floor)
-    target=(x*.65,1,1) if not floor else (x*.5,4,5)
-    light('Spot',(x,y,z+h),'#B78DFF' if index%3==0 else '#FFE0AD',650 if not floor else 260,target,cone=44,purpose='Purple stage wash' if index%3==0 else 'Warm stage pool')
+    target=(x*.60,-1.45,1.8) if not floor else ((x*.9,1.8,5.5) if y<0 else (x*.65,5.0,6.7))
+    direction=(Vector(target)-Vector((x,y,z+h))).normalized()
+    root.rotation_euler.z=math.atan2(-direction.x,direction.y)
+    tilt.rotation_euler.x=math.acos(-direction.z)
+    axis=empty(f'MK_Trivia_Spotlight_{index:02}_OpticalAxis',(0,0,-.252));axis.parent=tilt
+    bpy.context.view_layer.update()
+    loc=axis.matrix_world.translation
+    lamp=light('Spot',loc,'#B78DFF' if index%3==0 else '#FFE0AD',650 if not floor else 260,target,cone=44,purpose=f'Fixture {index:02}: '+('gathered side curtain wash' if floor and y<0 else 'rear curtain wash' if floor else 'player standing line key'))
+    LIGHTS[-1]['fixture_axis']=axis.name
+    LIGHTS[-1]['target_unity']=[-target[0],target[2],-target[1]]
 
 def stage():
     # Rear is straight; the stage apron follows a wide ellipse.
@@ -250,30 +263,9 @@ def screen_and_arch():
     # Bulb marquee with a purple surround and live cream center.
     cx=0;y=4.25;cz=5.4;w=12.3;h=4.25
     border=rounded_rect(cx,y,cz,w,h,.65,14)
-    mesh('SM_Trivia_QuestionSurround',border,[tuple(range(len(border)))],'RoyalPurple',True)
     for d,r in [(0,.075),(-.17,.025),(.17,.055)]:tube('SM_Trivia_QuestionFrame',rounded_rect(cx,y-.055,cz,w+d,h+d,.65,14),r,'Gold',True,sides=16)
-    panel('SM_Trivia_QuestionScreen',0,y-.10,cz,9.5,3.55,'Screen')
-    tube('SM_Trivia_InnerQuestionFrame',rounded_rect(0,y-.13,cz,9.6,3.65,.25,8),.035,'Gold',True)
-    for sx in [-1,1]:
-        for sz in [-1,1]:
-            # Small carved corner flourishes sit outside the live-screen inset.
-            x=sx*4.71;z=cz+sz*1.79
-            for k in range(3):
-                a=k*.35+.20
-                detail.carved_leaf('SM_Trivia_ScreenCornerCarving',(x,y-.18,z),(x+sx*.24*math.sin(a),y-.18,z+sz*.24*math.cos(a)),.045,depth=.025)
-    for x in [-5.35,5.35]:laurel(x,y-.13,cz,.49,'SM_Trivia_ScreenLaurel')
-    # Pearl-and-reel moulding gives the broad surround a carved inner layer.
-    for side in [-1,1]:
-        for i in range(47):
-            xx=-4.65+i*.202
-            sphere('SM_Trivia_FramePearl',(xx,y-.16,cz+side*1.94),(.035,.022,.026),'GoldDark',8,4)
-        for sx in [-1,1]:
-            detail.rosette(sx*5.58,y-.17,cz+side*1.43,.145)
-            scrollwork(sx*5.22,y-.16,cz+side*1.48,.22,sx)
-    for sx in [-1,1]:
-        for sz in [-1,1]:
-            scrollwork(sx*5.65,y-.15,cz+sz*1.6,.18,sx)
-            acanthus(sx*5.65,y-.15,cz+sz*1.6-.12,.5)
+    from trivia_round_two import rounded_screen
+    rounded_screen('SM_Trivia_QuestionScreen',y-.10,12.0,3.95)
     groups=[[],[],[]]
     perimeter=rounded_rect(cx,y-.13,cz,w,h,.65,30)
     lengths=[(Vector(perimeter[(i+1)%len(perimeter)])-Vector(p)).length for i,p in enumerate(perimeter)]
@@ -359,11 +351,12 @@ def seat_template(distant=False):
                 if modifier.type=='BEVEL':modifier.segments=1
     o=join_objects(parts,'SM_Trivia_Seat_PrototypeFar' if distant else 'SM_Trivia_Seat_Prototype');origin_bottom(o);return o
 
-def rail(points,z):
+def rail(points,z,base=None):
     tube('SM_Trivia_Handrail',[(x,y,z) for x,y in points],.055,'Gold',sides=8)
     tube('SM_Trivia_HandrailBottom',[(x,y,z-.72) for x,y in points],.025,'Gold',sides=6)
+    if base is None:base=0 if z<2 else z-.85
     for x,y in points[::max(1,len(points)//18)]:
-        cylinder('SM_Trivia_Baluster',(x,y,z-.43),.025,.85,'Gold',8)
+        cylinder('SM_Trivia_Baluster',(x,y,(z+base)/2),.025,z-base,'Gold',8)
         sphere('SM_Trivia_BalusterCollar',(x,y,z-.30),(.045,.045,.07),'Gold',8,4)
 
 def grille(x,y,z,w=1.0,h=1.35):
@@ -633,6 +626,19 @@ def finalize():
         groups.setdefault(key,[]).append(o)
     for key,group in groups.items():
         if len(group)>1:join_objects(group,key)
+    # Joining chooses an active part; keep existing static origins deterministic
+    # across rebuilds. Moving/relocated equipment retains its intentional pivot.
+    baseline=ROOT/'art-source/renders/trivia/round-05/before-inventory.json'
+    if baseline.exists() and not opt.pilot:
+        original={r['name']:r['position'] for r in json.loads(baseline.read_text(encoding='utf8'))}
+        for o in bpy.context.scene.objects:
+            if o.type!='MESH' or o.parent or o.name not in original or o.name.startswith('COL_'):continue
+            if any(t in o.name for t in ['Seat_R','UpperSeat','Podium','LiftDoor','FlowerUrn','HostCompass','StageStep']):continue
+            px,py,pz=original[o.name];loc=Vector((-px,-pz,py));delta=o.location-loc
+            if delta.length>.00001:
+                o.data=o.data.copy()
+                for v in o.data.vertices:v.co+=delta
+                o.location=loc
     print('BATCHED static details',flush=True)
     bpy.context.view_layer.update()
     meshes=[o for o in bpy.context.scene.objects if o.type=='MESH' and not o.name.startswith('COL_')]
@@ -703,4 +709,10 @@ else:
     light('Area',(-9,-5,4),'#FFDDAA',500,(-13,-2,1.5),size=3,purpose='Brushed gold lift door reflection key')
     light('Area',(7,-18,7),'#FFC78A',950,(0,-23,4.5),size=6,purpose='Rear balcony and banner key')
     light('Area',(-7,-18,7),'#FFC78A',950,(0,-23,4.5),size=6,purpose='Rear balcony balancing fill')
+if not opt.pilot:
+    # Local restart point: audit/layout iterations need not rebuild all bouquets.
+    bpy.ops.wm.save_as_mainfile(filepath=str(SOURCE/'Trivia_Round2Base.blend'))
+    (SOURCE/'round2-base-lights.json').write_text(json.dumps(LIGHTS,indent=2),encoding='utf8')
+    from trivia_round_two import apply_round_two
+    apply_round_two(S,seat_template,rail,light)
 finalize()

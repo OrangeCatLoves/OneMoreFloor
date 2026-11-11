@@ -1,0 +1,398 @@
+{
+  "importedTriangles": 1549521,
+  "trianglesBelowAreaThreshold": 133130,
+  "areaThresholdSquareMetres": 1E-05,
+  "scope": "All imported render meshes, same-facing coplanar triangles; 0.1 mm plane tolerance. Reports require visibility review for intentional hidden construction overlaps.",
+  "overlaps": [
+    {
+      "pair": "SM_Trivia_HallFloor / SM_Trivia_LiftFloor",
+      "count": 2,
+      "projectedArea": 7.5,
+      "sample": [
+        4.83333349,
+        0.0,
+        15.333333
+      ]
+    },
+    {
+      "pair": "SM_Trivia_BoxCornice / SM_Trivia_SideWall",
+      "count": 16,
+      "projectedArea": 1.6320014,
+      "sample": [
+        -14.6000013,
+        7.0,
+        4.66666651
+      ]
+    },
+    {
+      "pair": "SM_Trivia_BoxLayeredCornice / SM_Trivia_BoxPilaster",
+      "count": 106,
+      "projectedArea": 0.309983969,
+      "sample": [
+        -14.45,
+        3.175,
+        5.17833328
+      ]
+    },
+    {
+      "pair": "SM_Trivia_Baluster / SM_Trivia_Baluster",
+      "count": 56,
+      "projectedArea": 0.247481033,
+      "sample": [
+        12.4882154,
+        6.211666,
+        9.979882
+      ]
+    },
+    {
+      "pair": "SM_Trivia_Stage / SM_Trivia_WingWall",
+      "count": 4,
+      "projectedArea": 0.244999647,
+      "sample": [
+        3.5666666,
+        0.0,
+        -1.36666679
+      ]
+    },
+    {
+      "pair": "SM_Trivia_BalconyDeck / SM_Trivia_BalconyFascia",
+      "count": 80,
+      "projectedArea": 0.219994277,
+      "sample": [
+        12.5,
+        4.753333,
+        2.66666675
+      ]
+    },
+    {
+      "pair": "SM_Trivia_Podium_03 / SM_Trivia_Podium_03",
+      "count": 176,
+      "projectedArea": 0.0861899257,
+      "sample": [
+        -1.0606432,
+        1.465,
+        2.03175855
+      ]
+    },
+    {
+      "pair": "SM_Trivia_Podium_02 / SM_Trivia_Podium_02",
+      "count": 176,
+      "projectedArea": 0.0861899257,
+      "sample": [
+        2.13935685,
+        1.465,
+        2.03175855
+      ]
+    },
+    {
+      "pair": "SM_Trivia_Podium_04 / SM_Trivia_Podium_04",
+      "count": 176,
+      "projectedArea": 0.08618981,
+      "sample": [
+        -4.260643,
+        1.465,
+        2.03175855
+      ]
+    },
+    {
+      "pair": "SM_Trivia_Podium_01 / SM_Trivia_Podium_01",
+      "count": 176,
+      "projectedArea": 0.0861897,
+      "sample": [
+        5.339357,
+        1.465,
+        2.03175855
+      ]
+    },
+    {
+      "pair": "SM_Trivia_BackWall / SM_Trivia_SideWall",
+      "count": 10,
+      "projectedArea": 0.07999508,
+      "sample": [
+        -4.83333349,
+        10.5,
+        -5.5333333
+      ]
+    },
+    {
+      "pair": "SM_Trivia_CeilingBeam / SM_Trivia_SideWall",
+      "count": 17,
+      "projectedArea": 0.0779756159,
+      "sample": [
+        -4.82500029,
+        10.5,
+        -2.02166677
+      ]
+    },
+    {
+      "pair": "SM_Trivia_SidePanelHorizontal / SM_Trivia_SidePanelVertical",
+      "count": 224,
+      "projectedArea": 0.0682444647,
+      "sample": [
+        -14.3475,
+        8.200001,
+        15.5441666
+      ]
+    },
+    {
+      "pair": "SM_Trivia_LiftCabWall / SM_Trivia_SideWall",
+      "count": 8,
+      "projectedArea": 0.06000012,
+      "sample": [
+        16.333334,
+        0.0,
+        -0.475000054
+      ]
+    },
+    {
+      "pair": "SM_Trivia_BalusterCollar / SM_Trivia_BalusterCollar",
+      "count": 96,
+      "projectedArea": 0.05447395,
+      "sample": [
+        12.4818926,
+        6.256331,
+        9.9925
+      ]
+    },
+    {
+      "pair": "SM_Trivia_RearWall / SM_Trivia_SideWall",
+      "count": 8,
+      "projectedArea": 0.0399990976,
+      "sample": [
+        4.83333349,
+        10.5,
+        26.0333328
+      ]
+    },
+    {
+      "pair": "SM_Trivia_AisleCarpet / SM_Trivia_AisleTerrace",
+      "count": 48,
+      "projectedArea": 0.0353141762,
+      "sample": [
+        -1.5,
+        0.4,
+        12.3516665
+      ]
+    },
+    {
+      "pair": "SM_Trivia_SideWall / SM_Trivia_WingWall",
+      "count": 6,
+      "projectedArea": 0.0349997766,
+      "sample": [
+        13.083333,
+        0.0,
+        -3.14166665
+      ]
+    },
+    {
+      "pair": "SM_Trivia_BalconyBulb / SM_Trivia_BalconyBulb",
+      "count": 80,
+      "projectedArea": 0.0287998971,
+      "sample": [
+        12.4310179,
+        5.030088,
+        9.985649
+      ]
+    },
+    {
+      "pair": "SM_Trivia_LiftCabBack / SM_Trivia_LiftCabWall",
+      "count": 8,
+      "projectedArea": 0.0224902816,
+      "sample": [
+        16.333334,
+        3.5,
+        -0.475000054
+      ]
+    },
+    {
+      "pair": "SM_Trivia_LiftCabWall / SM_Trivia_LiftCeiling",
+      "count": 8,
+      "projectedArea": 0.0224859864,
+      "sample": [
+        13.0,
+        2.33333325,
+        -0.5249999
+      ]
+    },
+    {
+      "pair": "SM_Trivia_LiftDoor_R / SM_Trivia_LiftPilaster",
+      "count": 4,
+      "projectedArea": 0.0202999711,
+      "sample": [
+        13.0116663,
+        0.0,
+        0.188333273
+      ]
+    },
+    {
+      "pair": "SM_Trivia_LiftDoor_L / SM_Trivia_LiftPilaster",
+      "count": 4,
+      "projectedArea": 0.0202998817,
+      "sample": [
+        13.0116663,
+        0.0,
+        3.90833354
+      ]
+    },
+    {
+      "pair": "SM_Trivia_LiftDoor_R / SM_Trivia_LiftJamb",
+      "count": 8,
+      "projectedArea": 0.017919898,
+      "sample": [
+        13.04,
+        2.5,
+        0.345
+      ]
+    },
+    {
+      "pair": "SM_Trivia_LiftDoor_L / SM_Trivia_LiftJamb",
+      "count": 8,
+      "projectedArea": 0.0179198235,
+      "sample": [
+        13.04,
+        2.5,
+        3.60499978
+      ]
+    },
+    {
+      "pair": "SM_Trivia_LiftCabBack / SM_Trivia_LiftCeiling",
+      "count": 2,
+      "projectedArea": 0.0112500191,
+      "sample": [
+        16.333334,
+        3.47500014,
+        -0.5
+      ]
+    },
+    {
+      "pair": "SM_Trivia_TrussBrace / SM_Trivia_TrussBrace",
+      "count": 35,
+      "projectedArea": 0.0074375,
+      "sample": [
+        8.416667,
+        8.187252,
+        -1.81618023
+      ]
+    },
+    {
+      "pair": "SM_Trivia_LiftCabWall / SM_Trivia_LiftDoor_R",
+      "count": 2,
+      "projectedArea": 0.00524999,
+      "sample": [
+        13.0116663,
+        0.0,
+        -0.548999965
+      ]
+    },
+    {
+      "pair": "SM_Trivia_LiftCabWall / SM_Trivia_LiftDoor_L",
+      "count": 3,
+      "projectedArea": 0.00524754263,
+      "sample": [
+        12.9883337,
+        0.0,
+        4.549
+      ]
+    },
+    {
+      "pair": "SM_Trivia_UpperSeat_Side_1_0_4 / SM_Trivia_UpperSeat_Side_1_0_5",
+      "count": 2,
+      "projectedArea": 0.0006799381,
+      "sample": [
+        -13.230649,
+        5.54999971,
+        5.92788124
+      ]
+    },
+    {
+      "pair": "SM_Trivia_UpperSeat_Side_-1_0_4 / SM_Trivia_UpperSeat_Side_-1_0_5",
+      "count": 4,
+      "projectedArea": 0.00066114543,
+      "sample": [
+        12.9428129,
+        5.54999971,
+        5.696752
+      ]
+    },
+    {
+      "pair": "SM_Trivia_UpperSeat_Side_1_1_4 / SM_Trivia_UpperSeat_Side_1_1_5",
+      "count": 2,
+      "projectedArea": 0.000437833369,
+      "sample": [
+        -13.8694029,
+        5.75,
+        5.92845535
+      ]
+    },
+    {
+      "pair": "SM_Trivia_UpperSeat_Side_-1_1_4 / SM_Trivia_UpperSeat_Side_-1_1_5",
+      "count": 6,
+      "projectedArea": 0.000437832437,
+      "sample": [
+        13.5980072,
+        5.75,
+        5.70354033
+      ]
+    },
+    {
+      "pair": "SM_Trivia_Podium_02_Button_Cross / SM_Trivia_Podium_02_Button_Cross",
+      "count": 6,
+      "projectedArea": 0.000174615416,
+      "sample": [
+        1.75944793,
+        1.82275486,
+        2.99506545
+      ]
+    },
+    {
+      "pair": "SM_Trivia_Podium_03_Button_Cross / SM_Trivia_Podium_03_Button_Cross",
+      "count": 6,
+      "projectedArea": 0.0001746146,
+      "sample": [
+        -1.404852,
+        1.82188082,
+        2.99775529
+      ]
+    },
+    {
+      "pair": "SM_Trivia_Podium_04_Button_Cross / SM_Trivia_Podium_04_Button_Cross",
+      "count": 6,
+      "projectedArea": 0.0001745983,
+      "sample": [
+        -4.604852,
+        1.82188082,
+        2.99775529
+      ]
+    },
+    {
+      "pair": "SM_Trivia_Podium_01_Button_Cross / SM_Trivia_Podium_01_Button_Cross",
+      "count": 6,
+      "projectedArea": 0.000174595509,
+      "sample": [
+        4.995148,
+        1.82188082,
+        2.99775529
+      ]
+    },
+    {
+      "pair": "SM_Trivia_UpperSeat_Side_1_1_3 / SM_Trivia_UpperSeat_Side_1_1_4",
+      "count": 2,
+      "projectedArea": 9.14572738E-05,
+      "sample": [
+        -13.8904333,
+        5.75,
+        6.87759256
+      ]
+    },
+    {
+      "pair": "SM_Trivia_UpperSeat_Side_-1_1_3 / SM_Trivia_UpperSeat_Side_-1_1_4",
+      "count": 2,
+      "projectedArea": 9.114202E-05,
+      "sample": [
+        13.5874777,
+        5.75,
+        6.639438
+      ]
+    }
+  ]
+}

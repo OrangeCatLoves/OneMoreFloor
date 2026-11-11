@@ -1,0 +1,341 @@
+{
+  "problems": [],
+  "fixture_alignment": [
+    {
+      "fixture": "MK_Trivia_Spotlight_01_OpticalAxis",
+      "angle_error_degrees": 0.0,
+      "light_to_lens_m": 3.5040232E-06,
+      "actual_lens_normal_error_degrees": 0.0,
+      "lens_position_error_m": 1.58597641E-06,
+      "target_unity": [
+        4.8,
+        1.8,
+        1.45
+      ]
+    },
+    {
+      "fixture": "MK_Trivia_Spotlight_02_OpticalAxis",
+      "angle_error_degrees": 0.0,
+      "light_to_lens_m": 2.883288E-06,
+      "actual_lens_normal_error_degrees": 0.0,
+      "lens_position_error_m": 4.80548E-07,
+      "target_unity": [
+        3.42,
+        1.8,
+        1.45
+      ]
+    },
+    {
+      "fixture": "MK_Trivia_Spotlight_03_OpticalAxis",
+      "angle_error_degrees": 0.0,
+      "light_to_lens_m": 5.96046448E-08,
+      "actual_lens_normal_error_degrees": 0.0,
+      "lens_position_error_m": 2.4575624E-07,
+      "target_unity": [
+        2.04,
+        1.8,
+        1.45
+      ]
+    },
+    {
+      "fixture": "MK_Trivia_Spotlight_04_OpticalAxis",
+      "angle_error_degrees": 0.0,
+      "light_to_lens_m": 5.462856E-07,
+      "actual_lens_normal_error_degrees": 0.0,
+      "lens_position_error_m": 0.0,
+      "target_unity": [
+        0.66,
+        1.8,
+        1.45
+      ]
+    },
+    {
+      "fixture": "MK_Trivia_Spotlight_05_OpticalAxis",
+      "angle_error_degrees": 0.0,
+      "light_to_lens_m": 5.462856E-07,
+      "actual_lens_normal_error_degrees": 0.0,
+      "lens_position_error_m": 0.0,
+      "target_unity": [
+        -0.66,
+        1.8,
+        1.45
+      ]
+    },
+    {
+      "fixture": "MK_Trivia_Spotlight_06_OpticalAxis",
+      "angle_error_degrees": 0.0,
+      "light_to_lens_m": 5.96046448E-08,
+      "actual_lens_normal_error_degrees": 0.0,
+      "lens_position_error_m": 2.4575624E-07,
+      "target_unity": [
+        -2.04,
+        1.8,
+        1.45
+      ]
+    },
+    {
+      "fixture": "MK_Trivia_Spotlight_07_OpticalAxis",
+      "angle_error_degrees": 0.0,
+      "light_to_lens_m": 2.883288E-06,
+      "actual_lens_normal_error_degrees": 0.0,
+      "lens_position_error_m": 4.80548E-07,
+      "target_unity": [
+        -3.42,
+        1.8,
+        1.45
+      ]
+    },
+    {
+      "fixture": "MK_Trivia_Spotlight_08_OpticalAxis",
+      "angle_error_degrees": 0.0,
+      "light_to_lens_m": 3.5040232E-06,
+      "actual_lens_normal_error_degrees": 0.0,
+      "lens_position_error_m": 1.58597641E-06,
+      "target_unity": [
+        -4.8,
+        1.8,
+        1.45
+      ]
+    },
+    {
+      "fixture": "MK_Trivia_Spotlight_09_OpticalAxis",
+      "angle_error_degrees": 0.0,
+      "light_to_lens_m": 1.1920929E-07,
+      "actual_lens_normal_error_degrees": 0.0,
+      "lens_position_error_m": 1.68587391E-07,
+      "target_unity": [
+        8.1,
+        5.5,
+        -1.8
+      ]
+    },
+    {
+      "fixture": "MK_Trivia_Spotlight_10_OpticalAxis",
+      "angle_error_degrees": 0.0,
+      "light_to_lens_m": 1.1920929E-07,
+      "actual_lens_normal_error_degrees": 0.0,
+      "lens_position_error_m": 1.68587391E-07,
+      "target_unity": [
+        -8.1,
+        5.5,
+        -1.8
+      ]
+    },
+    {
+      "fixture": "MK_Trivia_Spotlight_11_OpticalAxis",
+      "angle_error_degrees": 0.0,
+      "light_to_lens_m": 1.52662381E-06,
+      "actual_lens_normal_error_degrees": 0.0,
+      "lens_position_error_m": 7.15255737E-07,
+      "target_unity": [
+        4.55,
+        6.7,
+        -5.0
+      ]
+    },
+    {
+      "fixture": "MK_Trivia_Spotlight_12_OpticalAxis",
+      "angle_error_degrees": 0.0,
+      "light_to_lens_m": 1.52662381E-06,
+      "actual_lens_normal_error_degrees": 0.0,
+      "lens_position_error_m": 7.15255737E-07,
+      "target_unity": [
+        -4.55,
+        6.7,
+        -5.0
+      ]
+    }
+  ],
+  "main_screen_aspect": 2.96341419,
+  "player_screen_aspect": 2.963414,
+  "triangles": 997614,
+  "triangle_ceiling": 1549521,
+  "host_position": [
+    -6.4,
+    0.6,
+    3.1
+  ],
+  "tv_sightlines": [
+    {
+      "player": "MK_Objective_01",
+      "target": [
+        -0.7,
+        1.16810775,
+        5.140417
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_01",
+      "target": [
+        -0.7,
+        1.59627306,
+        5.34007359
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_01",
+      "target": [
+        0.7,
+        1.59627306,
+        5.340073
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_01",
+      "target": [
+        0.7,
+        1.16810775,
+        5.14041662
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_01",
+      "target": [
+        0.0,
+        1.38219047,
+        5.24024534
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_02",
+      "target": [
+        -0.7,
+        1.16810775,
+        5.140417
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_02",
+      "target": [
+        -0.7,
+        1.59627306,
+        5.34007359
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_02",
+      "target": [
+        0.7,
+        1.59627306,
+        5.340073
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_02",
+      "target": [
+        0.7,
+        1.16810775,
+        5.14041662
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_02",
+      "target": [
+        0.0,
+        1.38219047,
+        5.24024534
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_03",
+      "target": [
+        -0.7,
+        1.16810775,
+        5.140417
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_03",
+      "target": [
+        -0.7,
+        1.59627306,
+        5.34007359
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_03",
+      "target": [
+        0.7,
+        1.59627306,
+        5.340073
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_03",
+      "target": [
+        0.7,
+        1.16810775,
+        5.14041662
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_03",
+      "target": [
+        0.0,
+        1.38219047,
+        5.24024534
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_04",
+      "target": [
+        -0.7,
+        1.16810775,
+        5.140417
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_04",
+      "target": [
+        -0.7,
+        1.59627306,
+        5.34007359
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_04",
+      "target": [
+        0.7,
+        1.59627306,
+        5.340073
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_04",
+      "target": [
+        0.7,
+        1.16810775,
+        5.14041662
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_04",
+      "target": [
+        0.0,
+        1.38219047,
+        5.24024534
+      ],
+      "blocker": null
+    }
+  ],
+  "directional_fixture_scope": "All 12 physical pan/tilt lamps. Point sconces are diffuse emitters; area sources are review fill without modeled lenses."
+}

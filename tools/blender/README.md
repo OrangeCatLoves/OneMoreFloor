@@ -1,3 +1,38 @@
+# Current task: Trivia round 2
+
+The owner's 11 November feedback is the stopping boundary. Rebuild the source,
+then run the Unity evidence/audit chain (Unity closed first):
+
+```powershell
+& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' -b --python-exit-code 1 --python tools/blender/build_trivia.py -- --iteration 23
+powershell -NoProfile -ExecutionPolicy Bypass -File tools/blender/verify_round_two.ps1 -UseCurrentBuild
+& 'C:/Program Files/Blender Foundation/Blender 5.2/5.2/python/bin/python.exe' tools/blender/report_trivia_round_two.py
+powershell -NoProfile -ExecutionPolicy Bypass -File tools/blender/compare_round_two.ps1
+& 'C:/Program Files/Blender Foundation/Blender 5.2/5.2/python/bin/python.exe' tools/blender/log_trivia_assets.py --date 2026-11-12 --round 05 --iteration 23
+```
+
+`trivia_round_two.py` performs the feedback's layout and circulation changes.
+`resume_trivia_round_two.py` can restart that pass from the local
+`Trivia_Round2Base.blend` checkpoint; **changes to podium construction or other
+base geometry require a full build**. `verify_round_two.ps1` without
+`-UseCurrentBuild` uses that restart point. Neither checkpoint nor temporary
+axis-probe FBX is a deliverable.
+
+`TriviaRoundTwoReview.Before` captured the original Unity scene before any model
+changes. Preserve those baseline PNGs/inventory; do not recapture them from the
+new scene. `After` uses the identical twelve cameras. JPEG comparisons add only
+labels. Source and Unity audits check cloth intersections, all lamp lenses,
+TV visibility, screen proportions and the triangle ceiling. The coplanar check
+scans the entire imported room. The walkthrough tests actual collision routes.
+
+The exporter explicitly converts each object's local basis while preserving
+world vertices/pivots, then disables Blender's problematic automatic FBX space
+bake. `probe_trivia_export.py` / `TriviaAxisProbe.Run` retain the diagnostic that
+exposed and verified this nested-hierarchy fix.
+
+The earlier round-1 commands below are historical reference workflows, not a
+request to restart open-ended refinement.
+
 # Trivia art pipeline
 
 Run from the project root with Blender 5.2 LTS installed. No downloaded mesh,

@@ -1,176 +1,123 @@
-# Trivia round 1 — art review and import notes
+# Trivia round 2 - art review and import notes
 
-This is a WIP art review, not owner acceptance or a completed game floor. The
-latest three comparisons are iteration 22 in `../renders/trivia/round-01/`.
-`review.md` there records the rejected passes and remaining visual differences.
-The owner’s “only minor differences” quality gate must not be treated as passed
-merely because the technical import checks pass.
+Round 2 follows `docs/floors/trivia_art_feedback.md` (11 November 2026).
+The hall's outer dimensions stay unchanged. This is an art review awaiting the
+owner's next playtest, not a completed Trivia game floor. Stop further refinement
+until that feedback arrives.
 
-The owner deferred playtesting and requested this refinement first. Current
-before/after images, close-ups, engine comparisons and the review journal are in
-`../renders/trivia/round-04/`. Room layout and interaction positions are frozen
-pending the owner's later feedback.
+Numbered before/after Unity captures, the spatial audit and the object-name
+change list are in `../renders/trivia/round-05/`. Earlier rounds remain archived.
 
-## Review scene (for a later playtest)
+## Open the room
 
-In Unity, choose **OneMoreFloor > Art > Open Trivia Review**, then press **Play**
-and click the Game view. Walk out of the open lift, turn toward the middle aisle,
-and climb the three illuminated stage steps. **WASD** moves, **mouse** looks,
-**Space** jumps, **V** switches first/third person, **scroll** adjusts camera
-distance, and **Escape** releases the cursor. This uses the existing local-host
-player and camera from MovementTest; questions and answer interactions are not
-implemented in this art scene.
+Unity menu **OneMoreFloor > Art > Open Trivia Review**, then **Play** and click
+Game view. Walk out of the lift, turn left around the stage corner, and climb the
+illuminated side steps. **WASD** moves, **mouse** looks, **Space** jumps,
+**V** switches first/third person, **scroll** adjusts camera distance, and
+**Escape** releases the cursor. This uses the existing local-host player from
+MovementTest. It has no Trivia question/answer gameplay.
 
-The scene is `Assets/_OneMoreFloor/Art/Floors/Trivia/Review/TriviaArtReview.unity`.
-It contains colliders, four spawn markers, open display-pose doors, 43 light markers, baked area lighting and bounce, two reflection maps and ACES
-grading. The scene instantiates 53 lights including derived highlight fills.
-Ten area sources and 21 points are baked; 12 stage spots remain realtime,
-plus 10 derived spot fills at 65% of the old area stand-in intensity. Four
-lights cast realtime shadows. There are 319 lightmapped renderers and 113 light
-probes for moving objects. Its temporary URP clone enables 4x MSAA and High SMAA at native
-resolution; it restores the previous pipeline/AA settings when disabled.
-The project's shared graphics assets are unchanged. Camera smoothing settings
-are serialized in the review scene; the pipeline override takes effect in Play.
-The separately baked reflection maps are assigned in **Custom** probe mode so
-their references survive a scene reload. The stage cubemap also supplies the
-indoor fallback outside the probe volumes. Both maps are captured with
-reflection feedback disabled, then imported as linear, uncompressed HDR. The
-audit rejects empty, nonfinite and implausibly bright maps. Do not change these to a temporary
-`bakedTexture` assignment without a complete LightingDataAsset bake.
-
-Use **OneMoreFloor > Art > Build and Open Trivia Review** to regenerate after
-exporting a changed room. This also bakes lighting (allow several minutes). It
-replaces the art review scene, UV2 mesh copies, maps, probe and grading assets; do not keep manual scene edits there. Runtime integration
-still belongs to Claude Code. Review evidence and remaining limitations are in
-`../renders/trivia/round-04/review.md`.
+Claude Code should run `tools/homepc/sync.sh` and open this scene on the owner's
+home PC for the next playtest. Do not edit that copy. The large local art is
+still excluded from Git pending owner approval; ordinary source commits alone
+will not transfer it.
 
 ## Local deliverables
 
-| File or folder | Contents |
+| Path | Contents |
 |---|---|
-| `art-source/trivia/Trivia_Round01.blend` | Editable metre-scale room, image-backed materials, 3 review cameras and EEVEE lighting |
-| `Assets/_OneMoreFloor/Art/Floors/Trivia/SM_Trivia_Theatre.fbx` | Room assembly with separate reactive parts, collision meshes and markers |
-| `Assets/_OneMoreFloor/Art/Floors/Trivia/Textures/` | 110 PNG material maps across 25 shared materials |
-| `Assets/_OneMoreFloor/Art/Floors/Trivia/Materials/` | 25 generated URP Lit/Complex Lit/Unlit material assets with texture bindings |
-| `art-source/renders/trivia/lighting_sheet.md` | Light colours, relative power, cone angles and Unity placement |
-| `art-source/trivia/lighting.json` | Machine-readable light positions/directions and EEVEE shadow flags |
-| `art-source/trivia/material_manifest.json` | Exact material names, map filenames, resolutions and surface settings |
-| `art-source/trivia/unity-markers.json` | Actual imported Unity marker transforms |
-| `Assets/_OneMoreFloor/Art/Floors/Trivia/Review/` | Local review scene, UV2 mesh copies, lightmaps, 113 light probes and 2 reflection cubemaps |
+| `art-source/trivia/Trivia_Round01.blend` | Current editable round-2 room; legacy filename retained |
+| `Assets/_OneMoreFloor/Art/Floors/Trivia/SM_Trivia_Theatre.fbx` | Separate static/reactive parts, collision meshes and markers |
+| `Assets/_OneMoreFloor/Art/Floors/Trivia/Textures/` | 110 PNG maps across 25 shared materials |
+| `Assets/_OneMoreFloor/Art/Floors/Trivia/Materials/` | URP Lit, Complex Lit wood, and Unlit question-screen materials |
+| `Assets/_OneMoreFloor/Art/Floors/Trivia/Review/TriviaArtReview.unity` | Walkable scene with baked lighting and saved reflection assignments |
+| `art-source/trivia/lighting.json` | Exact light positions, directions, targets and purposes |
+| `art-source/renders/trivia/lighting_sheet.md` | Human-readable lighting sheet |
+| `art-source/renders/trivia/round-05/name-changes.md` | Every added, removed or changed imported object |
 
-The large model, texture and material files and their `.meta` files are local,
-excluded from Git pending owner approval as the brief requires. A fresh checkout
-must run `tools/blender/README.md`'s build command before importing. The old pilot
-FBX/blend proves the initial pipeline; use the full theatre for current geometry.
+## Updated layout and interaction contract
 
-## Claude Code integration
+- Four podiums face the audience (+Z). `MK_Objective_01` to `04` stand at
+  Unity z=1.45, y=0.6, facing +Z; their x values remain 4.8, 1.6, -1.6, -4.8.
+  The four-metre strip behind those positions stays clear for the camera.
+- Status monitors sit outboard on their desk-mounted stems and turn toward
+  their players. This leaves the shared TV visible. The answer decks slope
+  **12 degrees**; all 16 buttons remain separate, with their original names.
+  Press direction at the identity room pose is **(0, -0.978148, +0.207912)**.
+  Use the FBX custom property or this vector, then restore the initial pose.
+- `MK_Host` is **(-6.4, 0.6, 3.1)**: downstage of the players, opposite the lift,
+  with a clear audience view and no obstruction across the shared TV.
+- `SM_Trivia_PlayerScreen` is the low shared question display near the centre
+  of the stage front. Its live surface is **1.4 m wide**, tilted **25 degrees
+  up**, in a supported black housing with a routed cable entering the stage.
+- The big live panel `SM_Trivia_QuestionScreen` is **12.15 x 4.10 m**;
+  both question surfaces have aspect **2.9634146:1**, clean 0-1 UVs and no text.
+  Bind the same question image to both. The four `SM_Trivia_PodiumScreen_nn`
+  surfaces remain separate status displays; assign textures only to the named
+  live surfaces, not the static monitor backs or control-desk equipment.
+- Stage steps wrap the lift-side corner: 3 m width, 0.3 m treads, 0.2 m rises,
+  read from `docs/sizes.json`. The red aisle joins the front cross-aisle and
+  leads to these steps. The lift landing remains clear for four players.
+- Seven ground seating rows use 2 m pitch and share the far-seat mesh.
+  The rear cross-aisle serves the control desk and both gallery staircases.
+  The side galleries are clear promenades; rear gallery seating has its own
+  passage. Two side broadcast positions and wall sconces serve the hall.
 
-1. Open the project and let Unity finish importing. The Art helper can rebuild
-   material mappings and verify the FBX with:
-   `unity run . --timeout 240 -- -executeMethod OneMoreFloor.ArtReview.TriviaArtValidation.Run`
-2. Instantiate the full theatre FBX at world origin with identity rotation and
-   scale 1. Its source front (-Y in Blender) becomes +Z in Unity. Measured point
-   conversion is `(-x, z, -y)`. All mesh rotation/scale is applied.
-3. Disable renderers on every `COL_` mesh and attach MeshColliders. Keep static
-   colliders non-convex; moving lift-door boxes can be convex. Parent each door
-   collider to its matching door with world position preserved. Do not combine
-   the two doors, buttons, spotlight hierarchy or marquee chase sets.
-4. Build gameplay around `MK_Spawn_01`–`04`, `MK_Objective_01`–`04`, `MK_Host`
-   and `MK_Exit`. The four objectives stand on the audience side of the podiums.
-5. Assign live question surfaces to `SM_Trivia_QuestionScreen` and
-   `SM_Trivia_PodiumScreen_01`–`04`. Each is a flat mesh with clean 0–1 UVs. The
-   dark monitor backs are housings inside the static podium meshes, not extra
-   live screens. Put all text in the project string tables.
-6. Each `SM_Trivia_Podium_nn_Button_<Circle|Square|Cross|Triangle>` has its own
-   mesh and pivot. The deck slopes 18 degrees. A short press moves in Unity
-   world/local direction `(0, -0.951057, -0.309017)` at the identity room pose;
-   return to its initial position after release. The FBX custom property records
-   this direction. Lift leaves slide along Unity Z. Spot pan is local Y, tilt
-   local X, using the supplied pan/tilt parent hierarchy.
-7. `SM_Trivia_MarqueeChase_01`–`03` contain every third marquee bulb. They share
-   the bulb material initially: use per-renderer emission overrides for chasing
-   so other room bulbs do not change. Instantiate actual Unity lights at the
-   supplied markers, using the JSON direction with `Quaternion.LookRotation`.
-8. Rebuild/bake the theatrical lighting, then compare
-   against EEVEE. Area sources are bake targets. Use only selected stage spots
-   as realtime shadow lights. The diagnostic Unity preview is deliberately not
-   a production lighting setup; its extra unshadowed directional fill reveals
-   textures through the ceiling. Do not copy that fill into the game scene.
+## Import and lighting
 
-The helper's `Preview` method still creates an unsaved diagnostic import-check
-scene. `TriviaReviewSceneBuilder.Build` creates the separate playable art scene
-described above. It now includes baked indirect lighting and rectangular area
-sources. It is still an art review, not an integrated production-lighting setup.
-The 79 generated UV2 meshes and LightingDataAsset remain with the local scene;
-rebake after changing geometry, materials or static light placement.
+Instantiate the FBX at world origin, rotation identity, scale 1. One Blender
+unit equals one metre. Measured conversion is Blender `(x,y,z)` to Unity
+`(-x,z,-y)`. Source mesh rotation and scale are applied. `export_unity.py` now
+rebases object and mesh coordinates explicitly before FBX export: Blender's
+automatic space bake introduced a rotation and offset below nested lamp pivots.
+The fixed exporter preserves geometry, all marker axes and parent-child poses.
 
-## Materials and performance
+Disable every `COL_` renderer and add a non-convex MeshCollider. Keep static
+collision assemblies separate by role; preserve button, lift-door and lamp
+hierarchies. Parent door colliders to the matching moving leaves while keeping
+world poses. Lift leaves slide along Unity Z. Spotlight pan remains local Y in
+Unity and tilt local X. New `MK_Trivia_Spotlight_nn_OpticalAxis` children identify
+the lens; its **negative local up** is the light direction. The Unity audit also
+checks the actual lens face normal and lens position, not only the marker.
 
-- BaseColor/Emission are sRGB; Normal, Roughness, SpecularSmoothness and MetallicSmoothness are
-  linear data. Unity uses MetallicSmoothness R for metal and A for smoothness,
-  with the material smoothness multiplier set to 1. Separate Roughness maps
-  are supplied for Blender/rebaking, not plugged directly into URP/Lit. Four
-  cloth materials use low-F0 specular maps (RGB 0.008, A smoothness) to reduce
-  broad plastic-like highlights. Wood uses Complex Lit with clearcoat weight
-  0.24 and smoothness 0.76; cloth still lacks an exact velvet-sheen counterpart.
-- The cream live-screen placeholder uses URP Unlit, so stage illumination does
-  not tint its display colour. Gameplay will supply the live question texture.
-- Petal materials use Render Face = Both (`_Cull = 0`) because the curled petals
-  are thin surfaces. All other materials use backface culling.
-- Seventeen material sets use 2048 × 2048 maps. Eight simple monitor/screen,
-  emissive and button sets use 64 × 64 maps. No 4K textures are used.
-- Texture imports use mipmaps, trilinear filtering and anisotropic level 8 to
-  reduce shimmer on surfaces viewed at an angle.
-- Image maps are deterministic procedural bakes. They are not high-to-low
-  sculpt bakes or downloaded materials. Fine carved normals, recess wear and
-  stitching remain weaker than the concepts. Repeated pieces share materials;
-  a consolidated production trim atlas is not yet supplied.
-- Near seats share one mesh; far rows/balconies share a second with fewer bevel
-  subdivisions. Features and trim remain. These are fixed distance groups,
-  not runtime LODGroups. Static details are batched by type; reactive pieces
-  stay independent. GPU instancing is enabled on the generated materials.
-- `unity-validation.json` is the actual imported triangle/object count;
-  `blender-validation.json` includes category costs and conservative camera
-  frustum counts that also include occluded geometry. Neither is a measured
-  GPU frame-time benchmark. The 500k visible-triangle target still needs Unity
-  profiling with occlusion, lights and shadows enabled.
-- Latest totals are 1,549,521 imported triangles, 520 render meshes, 79 collision
-  meshes, 16 buttons, 5 screens and 43 light markers. The source has 1,605,549
-  triangles before Unity's removal of degenerate faces and triangulation.
-  This is 169,757 more imported triangles (+12.3%) than iteration 21. Flowers,
-  rounded rose whorls and finer carved leaves account for this pass's increase;
-  the heavier cloth/upholstery work remains from iteration 21. Flowers and seats need production distance LODs before the
-  laptop budget can be accepted; no frame-time result is claimed.
-- Baked area lighting, bounce and wood clearcoat narrow the engine gap.
-  Blender and URP still differ in tone mapping, velvet sheen and reflections;
-  a custom cloth shader and production reflection setup may be needed.
+The review has **50 source light markers**: **11 areas + 27 points baked**, and
+**12 realtime spots**. Each area supplies one restrained realtime highlight
+spot; four sources cast realtime shadows. Positions and aims come from
+`lighting.json`; use `Quaternion.LookRotation(direction_unity)` for each lamp.
+All twelve stage lamps have specific targets in the lighting sheet. Point
+sconces are diffuse emitters; the broad area sources are review fill.
 
-## Verification and limits
+Use **OneMoreFloor > Art > Build and Open Trivia Review** to regenerate and bake
+after an export. This overwrites the art-owned review scene and its generated
+lighting assets. Current measured receiver/map counts are in
+`baked-lighting-validation.json`; there are 113 light probes for moving objects.
 
-The pilot was imported before the room was generated. The full model is checked
-for the five live screens, sixteen buttons, required markers, correct door
-height, outward solid collision winding and URP material assignment. Blender
-also checks closed collision meshes, applied transforms, marquee sets and all
-twelve spot pan/tilt hierarchies. Actual imported light positions are compared
-to the lighting JSON.
+Keep both reflection probes in **Custom** mode with `customBakedTexture`, and
+retain the indoor fallback reflection. Bake with existing reflection feedback
+disabled; import EXRs as linear uncompressed HDR. Audits reject empty, nonfinite
+or excessive HDR values. The temporary review pipeline enables **4x MSAA + High
+SMAA**, restores previous settings when disabled and does not change shared
+project graphics assets. Texture maps retain mipmaps, trilinear filtering and
+anisotropic level 8.
 
-Shared sizes come from `docs/sizes.json`: player 1.8 m, lift opening 3 × 2.5 m,
-cab 5 × 5 × 3.5 m, steps 0.2 m high × 0.3 m deep × 3 m wide. The final podium
-width is 1.241 m, leaving 1.959 m between neighboring lecterns. Local Unity
-screenshots put the existing KyleRobot at measured 1.8 m beside a podium and
-the lift. The new PlayMode test also walks from the lift to the stage using the
-existing player motor and captures both views with AA enabled. Camera comfort
-and several players moving together still require human assessment.
+## Budget, evidence and limitations
 
-All 82 EditMode and 22 PlayMode tests passed during this iteration. The extra
-PlayMode test exercises the art review route; it skips if the local binary scene
-has not been generated on a fresh clone. These tests do not cover Trivia rules,
-which have not been implemented yet. Summaries and validation reports are here.
+`unity-validation.json` is the authoritative imported triangle/object count.
+Round 2 must remain below 1,549,521 total triangles. Flower tessellation was
+reduced and all seating now shares the far-seat mesh to pay for the additions.
+The separate approximately 500,000-visible-triangle goal still needs production
+visibility/LOD work and profiling; a lower total is not proof of frame rate.
 
-The brief requested an AI 3D provider for flowers. No suitable connected provider
-was available in the plugin search. These flowers were constructed in Blender
-as a documented substitute; there is no invented tool or licence claim. The
-refinement uses overlapping convex rose whorls with closed centres, clustered
-phlox, veined leaves and local seeded variation. Botanical realism still falls short of a
-sculpted reference-quality asset. The owner's
-exact ChatGPT concept prompt is preserved in `../concept/floors/trivia/provenance.txt`.
+`round-05/unity-audit.json` checks screen aspect/UV orientation, all 12 actual
+lamp lenses and 20 player-to-TV sightlines. `source-audit.json` checks cloth
+intersections and floor-fixture support. The whole-room coplanar audit records
+same-facing overlaps above 0.00001 square metres, including within merged
+meshes. Its remaining candidates need the classification in the review journal;
+hidden construction contacts are not an assertion of exposed z-fighting.
+
+The automated Unity walkthrough exercises the existing player motor, the lift,
+stage, all seating passages, control position, both stairs and both galleries.
+It captures first/third person. Crowd comfort and final appearance require the
+owner's playtest. Host/audience characters and Trivia gameplay are outside this
+round. Cloth response, repeated ornament and flower close-ups remain less
+natural than the concept images. This is not final art acceptance.

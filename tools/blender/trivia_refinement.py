@@ -147,12 +147,12 @@ def fixture_detail(head,index,floor):
     """Lens cluster, cooling ribs and yoke bolts follow the existing tilt pivot."""
     # Mesh coordinates inherit the exact housing tilt, with unchanged pivots.
     start=set(bpy.data.objects)
-    angle=math.radians(30 if floor else -22)
+    angle=0
     transform=Quaternion((1,0,0),angle)
     for z in [-.12,-.06,0,.06]:
         pts=[transform@Vector((.214*math.cos(i*math.tau/32),.214*math.sin(i*math.tau/32),z)) for i in range(32)]
         rib=tube(f'SM_Trivia_Spotlight_{index:02}_Cooling',pts,.012,'GoldDark',True,sides=5);rib.parent=head.parent
-    face_z=.252 if floor else -.252
+    face_z=-.252
     for k in range(7):
         a=k*math.tau/6;rad=.105 if k<6 else 0
         p=transform@Vector((rad*math.cos(a),rad*math.sin(a),face_z))

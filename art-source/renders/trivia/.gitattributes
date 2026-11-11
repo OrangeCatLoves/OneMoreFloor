@@ -9,3 +9,4 @@ round-01/comparison-20_view-*.jpg -filter -diff -merge -text
 round-01/comparison-21_view-*.jpg -filter -diff -merge -text
 round-01/comparison-22_view-*.jpg -filter -diff -merge -text
 round-04/*.jpg -filter -diff -merge -text
+round-05/*.jpg -filter -diff -merge -text

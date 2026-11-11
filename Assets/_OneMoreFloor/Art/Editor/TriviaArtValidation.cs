@@ -43,7 +43,7 @@ namespace OneMoreFloor.ArtReview
                 Bounds bounds = renderers[0].bounds;
                 foreach (var renderer in renderers) bounds.Encapsulate(renderer.bounds);
                 var problems = new List<string>();
-                var screens = meshes.Where(m => m.name == "SM_Trivia_QuestionScreen" || m.name.StartsWith("SM_Trivia_PodiumScreen_")).ToArray();
+                var screens = meshes.Where(m => m.name == "SM_Trivia_QuestionScreen" || m.name == "SM_Trivia_PlayerScreen" || m.name.StartsWith("SM_Trivia_PodiumScreen_")).ToArray();
                 foreach (var screen in screens)
                 {
                     var uv = screen.sharedMesh.uv;

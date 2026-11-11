@@ -1,0 +1,14 @@
+{
+  "ground_row_pitch_m": 2,
+  "ground_seat_depth_m": 0.7090566199999992,
+  "row_clearance_m": 1.2909433800000008,
+  "narrowest_side_route_at_gallery_stair_m": 1.4625009999999996,
+  "central_aisle_m": 3,
+  "rear_cross_aisle_m": 2.099999999999998,
+  "rear_gallery_behind_seats_m": 2.1559434999999993,
+  "side_gallery_between_guard_and_pilaster_m": 1.6649999999999991,
+  "upper_seats_to_stair_guard_m": 1.8125,
+  "gallery_bottom_landing_depth_m": 1.4000000000000021,
+  "third_person_clear_distance_behind_objectives_m": 4,
+  "note": "Dimensions are clear geometric corridors. Separate Unity motor test exercises each route; crowd comfort remains the owner playtest."
+}

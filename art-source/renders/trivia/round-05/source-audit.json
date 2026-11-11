@@ -1,0 +1,303 @@
+{
+  "problems": [],
+  "cloth_attachment_intersections": [
+    {
+      "mesh": "SM_Trivia_GoldTieback_L",
+      "cloth_triangle_intersections": 0
+    },
+    {
+      "mesh": "SM_Trivia_GoldTieback_R",
+      "cloth_triangle_intersections": 0
+    },
+    {
+      "mesh": "SM_Trivia_TasselCollar",
+      "cloth_triangle_intersections": 0
+    },
+    {
+      "mesh": "SM_Trivia_TasselCord_L",
+      "cloth_triangle_intersections": 0
+    },
+    {
+      "mesh": "SM_Trivia_TasselCord_R",
+      "cloth_triangle_intersections": 0
+    },
+    {
+      "mesh": "SM_Trivia_TasselKnot",
+      "cloth_triangle_intersections": 0
+    },
+    {
+      "mesh": "SM_Trivia_TasselSkirt",
+      "cloth_triangle_intersections": 0
+    },
+    {
+      "mesh": "SM_Trivia_TasselThread",
+      "cloth_triangle_intersections": 0
+    },
+    {
+      "mesh": "SM_Trivia_TiebackAnchor_L",
+      "cloth_triangle_intersections": 0
+    },
+    {
+      "mesh": "SM_Trivia_TiebackAnchor_R",
+      "cloth_triangle_intersections": 0
+    },
+    {
+      "mesh": "SM_Trivia_TiebackKnot_L",
+      "cloth_triangle_intersections": 0
+    },
+    {
+      "mesh": "SM_Trivia_TiebackKnot_R",
+      "cloth_triangle_intersections": 0
+    }
+  ],
+  "fixture_targets": [
+    {
+      "fixture": "MK_Trivia_Spotlight_01_OpticalAxis",
+      "target_error_degrees": 0.0
+    },
+    {
+      "fixture": "MK_Trivia_Spotlight_02_OpticalAxis",
+      "target_error_degrees": 0.0
+    },
+    {
+      "fixture": "MK_Trivia_Spotlight_03_OpticalAxis",
+      "target_error_degrees": 0.0
+    },
+    {
+      "fixture": "MK_Trivia_Spotlight_04_OpticalAxis",
+      "target_error_degrees": 0.0
+    },
+    {
+      "fixture": "MK_Trivia_Spotlight_05_OpticalAxis",
+      "target_error_degrees": 0.0
+    },
+    {
+      "fixture": "MK_Trivia_Spotlight_06_OpticalAxis",
+      "target_error_degrees": 0.0
+    },
+    {
+      "fixture": "MK_Trivia_Spotlight_07_OpticalAxis",
+      "target_error_degrees": 0.0
+    },
+    {
+      "fixture": "MK_Trivia_Spotlight_08_OpticalAxis",
+      "target_error_degrees": 0.0
+    },
+    {
+      "fixture": "MK_Trivia_Spotlight_09_OpticalAxis",
+      "target_error_degrees": 0.0
+    },
+    {
+      "fixture": "MK_Trivia_Spotlight_10_OpticalAxis",
+      "target_error_degrees": 0.0
+    },
+    {
+      "fixture": "MK_Trivia_Spotlight_11_OpticalAxis",
+      "target_error_degrees": 0.0
+    },
+    {
+      "fixture": "MK_Trivia_Spotlight_12_OpticalAxis",
+      "target_error_degrees": 0.0
+    }
+  ],
+  "tv_sightlines": [
+    {
+      "player": "MK_Objective_01",
+      "target_blender": [
+        0.699999988079071,
+        -5.140417098999023,
+        1.1681078672409058
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_01",
+      "target_blender": [
+        -0.699999988079071,
+        -5.140416622161865,
+        1.1681078672409058
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_01",
+      "target_blender": [
+        -0.699999988079071,
+        -5.340073108673096,
+        1.5962730646133423
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_01",
+      "target_blender": [
+        0.699999988079071,
+        -5.340073585510254,
+        1.5962730646133423
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_01",
+      "target_blender": [
+        0.0,
+        -5.2402448654174805,
+        1.382190465927124
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_02",
+      "target_blender": [
+        0.699999988079071,
+        -5.140417098999023,
+        1.1681078672409058
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_02",
+      "target_blender": [
+        -0.699999988079071,
+        -5.140416622161865,
+        1.1681078672409058
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_02",
+      "target_blender": [
+        -0.699999988079071,
+        -5.340073108673096,
+        1.5962730646133423
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_02",
+      "target_blender": [
+        0.699999988079071,
+        -5.340073585510254,
+        1.5962730646133423
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_02",
+      "target_blender": [
+        0.0,
+        -5.2402448654174805,
+        1.382190465927124
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_03",
+      "target_blender": [
+        0.699999988079071,
+        -5.140417098999023,
+        1.1681078672409058
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_03",
+      "target_blender": [
+        -0.699999988079071,
+        -5.140416622161865,
+        1.1681078672409058
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_03",
+      "target_blender": [
+        -0.699999988079071,
+        -5.340073108673096,
+        1.5962730646133423
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_03",
+      "target_blender": [
+        0.699999988079071,
+        -5.340073585510254,
+        1.5962730646133423
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_03",
+      "target_blender": [
+        0.0,
+        -5.2402448654174805,
+        1.382190465927124
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_04",
+      "target_blender": [
+        0.699999988079071,
+        -5.140417098999023,
+        1.1681078672409058
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_04",
+      "target_blender": [
+        -0.699999988079071,
+        -5.140416622161865,
+        1.1681078672409058
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_04",
+      "target_blender": [
+        -0.699999988079071,
+        -5.340073108673096,
+        1.5962730646133423
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_04",
+      "target_blender": [
+        0.699999988079071,
+        -5.340073585510254,
+        1.5962730646133423
+      ],
+      "blocker": null
+    },
+    {
+      "player": "MK_Objective_04",
+      "target_blender": [
+        0.0,
+        -5.2402448654174805,
+        1.382190465927124
+      ],
+      "blocker": null
+    }
+  ],
+  "floor_fixture_support": [
+    {
+      "fixture": 9,
+      "bottom_m": 0.6000000238418579
+    },
+    {
+      "fixture": 10,
+      "bottom_m": 0.6000000238418579
+    },
+    {
+      "fixture": 11,
+      "bottom_m": 0.6000000238418579
+    },
+    {
+      "fixture": 12,
+      "bottom_m": 0.6000000238418579
+    }
+  ]
+}

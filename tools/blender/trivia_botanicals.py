@@ -31,7 +31,7 @@ def flower(center, normal, radius, material, rng, full=True):
             q=orient@Quaternion((0,0,1),angle)
             size=radius*rng.uniform(.91,1.08)
             twist=rng.uniform(-.09,.09);curl=rng.uniform(.09,.16)
-            rows=9;cols=8;offset=len(vertices)
+            rows=6;cols=5;offset=len(vertices)
             for j in range(rows+1):
                 t=j/rows
                 for i in range(cols+1):
@@ -52,7 +52,7 @@ def flower(center, normal, radius, material, rng, full=True):
                     faces.append((a,a+1,a+cols+2,a+cols+1))
     petals=surface('SM_Trivia_RoseWhorls',vertices,faces,uv,material)
     subdiv=petals.modifiers.new('Soft petal rims','SUBSURF');subdiv.levels=1
-    reduce=petals.modifiers.new('Petal silhouette budget','DECIMATE');reduce.ratio=.34
+    reduce=petals.modifiers.new('Petal silhouette budget','DECIMATE');reduce.ratio=.30
     reduce.use_collapse_triangulate=True
     # A small bud closes the basal holes without a conspicuous spiral decal.
     sphere('SM_Trivia_RoseBud',center+normal*radius*(.73 if full else .52),
@@ -63,7 +63,7 @@ def phlox(center, normal, radius, material, phase):
     q=normal.to_track_quat('Z','Y');vertices=[];faces=[];uv=[]
     for k in range(5):
         rot=q@Quaternion((0,0,1),phase+k*math.tau/5)
-        offset=len(vertices);rows=6;cols=6
+        offset=len(vertices);rows=4;cols=4
         for j in range(rows+1):
             t=j/rows
             for i in range(cols+1):

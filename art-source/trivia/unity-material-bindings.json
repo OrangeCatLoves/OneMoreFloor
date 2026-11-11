@@ -31,17 +31,6 @@
         ]
       },
       {
-        "name": "M_Trivia_GoldDark",
-        "shader": "Universal Render Pipeline/Lit",
-        "baseMap": "T_Trivia_GoldDark_BaseColor",
-        "metallicMap": "T_Trivia_GoldDark_MetallicSmoothness",
-        "specularMap": null,
-        "keywords": [
-          "_METALLICSPECGLOSSMAP",
-          "_NORMALMAP"
-        ]
-      },
-      {
         "name": "M_Trivia_Walnut",
         "shader": "Universal Render Pipeline/Complex Lit",
         "baseMap": "T_Trivia_Walnut_BaseColor",
@@ -49,6 +38,17 @@
         "specularMap": null,
         "keywords": [
           "_CLEARCOAT",
+          "_METALLICSPECGLOSSMAP",
+          "_NORMALMAP"
+        ]
+      },
+      {
+        "name": "M_Trivia_GoldDark",
+        "shader": "Universal Render Pipeline/Lit",
+        "baseMap": "T_Trivia_GoldDark_BaseColor",
+        "metallicMap": "T_Trivia_GoldDark_MetallicSmoothness",
+        "specularMap": null,
+        "keywords": [
           "_METALLICSPECGLOSSMAP",
           "_NORMALMAP"
         ]
