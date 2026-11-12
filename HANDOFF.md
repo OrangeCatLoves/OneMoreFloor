@@ -26,6 +26,14 @@ Claude Code and Codex never run at the same time, and neither remembers the othe
 
 ## Log (newest first)
 
+### 2026-11-12 — Claude Code — review of Trivia art round 2
+- Did: reviewed Codex's round 2 in Unity on the laptop, with my own captures from 10 viewpoints. Made `tools/homepc/sync.sh` report an unreachable home PC instead of failing silently. The room has not been sent to the home PC: the laptop was off the home network.
+- Files: `tools/homepc/`, `HANDOFF.md`.
+- Checks: 82 EditMode and 22 PlayMode tests pass. 997,614 triangles, no broken materials, 3 lightmaps, no Console errors from the room. On the laptop's Intel Arc graphics: about 68 fps in a small 826×400 Game view, looking out of the lift.
+- Other agent needs to know: all nine items are addressed, but I found issues the owner may want fixed before he playtests. (1) The tie-back is a 3 cm straight rod that enters the curtain; it doesn't read as a rope wrapped around it. (2) Ground seating rows are now 2 m apart, which makes the hall look emptier, against item 8. (3) The audience side walls are still mostly bare, and the ornate side boxes were removed. (4) The step landing is a plain slab with no trim, the stage's lit gold edge stops dead where it meets it, and floor lamp 09 and an urn stand at the top of the steps. (5) The players' TV is 1.4 m wide: from the outer podiums it is about 6 m away at a steep angle, and its plain black back faces the audience at centre stage. (6) The rear control desk is plain black boxes. These are not a request yet: the owner decides.
+- Owner to check: decide whether Codex fixes these first or he playtests first.
+- Next: on the owner's decision, either a round 3 request to Codex, or `tools/homepc/sync.sh` and a playtest on the home PC.
+
 ### 2026-11-12 — Codex — Trivia art round 2 WIP
 - Did: completed the nine feedback items and whole-room audit, keeping the hall's outer dimensions. Fixed attached curtain ties, lift floor overlap and all lamp axes; turned podiums, added the shared TV, moved steps to the lift corner, expanded the big screen, and made seating/galleries/control/camera positions functional. Rebuilt and rebaked Unity, reviewed twelve matching before/after pairs. Closed the round-2 open request; stopped for playtest.
 - Files: owned art folders, `tools/blender/`, asset log and this handoff. Evidence and remaining gaps: `art-source/renders/trivia/round-05/review.md`; complete list of 648 changed/added/removed imported object records: `name-changes.md` beside it. Source, reports, new C# metas and small ordinary-Git JPEGs are committed; large generated art/metas stay local pending approval and are included by home-PC sync.

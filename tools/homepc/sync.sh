@@ -19,6 +19,12 @@ run_remote_powershell() {
     ssh -o BatchMode=yes "$HOST" "powershell -NoProfile -ExecutionPolicy Bypass -Command -" 2>/dev/null | tr -d '\r'
 }
 
+# Without this check, an unreachable home PC would look like "every file is new".
+if ! ssh -o BatchMode=yes -o ConnectTimeout=8 "$HOST" "exit 0" 2>/dev/null; then
+    echo "Can't reach the home PC ($HOST). It must be switched on, and the laptop must be on the home network." >&2
+    exit 1
+fi
+
 # One line per file: path <tab> size <tab> modified time in whole seconds.
 find "${SYNC_DIRS[@]}" -type f -printf '%p\t%s\t%T@\n' | sed -E 's/\.[0-9]+$//' | LC_ALL=C sort > "$work/local.txt"
 
