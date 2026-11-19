@@ -22,9 +22,17 @@ Claude Code and Codex never run at the same time, and neither remembers the othe
 ## Open requests
 | From | To | Request | Added |
 |---|---|---|---|
-| Claude Code | Codex | Build Trivia art round 3: `docs/floors/trivia_art_feedback.md`, "Round 3". Biggest change: the lift moves to the centre of the back wall. Remove the galleries and front rails, fix the wall/curtain gaps, make the room much brighter, make the screens upright. Hand back to Claude Code, which checks it before the owner sees it. | 2026-11-19 |
+| Claude Code | Codex | Build Trivia art round 3: `docs/floors/trivia_art_feedback.md`, "Round 3". Biggest change: the lift moves to the centre of the back wall. Remove the galleries and front rails, fix the wall/curtain gaps, make the room much brighter, make the screens upright. Before handing back, run the room checks yourself and fix every failure: `unity test . --mode EditMode --filter TriviaRoomChecks` (what they need, including the new `MK_PlayArea_nn` markers, is in the brief). Claude Code reruns them before the owner sees the room. | 2026-11-19 |
 
 ## Log (newest first)
+
+### 2026-11-20 — Claude Code — automated room checks for the Trivia art
+- Did: built the checks each art round must pass before the owner playtests (`Assets/_OneMoreFloor/Tests/EditMode/RoomChecks/`). They cover where players can reach (against `MK_PlayArea_nn` boxes), standing inside visible meshes, the walking route to the podiums, small floor edges, upright screens and brightness (the owner's target is 0.35). The checks are Explicit, so everyday runs skip them. Wrote round 3 for Codex (`docs/floors/trivia_art_feedback.md`) with the owner's answers: lift at the back centre, ramped centre aisle, steps at both front stage corners, lift opens straight into the hall.
+- Files: `Assets/_OneMoreFloor/Tests/EditMode/`, `docs/`, `HANDOFF.md`.
+- Checks: on the home PC, 82/82 everyday EditMode tests pass. On round 2 the room checks catch everything the owner reported: players reach the 4.8 m gallery deck; the player fits inside visible meshes on 973 spots (back curtain, tied drapes, proscenium capitals, pilasters…); the TV is tilted 25° and the podium screens 16.7°; brightness is 0.12 with up to 91% of the view near-black. The route and floor-edge checks pass.
+- Other agent needs to know: run the checks before handing round 3 back. Name pass-through visuals with `Beam`, `Haze`, `Glow` or `Decal`.
+- Owner to check: nothing until round 3.
+- Next: Codex builds round 3. Claude Code reruns the checks, then opens the room on the home PC.
 
 ### 2026-11-19 — Claude Code — camera twitch while running
 - Did: the owner saw the view twitch while running. Measured it on the home PC, frame by frame. Causes: (1) the character climbs each 20 cm step in a few milliseconds, so the camera jolted up to 38 mm per frame; (2) VSync was off, so the Editor drew ~300 fps into Parsec's 60 fps stream. Fixes: the camera now eases up and down steps (`stepSmoothTime`, `maxSmoothedStep` in `PlayerCameraSettings`); VSync on for players; `PlaytestFrameRate` Editor script caps Play mode to the stream rate (FishNet resets the cap to 500, so it is re-applied). Added `PlayerController.PlaceAt` for teleports.

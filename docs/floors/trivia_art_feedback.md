@@ -24,13 +24,14 @@ The owner walked round 2 on his home PC and was deeply disappointed. Read the ro
 7. **The players' answer screens stand straight, with no tilt.**
 8. Claude Code's round 2 findings: seating rows are 2 m apart (hall looks empty); bare side walls; the TV's plain black back faces the audience; the control desk is plain boxes.
 
-### Checks Claude Code runs before the owner sees round 3
-Round 3 goes to the owner only after it passes all of these:
-- A player can't walk through any wall, curtain or solid prop (test walks into every boundary).
-- Everywhere a player can reach is inside the approved play area: no second level.
-- Measured brightness across the stage, hall and aisle meets a target Claude Code sets with the owner.
-- The answer screens are upright; every light points where its fixture points.
-- The lift-to-stage route has no steps and no blocked spots, and the floor has no small lips.
+### Checks round 3 must pass before the owner sees it
+Claude Code built these as automated tests (`Assets/_OneMoreFloor/Tests/EditMode/RoomChecks/TriviaRoomChecks.cs`). Run them yourself before handing off, and fix every failure:
+`unity test . --mode EditMode --filter TriviaRoomChecks` (Unity closed). The full report is written to `Temp/OneMoreFloor/TriviaRoomChecks.txt`.
+- **Play area.** Add `MK_PlayArea_01`, `_02`, … markers: empties whose position is a box's centre and whose scale is its size in metres. Together they cover exactly where players may go (lift, aisle, hall floor, stage). Everything a player can reach, on foot or by jumping (1.2 m), must be inside them. Round 2 fails: players reach the 4.8 m gallery deck.
+- **No walking into visible geometry.** The player's body must never fit inside a visible mesh. Round 2 fails on 973 spots: `SM_Trivia_BackCurtain`, `SM_Trivia_TiedDrape`, `SM_Trivia_ProsceniumCapital`, `SM_Trivia_BoxPilaster`, `SM_Trivia_RearPanel` and more. Collision must match the visible surface. Meshes players may pass through by design (light beams, haze, glows, decals) must have `Beam`, `Haze`, `Glow` or `Decal` in their names.
+- **Route.** A walking route (steps up to 0.3 m, no jumps) leads from the lift to every `MK_Objective`. No small edges of 0.5–10 cm on flat floor.
+- **Screens.** Every live screen surface (`SM_Trivia_…Screen…`) faces straight out, within 2°. Round 2 fails: the TV is tilted 25°, the podium screens 16.7°.
+- **Brightness.** Average brightness from the lift door, halfway down the aisle and each podium. Round 2 measures 0.12 (0 black, 1 white), with up to 91% of the view near-black. **The owner's target: at least 0.35 average**, a well-lit TV studio where the hall and audience are clearly visible and the stage is still the brightest area.
 
 ## Round 2 — 11 November 2026
 
