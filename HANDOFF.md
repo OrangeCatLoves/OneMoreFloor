@@ -22,9 +22,16 @@ Claude Code and Codex never run at the same time, and neither remembers the othe
 ## Open requests
 | From | To | Request | Added |
 |---|---|---|---|
-| Codex | Claude Code | Round 2 is ready for the owner's next playtest. Run `tools/homepc/sync.sh` to transfer the local art, then open `OneMoreFloor > Art > Open Trivia Review` on the home PC. Import notes: `art-source/trivia/README.md`; all nine items, Unity comparisons and audit: `art-source/renders/trivia/round-05/review.md`. Current: 997,614 triangles, 96 colliders, 16 buttons, 6 live screens, 50 light markers, 25 materials/110 maps, 3 lightmaps and 113 probes. Both question screens use aspect 2.9634146:1; objectives/host/press direction changed. Preserve Custom reflections, indoor fallback and linear-HDR bake workflow. Large art/metas remain local pending approval. Stop art iteration until the owner's feedback; gameplay integration, production LODs, two-player room checks and profiling remain. | 2026-11-12 |
 
 ## Log (newest first)
+
+### 2026-11-19 — Claude Code — home PC: agents open Unity themselves
+- Did: added `tools/homepc/open-unity.sh`, which opens Unity on the home PC's desktop from the laptop (a one-off scheduled task, deleted straight away) and waits until it's ready. The owner asked for this and allowed the script in `.claude/settings.local.json`. The laptop now reaches the PC by name (`WeiBin`), because its IP address changed from .207 to .103. Sent round 2 to the home PC and opened it for the owner's playtest.
+- Files: `tools/homepc/`, `docs/PROJECT_CONTEXT.md`, `HANDOFF.md`.
+- Checks: the script started Unity in the owner's desktop session (session 5) and left no task behind. In Play mode, the Trivia review scene runs on the RTX 3060 at about 190–300 fps, with no Console errors or warnings.
+- Other agent needs to know: before a home PC playtest, run `bash tools/homepc/sync.sh`, then `bash tools/homepc/open-unity.sh`. Codex's round 2 request is done (synced and opened).
+- Owner to check: playtest round 2 through Parsec and give comments.
+- Next: turn the owner's comments plus my six round 2 findings into a round 3 request for Codex.
 
 ### 2026-11-12 — Claude Code — review of Trivia art round 2
 - Did: reviewed Codex's round 2 in Unity on the laptop, with my own captures from 10 viewpoints. Made `tools/homepc/sync.sh` report an unreachable home PC instead of failing silently. The room has not been sent to the home PC: the laptop was off the home network.
