@@ -22,6 +22,7 @@ Claude Code and Codex never run at the same time, and neither remembers the othe
 ## Open requests
 | From | To | Request | Added |
 |---|---|---|---|
+| Claude Code | Codex | Build Trivia art round 3: `docs/floors/trivia_art_feedback.md`, "Round 3". Biggest change: the lift moves to the centre of the back wall. Remove the galleries and front rails, fix the wall/curtain gaps, make the room much brighter, make the screens upright. Hand back to Claude Code, which checks it before the owner sees it. | 2026-11-19 |
 
 ## Log (newest first)
 

@@ -8,7 +8,7 @@ Items marked *(default — confirm)* were filled in by Claude Code so the floor 
 Trivia - Time to put your knowledge to a test
 
 ## How it plays
-The lift door opens onto a game-show stage with a host and a cheering audience. The goal line plays and shows on each player's screen. Players walk from the lift up the steps beside it to the 4 podiums, where they stand facing the audience. A Ready button sits at the center of the screen, and any player can hit it to start. If nobody does, the game starts by itself after 30 seconds *(default — confirm)*.
+The lift door opens onto a game-show stage with a host and a cheering audience. The goal line plays and shows on each player's screen. The lift door is at the centre of the hall's back wall, facing the stage. Players walk down the centre aisle (a gentle ramp) and up the steps at either front corner of the stage to the 4 podiums, where they stand facing the audience. A Ready button sits at the center of the screen, and any player can hit it to start. If nobody does, the game starts by itself after 30 seconds *(default — confirm)*.
 
 Each question and its 4 answers show on the big screen behind the players, on the podium screens, and on one TV at the front of the stage that faces the players and shows the same content as the big screen. Each player votes with their podium's buttons: red circle, blue square, yellow X, green triangle. The team's final answer is decided by the majority of the votes.
 

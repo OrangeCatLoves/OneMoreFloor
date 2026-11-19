@@ -2,6 +2,36 @@
 
 For Codex. The owner's playtest feedback on the Trivia room, newest round first. Where this file and `trivia_art_brief.md` differ, this file wins.
 
+## Round 3 — 19 November 2026
+
+The owner walked round 2 on his home PC and was deeply disappointed. Read the round 2 instruction below again: **every design you add has to be intentional.** If an object, level or space has no clear purpose for the players or the show, leave it out. The hall's outer size stays.
+
+### Major layout change: the lift moves to the back of the hall
+1. **The lift door sits at the centre of the hall's back wall**, so players face the stage directly when it opens. Remove the lift beside the stage.
+   - The door opens **straight into the hall** at the top of the centre aisle, with no foyer.
+   - **The centre aisle is a gentle ramp** from the lift down to the stage. The seats either side stay tiered; the aisle itself has no steps.
+   - **Steps at both front corners of the stage**, left and right of the players' TV. Remove the current steps and landing.
+   - Move `MK_Spawn_01` to `04` and `MK_Exit` to the new lift. Relocate the control desk and cameras now at the back centre where they serve the show and block nothing.
+
+### Remove
+2. **The upper galleries and their staircases, completely.** Players must not reach any second level. The owner: "an unnecessary addition".
+3. **Both front rails**: the guard rail along the front of the seating (`COL_Trivia_FrontRowGuard`) and the rail along the stage front. The owner finds them hideous. Add a rail back only where there is a real drop, designed to match the room.
+
+### Fix
+4. **Players can walk through parts of the wall and curtain on the right of the stage.** Every wall, curtain and solid surface needs matching collision, with no gaps.
+5. **The curtain tie-backs are hideous.** Redesign them as believable thick rope tiebacks that wrap the gathered curtain (see round 2, item 1).
+6. **The whole room must be a lot brighter**: a lively game show, not a dim theatre. This overrides the brief's "darker surroundings": the hall and audience are well lit too.
+7. **The players' answer screens stand straight, with no tilt.**
+8. Claude Code's round 2 findings: seating rows are 2 m apart (hall looks empty); bare side walls; the TV's plain black back faces the audience; the control desk is plain boxes.
+
+### Checks Claude Code runs before the owner sees round 3
+Round 3 goes to the owner only after it passes all of these:
+- A player can't walk through any wall, curtain or solid prop (test walks into every boundary).
+- Everywhere a player can reach is inside the approved play area: no second level.
+- Measured brightness across the stage, hall and aisle meets a target Claude Code sets with the owner.
+- The answer screens are upright; every light points where its fixture points.
+- The lift-to-stage route has no steps and no blocked spots, and the floor has no small lips.
+
 ## Round 2 — 11 November 2026
 
 The owner walked iteration 22 on his home PC. **The room's overall size is fine: keep the hall's outer dimensions.** The design inside it needs the changes below.
