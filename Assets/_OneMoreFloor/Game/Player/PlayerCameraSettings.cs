@@ -42,6 +42,12 @@ namespace OneMoreFloor.Game
         [SerializeField, Min(0f), Tooltip("The player's own body hides when the camera is closer to their head than this, in metres.")]
         private float hideBodyDistance = 0.8f;
 
+        [SerializeField, Min(0f), Tooltip("Seconds the camera takes to ease up or down a step, instead of jumping with the character. 0 jumps.")]
+        private float stepSmoothTime = 0.07f;
+
+        [SerializeField, Min(0f), Tooltip("Height changes up to this size in one frame, in metres, count as a step and are eased. Bigger ones (teleports) are followed straight away.")]
+        private float maxSmoothedStep = 0.5f;
+
         public float LookSensitivity => lookSensitivity;
         public float LookUpLimit => lookUpLimit;
         public float LookDownLimit => lookDownLimit;
@@ -54,5 +60,7 @@ namespace OneMoreFloor.Game
         public Vector3 ShoulderOffset => shoulderOffset;
         public Vector3 FollowDamping => followDamping;
         public float HideBodyDistance => hideBodyDistance;
+        public float StepSmoothTime => stepSmoothTime;
+        public float MaxSmoothedStep => maxSmoothedStep;
     }
 }

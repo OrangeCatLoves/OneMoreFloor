@@ -25,6 +25,13 @@ Claude Code and Codex never run at the same time, and neither remembers the othe
 
 ## Log (newest first)
 
+### 2026-11-19 — Claude Code — camera twitch while running
+- Did: the owner saw the view twitch while running. Measured it on the home PC, frame by frame. Causes: (1) the character climbs each 20 cm step in a few milliseconds, so the camera jolted up to 38 mm per frame; (2) VSync was off, so the Editor drew ~300 fps into Parsec's 60 fps stream. Fixes: the camera now eases up and down steps (`stepSmoothTime`, `maxSmoothedStep` in `PlayerCameraSettings`); VSync on for players; `PlaytestFrameRate` Editor script caps Play mode to the stream rate (FishNet resets the cap to 500, so it is re-applied). Added `PlayerController.PlaceAt` for teleports.
+- Files: `Assets/_OneMoreFloor/Game/Player/`, `Assets/_OneMoreFloor/Data/`, `Assets/_OneMoreFloor/Editor/`, `Assets/_OneMoreFloor/Tests/PlayMode/`, `ProjectSettings/QualitySettings.asset`, `docs/PROJECT_CONTEXT.md`.
+- Checks: on the home PC, 82 EditMode tests pass; 22 of 23 PlayMode tests pass, including the new stairs test. The failure is Codex's walkthrough test, which writes into `art-source/` (not synced to the PC). On stairs the camera now rises at the stairs' slope (≤15 mm per frame at ~250 fps) instead of jolting. Flat running and standing were already smooth (camera within 0.1 mm). The camera's collision with props caused no pops. Play mode holds 60 fps on the PC.
+- Other agent needs to know: the test arena's jump block `GapAfter5m` overlaps half the stairs (my layout mistake, harmless).
+- Owner to check: whether running, and running up the stage steps, still feels twitchy.
+
 ### 2026-11-19 — Claude Code — home PC: agents open Unity themselves
 - Did: added `tools/homepc/open-unity.sh`, which opens Unity on the home PC's desktop from the laptop (a one-off scheduled task, deleted straight away) and waits until it's ready. The owner asked for this and allowed the script in `.claude/settings.local.json`. The laptop now reaches the PC by name (`WeiBin`), because its IP address changed from .207 to .103. Sent round 2 to the home PC and opened it for the owner's playtest.
 - Files: `tools/homepc/`, `docs/PROJECT_CONTEXT.md`, `HANDOFF.md`.

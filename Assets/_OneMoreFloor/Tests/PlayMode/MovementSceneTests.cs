@@ -232,6 +232,40 @@ namespace OneMoreFloor.Tests.PlayMode
         }
 
         [UnityTest]
+        public IEnumerator RunningUpStairs_TheCameraEasesUpInsteadOfJolting()
+        {
+            // The arena's stairs span x = 10.5 to 13.5 from z = 4, climbing towards +Z (see MovementTestBuilder).
+            // A jump-test block covers their x < 12 half, so the run uses the free half.
+            _player.PlaceAt(new Vector3(13f, 0.05f, 2.5f), 0f);
+            yield return new WaitForSeconds(0.3f);
+            float restHeight = _player.CameraTarget.position.y - _player.transform.position.y;
+
+            float fastestBodyRise = 0f, fastestCameraRise = 0f;
+            float lastBody = _player.transform.position.y, lastCamera = _player.CameraTarget.position.y;
+            Hold(Key.W);
+            float end = Time.time + 1.6f;
+            while (Time.time < end)
+            {
+                yield return null;
+                float body = _player.transform.position.y, camera = _player.CameraTarget.position.y;
+                if (Time.deltaTime > 0f)
+                {
+                    fastestBodyRise = Mathf.Max(fastestBodyRise, (body - lastBody) / Time.deltaTime);
+                    fastestCameraRise = Mathf.Max(fastestCameraRise, (camera - lastCamera) / Time.deltaTime);
+                }
+                lastBody = body;
+                lastCamera = camera;
+            }
+            Hold();
+            yield return new WaitForSeconds(0.5f);
+
+            Assert.That(_player.transform.position.y, Is.GreaterThan(2f), "The player should have climbed the stairs.");
+            Assert.That(fastestBodyRise, Is.GreaterThan(5f), "The character jolts up each step; without that, this test proves nothing.");
+            Assert.That(fastestCameraRise, Is.LessThan(fastestBodyRise * 0.6f), "The camera should ease up the steps, not jolt with the character.");
+            Assert.That(_player.CameraTarget.position.y - _player.transform.position.y, Is.EqualTo(restHeight).Within(0.01f), "The camera should settle back at eye height.");
+        }
+
+        [UnityTest]
         public IEnumerator InThirdPerson_AWallPushesTheCameraInInsteadOfClippingThroughIt()
         {
             // A wall right behind the player would hide the view if the camera went through it.

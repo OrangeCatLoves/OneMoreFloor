@@ -46,6 +46,13 @@ namespace OneMoreFloor.Game
         private float _zoomVelocity;
         private bool _inputActive;
 
+        // Step smoothing: how far the camera currently sits below (or above) where it should be.
+        private Vector3 _cameraTargetRest;
+        private float _lastHeight;
+        private bool _wasGrounded;
+        private float _stepOffset;
+        private float _stepOffsetVelocity;
+
         public bool IsLocalPlayer { get; private set; }
         public bool IsBodyVisible { get; private set; } = true;
         public ViewZoom Zoom { get; private set; }
@@ -61,6 +68,8 @@ namespace OneMoreFloor.Game
             IsLocalPlayer = true;
             _motor = GetComponent<PlayerMotor>();
             _yaw = transform.eulerAngles.y;
+            _cameraTargetRest = cameraTarget.localPosition;
+            _lastHeight = transform.position.y;
 
             Zoom = new ViewZoom(
                 cameraSettings.StartDistance,
@@ -128,7 +137,43 @@ namespace OneMoreFloor.Game
             _motor.Tick(new MoveCommand(moveInput, jump, _yaw, Zoom.IsFirstPerson), Time.deltaTime);
             playerAnimator.Apply(_motor, Time.deltaTime);
 
+            SmoothSteps(Time.deltaTime);
             UpdateCamera(Time.deltaTime);
+        }
+
+        /// <summary>Moves the local player instantly, for example to a floor's start. The camera follows without easing.</summary>
+        public void PlaceAt(Vector3 position, float yaw)
+        {
+            var body = GetComponent<CharacterController>();
+            body.enabled = false;
+            transform.SetPositionAndRotation(position, Quaternion.Euler(0f, yaw, 0f));
+            body.enabled = true;
+
+            _yaw = yaw;
+            if (cameraTarget != null)
+                cameraTarget.rotation = Quaternion.Euler(_pitch, _yaw, 0f);
+
+            _lastHeight = position.y;
+            _wasGrounded = false;
+            _stepOffset = 0f;
+            _stepOffsetVelocity = 0f;
+        }
+
+        // The character controller climbs a step in a single frame, which jolts the camera.
+        // While walking on the ground, the camera keeps its height through that jump and eases after it.
+        // Jumps and falls aren't eased: they are already smooth.
+        private void SmoothSteps(float deltaTime)
+        {
+            float height = transform.position.y;
+            float change = height - _lastHeight;
+            _lastHeight = height;
+
+            if (_wasGrounded && _motor.IsGrounded && Mathf.Abs(change) <= cameraSettings.MaxSmoothedStep)
+                _stepOffset = Mathf.Clamp(_stepOffset - change, -cameraSettings.MaxSmoothedStep, cameraSettings.MaxSmoothedStep);
+            _wasGrounded = _motor.IsGrounded;
+
+            _stepOffset = Mathf.SmoothDamp(_stepOffset, 0f, ref _stepOffsetVelocity, cameraSettings.StepSmoothTime, Mathf.Infinity, deltaTime);
+            cameraTarget.localPosition = _cameraTargetRest + Vector3.up * _stepOffset;
         }
 
         private void UpdateCursorCapture()
