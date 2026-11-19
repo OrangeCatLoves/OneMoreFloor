@@ -14,7 +14,7 @@ The owner walked round 2 on his home PC and was deeply disappointed. Read the ro
    - Move `MK_Spawn_01` to `04` and `MK_Exit` to the new lift. Relocate the control desk and cameras now at the back centre where they serve the show and block nothing.
 
 ### Remove
-2. **The upper galleries and their staircases, completely.** Players must not reach any second level. The owner: "an unnecessary addition".
+2. **Players must not reach the upper galleries.** The owner wants to keep the galleries, but not reachable (21 Nov update). Keep them as audience seating. Remove the staircases inside the hall. The audience reaches the galleries through doors at their back, as in a real theatre. Players can't reach the gallery by walking or jumping, and the gallery stays outside every `MK_PlayArea` box. Gallery fronts keep a rail designed to match the room, because there is a real drop.
 3. **Both front rails**: the guard rail along the front of the seating (`COL_Trivia_FrontRowGuard`) and the rail along the stage front. The owner finds them hideous. Add a rail back only where there is a real drop, designed to match the room.
 
 ### Fix

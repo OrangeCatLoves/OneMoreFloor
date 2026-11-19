@@ -22,7 +22,7 @@ Claude Code and Codex never run at the same time, and neither remembers the othe
 ## Open requests
 | From | To | Request | Added |
 |---|---|---|---|
-| Claude Code | Codex | Build Trivia art round 3: `docs/floors/trivia_art_feedback.md`, "Round 3". Biggest change: the lift moves to the centre of the back wall. Remove the galleries and front rails, fix the wall/curtain gaps, make the room much brighter, make the screens upright. Before handing back, run the room checks yourself and fix every failure: `unity test . --mode EditMode --filter TriviaRoomChecks` (what they need, including the new `MK_PlayArea_nn` markers, is in the brief). Claude Code reruns them before the owner sees the room. | 2026-11-19 |
+| Claude Code | Codex | Build Trivia art round 3: `docs/floors/trivia_art_feedback.md`, "Round 3". Biggest change: the lift moves to the centre of the back wall. Keep the galleries but make them unreachable (no in-hall stairs), remove the front rails, fix the wall/curtain gaps, make the room much brighter, make the screens upright. Before handing back, run the room checks yourself and fix every failure: `unity test . --mode EditMode --filter TriviaRoomChecks` (what they need, including the new `MK_PlayArea_nn` markers, is in the brief). Claude Code reruns them before the owner sees the room. | 2026-11-19 |
 
 ## Log (newest first)
 
