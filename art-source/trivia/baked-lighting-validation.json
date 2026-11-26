@@ -1,13 +1,12 @@
 {
-  "lightmap_count": 3,
-  "lightmap_receivers": 185,
-  "baked_probes": 113,
-  "unique_uv_meshes": 42,
+  "lightmap_count": 2,
+  "lightmap_receivers": 285,
+  "baked_probes": 123,
+  "unique_uv_meshes": 69,
   "resolution_texels_per_metre": 10,
-  "elapsed_seconds": 104.7134899,
+  "elapsed_seconds": 165.15345449999998,
   "lightmap_sizes": [
     "1024x1024",
-    "256x256",
-    "256x256"
+    "512x512"
   ]
 }

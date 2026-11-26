@@ -116,7 +116,8 @@ namespace OneMoreFloor.Tests.EditMode.RoomChecks
         [Test]
         public void PlayersCanOnlyReachTheApprovedPlayArea()
         {
-            List<Bounds> areas = Markers("MK_PlayArea_").Select(t => new Bounds(t.position, t.lossyScale)).ToList();
+            // Absolute size: an import can flip an axis of a marker's scale.
+            List<Bounds> areas = Markers("MK_PlayArea_").Select(t => new Bounds(t.position, Abs(t.lossyScale))).ToList();
             Assume.That(areas, Is.Not.Empty, "Needs MK_PlayArea markers (see TheRoomHasItsMarkers).");
 
             List<FloorSpot> outside = _survey.ReachableWithJumps
@@ -287,6 +288,8 @@ namespace OneMoreFloor.Tests.EditMode.RoomChecks
                 Object.DestroyImmediate(target);
             }
         }
+
+        private static Vector3 Abs(Vector3 v) => new Vector3(Mathf.Abs(v.x), Mathf.Abs(v.y), Mathf.Abs(v.z));
 
         private static Vector3 AverageNormal(MeshFilter filter)
         {

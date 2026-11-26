@@ -32,10 +32,14 @@ bpy.context.scene.unit_settings.system='METRIC';bpy.context.scene.unit_settings.
 g.M,materials=build_materials(OUT/'Textures',opt.textures,opt.refresh_textures)
 RNG=random.Random(7139)
 LIGHTS=[]
+# Light numbers never repeat, even after a later round removes lights.
+LIGHT_NUMBERS=[0]
 STAGE=S['stairs']['stepHeight']*3
+# Podium status monitors stand upright (owner, round 3). Round 2 tilted them 17 degrees back.
+MONITOR_TILT=0
 
 def light(kind,loc,color,power,target=None,size=1,cone=50,purpose=''):
-    i=len(LIGHTS)+1;name=f'MK_Light_{kind}_{i:02}'
+    LIGHT_NUMBERS[0]+=1;i=LIGHT_NUMBERS[0];name=f'MK_Light_{kind}_{i:02}'
     o=empty(name,loc)
     if target:o.rotation_euler=(Vector(target)-Vector(loc)).to_track_quat('-Z','Y').to_euler()
     d=bpy.data.lights.new(name.replace('MK_',''),{'Spot':'SPOT','Area':'AREA','Point':'POINT'}[kind]);d.energy=power
@@ -90,7 +94,7 @@ def podium(index,x,y,z):
     mx=x-math.copysign(.5,x) if x else x
     box('SM_Trivia_MonitorNeck',(mx,y+.22,z+1.16),(.18,.15,.24),'Gold',.02)
     rim=box('SM_Trivia_MonitorFrame',(mx,y+.22,z+1.48),(1.12,.10,.69),'Gold',.045)
-    rim.rotation_euler.x=math.radians(-17);apply(rim)
+    rim.rotation_euler.x=math.radians(-MONITOR_TILT);apply(rim)
     screen=panel(f'SM_Trivia_PodiumScreen_{tag}',mx,y+.165,z+1.48,1.01,.59,'Monitor')
     back=panel(f'SM_Trivia_MonitorBackHousing_{tag}',mx,y+.275,z+1.48,1.01,.59,'Monitor')
     for p in back.data.polygons:p.flip()
@@ -98,8 +102,8 @@ def podium(index,x,y,z):
     for part in [screen,back]:
         for v in part.data.vertices:
             yy=v.co.y-(y+.22);zz=v.co.z-(z+1.48)
-            v.co.y=y+.22+yy*math.cos(math.radians(-17))-zz*math.sin(math.radians(-17))
-            v.co.z=z+1.48+yy*math.sin(math.radians(-17))+zz*math.cos(math.radians(-17))
+            v.co.y=y+.22+yy*math.cos(math.radians(-MONITOR_TILT))-zz*math.sin(math.radians(-MONITOR_TILT))
+            v.co.z=z+1.48+yy*math.sin(math.radians(-MONITOR_TILT))+zz*math.cos(math.radians(-MONITOR_TILT))
     from trivia_round_two import turn
     for part in set(bpy.data.objects)-monitor_start:
         turn(part,(mx,y+.22,z+1.48),math.copysign(math.radians(18),x) if x else 0)
@@ -715,4 +719,6 @@ if not opt.pilot:
     (SOURCE/'round2-base-lights.json').write_text(json.dumps(LIGHTS,indent=2),encoding='utf8')
     from trivia_round_two import apply_round_two
     apply_round_two(S,seat_template,rail,light)
+    from trivia_round_three import apply_round_three
+    apply_round_three(S,seat_template,rail,light,LIGHTS,lantern)
 finalize()

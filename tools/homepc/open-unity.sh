@@ -12,21 +12,18 @@
 # See docs/PROJECT_CONTEXT.md, section 11.
 set -euo pipefail
 
-HOST="${HOMEPC_HOST:-homepc}"
-REMOTE_DIR="${HOMEPC_DIR:-C:\\OneMoreFloor}"
 WAIT=1
 [[ "${1:-}" == "--no-wait" ]] && WAIT=0
 
 cd "$(git rev-parse --show-toplevel)"
+source tools/homepc/common.sh
+REMOTE_DIR='C:\OneMoreFloor'
 version="$(sed -n 's/^m_EditorVersion: *//p' ProjectSettings/ProjectVersion.txt | tr -d '\r')"
 UNITY_EXE="${HOMEPC_UNITY:-C:\\Program Files\\Unity\\Hub\\Editor\\$version\\Editor\\Unity.exe}"
 
 ssh_quiet() { ssh -o BatchMode=yes -o ConnectTimeout=8 "$HOST" "$@" 2>/dev/null | tr -d '\r'; }
 
-if ! ssh -o BatchMode=yes -o ConnectTimeout=8 "$HOST" "exit 0" 2>/dev/null; then
-    echo "Can't reach the home PC ($HOST). It must be switched on, and the laptop must be on the home network." >&2
-    exit 1
-fi
+ensure_homepc_reachable
 
 # The PowerShell part runs on the PC. Sent base64-encoded because multi-line scripts piped over
 # stdin break in PowerShell.

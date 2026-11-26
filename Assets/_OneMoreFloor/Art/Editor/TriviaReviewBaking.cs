@@ -89,9 +89,12 @@ namespace OneMoreFloor.ArtReview
             foreach (float x in new[]{-10f,-5f,0,5,10})
                 foreach (float z in new[]{9f,15,21})
                     foreach (float y in new[]{2.4f,4.5f,7}) positions.Add(new Vector3(x,y,z));
-            foreach (float x in new[]{13.8f,16.3f})
-                foreach (float z in new[]{.5f,3.5f})
-                    foreach (float y in new[]{1f,2.5f}) positions.Add(new Vector3(x,y,z));
+            // Cross-aisle at lift level (1.2 m) and the lift cab behind the rear wall.
+            foreach (float x in new[]{-10f,-5f,0,5,10})
+                foreach (float y in new[]{2.2f,3.7f}) positions.Add(new Vector3(x,y,24));
+            foreach (float x in new[]{-1.2f,1.2f})
+                foreach (float z in new[]{27.2f,30f})
+                    foreach (float y in new[]{2.2f,3.7f}) positions.Add(new Vector3(x,y,z));
             group.probePositions=positions.ToArray();
             EditorSceneManager.SaveScene(room.scene);AssetDatabase.SaveAssets();
             var start=DateTime.UtcNow;

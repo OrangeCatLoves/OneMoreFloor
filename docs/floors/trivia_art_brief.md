@@ -17,7 +17,7 @@ This room is the game's first impression and its best trailer shot. Treat it as 
 - Supporting: warm walnut wood, cream and ivory plaster and marble.
 - Accents, only where the images use them: saturated red, blue, yellow and green on the answer symbols.
 
-**Lighting mood:** warm, theatrical and high contrast. Pools of amber key light against rich, darker surroundings, with purple-gelled stage light as the secondary colour. Dozens of small practical lights (bulbs, sconces, lit edges) make the room sparkle. Highlights glow softly. The polished stage floor reflects all of it. Light should visibly fall off into shadow, giving depth from the bright stage to the darker hall.
+**Lighting mood:** warm, bright and lively, like a well-lit TV studio (owner, round 3): the hall and audience are clearly visible, and the stage is still the brightest area. Amber key light with purple-gelled stage light as the secondary colour. Dozens of small practical lights (bulbs, sconces, chandeliers, lit edges) make the room sparkle. Highlights glow softly. The polished stage floor reflects all of it. The room checks measure the brightness: at least 0.35 average on screen from the players' views (the concept images measure 0.35 to 0.38).
 
 **Detail language:** ornate and layered, never bare. Every large surface has moulding, trim, fabric folds, inlay or lights. Detail is richest around the stage and simplifies with distance from it.
 
@@ -28,8 +28,8 @@ Where the images disagree, `trivia-1.png` wins.
 - A curved stage front with gold trim and a lit edge, raised above the hall.
 - Polished warm wood planks, glossy enough to show clear reflections.
 - A gold star-compass inlay in a gold ring at centre stage, where the host stands.
-- Steps with lit risers on the side of the stage nearest the lift, on the direct route from the lift doors.
-- One low TV for the players at the centre of the stage front, facing them and tilted up, showing the same content as the big screen.
+- Curved steps with lit risers at both front corners of the stage, left and right of the players' TV, reached from the foot of the centre aisle (round 3).
+- One low TV for the players at the centre of the stage front, facing them and standing upright, showing the same content as the big screen. Its back, seen by the audience, is dressed in walnut and gold. All live screens stand upright (round 3).
 - Compact floor-standing stage lights at the corners of the stage, each tilted up at a specific target.
 
 **Proscenium and backdrop**
@@ -52,14 +52,14 @@ Where the images disagree, `trivia-1.png` wins.
 **Hall**
 - Tiered rows of burgundy velvet seats with gold trim, empty for now.
 - A red carpet aisle with gold stars, leading to the stage front.
-- Gold handrails along the front of the seating sections.
+- No rail in front of the first row, and no vertical bars along the stage front (owner, round 3). Rails only where there is a real drop, such as the gallery fronts.
 - A curved upper balcony with a cream fascia lined with small bulbs, and purple banners and gold-star shields along it.
 - Theatre boxes on the side walls, with arches, drapes and gold lanterns.
 - Burgundy panelled walls with gold lattice grilles and glowing wall sconces.
 - Cream marble plinths with gold urns of purple, white and cream flowers.
 
 **Lift**
-- Brushed gold double doors in an arched gold surround, with an up and down indicator above, beside the stage as in `trivia-1.png`.
+- Brushed gold double doors in an arched gold surround, with an up and down indicator above, at the centre of the hall's back wall, facing the stage (owner, round 3; as in the reverse concept image). The doors open straight into the hall at the top of the ramped centre aisle.
 - Flanked by sconces and flower plinths.
 
 **Not in this round:** the host and the audience. Leave the seats empty. Confetti and light beams are effects that Claude Code adds in Unity.

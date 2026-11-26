@@ -1,15 +1,15 @@
 {
     "model": "Assets/_OneMoreFloor/Art/Floors/Trivia/SM_Trivia_Theatre.fbx",
     "sizeMetres": [
-        32.67500305175781,
+        29.200000762939454,
         11.040002822875977,
-        32.099998474121097
+        37.25
     ],
-    "renderMeshes": 397,
-    "triangles": 997614,
-    "colliders": 96,
+    "renderMeshes": 520,
+    "triangles": 1114537,
+    "colliders": 116,
     "buttons": 16,
-    "lightMarkers": 50,
+    "lightMarkers": 51,
     "screens": 6,
     "problems": []
 }

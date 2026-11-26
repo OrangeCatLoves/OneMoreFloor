@@ -1,4 +1,60 @@
-# Trivia round 2 - art review and import notes
+# Trivia round 3 - art review and import notes
+
+Round 3 follows `docs/floors/trivia_art_feedback.md` ("Round 3", 19-21 November 2026). Claude Code
+built it (owner, 26 November): `tools/blender/trivia_round_three.py` runs after the round 2 pass and
+changes only what round 3 asks for. The hall's outer dimensions stay unchanged. This is an art review
+awaiting the owner's playtest, not a completed Trivia game floor.
+
+## What changed (Unity metres)
+
+- **Lift** at the centre of the rear wall (door plane z = 26, floor y = 1.2), facing the stage. The
+  doors open straight onto the rear cross-aisle. The leaves stand just behind the wall and slide apart
+  behind it, into the cab (the review builder opens them by half the door width each). Flower urns
+  flank the portal; two gallery doors sit above it. Cab interior from `docs/sizes.json`, floor flush
+  with the cross-aisle, gold threshold flush with both.
+- **Markers:** `MK_Spawn_01`-`04` in the cab at x = +/-1, z = 27.9 and 29.3; `MK_Exit` at (0, 1.2, 25.3).
+  `MK_PlayArea_01` (hall, aisles, cross-aisle and stage, under the galleries) and `MK_PlayArea_02` (lift
+  cab) are empties whose position is a box centre and whose scale is its size in metres.
+- **Seating:** 10 rows each side at 1.3 m pitch from z = 8.3, each 0.12 m above the one in front; the
+  cross-aisle (y = 1.2) is "row 10". Rows are audience-only: the passages are narrower than a player.
+- **Aisles:** the centre aisle (x +/-1.5) and both side aisles (|x| 10.4-14.4) are ramps from y = 0 at
+  z = 7.65 to y = 1.2 at z = 20.65 (about 1 in 11). Red carpet with gold stars from the lift to the
+  front carpet, which runs round the stage front to both flights.
+- **Stage:** curved flights at both front corners (|x| 3.6-6.8 along the stage edge), two treads of
+  0.2 m and 0.3 m going, lit risers, gilded nosings and cheeks. The vertical bars on the stage front and
+  the rail in front of the first row are gone.
+- **Galleries** stay as audience seating (one row added along each side gallery) but can't be reached:
+  the in-hall stairs are gone and the deck is continuous.
+- **Tie-backs:** two-ply twisted gold rope round each gathered drape, a slack run onto a fluted holdback
+  on the proscenium pillar, a knot and a heavy tassel.
+- **Screens:** the players' TV (1.4 m live surface, same aspect as the big screen) and the four podium
+  monitors stand upright. The TV's back is walnut with a gold frame and laurel.
+- **Functions:** front-of-house desk at the back-left of the cross-aisle (dressed walnut console, ivory
+  posts, operator's chair); broadcast cameras at the back-right and on both sides of the stage.
+- **Light:** two chandeliers over the audience (z = 10 and 18), an ivory ceiling with gilded beams both
+  ways, more audience fill, a lift portal key and a cab light. The review camera exposure is 2.3.
+- **Collision:** `COL_Trivia_DecorProxy` boxes cover curtains, pillars, wall pilasters, grilles, podium
+  monitors, cameras, the lift portal and the cab handrails; `COL_Trivia_ApronEdgeGuard_*` keeps players
+  off the stage-edge trims.
+
+## Checks
+
+- Room checks (Claude Code): `unity test . --mode EditMode --filter TriviaRoomChecks`, report in
+  `Temp/OneMoreFloor/TriviaRoomChecks.txt`. Round 3 passes all 7: play area, no walking into visible
+  meshes, routes, no small floor edges, upright screens, brightness 0.36 (target 0.35).
+- Walkthrough (PlayMode): `TriviaReviewWalkthroughTests` walks out of the lift, down the ramp, up a
+  corner flight, to all four podiums, then down the other flight and round both side aisles.
+  Captures in `../renders/trivia/round-06/`.
+- RTX 3060, Editor Game view 1718x806: about 175 fps uncapped. 1,167,199 render triangles.
+
+## Rebuild
+
+From the laptop, with Unity open on the home PC: `tools/homepc/build-trivia.sh --iteration <n>`.
+It builds in Blender on the PC, rebuilds and bakes the review scene there, and copies everything back.
+
+---
+
+# Round 2 notes (historical)
 
 Round 2 follows `docs/floors/trivia_art_feedback.md` (11 November 2026).
 The hall's outer dimensions stay unchanged. This is an art review awaiting the

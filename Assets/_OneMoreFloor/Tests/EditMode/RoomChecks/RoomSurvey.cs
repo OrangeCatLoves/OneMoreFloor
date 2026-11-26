@@ -88,6 +88,11 @@ namespace OneMoreFloor.Tests.EditMode.RoomChecks
                 {
                     if (hit.normal.y < minUp || !CanStand(hit.point))
                         continue;
+                    // A surface with another one lying on it (a sill under a threshold, a floor under a
+                    // thin slab) is covered: no foot fits in between.
+                    float y = hit.point.y;
+                    if (hits.Any(other => other.point.y > y + .001f && other.point.y <= y + _body.StepOffset))
+                        continue;
                     if (_spotsByColumn.TryGetValue(column, out List<int> existing) && existing.Any(i => Mathf.Abs(_spots[i].Position.y - hit.point.y) < 0.05f))
                         continue;
 
@@ -188,13 +193,14 @@ namespace OneMoreFloor.Tests.EditMode.RoomChecks
         }
 
         /// <summary>
-        /// Small height edges between neighbouring flat spots: too low to be a step, high enough to jolt the
-        /// character. A ramp isn't an edge: its surface is sloped.
+        /// Small height edges between neighbouring flat spots players walk on: too low to be a step, high
+        /// enough to jolt the character. A ramp isn't an edge: its surface is sloped. Spots reachable only by
+        /// jumping (the tops of seat rows, say) don't count.
         /// </summary>
         public List<(FloorSpot low, FloorSpot high)> Lips(float min, float max)
         {
             var lips = new List<(FloorSpot, FloorSpot)>();
-            foreach (FloorSpot spot in _spots.Where(s => s.ReachedWithJumps))
+            foreach (FloorSpot spot in _spots.Where(s => s.ReachedWalking))
             {
                 int ix = spot.Column / _columnsZ, iz = spot.Column % _columnsZ;
                 foreach ((int dx, int dz) in new[] { (1, 0), (0, 1) })
@@ -206,7 +212,7 @@ namespace OneMoreFloor.Tests.EditMode.RoomChecks
                     foreach (int n in neighbours)
                     {
                         FloorSpot other = _spots[n];
-                        if (!other.ReachedWithJumps)
+                        if (!other.ReachedWalking)
                             continue;
                         float d = Mathf.Abs(other.Position.y - spot.Position.y);
                         bool bothFlat = spot.Normal.y > 0.999f && other.Normal.y > 0.999f;

@@ -25,6 +25,7 @@ namespace OneMoreFloor.Tests.PlayMode
         private InputSettings.BackgroundBehavior _backgroundBehavior;
         private InputSettings.EditorInputBehaviorInPlayMode _editorBehavior;
         private PlayerController _player;
+        private readonly System.Collections.Generic.List<InputDevice> _disabledDevices = new System.Collections.Generic.List<InputDevice>();
 
         [UnitySetUp]
         public IEnumerator SetUp()
@@ -37,6 +38,16 @@ namespace OneMoreFloor.Tests.PlayMode
 
             _keyboard = InputSystem.AddDevice<Keyboard>();
             _mouse = InputSystem.AddDevice<Mouse>();
+
+            // Real mouse and keyboard input (someone at the machine, or a remote-desktop app such as
+            // Parsec) would steer the player mid-test. Only the simulated devices count while a test runs.
+            foreach (InputDevice device in InputSystem.devices.ToArray())
+            {
+                if (device == _keyboard || device == _mouse || !device.enabled || !(device is Pointer || device is Keyboard))
+                    continue;
+                InputSystem.DisableDevice(device);
+                _disabledDevices.Add(device);
+            }
 
             yield return SceneManager.LoadSceneAsync(SceneName, LoadSceneMode.Single);
 
@@ -56,6 +67,9 @@ namespace OneMoreFloor.Tests.PlayMode
         {
             InputSystem.RemoveDevice(_keyboard);
             InputSystem.RemoveDevice(_mouse);
+            foreach (InputDevice device in _disabledDevices)
+                InputSystem.EnableDevice(device);
+            _disabledDevices.Clear();
             InputSystem.settings.backgroundBehavior = _backgroundBehavior;
             InputSystem.settings.editorInputBehaviorInPlayMode = _editorBehavior;
 

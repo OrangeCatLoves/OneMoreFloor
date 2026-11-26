@@ -924,294 +924,6 @@
     ]
   },
   {
-    "name": "MK_Light_Point_26",
-    "type": "Point",
-    "position_blender": [
-      -11.0,
-      -24.799999237060547,
-      7.420000076293945
-    ],
-    "target_blender": null,
-    "color": "#FFB85A",
-    "watts_blender": 65,
-    "relative_intensity": 0.065,
-    "cone_degrees": null,
-    "size_m": 0.22,
-    "casts_shadow_eevee": false,
-    "purpose": "Amber wall lantern; bake indirect light",
-    "direction_blender": [
-      0.0,
-      0.0,
-      -1.0
-    ],
-    "position_unity": [
-      11.0,
-      7.420000076293945,
-      24.799999237060547
-    ],
-    "direction_unity": [
-      -0.0,
-      -1.0,
-      -0.0
-    ]
-  },
-  {
-    "name": "MK_Light_Point_27",
-    "type": "Point",
-    "position_blender": [
-      -7.0,
-      -24.799999237060547,
-      7.420000076293945
-    ],
-    "target_blender": null,
-    "color": "#FFB85A",
-    "watts_blender": 65,
-    "relative_intensity": 0.065,
-    "cone_degrees": null,
-    "size_m": 0.22,
-    "casts_shadow_eevee": false,
-    "purpose": "Amber wall lantern; bake indirect light",
-    "direction_blender": [
-      0.0,
-      0.0,
-      -1.0
-    ],
-    "position_unity": [
-      7.0,
-      7.420000076293945,
-      24.799999237060547
-    ],
-    "direction_unity": [
-      -0.0,
-      -1.0,
-      -0.0
-    ]
-  },
-  {
-    "name": "MK_Light_Point_28",
-    "type": "Point",
-    "position_blender": [
-      -3.0,
-      -24.799999237060547,
-      7.420000076293945
-    ],
-    "target_blender": null,
-    "color": "#FFB85A",
-    "watts_blender": 65,
-    "relative_intensity": 0.065,
-    "cone_degrees": null,
-    "size_m": 0.22,
-    "casts_shadow_eevee": false,
-    "purpose": "Amber wall lantern; bake indirect light",
-    "direction_blender": [
-      0.0,
-      0.0,
-      -1.0
-    ],
-    "position_unity": [
-      3.0,
-      7.420000076293945,
-      24.799999237060547
-    ],
-    "direction_unity": [
-      -0.0,
-      -1.0,
-      -0.0
-    ]
-  },
-  {
-    "name": "MK_Light_Point_29",
-    "type": "Point",
-    "position_blender": [
-      1.0,
-      -24.799999237060547,
-      7.420000076293945
-    ],
-    "target_blender": null,
-    "color": "#FFB85A",
-    "watts_blender": 65,
-    "relative_intensity": 0.065,
-    "cone_degrees": null,
-    "size_m": 0.22,
-    "casts_shadow_eevee": false,
-    "purpose": "Amber wall lantern; bake indirect light",
-    "direction_blender": [
-      0.0,
-      0.0,
-      -1.0
-    ],
-    "position_unity": [
-      -1.0,
-      7.420000076293945,
-      24.799999237060547
-    ],
-    "direction_unity": [
-      -0.0,
-      -1.0,
-      -0.0
-    ]
-  },
-  {
-    "name": "MK_Light_Point_30",
-    "type": "Point",
-    "position_blender": [
-      5.0,
-      -24.799999237060547,
-      7.420000076293945
-    ],
-    "target_blender": null,
-    "color": "#FFB85A",
-    "watts_blender": 65,
-    "relative_intensity": 0.065,
-    "cone_degrees": null,
-    "size_m": 0.22,
-    "casts_shadow_eevee": false,
-    "purpose": "Amber wall lantern; bake indirect light",
-    "direction_blender": [
-      0.0,
-      0.0,
-      -1.0
-    ],
-    "position_unity": [
-      -5.0,
-      7.420000076293945,
-      24.799999237060547
-    ],
-    "direction_unity": [
-      -0.0,
-      -1.0,
-      -0.0
-    ]
-  },
-  {
-    "name": "MK_Light_Point_31",
-    "type": "Point",
-    "position_blender": [
-      9.0,
-      -24.799999237060547,
-      7.420000076293945
-    ],
-    "target_blender": null,
-    "color": "#FFB85A",
-    "watts_blender": 65,
-    "relative_intensity": 0.065,
-    "cone_degrees": null,
-    "size_m": 0.22,
-    "casts_shadow_eevee": false,
-    "purpose": "Amber wall lantern; bake indirect light",
-    "direction_blender": [
-      0.0,
-      0.0,
-      -1.0
-    ],
-    "position_unity": [
-      -9.0,
-      7.420000076293945,
-      24.799999237060547
-    ],
-    "direction_unity": [
-      -0.0,
-      -1.0,
-      -0.0
-    ]
-  },
-  {
-    "name": "MK_Light_Point_32",
-    "type": "Point",
-    "position_blender": [
-      13.0,
-      -24.799999237060547,
-      7.420000076293945
-    ],
-    "target_blender": null,
-    "color": "#FFB85A",
-    "watts_blender": 65,
-    "relative_intensity": 0.065,
-    "cone_degrees": null,
-    "size_m": 0.22,
-    "casts_shadow_eevee": false,
-    "purpose": "Amber wall lantern; bake indirect light",
-    "direction_blender": [
-      0.0,
-      0.0,
-      -1.0
-    ],
-    "position_unity": [
-      -13.0,
-      7.420000076293945,
-      24.799999237060547
-    ],
-    "direction_unity": [
-      -0.0,
-      -1.0,
-      -0.0
-    ]
-  },
-  {
-    "name": "MK_Light_Point_33",
-    "type": "Point",
-    "position_blender": [
-      -12.350000381469727,
-      -4.099999904632568,
-      2.619999885559082
-    ],
-    "target_blender": null,
-    "color": "#FFB85A",
-    "watts_blender": 65,
-    "relative_intensity": 0.065,
-    "cone_degrees": null,
-    "size_m": 0.22,
-    "casts_shadow_eevee": false,
-    "purpose": "Amber wall lantern; bake indirect light",
-    "direction_blender": [
-      0.0,
-      0.0,
-      -1.0
-    ],
-    "position_unity": [
-      12.350000381469727,
-      2.619999885559082,
-      4.099999904632568
-    ],
-    "direction_unity": [
-      -0.0,
-      -1.0,
-      -0.0
-    ]
-  },
-  {
-    "name": "MK_Light_Point_34",
-    "type": "Point",
-    "position_blender": [
-      -12.350000381469727,
-      0.09999990463256836,
-      2.619999885559082
-    ],
-    "target_blender": null,
-    "color": "#FFB85A",
-    "watts_blender": 65,
-    "relative_intensity": 0.065,
-    "cone_degrees": null,
-    "size_m": 0.22,
-    "casts_shadow_eevee": false,
-    "purpose": "Amber wall lantern; bake indirect light",
-    "direction_blender": [
-      0.0,
-      0.0,
-      -1.0
-    ],
-    "position_unity": [
-      12.350000381469727,
-      2.619999885559082,
-      -0.09999990463256836
-    ],
-    "direction_unity": [
-      -0.0,
-      -1.0,
-      -0.0
-    ]
-  },
-  {
     "name": "MK_Light_Area_35",
     "type": "Area",
     "position_blender": [
@@ -1333,8 +1045,8 @@
       0
     ],
     "color": "#FFD6AD",
-    "watts_blender": 1050,
-    "relative_intensity": 1.05,
+    "watts_blender": 1470.0,
+    "relative_intensity": 1.47,
     "cone_degrees": null,
     "size_m": 8,
     "casts_shadow_eevee": true,
@@ -1389,78 +1101,6 @@
       -0.0,
       -0.8944271206855774,
       -0.44721370935440063
-    ]
-  },
-  {
-    "name": "MK_Light_Area_40",
-    "type": "Area",
-    "position_blender": [
-      -10.0,
-      -8.0,
-      7.5
-    ],
-    "target_blender": [
-      -13,
-      -2,
-      2.5
-    ],
-    "color": "#FFC78A",
-    "watts_blender": 1600,
-    "relative_intensity": 1.6,
-    "cone_degrees": null,
-    "size_m": 5,
-    "casts_shadow_eevee": false,
-    "purpose": "Lift and side balcony amber key",
-    "direction_blender": [
-      -0.3585685193538666,
-      0.7171370983123779,
-      -0.5976144075393677
-    ],
-    "position_unity": [
-      10.0,
-      7.5,
-      8.0
-    ],
-    "direction_unity": [
-      0.3585685193538666,
-      -0.5976144075393677,
-      -0.7171370983123779
-    ]
-  },
-  {
-    "name": "MK_Light_Area_41",
-    "type": "Area",
-    "position_blender": [
-      -9.0,
-      -5.0,
-      4.0
-    ],
-    "target_blender": [
-      -13,
-      -2,
-      1.5
-    ],
-    "color": "#FFDDAA",
-    "watts_blender": 500,
-    "relative_intensity": 0.5,
-    "cone_degrees": null,
-    "size_m": 3,
-    "casts_shadow_eevee": false,
-    "purpose": "Brushed gold lift door reflection key",
-    "direction_blender": [
-      -0.7155419588088989,
-      0.5366562604904175,
-      -0.447213351726532
-    ],
-    "position_unity": [
-      9.0,
-      4.0,
-      5.0
-    ],
-    "direction_unity": [
-      0.7155419588088989,
-      -0.447213351726532,
-      -0.5366562604904175
     ]
   },
   {
@@ -1728,39 +1368,433 @@
     ]
   },
   {
-    "name": "MK_Light_Area_50",
-    "type": "Area",
+    "name": "MK_Light_Point_51",
+    "type": "Point",
     "position_blender": [
-      0.0,
-      -23.799999237060547,
-      4.349999904632568
+      2.0999999046325684,
+      -25.010000228881836,
+      3.819999933242798
     ],
-    "target_blender": [
-      0.0,
-      -23.299999237060547,
-      1.399999976158142
-    ],
-    "color": "#FFD9B3",
-    "watts_blender": 180,
-    "relative_intensity": 0.18,
+    "target_blender": null,
+    "color": "#FFB85A",
+    "watts_blender": 65,
+    "relative_intensity": 0.065,
     "cone_degrees": null,
-    "size_m": 3,
+    "size_m": 0.22,
     "casts_shadow_eevee": false,
-    "purpose": "Rear control working light; bake, below balcony",
+    "purpose": "Amber wall lantern; bake indirect light",
     "direction_blender": [
       0.0,
-      0.16710792481899261,
-      -0.9859386086463928
+      0.0,
+      -1.0
     ],
     "position_unity": [
-      -0.0,
-      4.349999904632568,
-      23.799999237060547
+      -2.0999999046325684,
+      3.819999933242798,
+      25.010000228881836
     ],
     "direction_unity": [
       -0.0,
-      -0.9859386086463928,
-      -0.16710792481899261
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Point_52",
+    "type": "Point",
+    "position_blender": [
+      -2.0999999046325684,
+      -25.010000228881836,
+      3.819999933242798
+    ],
+    "target_blender": null,
+    "color": "#FFB85A",
+    "watts_blender": 65,
+    "relative_intensity": 0.065,
+    "cone_degrees": null,
+    "size_m": 0.22,
+    "casts_shadow_eevee": false,
+    "purpose": "Amber wall lantern; bake indirect light",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      2.0999999046325684,
+      3.819999933242798,
+      25.010000228881836
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Area_53",
+    "type": "Area",
+    "position_blender": [
+      0.0,
+      -28.600000381469727,
+      4.650000095367432
+    ],
+    "target_blender": [
+      0.0,
+      -28.600000381469727,
+      1.2000000476837158
+    ],
+    "color": "#FFE6C4",
+    "watts_blender": 520,
+    "relative_intensity": 0.52,
+    "cone_degrees": null,
+    "size_m": 2.4,
+    "casts_shadow_eevee": false,
+    "purpose": "Lift cab ceiling panel; bake",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      -0.0,
+      4.650000095367432,
+      28.600000381469727
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Area_54",
+    "type": "Area",
+    "position_blender": [
+      0.0,
+      -23.299999237060547,
+      4.400000095367432
+    ],
+    "target_blender": [
+      0.0,
+      -25.899999618530273,
+      2.5999999046325684
+    ],
+    "color": "#FFD9AA",
+    "watts_blender": 380,
+    "relative_intensity": 0.38,
+    "cone_degrees": null,
+    "size_m": 2.6,
+    "casts_shadow_eevee": false,
+    "purpose": "Lift portal key under the rear gallery; bake",
+    "direction_blender": [
+      -8.323371503138333e-08,
+      -0.8221921920776367,
+      -0.5692099332809448
+    ],
+    "position_unity": [
+      -0.0,
+      4.400000095367432,
+      23.299999237060547
+    ],
+    "direction_unity": [
+      8.323371503138333e-08,
+      -0.5692099332809448,
+      0.8221921920776367
+    ]
+  },
+  {
+    "name": "MK_Light_Area_55",
+    "type": "Area",
+    "position_blender": [
+      9.600000381469727,
+      -22.600000381469727,
+      4.300000190734863
+    ],
+    "target_blender": [
+      9.600000381469727,
+      -23.399999618530273,
+      2.200000047683716
+    ],
+    "color": "#FFE2BE",
+    "watts_blender": 160,
+    "relative_intensity": 0.16,
+    "cone_degrees": null,
+    "size_m": 2.2,
+    "casts_shadow_eevee": false,
+    "purpose": "Front-of-house desk working light; bake",
+    "direction_blender": [
+      -2.4670548270933068e-08,
+      -0.3559949994087219,
+      -0.9344878792762756
+    ],
+    "position_unity": [
+      -9.600000381469727,
+      4.300000190734863,
+      22.600000381469727
+    ],
+    "direction_unity": [
+      2.4670548270933068e-08,
+      -0.9344878792762756,
+      0.3559949994087219
+    ]
+  },
+  {
+    "name": "MK_Light_Point_56",
+    "type": "Point",
+    "position_blender": [
+      0.0,
+      -10.0,
+      7.800000190734863
+    ],
+    "target_blender": null,
+    "color": "#FFD9A6",
+    "watts_blender": 2600,
+    "relative_intensity": 2.6,
+    "cone_degrees": null,
+    "size_m": 1.2,
+    "casts_shadow_eevee": false,
+    "purpose": "Chandelier over the audience at z=10.0; house light, bake",
+    "range_m": 24,
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      -0.0,
+      7.800000190734863,
+      10.0
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Point_57",
+    "type": "Point",
+    "position_blender": [
+      0.0,
+      -18.0,
+      7.800000190734863
+    ],
+    "target_blender": null,
+    "color": "#FFD9A6",
+    "watts_blender": 2600,
+    "relative_intensity": 2.6,
+    "cone_degrees": null,
+    "size_m": 1.2,
+    "casts_shadow_eevee": false,
+    "purpose": "Chandelier over the audience at z=18.0; house light, bake",
+    "range_m": 24,
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      -0.0,
+      7.800000190734863,
+      18.0
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Point_58",
+    "type": "Point",
+    "position_blender": [
+      13.0,
+      -24.899999618530273,
+      7.420000076293945
+    ],
+    "target_blender": null,
+    "color": "#FFB85A",
+    "watts_blender": 65,
+    "relative_intensity": 0.065,
+    "cone_degrees": null,
+    "size_m": 0.22,
+    "casts_shadow_eevee": false,
+    "purpose": "Amber wall lantern; bake indirect light",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      -13.0,
+      7.420000076293945,
+      24.899999618530273
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Point_59",
+    "type": "Point",
+    "position_blender": [
+      9.0,
+      -24.899999618530273,
+      7.420000076293945
+    ],
+    "target_blender": null,
+    "color": "#FFB85A",
+    "watts_blender": 65,
+    "relative_intensity": 0.065,
+    "cone_degrees": null,
+    "size_m": 0.22,
+    "casts_shadow_eevee": false,
+    "purpose": "Amber wall lantern; bake indirect light",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      -9.0,
+      7.420000076293945,
+      24.899999618530273
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Point_60",
+    "type": "Point",
+    "position_blender": [
+      5.0,
+      -24.899999618530273,
+      7.420000076293945
+    ],
+    "target_blender": null,
+    "color": "#FFB85A",
+    "watts_blender": 65,
+    "relative_intensity": 0.065,
+    "cone_degrees": null,
+    "size_m": 0.22,
+    "casts_shadow_eevee": false,
+    "purpose": "Amber wall lantern; bake indirect light",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      -5.0,
+      7.420000076293945,
+      24.899999618530273
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Point_61",
+    "type": "Point",
+    "position_blender": [
+      -5.0,
+      -24.899999618530273,
+      7.420000076293945
+    ],
+    "target_blender": null,
+    "color": "#FFB85A",
+    "watts_blender": 65,
+    "relative_intensity": 0.065,
+    "cone_degrees": null,
+    "size_m": 0.22,
+    "casts_shadow_eevee": false,
+    "purpose": "Amber wall lantern; bake indirect light",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      5.0,
+      7.420000076293945,
+      24.899999618530273
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Point_62",
+    "type": "Point",
+    "position_blender": [
+      -9.0,
+      -24.899999618530273,
+      7.420000076293945
+    ],
+    "target_blender": null,
+    "color": "#FFB85A",
+    "watts_blender": 65,
+    "relative_intensity": 0.065,
+    "cone_degrees": null,
+    "size_m": 0.22,
+    "casts_shadow_eevee": false,
+    "purpose": "Amber wall lantern; bake indirect light",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      9.0,
+      7.420000076293945,
+      24.899999618530273
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
+    ]
+  },
+  {
+    "name": "MK_Light_Point_63",
+    "type": "Point",
+    "position_blender": [
+      -13.0,
+      -24.899999618530273,
+      7.420000076293945
+    ],
+    "target_blender": null,
+    "color": "#FFB85A",
+    "watts_blender": 65,
+    "relative_intensity": 0.065,
+    "cone_degrees": null,
+    "size_m": 0.22,
+    "casts_shadow_eevee": false,
+    "purpose": "Amber wall lantern; bake indirect light",
+    "direction_blender": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "position_unity": [
+      13.0,
+      7.420000076293945,
+      24.899999618530273
+    ],
+    "direction_unity": [
+      -0.0,
+      -1.0,
+      -0.0
     ]
   }
 ]

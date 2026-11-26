@@ -21,7 +21,7 @@ namespace OneMoreFloor.ArtReview.Tests
     public class TriviaReviewWalkthroughTests
     {
         const string ScenePath = "Assets/_OneMoreFloor/Art/Floors/Trivia/Review/TriviaArtReview.unity";
-        const string EvidenceFolder = "art-source/renders/trivia/round-05";
+        const string EvidenceFolder = "art-source/renders/trivia/round-06";
 
         [UnityTest]
         public IEnumerator LocalHost_CanLeaveLift_ClimbStage_AndInspectBothViewsWithAA()
@@ -32,6 +32,10 @@ namespace OneMoreFloor.ArtReview.Tests
             InputSystem.settings.backgroundBehavior = InputSettings.BackgroundBehavior.IgnoreFocus;
             InputSystem.settings.editorInputBehaviorInPlayMode = InputSettings.EditorInputBehaviorInPlayMode.AllDeviceInputAlwaysGoesToGameView;
             var keyboard = InputSystem.AddDevice<Keyboard>();var mouse = InputSystem.AddDevice<Mouse>();
+            // Real mouse and keyboard input (someone at the machine, or Parsec) would steer the player
+            // mid-test; only the simulated devices count while the walkthrough runs.
+            var disabled = InputSystem.devices.Where(d => d != keyboard && d != mouse && d.enabled && (d is Pointer || d is Keyboard)).ToList();
+            foreach (var device in disabled) InputSystem.DisableDevice(device);
             try
             {
                 EditorSceneManager.LoadSceneInPlayMode(ScenePath,new LoadSceneParameters(LoadSceneMode.Single));
@@ -52,16 +56,18 @@ namespace OneMoreFloor.ArtReview.Tests
                 Assert.That(probes.Length,Is.EqualTo(2));
                 Assert.That(probes.All(p => p.mode==ReflectionProbeMode.Custom && p.customBakedTexture),Is.True,"Baked cubemap assignments must survive loading the saved scene.");
                 Assert.That(LightmapSettings.lightmaps.Length,Is.GreaterThan(0),"Baked room lighting must survive loading the saved scene.");
-                Assert.That(LightmapSettings.lightProbes.bakedProbes.Length,Is.EqualTo(113),"The player and moving props need the baked probe volume.");
+                int probeCount = Object.FindFirstObjectByType<LightProbeGroup>().probePositions.Length;
+                Assert.That(LightmapSettings.lightProbes.bakedProbes.Length,Is.EqualTo(probeCount),"The player and moving props need the baked probe volume.");
                 Assert.That(RenderSettings.customReflectionTexture,Is.Not.Null,"Outside probe bounds must use the indoor fallback.");
 
-                // Exercise real input through the existing controller on exit.
-                float originalX = player.transform.position.x;
+                // Exercise real input through the existing controller on exit: the lift is in the
+                // rear wall and players face the stage (towards -z) when the doors open.
+                float originalZ = player.transform.position.z;
                 InputSystem.QueueStateEvent(keyboard,new KeyboardState(Key.W));
                 yield return new WaitForSeconds(1.05f);
                 InputSystem.QueueStateEvent(keyboard,new KeyboardState());
                 yield return new WaitForSeconds(.2f);
-                Assert.That(player.transform.position.x,Is.LessThan(originalX-3),"Open lift doors must not block walking out.");
+                Assert.That(player.transform.position.z,Is.LessThan(originalZ-3),"Open lift doors must not block walking out.");
 
                 // Then use the same motor for a deterministic collision route.
                 // Camera feel remains the owner's playtest, not an assertion.
@@ -79,12 +85,16 @@ namespace OneMoreFloor.ArtReview.Tests
                     }
                     Assert.That(Vector2.Distance(new Vector2(player.transform.position.x,player.transform.position.z),new Vector2(target.x,target.z)),Is.LessThan(.3f),"Collision route blocked toward " + target);
                 }
-                yield return WalkTo(new Vector3(11.2f,0,3));
-                yield return WalkTo(new Vector3(11.2f,0,6.4f));
-                yield return WalkTo(new Vector3(8.9f,0,6.4f));
-                yield return WalkTo(new Vector3(8.9f,.6f,3.8f));
-                Assert.That(player.transform.position.y,Is.InRange(.55f,.75f),"Player must climb the three corner steps.");
-                yield return WalkTo(new Vector3(6,.6f,1.45f));
+                // Lift -> cross-aisle -> down the ramped centre aisle -> stage-right corner flight -> podiums.
+                yield return WalkTo(new Vector3(0,1.2f,22.5f));
+                yield return WalkTo(new Vector3(0,0,8f));
+                Assert.That(player.transform.position.y,Is.LessThan(.2f),"The centre aisle ramps down to the hall floor.");
+                yield return WalkTo(new Vector3(0,0,6.6f));
+                yield return WalkTo(new Vector3(5.45f,0,6.2f));
+                yield return WalkTo(new Vector3(4.9f,.6f,3.6f));
+                Assert.That(player.transform.position.y,Is.InRange(.55f,.75f),"Player must climb the corner steps onto the stage.");
+                yield return WalkTo(new Vector3(6.2f,.6f,3.6f));
+                yield return WalkTo(new Vector3(6.2f,.6f,1.45f));
                 foreach(float x in new[]{4.8f,1.6f,-1.6f,-4.8f})yield return WalkTo(new Vector3(x,.6f,1.45f));
                 yield return WalkTo(new Vector3(0,.6f,1.45f));
                 player.enabled = true;
@@ -99,61 +109,30 @@ namespace OneMoreFloor.ArtReview.Tests
                 yield return new WaitForSeconds(.6f);
                 Assert.That(player.Zoom.IsFirstPerson,Is.True);
                 Capture("unity-playtest-first-person");
-                // Check every seating-row passage, both side aisles, the rear
-                // control position, both gallery stairs and the continuous gallery.
+                // Back down the stage-left flight, then round both ramped side aisles and the
+                // cross-aisle. The galleries are out of reach by design; the room checks prove it.
                 player.enabled=false;
-                yield return WalkTo(new Vector3(6,.6f,1.45f));
-                yield return WalkTo(new Vector3(8.9f,.6f,3.8f));
-                yield return WalkTo(new Vector3(8.9f,0,6.4f));
-                yield return WalkTo(new Vector3(0,0,6.4f));
-                for(int row=0;row<7;row++)
-                {
-                    float z=9.15f+row*2;
-                    yield return WalkTo(new Vector3(0,row*.2f,z));
-                    yield return WalkTo(new Vector3(9.95f,row*.2f,z));
-                    yield return WalkTo(new Vector3(-9.95f,row*.2f,z));
-                    yield return WalkTo(new Vector3(0,row*.2f,z));
-                }
-                yield return WalkTo(new Vector3(0,1.2f,22.3f));
-                foreach(float side in new[]{-1f,1f})
-                {
-                    yield return WalkTo(new Vector3(side*9.95f,1.2f,22.3f));
-                    yield return WalkTo(new Vector3(side*9.95f,0,7.1f));
-                    yield return WalkTo(new Vector3(side*9.95f,.4f,13.2f));
-                    yield return WalkTo(new Vector3(side*12.8f,.4f,13.2f));
-                    yield return WalkTo(new Vector3(side*9.95f,.4f,13.2f));
-                    yield return WalkTo(new Vector3(side*9.95f,1.2f,22.3f));
-                    yield return WalkTo(new Vector3(0,1.2f,22.3f));
-                }
-                yield return WalkTo(new Vector3(3,1.2f,22.3f));
-                yield return WalkTo(new Vector3(3,1.2f,25.1f));
-                yield return WalkTo(new Vector3(0,1.2f,25.1f));
-                Capture("unity-walk-control");
-                foreach(float side in new[]{1f,-1f})
-                {
-                    yield return WalkTo(new Vector3(side*9.9f,1.2f,25.1f));
-                    yield return WalkTo(new Vector3(side*12.45f,1.2f,25.1f));
-                    yield return WalkTo(new Vector3(side*12.45f,4.8f,18.6f));
-                    Assert.That(player.transform.position.y,Is.InRange(4.75f,4.95f),"Gallery staircase must support the player.");
-                    yield return WalkTo(new Vector3(side*13.3f,4.8f,16));
-                    yield return WalkTo(new Vector3(side*13.3f,4.8f,0));
-                    yield return WalkTo(new Vector3(side*13.3f,4.8f,16));
-                    yield return WalkTo(new Vector3(side*10.1f,4.8f,19));
-                    yield return WalkTo(new Vector3(side*10.1f,4.8f,24.6f));
-                    yield return WalkTo(new Vector3(0,4.8f,24.6f));
-                    Capture("unity-walk-gallery-"+side);
-                    yield return WalkTo(new Vector3(side*10.1f,4.8f,24.6f));
-                    yield return WalkTo(new Vector3(side*10.1f,4.8f,18.6f));
-                    yield return WalkTo(new Vector3(side*12.45f,4.8f,18.6f));
-                    yield return WalkTo(new Vector3(side*12.45f,1.2f,25.1f));
-                    yield return WalkTo(new Vector3(side*9.9f,1.2f,25.1f));
-                    yield return WalkTo(new Vector3(0,1.2f,25.1f));
-                }
-                File.WriteAllText("art-source/trivia/walkthrough-validation.json", "{\"local_host\":true,\"lift_exit_input\":true,\"corner_steps_walked\":true,\"four_player_positions\":true,\"all_seven_row_passages\":true,\"rear_control\":true,\"both_gallery_stairs_and_side_galleries\":true,\"first_and_third_person_captured\":true,\"msaa_samples\":4,\"human_comfort_and_frame_rate\":\"Owner playtest pending\"}");
+                yield return WalkTo(new Vector3(-6.2f,.6f,1.45f));
+                yield return WalkTo(new Vector3(-6.2f,.6f,3.6f));
+                yield return WalkTo(new Vector3(-4.9f,.6f,3.6f));
+                yield return WalkTo(new Vector3(-5.45f,0,6.2f));
+                Assert.That(player.transform.position.y,Is.LessThan(.1f),"Player must walk down the stage-left corner steps.");
+                yield return WalkTo(new Vector3(-9f,0,6.6f));
+                yield return WalkTo(new Vector3(-12.4f,0,7.2f));
+                yield return WalkTo(new Vector3(-12.4f,1.15f,20.2f));
+                yield return WalkTo(new Vector3(-12.4f,1.2f,21.6f));
+                yield return WalkTo(new Vector3(0,1.2f,21.6f));
+                Capture("unity-walk-cross-aisle");
+                yield return WalkTo(new Vector3(12.4f,1.2f,21.6f));
+                yield return WalkTo(new Vector3(12.4f,0,7.2f));
+                yield return WalkTo(new Vector3(9f,0,6.6f));
+                yield return WalkTo(new Vector3(0,0,6.6f));
+                File.WriteAllText("art-source/trivia/walkthrough-validation.json", "{\"local_host\":true,\"lift_exit_input\":true,\"centre_aisle_ramp\":true,\"both_corner_flights\":true,\"four_player_positions\":true,\"both_side_aisle_ramps\":true,\"cross_aisle\":true,\"galleries\":\"unreachable by design, see the room checks\",\"first_and_third_person_captured\":true,\"msaa_samples\":4,\"human_comfort_and_frame_rate\":\"Owner playtest pending\"}");
             }
             finally
             {
                 InputSystem.RemoveDevice(keyboard);InputSystem.RemoveDevice(mouse);
+                foreach (var device in disabled) InputSystem.EnableDevice(device);
                 InputSystem.settings.backgroundBehavior=oldBackground;InputSystem.settings.editorInputBehaviorInPlayMode=oldEditorInput;
                 if (InstanceFinder.NetworkManager)
                 {

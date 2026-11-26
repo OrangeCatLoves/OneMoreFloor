@@ -17,6 +17,9 @@ namespace OneMoreFloor.ArtReview
     {
         public const string Folder = "Assets/_OneMoreFloor/Art/Floors/Trivia/Review";
         public const string ScenePath = Folder + "/TriviaArtReview.unity";
+        // Camera exposure in stops. Round 2 used 0.5; round 3 aims for the concept images' brightness
+        // (about 0.35 average on screen, checked by the room checks).
+        public const float ReviewExposure = 2.3f;
 
         [MenuItem("OneMoreFloor/Art/Open Trivia Review")]
         public static void OpenReview()
@@ -122,18 +125,28 @@ namespace OneMoreFloor.ArtReview
             }
             // Open display pose for this walk-through; the source FBX remains
             // closed and there is no door gameplay or network behavior here.
+            // The leaves slide apart, each away from the other, behind the wall into the cab.
+            var leaves = new[] { "L", "R" }.ToDictionary(side => side, side => parts.First(t => t.name == "SM_Trivia_LiftDoor_" + side));
+            Vector3 apart = leaves["R"].position - leaves["L"].position;
+            apart.y = 0;
+            apart.Normalize();
+            float slide = (float)JObject.Parse(File.ReadAllText("docs/sizes.json"))["elevator"]["door"]["width"] / 2;
             foreach (string side in new[] { "L", "R" })
             {
-                var door = parts.First(t => t.name == "SM_Trivia_LiftDoor_" + side);
                 var collision = parts.First(t => t.name == "COL_Trivia_LiftDoor_" + side);
-                collision.SetParent(door, true);
-                door.position += Vector3.forward * (side == "L" ? 1.55f : -1.55f);
+                collision.SetParent(leaves[side], true);
+                leaves[side].position += (side == "L" ? -apart : apart) * slide;
             }
+            // Players start in the cab facing the open doors (MK_Exit).
             var spawns = Enumerable.Range(1,4).Select(i => parts.First(t => t.name == "MK_Spawn_" + i.ToString("00"))).ToArray();
+            Vector3 exit = parts.First(t => t.name == "MK_Exit").position;
+            Vector3 centre = spawns.Aggregate(Vector3.zero, (sum, s) => sum + s.position) / spawns.Length;
+            Vector3 facing = exit - centre;
+            facing.y = 0;
             foreach (var spawn in spawns)
             {
                 spawn.position += Vector3.up * .08f;
-                spawn.rotation = Quaternion.Euler(0,270,0);
+                spawn.rotation = Quaternion.LookRotation(facing.normalized);
             }
             // Baked probes only include ReflectionProbeStatic renderers.
             // These flags apply to the local art review copy, including its
@@ -159,10 +172,11 @@ namespace OneMoreFloor.ArtReview
         static void AddLighting()
         {
             RenderSettings.skybox = null;
+            // A lively, well-lit studio (owner, round 3): about twice round 2's warm fill.
             RenderSettings.ambientMode = AmbientMode.Trilight;
-            RenderSettings.ambientSkyColor = new Color(.22f,.17f,.13f);
-            RenderSettings.ambientEquatorColor = new Color(.18f,.11f,.075f);
-            RenderSettings.ambientGroundColor = new Color(.07f,.04f,.03f);
+            RenderSettings.ambientSkyColor = new Color(.42f,.33f,.25f);
+            RenderSettings.ambientEquatorColor = new Color(.34f,.22f,.15f);
+            RenderSettings.ambientGroundColor = new Color(.14f,.09f,.06f);
             var root = new GameObject("Trivia_ReviewLighting").transform;
             foreach (JObject spec in JArray.Parse(File.ReadAllText("art-source/trivia/lighting.json")))
             {
@@ -176,7 +190,8 @@ namespace OneMoreFloor.ArtReview
                 light.spotAngle = type == "Area" ? 135 : type == "Spot" ? (float)spec["cone_degrees"] : 60;
                 light.innerSpotAngle = light.spotAngle * .6f;
                 light.intensity = (float)spec["watts_blender"] / (type == "Point" ? 35f : type == "Area" ? 18f : 24f);
-                light.range = type == "Point" ? 6 : 35;
+                // Most practicals light their surroundings; chandeliers carry a longer range in the sheet.
+                light.range = spec["range_m"] != null ? (float)spec["range_m"] : type == "Point" ? 6 : 35;
                 string purpose = (string)spec["purpose"];
                 // Limit realtime shadows to four sources for this review. The
                 // production lighting bake and performance pass remain separate.
@@ -195,7 +210,7 @@ namespace OneMoreFloor.ArtReview
             profile.components.Clear();
             var tone = profile.Add<Tonemapping>();tone.mode.Override(TonemappingMode.ACES);
             var bloom = profile.Add<Bloom>();bloom.intensity.Override(.16f);bloom.threshold.Override(1.2f);
-            var grading = profile.Add<ColorAdjustments>();grading.postExposure.Override(.5f);grading.contrast.Override(5);grading.saturation.Override(-5);
+            var grading = profile.Add<ColorAdjustments>();grading.postExposure.Override(ReviewExposure);grading.contrast.Override(5);grading.saturation.Override(-5);
             foreach (var component in profile.components) AssetDatabase.AddObjectToAsset(component,profile);
             EditorUtility.SetDirty(profile);
             var volume = new GameObject("Trivia_ReviewGrading").AddComponent<Volume>();volume.isGlobal = true;volume.sharedProfile = profile;

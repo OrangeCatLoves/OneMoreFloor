@@ -22,8 +22,8 @@ files+=list((root/'art-source/renders/trivia').rglob('*.jpg'))
 for suffix in ('*.unity','*.asset','*.exr'):
     files+=list((root/'Assets/_OneMoreFloor/Art/Floors/Trivia/Review').rglob(suffix))
 for p in sorted(set(files)):
-    tool='Codex-authored Blender Python; Blender 5.2.3 LTS'
-    source='docs/floors/trivia_art_feedback.md round 2 overrides earlier art brief; owner references; tools/blender/build_trivia.py + trivia_round_two.py + trivia_refinement.py + trivia_botanicals.py + trivia_geometry.py + trivia_materials.py; original parametric flowers (AI 3D provider not available)'
+    tool='Blender Python by Codex (rounds 1-2) and Claude Code (round 3, trivia_round_three.py); Blender 5.2.3 LTS'
+    source='docs/floors/trivia_art_feedback.md round 3 overrides earlier rounds and the art brief; owner references; tools/blender/build_trivia.py + trivia_round_two.py + trivia_round_three.py + trivia_refinement.py + trivia_botanicals.py + trivia_geometry.py + trivia_materials.py; original parametric flowers (AI 3D provider not available)'
     licence='Original generated project artwork; no third-party texture/mesh input; Blender output commercial use permitted: https://www.blender.org/about/license/'
     if p.name=='aa-detail-comparison.png':
         tool='Unity 6000.3.28f1 / URP; PowerShell System.Drawing'
@@ -42,7 +42,9 @@ for p in sorted(set(files)):
         source='tools/blender/preview_trivia_bouquet.py and trivia_botanicals.py; unretouched local floral geometry study'
     elif f'round-{args.round}' in p.parts:
         tool='Blender 5.2.3 LTS / Unity 6000.3.28f1 URP; PowerShell System.Drawing'
-        source=('TriviaRoundTwoReview.cs / TriviaReviewWalkthroughTests.cs; actual Unity review scene, matching baseline/final cameras; compare_round_two.ps1 adds labels only' if args.round=='05' else 'tools/blender/compare_refinement.ps1; matched previous/current cameras, actual Unity captures or unretouched Blender close-ups, according to filename')
+        source=('TriviaRoundTwoReview.cs / TriviaReviewWalkthroughTests.cs; actual Unity review scene, matching baseline/final cameras; compare_round_two.ps1 adds labels only' if args.round=='05' else
+                'TriviaReviewWalkthroughTests.cs native 720p captures of the round 3 review scene (Claude Code)' if args.round=='06' else
+                'tools/blender/compare_refinement.ps1; matched previous/current cameras, actual Unity captures or unretouched Blender close-ups, according to filename')
         licence='Original project art; no third-party texture/mesh input'
     elif p.suffix=='.jpg':
         tool='PowerShell System.Drawing comparison assembly'
@@ -50,7 +52,7 @@ for p in sorted(set(files)):
         licence='Composite of owner-provided reference and original project artwork; see provenance.txt'
     elif 'Review' in p.parts:
         tool='Unity 6000.3.28f1 / URP; TriviaReviewSceneBuilder.cs'
-        source='Art-only walk-through assembled from generated theatre, lighting.json marker rig, existing MovementTest local-host player/camera; two custom reflection cubemaps, baked area lights, lightmaps, 113 light probes and ACES volume; TriviaReviewBaking.cs generates UV2 review meshes'
+        source='Art-only walk-through assembled from generated theatre, lighting.json marker rig, existing MovementTest local-host player/camera; two custom reflection cubemaps, baked area lights, lightmaps, baked light probes and ACES volume; TriviaReviewBaking.cs generates UV2 review meshes (round 3 builder changes by Claude Code)'
         licence='Original project assembly; existing local player/package references preserved; no third-party model redistributed'
     elif p.name.startswith('unity-') or p.suffix=='.mat':
         tool='Unity 6000.3.28f1 / URP; TriviaArtValidation.cs'

@@ -1,4 +1,11 @@
-# Current task: Trivia round 2
+# Current task: Trivia round 3 (Claude Code)
+
+`trivia_round_three.py` applies the owner's round 3 feedback after the round 2 pass. Rebuild from the
+laptop with Unity open on the home PC: `tools/homepc/build-trivia.sh --iteration <n>` (Blender build on
+the PC, Unity review scene rebuild and bake there, results copied back). Then run the room checks:
+`unity test . --mode EditMode --filter TriviaRoomChecks`. Notes: `art-source/trivia/README.md`.
+
+# Round 2 (historical)
 
 The owner's 11 November feedback is the stopping boundary. Rebuild the source,
 then run the Unity evidence/audit chain (Unity closed first):

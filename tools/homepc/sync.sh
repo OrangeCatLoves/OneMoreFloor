@@ -1,50 +1,49 @@
 #!/usr/bin/env bash
-# Sends the Unity project from this laptop to the home PC, where the owner playtests on the RTX 3060.
+# Sends the project from this laptop to the home PC, where the owner playtests on the RTX 3060 and art is built.
 # One-way: the laptop is the source of truth. Only files that changed are sent, and files deleted
 # here are deleted there. Unity's Library folder on the home PC is left alone.
+# Exception: a .meta file that Unity on the home PC created for an asset this laptop also has is copied
+# back here instead of deleted, so the asset keeps its ID on both machines.
+# Anything else built on the home PC must be fetched with tools/homepc/pull.sh before the next sync.
 #
 # Usage, from the project root in Git Bash:  tools/homepc/sync.sh
 # Needs the "homepc" host in ~/.ssh/config (see docs/PROJECT_CONTEXT.md, section 11).
 set -euo pipefail
 
-HOST="${HOMEPC_HOST:-homepc}"
-REMOTE_DIR="${HOMEPC_DIR:-C:/OneMoreFloor}"
-SYNC_DIRS=(Assets Packages ProjectSettings docs)
-
 cd "$(git rev-parse --show-toplevel)"
+source tools/homepc/common.sh
+SYNC_DIRS=(Assets Packages ProjectSettings docs tools art-source)
+
 work="$(mktemp -d)"
 trap 'rm -rf "$work"' EXIT
 
-run_remote_powershell() {
-    ssh -o BatchMode=yes "$HOST" "powershell -NoProfile -ExecutionPolicy Bypass -Command -" 2>/dev/null | tr -d '\r'
-}
-
 # Without this check, an unreachable home PC would look like "every file is new".
-if ! ssh -o BatchMode=yes -o ConnectTimeout=8 "$HOST" "exit 0" 2>/dev/null; then
-    echo "Can't reach the home PC ($HOST). It must be switched on, and the laptop must be on the home network." >&2
-    exit 1
-fi
+ensure_homepc_reachable
 
-# One line per file: path <tab> size <tab> modified time in whole seconds.
-find "${SYNC_DIRS[@]}" -type f -printf '%p\t%s\t%T@\n' | sed -E 's/\.[0-9]+$//' | LC_ALL=C sort > "$work/local.txt"
-
-# PowerShell reads this from standard input one line at a time, so each statement stays on one line.
-run_remote_powershell > "$work/remote.txt.unsorted" <<EOF
-\$root = '$REMOTE_DIR'
-New-Item -ItemType Directory -Force \$root | Out-Null
-\$epoch = [datetime]'1970-01-01'
-'${SYNC_DIRS[*]}'.Split(' ') | Where-Object { Test-Path (Join-Path \$root \$_) } | ForEach-Object { Get-ChildItem -LiteralPath (Join-Path \$root \$_) -Recurse -File -Force } | ForEach-Object { \$_.FullName.Substring(\$root.Length + 1).Replace('\\', '/') + "\`t" + \$_.Length + "\`t" + [math]::Floor((\$_.LastWriteTimeUtc - \$epoch).TotalSeconds) }
-EOF
-LC_ALL=C sort "$work/remote.txt.unsorted" > "$work/remote.txt"
+list_local_files "${SYNC_DIRS[@]}" | LC_ALL=C sort > "$work/local.txt"
+list_remote_files "${SYNC_DIRS[@]}" | LC_ALL=C sort > "$work/remote.txt"
 
 # Files that are new or different here, and files that exist only on the home PC.
 LC_ALL=C comm -23 "$work/local.txt" "$work/remote.txt" | cut -f1 > "$work/send.txt"
 cut -f1 "$work/local.txt" | LC_ALL=C sort > "$work/local-paths.txt"
 cut -f1 "$work/remote.txt" | LC_ALL=C sort > "$work/remote-paths.txt"
-LC_ALL=C comm -13 "$work/local-paths.txt" "$work/remote-paths.txt" > "$work/delete.txt"
+LC_ALL=C comm -13 "$work/local-paths.txt" "$work/remote-paths.txt" > "$work/only-there.txt"
+
+# Unity-made .meta files for assets that exist here come back; everything else only there is deleted.
+: > "$work/fetch.txt"; : > "$work/delete.txt"
+while IFS= read -r path; do
+    if [[ "$path" == *.meta ]] && grep -qxF "${path%.meta}" "$work/local-paths.txt"; then
+        echo "$path" >> "$work/fetch.txt"
+    else
+        echo "$path" >> "$work/delete.txt"
+    fi
+done < "$work/only-there.txt"
 
 send_count=$(wc -l < "$work/send.txt")
 delete_count=$(wc -l < "$work/delete.txt")
+fetch_count=$(wc -l < "$work/fetch.txt")
+
+fetch_from_homepc "$work/fetch.txt"
 
 if [ "$send_count" -gt 0 ]; then
     tar -cf - --files-from="$work/send.txt" | ssh -o BatchMode=yes -o Compression=no "$HOST" "tar -xf - -C $REMOTE_DIR" 2>/dev/null
@@ -59,4 +58,4 @@ if [ "$delete_count" -gt 0 ]; then
     } | run_remote_powershell > /dev/null
 fi
 
-echo "Sent $send_count file(s), removed $delete_count file(s) on $HOST:$REMOTE_DIR"
+echo "Sent $send_count file(s), removed $delete_count file(s) on $HOST:$REMOTE_DIR; copied back $fetch_count .meta file(s) Unity made there."

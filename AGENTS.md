@@ -35,6 +35,7 @@ OneMoreFloor is a 3D co-op challenge game (1–4 players) for Windows PC (deskto
 - **Shared:** `HANDOFF.md`. Both agents write to it.
 - `docs/` belongs to the owner. Read it; edit it only when the owner asks or to record a notable change (see "How we work").
 - Never edit the other agent's folders. If you need a change there, add a request to `HANDOFF.md`.
+- **Current exception (owner, 26 Nov 2026):** Claude Code builds the Trivia art (round 3) in Codex's folders until the owner hands it back to Codex. Codex: read the latest `HANDOFF.md` entries before resuming art work.
 
 ## Design rules
 - The owner designs the story, the setting and every floor's rules. Never invent them. If something is missing or unclear, use a neutral placeholder and ask.
