@@ -51,6 +51,9 @@ def build_materials(folder, size=2048, refresh=False):
       'Yellow':((.95,.5,.005),.08,.22,'button'),
       'Green':((.004,.44,.04),.08,.22,'button'),
       'Symbol':((.9,.89,.68),0,.25,'emission'),
+      # Round 3 (owner): every floor off the stage is carpeted. Deep burgundy pile with a small
+      # gold-and-purple lattice, darker than the red star runner so the aisle still reads.
+      'Carpet':((.17,.012,.03),0,.9,'carpet'),
     }
     result={}; manifest={}
     for name,(col,metal,rough,kind) in specs.items():
@@ -82,6 +85,15 @@ def build_materials(folder, size=2048, refresh=False):
             weave=np.sin(x*math.pi*2*640)*np.sin(y*math.pi*2*640)
             variation=1+slow*.035+noise*.018+motif*.11
             height=motif*.00010+weave*.000006
+        elif kind=='carpet':
+            # Two motif repeats per metre of floor (box UVs are in metres): a gold diamond outline
+            # with a centre dot, and small purple rosettes where the diamonds meet. Fine pile noise.
+            u=(x*2)%1-.5; v=(y*2)%1-.5
+            diamond=np.abs(u)+np.abs(v)
+            carpet_gold=np.clip(np.exp(-((diamond-.36)/.03)**2)+np.exp(-(u**2+v**2)/.003),0,1)
+            carpet_purple=np.clip(np.exp(-((np.abs(u)-.5)**2+(np.abs(v)-.5)**2)/.005),0,1)
+            variation=1+noise*.07+slow*.04
+            height=(carpet_gold+carpet_purple)*.00003+noise*.000004
         elif kind=='metal':
             patina=np.clip((ss+.1)*1.5,0,1)
             brush=np.sin(y*2700+np.sin(x*17)*3) if n==size else nn
@@ -103,6 +115,10 @@ def build_materials(folder, size=2048, refresh=False):
                 vein=np.sin((x-.5)*85/(.6+y))*.5+.5
                 height=vein*.000018*np.sin(y*math.pi)**2
         rgb=np.asarray(col,np.float32)[None,None,:]*variation[:,:,None]
+        if kind=='carpet':
+            gold=np.asarray((.42,.26,.07),np.float32)[None,None,:];purple=np.asarray((.11,.02,.19),np.float32)[None,None,:]
+            g=carpet_gold[:,:,None]*.85;p=carpet_purple[:,:,None]*.85
+            rgb=(rgb*(1-g-p)+gold*g*variation[:,:,None]+purple*p*variation[:,:,None])
         if name.startswith('Petal'):
             # Explicit petal UVs: darker throat, softly lighter rim and faint
             # longitudinal veins. This is colour, not baked illumination.

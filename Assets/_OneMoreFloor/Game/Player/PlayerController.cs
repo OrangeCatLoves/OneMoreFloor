@@ -13,6 +13,12 @@ namespace OneMoreFloor.Game
     [RequireComponent(typeof(PlayerMotor))]
     public class PlayerController : NetworkBehaviour
     {
+        /// <summary>Physics layer of the players' characters.</summary>
+        public const string PlayerLayer = "Player";
+
+        /// <summary>Physics layer of invisible colliders that stop players but not the camera.</summary>
+        public const string PlayerBlockerLayer = "PlayerBlocker";
+
         [SerializeField]
         private InputActionAsset controls;
 
@@ -113,7 +119,45 @@ namespace OneMoreFloor.Game
             _follow = virtualCamera.GetComponent<CinemachineThirdPersonFollow>();
             virtualCamera.Follow = cameraTarget;
             _follow.CameraDistance = Zoom.Distance;
+
+            ConfigureCameraCollision(virtualCamera);
+
             _camera = Camera.main.transform;
+        }
+
+        // The camera keeps walls and solid props out of the view, but ignores the player and the invisible
+        // blockers that only keep players out of places (layer PlayerBlocker).
+        // Cinemachine's Deoccluder replaces the third-person rig's own avoidance, which snapped the camera
+        // instantly whenever its shoulder point touched a door frame (a 2 m jump walking out of the lift).
+        // The Deoccluder ignores brief blocking and eases in and out.
+        private void ConfigureCameraCollision(CinemachineCamera virtualCamera)
+        {
+            CinemachineThirdPersonFollow.ObstacleSettings builtIn = _follow.AvoidObstacles;
+            builtIn.Enabled = false;
+            _follow.AvoidObstacles = builtIn;
+
+            if (!virtualCamera.TryGetComponent(out CinemachineDeoccluder deoccluder))
+                deoccluder = virtualCamera.gameObject.AddComponent<CinemachineDeoccluder>();
+            deoccluder.CollideAgainst = ~LayerMask.GetMask(PlayerLayer, "Ignore Raycast", PlayerBlockerLayer);
+            deoccluder.IgnoreTag = string.Empty;
+            deoccluder.TransparentLayers = 0;
+            deoccluder.MinimumDistanceFromTarget = cameraSettings.CollisionMinimumDistance;
+
+            CinemachineDeoccluder.ObstacleAvoidance avoidance = deoccluder.AvoidObstacles;
+            avoidance.Enabled = true;
+            avoidance.DistanceLimit = 0f;
+            avoidance.MinimumOcclusionTime = cameraSettings.IgnoreBriefBlocking;
+            avoidance.CameraRadius = cameraSettings.CameraCollisionRadius;
+            avoidance.Strategy = CinemachineDeoccluder.ObstacleAvoidance.ResolutionStrategy.PullCameraForward;
+            avoidance.MaximumEffort = 4;
+            avoidance.SmoothingTime = cameraSettings.CollisionHoldTime;
+            avoidance.Damping = cameraSettings.CollisionEaseOut;
+            avoidance.DampingWhenOccluded = cameraSettings.CollisionEaseIn;
+            deoccluder.AvoidObstacles = avoidance;
+
+            CinemachineDeoccluder.QualityEvaluation quality = deoccluder.ShotQualityEvaluation;
+            quality.Enabled = false;
+            deoccluder.ShotQualityEvaluation = quality;
         }
 
         private void Update()

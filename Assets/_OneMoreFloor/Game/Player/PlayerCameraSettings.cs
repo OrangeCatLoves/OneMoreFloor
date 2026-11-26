@@ -48,6 +48,24 @@ namespace OneMoreFloor.Game
         [SerializeField, Min(0f), Tooltip("Height changes up to this size in one frame, in metres, count as a step and are eased. Bigger ones (teleports) are followed straight away.")]
         private float maxSmoothedStep = 0.5f;
 
+        [SerializeField, Min(0f), Tooltip("How close the third-person camera may get to walls and props, in metres.")]
+        private float cameraCollisionRadius = 0.15f;
+
+        [SerializeField, Min(0f), Tooltip("Something that blocks the view for less than this many seconds (a door frame you walk past) is ignored, instead of making the camera jump.")]
+        private float ignoreBriefBlocking = 0.2f;
+
+        [SerializeField, Min(0f), Tooltip("Seconds the third-person camera takes to move in when something stays between it and the player.")]
+        private float collisionEaseIn = 0.15f;
+
+        [SerializeField, Min(0f), Tooltip("Seconds the third-person camera takes to move back out once the way is clear.")]
+        private float collisionEaseOut = 0.4f;
+
+        [SerializeField, Min(0f), Tooltip("After moving for an obstacle, the camera holds still at least this many seconds, so it doesn't flicker back and forth.")]
+        private float collisionHoldTime = 0.2f;
+
+        [SerializeField, Min(0f), Tooltip("The camera never moves closer to the player's head than this when avoiding obstacles, in metres.")]
+        private float collisionMinimumDistance = 0.3f;
+
         public float LookSensitivity => lookSensitivity;
         public float LookUpLimit => lookUpLimit;
         public float LookDownLimit => lookDownLimit;
@@ -62,5 +80,11 @@ namespace OneMoreFloor.Game
         public float HideBodyDistance => hideBodyDistance;
         public float StepSmoothTime => stepSmoothTime;
         public float MaxSmoothedStep => maxSmoothedStep;
+        public float CameraCollisionRadius => cameraCollisionRadius;
+        public float IgnoreBriefBlocking => ignoreBriefBlocking;
+        public float CollisionEaseIn => collisionEaseIn;
+        public float CollisionEaseOut => collisionEaseOut;
+        public float CollisionHoldTime => collisionHoldTime;
+        public float CollisionMinimumDistance => collisionMinimumDistance;
     }
 }

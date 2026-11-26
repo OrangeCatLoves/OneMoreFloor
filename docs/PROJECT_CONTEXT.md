@@ -665,6 +665,9 @@ Concept images stay out of `Assets/`, where Unity would import every one. Name t
 - 20 Nov 2026 — Agents may open Unity on the home PC themselves (`tools/homepc/open-unity.sh`), so the owner doesn't have to start it through Parsec.
 - 26 Nov 2026 — Claude Code builds the Trivia art (round 3) instead of Codex, until the owner hands it back. Blender is installed on the home PC so art builds and bakes run there; the laptop stays the master copy.
 - 20 Nov 2026 — Trivia brightness target: at least 0.35 average screen brightness from the player's views (0 black, 1 white), a well-lit TV studio. Round 2 measured 0.12.
+- 27 Nov 2026 — Round 3 playtest (owner): 0.36 is a little too bright, so the target is now 0.29–0.34 (round 3 measures 0.32). Every floor off the stage is carpeted; the stage stays wood. The dark lattice panels on the walls go. The players' TV grows from 1.4 m to 1.9 m wide.
+- 27 Nov 2026 — Trivia logic (owner): no points (the run's score stays floors cleared). 30 s per question. Players press E at a podium to get into position; the questions start only when every player is in position and one of them clicks Ready. Votes are hidden and can be changed until time runs out; most votes wins; a tie re-asks the question once, and a second tie costs 1 heart. The right answer shows for about 3 s. Claude Code drafts the starter question bank for the owner to review. The lobby and lift ride come right after Trivia's logic.
+- 27 Nov 2026 — Audio comes from free CC0 libraries (Claude Code sources and logs it; the owner approves by listening). The host and audience come from Mixamo (the owner downloads with his Adobe account; Claude Code sets them up).
 
 ---
 

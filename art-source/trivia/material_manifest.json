@@ -383,5 +383,20 @@
     "surface_type": "emission",
     "coat_weight": 0,
     "coat_roughness": 0.24
+  },
+  "M_Trivia_Carpet": {
+    "maps": {
+      "BaseColor": "T_Trivia_Carpet_BaseColor.png",
+      "Normal": "T_Trivia_Carpet_Normal.png",
+      "MetallicSmoothness": "T_Trivia_Carpet_MetallicSmoothness.png",
+      "Roughness": "T_Trivia_Carpet_Roughness.png"
+    },
+    "metallic": 0,
+    "roughness": 0.9,
+    "size": 2048,
+    "emission_strength": 0.0,
+    "surface_type": "carpet",
+    "coat_weight": 0,
+    "coat_roughness": 0.24
   }
 }

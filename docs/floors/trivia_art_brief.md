@@ -17,7 +17,7 @@ This room is the game's first impression and its best trailer shot. Treat it as 
 - Supporting: warm walnut wood, cream and ivory plaster and marble.
 - Accents, only where the images use them: saturated red, blue, yellow and green on the answer symbols.
 
-**Lighting mood:** warm, bright and lively, like a well-lit TV studio (owner, round 3): the hall and audience are clearly visible, and the stage is still the brightest area. Amber key light with purple-gelled stage light as the secondary colour. Dozens of small practical lights (bulbs, sconces, chandeliers, lit edges) make the room sparkle. Highlights glow softly. The polished stage floor reflects all of it. The room checks measure the brightness: at least 0.35 average on screen from the players' views (the concept images measure 0.35 to 0.38).
+**Lighting mood:** warm, bright and lively, like a well-lit TV studio (owner, round 3): the hall and audience are clearly visible, and the stage is still the brightest area. Amber key light with purple-gelled stage light as the secondary colour. Dozens of small practical lights (bulbs, sconces, chandeliers, lit edges) make the room sparkle. Highlights glow softly. The polished stage floor reflects all of it. The room checks measure the brightness: 0.29 to 0.34 average on screen from the players' views (owner, 27 Nov: 0.36 was a little too bright; the concept images measure 0.35 to 0.38).
 
 **Detail language:** ornate and layered, never bare. Every large surface has moulding, trim, fabric folds, inlay or lights. Detail is richest around the stage and simplifies with distance from it.
 
@@ -29,7 +29,7 @@ Where the images disagree, `trivia-1.png` wins.
 - Polished warm wood planks, glossy enough to show clear reflections.
 - A gold star-compass inlay in a gold ring at centre stage, where the host stands.
 - Curved steps with lit risers at both front corners of the stage, left and right of the players' TV, reached from the foot of the centre aisle (round 3).
-- One low TV for the players at the centre of the stage front, facing them and standing upright, showing the same content as the big screen. Its back, seen by the audience, is dressed in walnut and gold. All live screens stand upright (round 3).
+- One low TV for the players at the centre of the stage front, 1.9 m wide, facing them and standing upright, showing the same content as the big screen. Its back, seen by the audience, is dressed in walnut and gold. All live screens stand upright (round 3).
 - Compact floor-standing stage lights at the corners of the stage, each tilted up at a specific target.
 
 **Proscenium and backdrop**

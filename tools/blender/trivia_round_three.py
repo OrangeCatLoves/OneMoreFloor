@@ -162,6 +162,8 @@ def clear_round_two(LIGHTS):
     remove('SM_Trivia_ApronFlute', 'SM_Trivia_StageApronEdge')
     # Tie-backs, the players' TV and the lower lower-wall panels are redesigned below.
     remove('SM_Trivia_GoldTieback', 'SM_Trivia_Tieback', 'SM_Trivia_Tassel', 'SM_Trivia_PlayerTV', 'SM_Trivia_PlayerScreen', 'COL_Trivia_PlayerTV')
+    # Dark lattice grilles on the walls (owner, round 3 playtest: they look weird).
+    remove('SM_Trivia_Grille')
 
 
 # ---------------------------------------------------------------- shell: walls, floor, ceiling
@@ -373,7 +375,8 @@ def lift(S, light, lantern):
     for side in [-1, 1]:
         utube('SM_Trivia_LiftHandrail', [(side * (cw / 2 - .05), B + .95, 26.6), (side * (cw / 2 - .05), B + .95, 26.1 + cd - .5)], .025, 'Gold', sides=8)
     # Four players start inside the cab, facing the doors and the stage beyond.
-    for i, (x, z) in enumerate([(-1.0, cz - .7), (1.0, cz - .7), (-1.0, cz + .7), (1.0, cz + .7)]):
+    # Close to the centre line, so a third-person camera behind a player clears the door frame.
+    for i, (x, z) in enumerate([(-.65, cz - .7), (.65, cz - .7), (-.65, cz + .7), (.65, cz + .7)]):
         empty(f'MK_Spawn_{i + 1:02}', U(x, B, z))
     empty('MK_Exit', U(0, B, WALL - .6))
     light('Area', U(0, B + ch - .05, cz), '#FFE6C4', 520, U(0, B, cz), size=2.4, purpose='Lift cab ceiling panel; bake')
@@ -420,7 +423,6 @@ def galleries(seat_template):
             # Face the centre of the stage front (Unity (0, z=1.5)).
             seat.rotation_euler.z = math.atan2(-x, z - 1.5)
             apply(seat)
-        collider('Trivia_UpperSideSeating', U(side * 13.35, 4.8 + .63, 4.5), (.75, 1.26, 9.6))
     bpy.data.objects.remove(far, do_unlink=True)
 
 
@@ -491,7 +493,7 @@ def tiebacks():
 def television():
     """Upright players' TV on the stage front: faces the players, with a dressed back for the audience."""
     LIVE_W, LIVE_H = 12.15, 4.10
-    w = 1.4; h = w / (LIVE_W / LIVE_H)
+    w = 1.9; h = w / (LIVE_W / LIVE_H)     # owner, round 3 playtest: 1.4 m was a little too small
     center = U(0, 1.35, 5.32)
     begin = set(bpy.data.objects)
     box('SM_Trivia_PlayerTVHousing', (0, 0, 0), (w + .12, .14, h + .12), 'BlackMetal', .035)
@@ -510,10 +512,10 @@ def television():
         o.data = o.data.copy()
         o.data.transform(Matrix.Translation(center) @ Matrix.Rotation(math.pi, 4, 'Z') @ o.matrix_world)
         o.matrix_world = Matrix.Identity(4)
-    block('PlayerTVFoot', (0, .65, 5.32), (1.0, .10, .40), 'BlackMetal', True, .025)
+    block('PlayerTVFoot', (0, .65, 5.32), (1.2, .10, .40), 'BlackMetal', True, .025)
     block('PlayerTVStand', (0, .935, 5.38), (.12, .57, .10), 'BlackMetal', True, .015)
     utube('SM_Trivia_PlayerTVCable', [(.1, 1.1, 5.44), (.1, .8, 5.45), (.1, .68, 5.42), (.1, .61, 5.40)], .012, 'BlackMetal')
-    collider('Trivia_PlayerTV', U(0, 1.35, 5.32), (1.56, .2, h + .2))
+    collider('Trivia_PlayerTV', U(0, 1.35, 5.32), (w + .16, .2, h + .2))
 
 
 # ---------------------------------------------------------------- control position and cameras
@@ -678,6 +680,20 @@ def play_areas():
         o.empty_display_type = 'CUBE'; o.empty_display_size = .5
 
 
+# ---------------------------------------------------------------- carpet
+
+def carpet_floors():
+    """Owner, round 3 playtest: every floor off the stage is carpeted. The stage keeps its polished
+    wood, and the red star runner stays on the centre aisle."""
+    import trivia_geometry as g
+    carpet = g.M['Carpet']
+    for o in bpy.data.objects:
+        if o.type == 'MESH' and o.name.startswith(('SM_Trivia_HallFloor', 'SM_Trivia_SeatTier', 'SM_Trivia_AisleRamp',
+                'SM_Trivia_SideAisleRamp', 'SM_Trivia_CrossAisle', 'SM_Trivia_LiftFloor', 'SM_Trivia_CornerStep_',
+                'SM_Trivia_BalconyDeck')):
+            o.data.materials.clear(); o.data.materials.append(carpet)
+
+
 # ---------------------------------------------------------------- entry point
 
 def apply_round_three(S, seat_template, rail, light, LIGHTS, lantern):
@@ -700,4 +716,5 @@ def apply_round_three(S, seat_template, rail, light, LIGHTS, lantern):
         start = set(bpy.data.objects); lantern(0, 0, 7.3)
         place(built_since(start), Matrix.Translation(U(x, 0, 25.55)) @ Matrix.Rotation(math.pi, 4, 'Z'))
     scale_light(LIGHTS, 'Audience fill', 1.4)
+    carpet_floors()
     print('ROUND3 collision and play areas', flush=True); proxy_colliders(); play_areas()

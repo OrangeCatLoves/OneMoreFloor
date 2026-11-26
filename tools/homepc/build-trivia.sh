@@ -13,8 +13,11 @@ cd "$(git rev-parse --show-toplevel)"
 source tools/homepc/common.sh
 ART=Assets/_OneMoreFloor/Art/Floors/Trivia
 UNITY_CMD='unity command --project-path C:/OneMoreFloor --instance "Main Editor" --no-banner --caller plugin --skill unity-cli --result-only'
+mkdir -p Temp
+trap 'echo "build-trivia.sh stopped at line $LINENO" >&2' ERR
 
-remote_unity() { ssh -o BatchMode=yes "$HOST" "$UNITY_CMD $*" 2>/dev/null | tr -d '\r'; }
+# Unity CLI commands can exit non-zero when there is nothing to do; callers check the output instead.
+remote_unity() { ssh -o BatchMode=yes "$HOST" "$UNITY_CMD $*" 2>/dev/null | tr -d '\r' || true; }
 
 echo "== Blender build on the home PC"
 bash tools/homepc/blender.sh tools/blender/build_trivia.py "$@" | grep -vE "Cannot register a valid material index" | tail -6
@@ -31,12 +34,12 @@ done
 if echo "$status" | grep -q '"compilationFailed":true'; then echo "Unity reports compile errors: $status" >&2; exit 1; fi
 printf '%s\n' 'var start = System.DateTime.UtcNow;' \
     'OneMoreFloor.ArtReview.TriviaReviewSceneBuilder.Build();' \
-    'return "built in " + (System.DateTime.UtcNow - start).TotalSeconds.ToString("F0") + " s";' > "${TMPDIR:-/tmp}/build-trivia-scene.cs"
-scp -q -o BatchMode=yes "${TMPDIR:-/tmp}/build-trivia-scene.cs" "$HOST:C:/OneMoreFloorTools/build-trivia-scene.cs"
+    'return "built in " + (System.DateTime.UtcNow - start).TotalSeconds.ToString("F0") + " s";' > Temp/build-trivia-scene.cs
+scp -q -o BatchMode=yes Temp/build-trivia-scene.cs "$HOST:C:/OneMoreFloorTools/build-trivia-scene.cs"
 result="$(remote_unity script eval --file C:/OneMoreFloorTools/build-trivia-scene.cs --timeout 2400)"
 echo "$result" | grep -oE '"result": *"[^"]*"|"message": *"[^"]{0,300}' || true
 echo "$result" | grep -q '"success": *true' || { echo "The Unity scene build failed." >&2; exit 1; }
 
 echo "== Bringing the review scene, lightmaps and materials back"
 bash tools/homepc/pull.sh --mirror "$ART/Review"
-bash tools/homepc/pull.sh "$ART/Materials" art-source/trivia
+bash tools/homepc/pull.sh "$ART/Materials" "$ART/Textures" art-source/trivia

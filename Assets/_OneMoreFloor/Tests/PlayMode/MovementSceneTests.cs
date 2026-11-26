@@ -255,7 +255,9 @@ namespace OneMoreFloor.Tests.PlayMode
             float restHeight = _player.CameraTarget.position.y - _player.transform.position.y;
 
             float fastestBodyRise = 0f, fastestCameraRise = 0f;
-            float lastBody = _player.transform.position.y, lastCamera = _player.CameraTarget.position.y;
+            float startHeight = _player.transform.position.y;
+            float lastBody = startHeight, lastCamera = _player.CameraTarget.position.y;
+            float climbStart = -1f, climbEnd = -1f, topHeight = 0f;
             Hold(Key.W);
             float end = Time.time + 1.6f;
             while (Time.time < end)
@@ -267,15 +269,25 @@ namespace OneMoreFloor.Tests.PlayMode
                     fastestBodyRise = Mathf.Max(fastestBodyRise, (body - lastBody) / Time.deltaTime);
                     fastestCameraRise = Mathf.Max(fastestCameraRise, (camera - lastCamera) / Time.deltaTime);
                 }
+                if (climbStart < 0f && body > startHeight + 0.01f)
+                    climbStart = Time.time;
+                if (body > topHeight + 0.01f)
+                {
+                    topHeight = body;
+                    climbEnd = Time.time;
+                }
                 lastBody = body;
                 lastCamera = camera;
             }
             Hold();
             yield return new WaitForSeconds(0.5f);
 
+            // A smooth camera rises at about the stairs' average climb rate. The character's step-ups are
+            // much faster than that average; the camera must stay close to it.
+            float averageClimb = (topHeight - startHeight) / Mathf.Max(0.01f, climbEnd - climbStart);
             Assert.That(_player.transform.position.y, Is.GreaterThan(2f), "The player should have climbed the stairs.");
-            Assert.That(fastestBodyRise, Is.GreaterThan(5f), "The character jolts up each step; without that, this test proves nothing.");
-            Assert.That(fastestCameraRise, Is.LessThan(fastestBodyRise * 0.6f), "The camera should ease up the steps, not jolt with the character.");
+            Assert.That(fastestBodyRise, Is.GreaterThan(averageClimb * 2f), "The character jolts up each step; without that, this test proves nothing.");
+            Assert.That(fastestCameraRise, Is.LessThan(averageClimb * 1.8f), $"The camera should ease up the steps, not jolt with the character (average climb {averageClimb:F1} m/s, character peak {fastestBodyRise:F1} m/s, camera peak {fastestCameraRise:F1} m/s).");
             Assert.That(_player.CameraTarget.position.y - _player.transform.position.y, Is.EqualTo(restHeight).Within(0.01f), "The camera should settle back at eye height.");
         }
 

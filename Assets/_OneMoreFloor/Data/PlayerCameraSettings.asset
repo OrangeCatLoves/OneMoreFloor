@@ -26,3 +26,9 @@ MonoBehaviour:
   hideBodyDistance: 0.8
   stepSmoothTime: 0.07
   maxSmoothedStep: 0.5
+  cameraCollisionRadius: 0.15
+  ignoreBriefBlocking: 0.2
+  collisionEaseIn: 0.15
+  collisionEaseOut: 0.4
+  collisionHoldTime: 0.2
+  collisionMinimumDistance: 0.3

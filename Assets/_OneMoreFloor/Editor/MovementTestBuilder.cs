@@ -160,9 +160,10 @@ namespace OneMoreFloor.EditorTools
                 Enabled = true,
                 CollisionFilter = ~((1 << playerLayer) | (1 << LayerMask.NameToLayer("Ignore Raycast"))),
                 IgnoreTag = string.Empty,
-                CameraRadius = 0.2f,
-                DampingIntoCollision = 0f,
-                DampingFromCollision = 0.5f,
+                // PlayerController applies the same values from PlayerCameraSettings at runtime.
+                CameraRadius = camera.CameraCollisionRadius,
+                DampingIntoCollision = camera.CollisionEaseIn,
+                DampingFromCollision = camera.CollisionEaseOut,
             };
         }
 

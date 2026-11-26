@@ -43,8 +43,10 @@ namespace OneMoreFloor.Tests.EditMode.RoomChecks
         private const float ScreenTiltLimit = 2f;
 
         // Average display brightness (0 = black, 1 = white) from the player's views. The owner chose 0.35 on
-        // 20 Nov 2026: a well-lit TV studio, about 3x round 2's 0.12. 0 would mean "not agreed yet".
-        private const float MinimumAverageBrightness = 0.35f;
+        // 20 Nov 2026 (a well-lit TV studio, about 3x round 2's 0.12), then found round 3 at 0.36 "a little
+        // too bright" on 27 Nov 2026: the room now has to land in this band.
+        private const float MinimumAverageBrightness = 0.29f;
+        private const float MaximumAverageBrightness = 0.34f;
 
         // Visible meshes the player may pass through by design: light beams, haze, glows, decals.
         private static readonly Regex NotSolid = new Regex("Beam|Haze|Glow|Decal|Fx|FX_|Volumetric|Cone", RegexOptions.IgnoreCase);
@@ -239,9 +241,7 @@ namespace OneMoreFloor.Tests.EditMode.RoomChecks
             string message = $"Average brightness {overall:F2} (0 black, 1 white).\n  " + string.Join("\n  ", lines);
             _report.AppendLine(message);
 
-            if (MinimumAverageBrightness <= 0f)
-                Assert.Inconclusive("No brightness target agreed with the owner yet. " + message);
-            Assert.That(overall, Is.GreaterThanOrEqualTo(MinimumAverageBrightness), message);
+            Assert.That(overall, Is.InRange(MinimumAverageBrightness, MaximumAverageBrightness), message);
         }
 
         private (float average, float darkShare) MeasureView(Vector3 from, Vector3 to)
@@ -260,7 +260,19 @@ namespace OneMoreFloor.Tests.EditMode.RoomChecks
                 camera.targetTexture = target;
                 camera.GetUniversalAdditionalCameraData().renderPostProcessing = true;
 
-                RenderPipeline.SubmitRenderRequest(camera, new RenderPipeline.StandardRequest { destination = target });
+                // The first render of a view can still use placeholder shaders while they compile in the
+                // background; compile synchronously and render twice before measuring.
+                bool asyncCompilation = ShaderUtil.allowAsyncCompilation;
+                ShaderUtil.allowAsyncCompilation = false;
+                try
+                {
+                    RenderPipeline.SubmitRenderRequest(camera, new RenderPipeline.StandardRequest { destination = target });
+                    RenderPipeline.SubmitRenderRequest(camera, new RenderPipeline.StandardRequest { destination = target });
+                }
+                finally
+                {
+                    ShaderUtil.allowAsyncCompilation = asyncCompilation;
+                }
 
                 var previous = RenderTexture.active;
                 RenderTexture.active = target;

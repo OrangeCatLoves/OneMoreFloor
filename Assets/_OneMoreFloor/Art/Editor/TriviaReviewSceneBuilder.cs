@@ -17,9 +17,9 @@ namespace OneMoreFloor.ArtReview
     {
         public const string Folder = "Assets/_OneMoreFloor/Art/Floors/Trivia/Review";
         public const string ScenePath = Folder + "/TriviaArtReview.unity";
-        // Camera exposure in stops. Round 2 used 0.5; round 3 aims for the concept images' brightness
-        // (about 0.35 average on screen, checked by the room checks).
-        public const float ReviewExposure = 2.3f;
+        // Camera exposure in stops. Round 2 used 0.5. Round 3 first used 2.3 (0.36 on screen); the owner
+        // found that a little too bright, so the target is now 0.29-0.34, checked by the room checks.
+        public const float ReviewExposure = 2.0f;
 
         [MenuItem("OneMoreFloor/Art/Open Trivia Review")]
         public static void OpenReview()
@@ -117,11 +117,17 @@ namespace OneMoreFloor.ArtReview
             room.name = "Trivia_Theatre";
             PrefabUtility.UnpackPrefabInstance(room,PrefabUnpackMode.Completely,InteractionMode.AutomatedAction);
             var parts = room.GetComponentsInChildren<Transform>();
+            // Invisible blockers that only keep players out of places (curtains, pillars, stage-edge trims)
+            // go on the PlayerBlocker layer, which the camera ignores, so it doesn't snap on them.
+            int blockerLayer = LayerMask.NameToLayer("PlayerBlocker");
+            if (blockerLayer < 0) throw new Exception("Missing physics layer PlayerBlocker (ProjectSettings/TagManager.asset)");
             foreach (var mesh in room.GetComponentsInChildren<MeshFilter>())
             {
                 if (!mesh.name.StartsWith("COL_")) continue;
                 mesh.GetComponent<Renderer>().enabled = false;
                 mesh.gameObject.AddComponent<MeshCollider>().sharedMesh = mesh.sharedMesh;
+                if (mesh.name.StartsWith("COL_Trivia_DecorProxy") || mesh.name.StartsWith("COL_Trivia_ApronEdgeGuard") || mesh.name.StartsWith("COL_Trivia_RearPanelGuard"))
+                    mesh.gameObject.layer = blockerLayer;
             }
             // Open display pose for this walk-through; the source FBX remains
             // closed and there is no door gameplay or network behavior here.
