@@ -126,7 +126,8 @@ namespace OneMoreFloor.ArtReview
                 if (!mesh.name.StartsWith("COL_")) continue;
                 mesh.GetComponent<Renderer>().enabled = false;
                 mesh.gameObject.AddComponent<MeshCollider>().sharedMesh = mesh.sharedMesh;
-                if (mesh.name.StartsWith("COL_Trivia_DecorProxy") || mesh.name.StartsWith("COL_Trivia_ApronEdgeGuard") || mesh.name.StartsWith("COL_Trivia_RearPanelGuard"))
+                if (mesh.name.StartsWith("COL_Trivia_DecorProxy") || mesh.name.StartsWith("COL_Trivia_ApronEdgeGuard") || mesh.name.StartsWith("COL_Trivia_RearPanelGuard")
+                    || mesh.name.StartsWith("COL_Trivia_LiftFrameGuard"))
                     mesh.gameObject.layer = blockerLayer;
             }
             // Open display pose for this walk-through; the source FBX remains

@@ -95,6 +95,8 @@ namespace OneMoreFloor.Game
             base.OnStartClient();
             if (FindAnyObjectByType<RunHud>() == null)
                 new GameObject("RunHud").AddComponent<RunHud>();
+            if (FindAnyObjectByType<LiftFloorSigns>() == null)
+                new GameObject("LiftFloorSigns").AddComponent<LiftFloorSigns>();
         }
 
         public override void OnStartServer()

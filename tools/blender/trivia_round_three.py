@@ -324,39 +324,95 @@ def stage_front():
 
 # ---------------------------------------------------------------- the lift, at the centre of the rear wall
 
+# Seven-segment layout for the lift's bulb floor signs: segment -> (centre x, centre z, horizontal?) in
+# units of the digit's width (w) and half-height (h), from its bottom-left corner.
+SEGMENTS = {'a': (.5, 2, True), 'b': (1, 1.5, False), 'c': (1, .5, False), 'd': (.5, 0, True),
+            'e': (0, .5, False), 'f': (0, 1.5, False), 'g': (.5, 1, True)}
+
+
+def bulb_digit(prefix, x, y, z, height, flip_about=None, radius=.026):
+    """One seven-segment digit of bulbs standing in the facade frame's XZ plane, bottom-left at (x, z).
+    Every segment is its own object (prefix_a ... prefix_g) so the game can light the floor number.
+    flip_about mirrors it across that x, so it reads correctly from behind (inside the cab)."""
+    w, h = height * .55, height / 2
+    for seg, (sx, sz, flat) in SEGMENTS.items():
+        length = w if flat else h
+        count = max(2, int(length / .075))
+        for i in range(count):
+            t = (i + .5) / count - .5
+            px = x + sx * w + (t * length if flat else 0)
+            pz = z + sz * h + (0 if flat else t * length)
+            if flip_about is not None:
+                px = 2 * flip_about - px
+            sphere(f'{prefix}_{seg}', (px, y, pz), (radius, radius, radius), 'Bulb', 8, 6)
+
+
 def lift(S, light, lantern):
+    """The Showtime Marquee lift (the owner's pick from the lift drafts, 27 Nov 2026): a red velvet frame
+    lined with bulbs, a bulb floor sign, gold star doors, and a velvet cab with gold pilasters, carpet and a
+    bulb-lined ceiling. The floor signs (SM_LiftSign_*) are lit by the game for the current floor number."""
     w, h = DOOR_W, DOOR_H
+    pad, top = .42, .5           # frame band width at the sides, and its height above the doorway
     start = set(bpy.data.objects)
-    # Built in the facade's own frame (x across, -y towards the hall, z up from the lift floor),
-    # then turned to face the stage. Proportions follow the round 1 portal, with a lower arch so the
-    # whole portal fits under the rear gallery (deck underside 4.6 m, lift floor 1.2 m).
+    # Built in the facade's own frame (x across, -y towards the hall, z up from the lift floor), then turned
+    # to face the stage. The frame tops out at 4.2 m, under the rear gallery (deck underside 4.6 m).
     for side in [-1, 1]:
-        box('SM_Trivia_LiftJamb', (side * (w / 2 + .13), 0, h / 2), (.23, .32, h), 'Gold', .04)
-    arch = [((w / 2 + .1) * math.cos(i * math.pi / 40), -.05, h + .40 * math.sin(i * math.pi / 40)) for i in range(41)]
-    tube('SM_Trivia_LiftArch', arch, .12, 'Gold', sides=10)
+        box('SM_Trivia_LiftFrame', (side * (w / 2 + pad / 2), .085, (h + top) / 2), (pad, .27, h + top), 'VelvetRed', .02)
+    box('SM_Trivia_LiftFrame', (0, .085, h + top / 2), (w, .27, top), 'VelvetRed', .02)
+    # Gold trims: round the doorway and along the frame's outer edge (open at the floor: no lip to trip on).
+    edge = w / 2 + pad - .05
+    tube('SM_Trivia_LiftFrameTrim', [(-w / 2 - .03, -.06, 0), (-w / 2 - .03, -.06, h + .03), (w / 2 + .03, -.06, h + .03), (w / 2 + .03, -.06, 0)], .028, 'Gold', sides=8)
+    tube('SM_Trivia_LiftFrameTrim', [(-edge, -.06, 0), (-edge, -.06, h + top - .05), (edge, -.06, h + top - .05), (edge, -.06, 0)], .028, 'Gold', sides=8)
+    # Marquee bulbs down both sides and across the top, clear of the sign and the stars.
     for side in [-1, 1]:
-        box('SM_Trivia_LiftPilaster', (side * (w / 2 + .36), .06, (h + .55) / 2), (.35, .35, h + .55), 'Ivory', .03)
-        for zz in [.10, .28, h + .37, h + .55]:
-            box('SM_Trivia_LiftCapital', (side * (w / 2 + .36), -.01, zz), (.52, .48, .10), 'Gold', .02)
-        tube('SM_Trivia_LiftPilasterInset', rounded_rect(side * (w / 2 + .36), -.13, 1.45, .22, 2.0, .035, 4), .018, 'Gold', True)
-    for dz in [.17, .30]:
-        tube('SM_Trivia_LiftArchLayer', [(xx, -.08, zz + dz) for xx, _, zz in arch], .05, 'GoldDark' if dz == .17 else 'Gold', sides=8)
-    box('SM_Trivia_LiftIndicator', (0, -.09, h + .14), (.85, .13, .24), 'BlackMetal', .045)
+        x = side * (w / 2 + pad / 2)
+        for z in [.3 + i * .22 for i in range(int((h + top / 2 - .3) / .22) + 1)]:
+            sphere('SM_Trivia_LiftFrameBulb', (x, -.07, z), (.042, .042, .042), 'Bulb', 10, 8)
+    for x in [-(w / 2 + pad / 2) + i * .22 for i in range(int((w + pad) / .22) + 1)]:
+        if abs(x) < .62 or abs(abs(x) - .95) < .2:
+            continue
+        sphere('SM_Trivia_LiftFrameBulb', (x, -.07, h + top / 2), (.042, .042, .042), 'Bulb', 10, 8)
     for side in [-1, 1]:
-        x = side * .18; coords = [(x - .09, -.17, h + .08), (x + .09, -.17, h + .08), (x, -.17, h + .21)]
-        if side > 0: coords = [(xx, yy, 2 * (h + .145) - zz) for xx, yy, zz in coords]
-        mesh('SM_Trivia_LiftArrow', coords, [(0, 2, 1) if side > 0 else (0, 1, 2)], 'Bulb', True)
-    for x in [-2.1, 2.1]:
-        lantern(x, 0, 2.5)
+        star('SM_Trivia_LiftStar', (side * .95, -.06, h + top / 2), .17, 'Gold')
+    # The floor sign in the middle of the top band: two digits of bulbs on a dark panel.
+    sign_z = h + top / 2
+    box('SM_Trivia_LiftSignBox', (0, -.07, sign_z), (.86, .1, .44), 'BurgundyWood', .02)
+    tube('SM_Trivia_LiftSignTrim', rounded_rect(0, -.125, sign_z, .8, .38, .05, 4), .016, 'Gold', True)
+    digit, gap = .3, .08
+    left = -(2 * digit * .55 + gap) / 2
+    for i, tag in enumerate(['Tens', 'Ones']):
+        bulb_digit(f'SM_LiftSign_Out_{tag}', left + i * (digit * .55 + gap), -.13, sign_z - digit / 2, digit)
+    # Globe lamps on gold stems either side (they replace the old wall lanterns).
+    for side in [-1, 1]:
+        x = side * (w / 2 + pad + .5)
+        tube('SM_Trivia_LiftGlobeStem', [(x, .2, 1.75), (x, -.1, 1.8), (x, -.22, 1.95)], .025, 'Gold', sides=8)
+        box('SM_Trivia_LiftGlobePlate', (x, .2, 1.8), (.16, .03, .26), 'Gold', .01)
+        sphere('SM_Trivia_LiftGlobe', (x, -.22, 2.1), (.15, .15, .15), 'Bulb', 16, 10)
+    # Inside the cab, over the door: a second sign, mirrored so it reads from inside.
+    inner_y = .44                 # the rear wall's back face, seen from the cab
+    box('SM_Trivia_LiftSignBox', (0, inner_y + .03, h + .3), (.7, .06, .4), 'BurgundyWood', .015)
+    small = .26
+    left = -(2 * small * .55 + gap) / 2
+    for i, tag in enumerate(['Tens', 'Ones']):
+        bulb_digit(f'SM_LiftSign_In_{tag}', left + i * (small * .55 + gap), inner_y + .075, h + .3 - small / 2, small, flip_about=0)
     # Facade frame -> world: front (-y) faces the stage, back plane sits on the rear wall face.
     to_world = Matrix.Translation(U(0, B, WALL - .24)) @ Matrix.Rotation(math.pi, 4, 'Z')
     place(built_since(start), to_world)
-    # Door leaves stand just behind the wall, so they slide open behind it, into the cab.
+    for side in [-1, 1]:
+        light('Point', U(side * (w / 2 + pad + .5), B + 2.1, WALL - .55), '#FFD39A', 55, size=.15, purpose='Marquee globe lamp by the lift; bake indirect light')
+    # Invisible guards over the frame's sides and bulbs, so players and the camera keep clear of them
+    # (the review builder puts COL_Trivia_LiftFrameGuard* on the PlayerBlocker layer).
+    for side, tag in [(-1, 'L'), (1, 'R')]:
+        collider(f'Trivia_LiftFrameGuard_{tag}', U(side * (w / 2 + pad / 2), B + 1.15, WALL - .24 + .045), (pad, .36, 2.3))
+    # Door leaves stand just behind the wall, so they slide open behind it, into the cab. Gold, with a
+    # star and a panel line on the hall side of each.
     for side, tag in [(-1, 'L'), (1, 'R')]:
         leaf_start = set(bpy.data.objects)
         box('SM_Trivia_LiftDoorPanel', U(side * (w / 4 + .006), B + h / 2, 26.16), (w / 2 - .012, .10, h), 'Gold', .015)
-        for dx in [-w / 4 + .12, w / 4 - .12]:
-            box('SM_Trivia_LiftDoorInset', U(side * w / 4 + dx, B + h / 2, 26.10), (.012, .02, h - .25), 'GoldDark')
+        decor_start = set(bpy.data.objects)
+        star('SM_Trivia_LiftDoorStar', (side * w / 4, .43, h * .58), .36, 'GoldDark')
+        tube('SM_Trivia_LiftDoorInset', rounded_rect(side * w / 4, .435, h / 2, w / 2 - .3, h - .34, .05, 4), .012, 'GoldDark', True)
+        place(built_since(decor_start), to_world)
         door = join_objects(built_since(leaf_start), f'SM_Trivia_LiftDoor_{tag}'); origin_bottom(door)
         collider(f'Trivia_LiftDoor_{tag}', U(side * (w / 4 + .006), B + h / 2, 26.16), (w / 2 - .012, .1, h))
     # Reveal lining the wall opening, and a flush threshold (no lip between hall and cab).
@@ -366,14 +422,23 @@ def lift(S, light, lantern):
     block('LiftThreshold', (0, B - .025, 26), (w, .05, .2), 'GoldDark', True)
     # Cab behind the wall: floor flush with the cross-aisle, interior from docs/sizes.json.
     cw, cd, ch = CAB; cz = 26.1 + cd / 2
-    block('LiftFloor', (0, B - .1, cz), (cw, .2, cd), 'Marble', True)
+    block('LiftFloor', (0, B - .1, cz), (cw, .2, cd), 'Carpet', True)
     for side in [-1, 1]:
-        block('LiftCabWall', (side * (cw / 2 + .075), B + ch / 2, cz), (.15, ch, cd), 'Walnut', True)
-    block('LiftCabBack', (0, B + ch / 2, 26.1 + cd + .075), (cw, ch, .15), 'Walnut', True)
-    block('LiftCeiling', (0, B + ch + .075, cz), (cw + .3, .15, cd + .15), 'Ivory', True)
-    block('LiftCeilingLight', (0, B + ch - .01, cz), (2.4, .02, 2.4), 'Bulb', False)
+        block('LiftCabWall', (side * (cw / 2 + .075), B + ch / 2, cz), (.15, ch, cd), 'VelvetRed', True)
+    block('LiftCabBack', (0, B + ch / 2, 26.1 + cd + .075), (cw, ch, .15), 'VelvetRed', True)
+    block('LiftCeiling', (0, B + ch + .075, cz), (cw + .3, .15, cd + .15), 'BurgundyWood', True)
+    block('LiftCeilingLight', (0, B + ch - .01, cz), (1.6, .02, 1.6), 'Bulb', False)
     for side in [-1, 1]:
+        for z in [26.1 + 1.0, 26.1 + cd / 2, 26.1 + cd - 1.0]:
+            box('SM_Trivia_LiftPilaster', U(side * (cw / 2 - .04), B + ch / 2, z), (.08, .16, ch), 'Gold', .01)
+        for z in [26.4 + i * .3 for i in range(int((cd - .6) / .3) + 1)]:
+            sphere('SM_Trivia_LiftCabBulb', U(side * (cw / 2 - .2), B + ch - .12, z), (.04, .04, .04), 'Bulb', 8, 6)
         utube('SM_Trivia_LiftHandrail', [(side * (cw / 2 - .05), B + .95, 26.6), (side * (cw / 2 - .05), B + .95, 26.1 + cd - .5)], .025, 'Gold', sides=8)
+    for x in [-cw / 2 + .5 + i * .4 for i in range(int((cw - 1.0) / .4) + 1)]:
+        sphere('SM_Trivia_LiftCabBulb', U(x, B + ch - .12, 26.1 + cd - .2), (.04, .04, .04), 'Bulb', 8, 6)
+    star_start = set(bpy.data.objects)
+    star('SM_Trivia_LiftCabStar', (0, 26.1 + cd - (WALL - .24) - .01, 2.5), .5, 'Gold')
+    place(built_since(star_start), to_world)
     # Four players start inside the cab, facing the doors and the stage beyond.
     # Close to the centre line, so a third-person camera behind a player clears the door frame.
     for i, (x, z) in enumerate([(-.65, cz - .7), (.65, cz - .7), (-.65, cz + .7), (.65, cz + .7)]):
@@ -381,6 +446,7 @@ def lift(S, light, lantern):
     empty('MK_Exit', U(0, B, WALL - .6))
     light('Area', U(0, B + ch - .05, cz), '#FFE6C4', 520, U(0, B, cz), size=2.4, purpose='Lift cab ceiling panel; bake')
     light('Area', U(0, 4.4, 23.3), '#FFD9AA', 380, U(0, B + 1.4, WALL), size=2.6, purpose='Lift portal key under the rear gallery; bake')
+
 
 def flank_lift_with_urns():
     """The two floor urns that stood by the old lift now flank the new lift, as in the reverse concept."""
@@ -616,8 +682,8 @@ def proxy_colliders():
                 'SM_Trivia_ProsceniumFlute', 'SM_Trivia_Box', 'SM_Trivia_WingWall', 'SM_Trivia_WallPilaster',
                 'SM_Trivia_PilasterRaisedPanel', 'SM_Trivia_CarvedRosette', 'SM_Trivia_RosetteBoss', 'SM_Trivia_Acanthus',
                 'SM_Trivia_Tassel', 'SM_Trivia_TiebackKnot', 'SM_Trivia_TiebackHoldback', 'SM_Trivia_TiebackRope', 'SM_Trivia_AisleSconce',
-                'SM_Trivia_WingWallBead', 'SM_Trivia_Grille', 'SM_Trivia_LiftHandrail', 'SM_Trivia_LiftJamb', 'SM_Trivia_LiftPilaster',
-                'SM_Trivia_LiftCapital', 'SM_Trivia_PodiumScreen', 'SM_Trivia_MonitorBackHousing', 'SM_Trivia_Podium_0',
+                'SM_Trivia_WingWallBead', 'SM_Trivia_Grille', 'SM_Trivia_LiftHandrail', 'SM_Trivia_LiftGlobe', 'SM_Trivia_LiftPilaster',
+                'SM_Trivia_PodiumScreen', 'SM_Trivia_MonitorBackHousing', 'SM_Trivia_Podium_0',
                 'SM_Trivia_BroadcastCamera', 'SM_Trivia_BroadcastLens', 'SM_Trivia_CameraPedestal', 'SM_Trivia_CameraStation',
                 'SM_Trivia_CameraHandle', 'SM_Trivia_ControlMonitor', 'SM_Trivia_ControlPost', 'SM_Trivia_ControlChair')
     boxes = []

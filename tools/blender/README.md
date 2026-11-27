@@ -4,7 +4,7 @@
 plain wall and renders each with doors closed, doors open and from inside the cab:
 `tools/homepc/blender.sh tools/blender/lift_drafts.py [--drafts A,B --samples 192]`. Renders go to
 `art-source/renders/lift/drafts-01/` (small JPGs, kept in ordinary Git). Drafts for the owner to choose
-from; nothing goes to Unity yet.
+from. The owner picked **B, Showtime Marquee**: `trivia_round_three.py` `lift()` builds it into the Trivia room.
 
 # Current task: Trivia round 3 (Claude Code)
 

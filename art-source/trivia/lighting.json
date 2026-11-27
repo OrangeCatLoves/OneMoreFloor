@@ -1371,27 +1371,27 @@
     "name": "MK_Light_Point_51",
     "type": "Point",
     "position_blender": [
-      2.0999999046325684,
-      -25.010000228881836,
-      3.819999933242798
+      2.4200000762939453,
+      -25.350000381469727,
+      3.299999952316284
     ],
     "target_blender": null,
-    "color": "#FFB85A",
-    "watts_blender": 65,
-    "relative_intensity": 0.065,
+    "color": "#FFD39A",
+    "watts_blender": 55,
+    "relative_intensity": 0.055,
     "cone_degrees": null,
-    "size_m": 0.22,
+    "size_m": 0.15,
     "casts_shadow_eevee": false,
-    "purpose": "Amber wall lantern; bake indirect light",
+    "purpose": "Marquee globe lamp by the lift; bake indirect light",
     "direction_blender": [
       0.0,
       0.0,
       -1.0
     ],
     "position_unity": [
-      -2.0999999046325684,
-      3.819999933242798,
-      25.010000228881836
+      -2.4200000762939453,
+      3.299999952316284,
+      25.350000381469727
     ],
     "direction_unity": [
       -0.0,
@@ -1403,27 +1403,27 @@
     "name": "MK_Light_Point_52",
     "type": "Point",
     "position_blender": [
-      -2.0999999046325684,
-      -25.010000228881836,
-      3.819999933242798
+      -2.4200000762939453,
+      -25.350000381469727,
+      3.299999952316284
     ],
     "target_blender": null,
-    "color": "#FFB85A",
-    "watts_blender": 65,
-    "relative_intensity": 0.065,
+    "color": "#FFD39A",
+    "watts_blender": 55,
+    "relative_intensity": 0.055,
     "cone_degrees": null,
-    "size_m": 0.22,
+    "size_m": 0.15,
     "casts_shadow_eevee": false,
-    "purpose": "Amber wall lantern; bake indirect light",
+    "purpose": "Marquee globe lamp by the lift; bake indirect light",
     "direction_blender": [
       0.0,
       0.0,
       -1.0
     ],
     "position_unity": [
-      2.0999999046325684,
-      3.819999933242798,
-      25.010000228881836
+      2.4200000762939453,
+      3.299999952316284,
+      25.350000381469727
     ],
     "direction_unity": [
       -0.0,

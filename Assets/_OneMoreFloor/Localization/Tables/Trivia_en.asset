@@ -67,8 +67,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 450809867
-    m_Localized: "Click an answer or press 1\u20134. You can change it until time
-      runs out."
+    m_Localized: "Click an answer or press 1\u20134. You can change it until everyone
+      has answered or time runs out."
     m_Metadata:
       m_Items: []
   - m_Id: 450809868

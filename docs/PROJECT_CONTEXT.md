@@ -4,8 +4,8 @@ Version 0.11 · 5 Nov 2026 · Owner: Wei Bin (GitHub: OrangeCatLoves)
 
 The single source of truth for what the game is and how it is built. Written for the owner and for AI coding agents (Claude Code, Codex).
 
-- **Status:** pre-production. Build steps 1 and 2c are done. Build step 3 (movement and camera) is built and waiting for the owner to try it. Trivia's art round 3 and Trivia's logic (step 5a) are built and waiting for the owner to playtest (27 Nov 2026), with the Floor Tester for playing one floor directly (section 11).
-- **Current focus:** Phase P0, on Trivia only (section 9). Next: the owner picks a lift design from the drafts, then CC0 audio, the Mixamo host and audience, and the lobby and lift ride. No backend work yet.
+- **Status:** pre-production. Build steps 1 and 2c are done. Build step 3 (movement and camera) is built and waiting for the owner to try it. Trivia's logic (step 5a) is done: the owner playtested it (27 Nov 2026). Trivia's art round 3 is built, now with the Showtime Marquee lift; the Floor Tester plays one floor directly (section 11).
+- **Current focus:** Phase P0, on Trivia only (section 9). Next: CC0 audio, the Mixamo host and audience, and the lobby and lift ride. No backend work yet.
 - **Conflicts:** if this file disagrees with the code or with the owner's latest instruction, stop and ask.
 
 ---
@@ -498,7 +498,7 @@ First three floors, in this order: **Trivia → Collapse Escape → Monster Aren
 - All text from the string tables.
 - **Done when:** lobby → 3 test floors → game over → results → lobby works, solo and with 2 players.
 
-**Step 5 — Trivia's logic** (Claude Code builds, you playtest) — 5a built 27 Nov 2026, waiting for the owner to playtest
+**Step 5 — Trivia's logic** (Claude Code builds, you playtest) — 5a done 27 Nov 2026 (owner playtested: "It seems fine")
 - **5a. Trivia:** the question screen, 4 podiums and team voting by keyboard or mouse, built on Codex's room, with plain boxes standing in for anything not ready yet, the clear rule and heart costs from your spec, and a sample question file (you supply the real questions).
 - **5b. Collapse Escape (later, once Trivia is complete):** a plain-box building section — corridors, stairs, doors — with the collapse, falling debris, checkpoints and the exit as your spec describes.
 - **5c. You:** playtest Trivia, tune movement in `MovementSettings`, and say what feels too big or too small. Claude Code iterates on the floor's size and puts the real shared sizes in `docs/sizes.json` as they settle. Trivia settles the door, ceiling and elevator sizes; corridors, stairs and the widest gap and highest ledge a player can jump stay guesses until Collapse Escape. Codex re-runs the generator scripts with them.
@@ -680,6 +680,8 @@ Concept images stay out of `Assets/`, where Unity would import every one. Name t
 - 27 Nov 2026 — Until the lobby and lift ride exist, a run starts with the session, the ride is instant, and a cleared floor is followed by the next floor in the same room. A floor's room is a scene for now (the Room Scene field of its FloorDefinition); room prefabs per visual tier come with the import tools (step 7). The game finds Trivia's screens through `MK_Screen_*` markers that the room's scene build makes from the screen meshes.
 - 27 Nov 2026 — Floor Tester (owner's request): a developer-only way to play one floor straight away at any difficulty level, to test its physics, logic and flow; release builds leave it out (section 11).
 - 27 Nov 2026 — Lift: the owner asked for several design drafts to choose from before the lift is built for real (`art-source/renders/lift/drafts-01`).
+- 27 Nov 2026 — Owner: Trivia's logic "seems fine" after his playtest (step 5a done). A question ends as soon as every player has voted (a 1 s beat after the last vote, `TriviaSettings`), not only when time runs out. The questions get harder per level: level 1 easy, level 2 medium, level 3 and up hard.
+- 27 Nov 2026 — Lift: the owner picked the Showtime Marquee draft (B): red velvet frame lined with bulbs, gold star doors, a velvet cab with gold pilasters, carpet and bulb-lined ceiling. Built into the Trivia room first. Its bulb floor signs (outside, and inside over the door) show the run's floor number: each segment is its own object (`SM_LiftSign_<Out|In>_<Tens|Ones>_<a-g>`), lit by the game's `LiftFloorSigns`.
 
 ---
 
@@ -694,8 +696,6 @@ Concept images stay out of `Assets/`, where Unity would import every one. Name t
 7. Repo: when should it go private? It is public for now, and the game will be sold, so anyone can read the code and art and build the game while it stays public.
 8. Home PC: the laptop can only reach it on the home network. Does the owner also need to playtest when away from home? That would need a private link between the two machines, such as Tailscale.
 9. Git LFS: GitHub's LFS budget for the repo is used up (checked 10 Nov 2026), so a fresh clone can't download any of the 63 LFS files. Raise the budget, or move those files out of LFS?
-10. Trivia: should a question end as soon as every player has voted, or always run the full 30 s (current)?
-11. Lift: which draft, or which mix of drafts? (`art-source/renders/lift/drafts-01`; review page https://claude.ai/artifact/A5P7NRpiryRSJmnyp2qQ5o)
 
 ---
 

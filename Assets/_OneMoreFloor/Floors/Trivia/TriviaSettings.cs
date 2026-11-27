@@ -44,11 +44,15 @@ namespace OneMoreFloor.Floors.Trivia
         [SerializeField, Min(0), Tooltip("How many times a tied question is asked again before a tie costs hearts.")]
         private int tieRepeats = 1;
 
+        [SerializeField, Min(0f), Tooltip("Once every player has voted, the question ends this many seconds later. Votes can still change until then.")]
+        private float secondsAfterEveryoneVoted = 1f;
+
         [SerializeField, Min(0.5f), Tooltip("How close to a podium a player must stand to get into position with E, in metres.")]
         private float podiumReach = 2f;
 
         public float SecondsPerQuestion => secondsPerQuestion;
         public float RevealSeconds => revealSeconds;
+        public float SecondsAfterEveryoneVoted => secondsAfterEveryoneVoted;
         public float PodiumReach => podiumReach;
 
         public Level ForLevel(int level) => levels[Mathf.Clamp(level - 1, 0, levels.Length - 1)];

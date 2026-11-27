@@ -11,7 +11,7 @@
     "press_e": "Press E to get into position",
     "podium_taken": "This podium is taken",
     "step_out": "E: step out",
-    "choose": "Click an answer or press 1–4. You can change it until time runs out.",
+    "choose": "Click an answer or press 1–4. You can change it until everyone has answered or time runs out.",
     "votes_one": "1 vote",
     "votes_many": "{0} votes",
     "outcome_correct": "Correct!",

@@ -12,6 +12,14 @@ awaiting the owner's playtest, not a completed Trivia game floor.
   behind it, into the cab (the review builder opens them by half the door width each). Flower urns
   flank the portal; two gallery doors sit above it. Cab interior from `docs/sizes.json`, floor flush
   with the cross-aisle, gold threshold flush with both.
+- **Lift: Showtime Marquee (owner's pick, 27 Nov):** red velvet frame (0.42 m bands, 0.5 m over the doorway,
+  topping out at 4.2 m under the rear gallery) lined with bulbs, gold trims open at the floor (no lip), two
+  stars, globe lamps on gold stems (they replace the wall lanterns; the urns stay), gold doors with a star and a
+  panel line. Cab: velvet walls, gold pilasters and rails, carpet, burgundy ceiling with a smaller light panel and
+  rows of bulbs, a gold star on the back wall. Two bulb floor signs, outside in the frame's top band and inside
+  over the door (mirrored to read from the cab): one object per segment, `SM_LiftSign_<Out|In>_<Tens|Ones>_<a-g>`,
+  so the game lights the floor number. `COL_Trivia_LiftFrameGuard_L/R` keep players and the camera off the
+  frame's sides (PlayerBlocker layer); globes and pilasters get decor proxies.
 - **Screen markers (made in Unity, 27 Nov):** the game can't read mesh shapes while playing (the model
   isn't Read/Write), so `TriviaReviewSceneBuilder.AddScreenMarkers` adds `MK_Screen_Question`,
   `MK_Screen_Players` and `MK_Screen_Podium_01`-`04` when it builds the scene: each sits at its screen's

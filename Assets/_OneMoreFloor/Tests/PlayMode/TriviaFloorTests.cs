@@ -105,6 +105,42 @@ namespace OneMoreFloor.Tests.PlayMode
             Assert.That(run.Hearts, Is.EqualTo(run.StartingHearts - 1));
         }
 
+        // Owner, 27 Nov 2026: a question ends as soon as every player has voted, not when the time runs out.
+        [UnityTest]
+        public IEnumerator WhenEveryoneHasVoted_TheQuestionEndsEarly()
+        {
+            yield return StartFloor(level: 1, questions: 5, secondsPerQuestion: 20f);
+            yield return GetIntoPositionAndStart();
+
+            float asked = Time.realtimeSinceStartup;
+            _floor.RequestVote(_floor.ServerCorrectAnswer);
+            yield return Until(() => _floor.Stage == TriviaStage.Reveal, "Voting should end once everyone has voted.", 6f);
+
+            float took = Time.realtimeSinceStartup - asked;
+            Assert.That(took, Is.LessThan(_floor.Settings.SecondsAfterEveryoneVoted + 2f), "The question should end about a second after the last vote, not after 20 s.");
+            Assert.That(_floor.Outcome, Is.EqualTo(VoteOutcome.Correct));
+        }
+
+        // The lift's bulb signs (outside and inside the cab) show the floor number: a level-2 floor test starts on floor 6.
+        [UnityTest]
+        public IEnumerator TheLiftSigns_ShowTheFloorNumber()
+        {
+            yield return StartFloor(level: 2, questions: 8);
+            LiftFloorSigns signs = null;
+            yield return Until(() => (signs = Object.FindAnyObjectByType<LiftFloorSigns>()) != null && signs.ShownNumber == RunManager.Instance.FloorNumber,
+                "The lift signs should show the floor number.");
+            Assert.That(signs.ShownNumber, Is.EqualTo(6));
+
+            List<Renderer> segments = Object.FindObjectsByType<Renderer>(FindObjectsSortMode.None).Where(r => r.name.StartsWith("SM_LiftSign_")).ToList();
+            Assert.That(segments.Count, Is.EqualTo(28), "Two signs, each two seven-segment digits.");
+            foreach (Renderer segment in segments)
+            {
+                string[] parts = segment.name.Split('_');
+                bool glows = parts[3] == "Ones" && LiftFloorSigns.LitFor(6).IndexOf(parts[4][0]) >= 0;
+                Assert.That(segment.sharedMaterial.name != "LiftSignBulbOff", Is.EqualTo(glows), segment.name);
+            }
+        }
+
         [UnityTest]
         public IEnumerator SteppingOut_ReleasesThePlayer_AndFreesThePodium()
         {
@@ -167,7 +203,7 @@ namespace OneMoreFloor.Tests.PlayMode
         }
 
         // Starts a floor test of Trivia at a level, with short timers, and waits for the floor to be ready.
-        private IEnumerator StartFloor(int level, int questions)
+        private IEnumerator StartFloor(int level, int questions, float secondsPerQuestion = SecondsPerQuestion)
         {
             FloorTest.Current = new FloorTestRequest { floorId = "trivia", level = level, seed = 4242, skipTitleCard = true };
             EditorSceneManager.LoadSceneInPlayMode(ScenePath, new LoadSceneParameters(LoadSceneMode.Single));
@@ -178,7 +214,7 @@ namespace OneMoreFloor.Tests.PlayMode
             _floor = Object.FindAnyObjectByType<TriviaFloor>();
 
             // Shorter timers, then restart the floor so they apply.
-            _floor.UseSettings(_floor.Settings.WithTimes(SecondsPerQuestion, RevealSeconds));
+            _floor.UseSettings(_floor.Settings.WithTimes(secondsPerQuestion, RevealSeconds));
             RunManager.Instance.StartRun();
             yield return Until(() => _floor.IsActive && _floor.QuestionCount == questions, $"Level {level} should be ready with {questions} questions.");
             Assert.That(RunManager.Instance.Level, Is.EqualTo(level));

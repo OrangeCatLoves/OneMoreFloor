@@ -10,7 +10,7 @@ Trivia - Time to put your knowledge to a test
 ## How it plays
 The lift door opens onto a game-show stage with a host and a cheering audience. The goal line plays and shows on each player's screen. The lift door is at the centre of the hall's back wall, facing the stage. Players walk down the centre aisle (a gentle ramp) and up the steps at either front corner of the stage to the 4 podiums, where they stand facing the audience. At a podium, a player presses **E** to get into position: the camera moves to the podium view and their screen shows the question, the options and the timer; **E** again steps out. Once every player is in position, a Ready button appears at the center of the screen, and the first click from any player starts the questions. Nothing starts until everyone is in position (owner, 27 Nov 2026).
 
-Each question and its 4 answers show on the big screen behind the players, on the podium screens, and on one TV at the front of the stage that faces the players and shows the same content as the big screen. Each player votes with their podium's buttons: red circle, blue square, yellow X, green triangle (click an option, or press 1–4). Votes stay hidden until time runs out, and each player can change theirs until then. The team's final answer is the option with the most votes (2-1-1 counts).
+Each question and its 4 answers show on the big screen behind the players, on the podium screens, and on one TV at the front of the stage that faces the players and shows the same content as the big screen. Each player votes with their podium's buttons: red circle, blue square, yellow X, green triangle (click an option, or press 1–4). Votes stay hidden until the question ends, and each player can change theirs until then. A question ends when every player has voted (a moment after the last vote) or when time runs out (owner, 27 Nov 2026). The team's final answer is the option with the most votes (2-1-1 counts).
 
 ## The vote
 - **Right answer:** the team moves onto the next question.
@@ -18,7 +18,7 @@ Each question and its 4 answers show on the big screen behind the players, on th
 - **Tie** (two or more options share the most votes): the same question is asked again, once. A second tie costs 1 heart and the team moves onto the next question.
 - **A player doesn't answer before the timer runs out:** their weight is distributed equally among the rest of the team, so only the votes cast count.
 - **Nobody answers before the timer runs out:** 1 heart is lost immediately and the team moves onto the next question.
-- **Timer:** 30 seconds per question (owner, 27 Nov 2026), tuned by playing.
+- **Timer:** 30 seconds per question (owner, 27 Nov 2026), tuned by playing. The question ends early once every player has voted.
 - **Reveal:** after each vote, everyone's votes and the right answer show for about 3 seconds before the next question.
 - **No points:** Trivia only costs hearts; the run's score stays the number of floors cleared.
 
@@ -38,11 +38,11 @@ The timer on each question. A team that stops answering keeps losing hearts, 1 p
 ## Gets harder per level
 | Level | What changes |
 |---|---|
-| 1 | 5 questions |
-| 2 | 8 questions |
-| 3 | 12 questions |
+| 1 | 5 easy questions |
+| 2 | 8 medium questions |
+| 3 | 12 hard questions |
 
-Past level 3 it stays at 12 questions.
+Past level 3 it stays at 12 hard questions. The questions get harder per level (owner, 27 Nov 2026).
 
 ## Solo vs co-op (1–4 players)
 There's no difference between solo and multiplayer. A solo player's vote is the team's answer. All 4 podiums are there even with fewer players.
@@ -76,8 +76,8 @@ Drafted by Claude Code from the concept images. Change anything.
 ## Open questions
 Answered 27 Nov 2026: 2-1-1 counts as a win for the 2; a tie re-asks once and a second tie costs 1 heart; votes are hidden and changeable until time runs out; Claude Code drafts a starter question bank (tagged easy, medium, hard) for the owner to review; the host and audience come from Mixamo.
 
+Answered later on 27 Nov 2026: the questions get harder per level (level 1 easy, level 2 medium, level 3 and up hard); a question ends as soon as every player has voted.
+
 Still open:
-- Do the questions themselves get harder per level? *(default — confirm: level 1 asks easy questions, level 2 medium, level 3 and up hard)*
-- Should a question end as soon as every player has voted? *(default — confirm: no, the full 30 seconds always runs, so votes can still change)*
 - The starter question bank (120 questions, 40 per difficulty) is ready for review: `Assets/_OneMoreFloor/Floors/Trivia/Data/TriviaQuestions.json`.
 - Does "realistic" for the host and audience mean the style of the images, or photorealistic?

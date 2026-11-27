@@ -271,9 +271,19 @@ namespace OneMoreFloor.Floors.Trivia
             while (!_game.IsFinished)
             {
                 Ask();
-                uint end = _votingEndsTick.Value;
-                while (TimeManager.Tick < end)
+                // Voting ends when time runs out, or a moment after every player has voted (owner, 27 Nov 2026).
+                bool everyoneVoted = false;
+                while (TimeManager.Tick < _votingEndsTick.Value)
+                {
+                    if (!everyoneVoted && EveryoneVoted())
+                    {
+                        everyoneVoted = true;
+                        uint soon = TimeManager.Tick + TimeManager.TimeToTicks(settings.SecondsAfterEveryoneVoted);
+                        if (soon < _votingEndsTick.Value)
+                            _votingEndsTick.Value = soon;
+                    }
                     yield return null;
+                }
 
                 VoteResult result = Reveal();
                 if (result.HeartsLost > 0)
@@ -329,6 +339,13 @@ namespace OneMoreFloor.Floors.Trivia
             _heartsLost.Value = result.HeartsLost;
             _stage.Value = (int)TriviaStage.Reveal;
             return result;
+        }
+
+        // Every player in the session has a vote in (a player can only vote while in position).
+        private bool EveryoneVoted()
+        {
+            int players = FloorPlayers.All.Count;
+            return players > 0 && _game.VoteCount >= players;
         }
 
         private void FreePodiumOf(int clientId)
