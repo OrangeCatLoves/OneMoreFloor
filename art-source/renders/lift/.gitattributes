@@ -1,0 +1,2 @@
+# Lift design drafts: small JPGs stay in ordinary Git (the remote LFS budget is used up).
+drafts-*/*.jpg -filter -diff -merge -text

@@ -233,7 +233,17 @@ namespace OneMoreFloor.Tests.EditMode.RoomChecks
             float total = 0f;
             foreach (var view in views)
             {
+                // Right after the room is rebuilt, its new lightmaps can still be loading on the first renders,
+                // which come out nearly black. Measure until two readings in a row agree.
                 (float average, float dark) = MeasureView(view.from, view.to);
+                for (int attempt = 0; attempt < 4; attempt++)
+                {
+                    (float again, float againDark) = MeasureView(view.from, view.to);
+                    bool steady = Mathf.Abs(again - average) < 0.01f;
+                    (average, dark) = (again, againDark);
+                    if (steady)
+                        break;
+                }
                 total += average;
                 lines.Add($"{view.name}: brightness {average:F2}, {dark * 100f:F0}% near-black");
             }

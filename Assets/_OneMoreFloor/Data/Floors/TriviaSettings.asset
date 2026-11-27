@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3c226b63fb65b04a83f67f6aa8cd354, type: 3}
+  m_Name: TriviaSettings
+  m_EditorClassIdentifier: OneMoreFloor.Floors.Trivia::OneMoreFloor.Floors.Trivia.TriviaSettings
+  levels:
+  - questions: 5
+    difficulty: 0
+  - questions: 8
+    difficulty: 1
+  - questions: 12
+    difficulty: 2
+  secondsPerQuestion: 30
+  revealSeconds: 3
+  heartsForWrongAnswer: 1
+  heartsForNoAnswer: 1
+  heartsForRepeatedTie: 1
+  tieRepeats: 1
+  podiumReach: 2

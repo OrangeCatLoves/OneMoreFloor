@@ -1,14 +1,32 @@
 {
     "name": "OneMoreFloor.Tests.EditMode",
     "rootNamespace": "OneMoreFloor.Tests.EditMode",
-    "references": ["UnityEngine.TestRunner", "UnityEditor.TestRunner", "OneMoreFloor.Core", "OneMoreFloor.Game", "FishNet.Runtime", "Unity.InputSystem", "Unity.RenderPipelines.Universal.Runtime", "Unity.RenderPipelines.Core.Runtime"],
-    "includePlatforms": ["Editor"],
+    "references": [
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner",
+        "OneMoreFloor.Core",
+        "OneMoreFloor.Game",
+        "FishNet.Runtime",
+        "Unity.InputSystem",
+        "Unity.RenderPipelines.Universal.Runtime",
+        "Unity.RenderPipelines.Core.Runtime",
+        "OneMoreFloor.Floors.Trivia.Rules",
+        "OneMoreFloor.FloorSDK",
+        "OneMoreFloor.Floors.Trivia"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": true,
-    "precompiledReferences": ["nunit.framework.dll"],
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
     "autoReferenced": false,
-    "defineConstraints": ["UNITY_INCLUDE_TESTS"],
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
     "versionDefines": [],
     "noEngineReferences": false
 }

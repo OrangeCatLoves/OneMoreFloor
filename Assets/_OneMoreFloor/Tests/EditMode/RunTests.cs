@@ -152,5 +152,26 @@ namespace OneMoreFloor.Tests.EditMode
             Assert.That(run.Phase, Is.EqualTo(RunPhase.Lobby));
             Assert.That(run.FloorNumber, Is.EqualTo(1));
         }
+
+        // The Floor Tester starts a run at the first floor of the difficulty level being tested.
+        [Test]
+        public void ARun_CanStartOnALaterFloor()
+        {
+            var run = new Run(seed: 1UL, playerCount: 1, heartsPerPlayer: 10, firstFloor: 11);
+            run.Start();
+            run.OpenDoors();
+            run.BeginPlay();
+            run.ClearFloor();
+            run.BoardElevator();
+
+            Assert.That(run.FloorNumber, Is.EqualTo(12));
+            Assert.That(run.FloorsCleared, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void ARun_CannotStartBelowFloorOne()
+        {
+            Assert.Throws<System.ArgumentOutOfRangeException>(() => new Run(seed: 1UL, playerCount: 1, heartsPerPlayer: 10, firstFloor: 0));
+        }
     }
 }

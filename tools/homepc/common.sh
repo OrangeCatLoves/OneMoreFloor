@@ -34,12 +34,16 @@ ensure_homepc_reachable() {
 
 # One line per file under the given folders on the home PC: path <tab> size <tab> modified time in whole seconds.
 # PowerShell reads its script from standard input one line at a time, so each statement stays on one line.
+# Paths may contain spaces (e.g. "Assets/TextMesh Pro"): they are passed to PowerShell separated by '|'.
 list_remote_files() {
-    local dirs="$*"
+    local dirs
+    dirs="$(printf '%s|' "$@")"
+    dirs="${dirs%|}"
+    dirs="${dirs//\'/\'\'}"
     run_remote_powershell <<EOF
 \$root = '$REMOTE_DIR'
 \$epoch = [datetime]'1970-01-01'
-'$dirs'.Split(' ') | Where-Object { Test-Path (Join-Path \$root \$_) } | ForEach-Object { \$p = Join-Path \$root \$_; if (Test-Path \$p -PathType Leaf) { Get-Item -LiteralPath \$p -Force } else { Get-ChildItem -LiteralPath \$p -Recurse -File -Force } } | ForEach-Object { \$_.FullName.Substring(\$root.Length + 1).Replace('\\', '/') + "\`t" + \$_.Length + "\`t" + [math]::Floor((\$_.LastWriteTimeUtc - \$epoch).TotalSeconds) }
+'$dirs'.Split('|') | Where-Object { Test-Path (Join-Path \$root \$_) } | ForEach-Object { \$p = Join-Path \$root \$_; if (Test-Path \$p -PathType Leaf) { Get-Item -LiteralPath \$p -Force } else { Get-ChildItem -LiteralPath \$p -Recurse -File -Force } } | ForEach-Object { \$_.FullName.Substring(\$root.Length + 1).Replace('\\', '/') + "\`t" + \$_.Length + "\`t" + [math]::Floor((\$_.LastWriteTimeUtc - \$epoch).TotalSeconds) }
 EOF
 }
 

@@ -17,3 +17,5 @@ MonoBehaviour:
   introSeconds: 5
   countdownSeconds: 3
   respawnDelaySeconds: 2
+  floorClearedSeconds: 3
+  gameOverSeconds: 3

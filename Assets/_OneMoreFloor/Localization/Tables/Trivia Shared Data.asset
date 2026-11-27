@@ -1,0 +1,128 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Trivia Shared Data
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
+  m_TableCollectionName: Trivia
+  m_TableCollectionNameGuidString: b9577a69fd28d104ca5d57d151886866
+  m_Entries:
+  - m_Id: 425644032
+    m_Key: name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809856
+    m_Key: goal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809857
+    m_Key: question_of
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809858
+    m_Key: asked_again
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809859
+    m_Key: get_in_position
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809860
+    m_Key: in_position
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809861
+    m_Key: waiting_for_team
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809862
+    m_Key: everyone_ready
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809863
+    m_Key: ready
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809864
+    m_Key: press_e
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809865
+    m_Key: podium_taken
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809866
+    m_Key: step_out
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809867
+    m_Key: choose
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809868
+    m_Key: votes_one
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809869
+    m_Key: votes_many
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809870
+    m_Key: outcome_correct
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809871
+    m_Key: outcome_wrong
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809872
+    m_Key: outcome_nobody
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809873
+    m_Key: outcome_tie_again
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809874
+    m_Key: outcome_tie_costs
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809875
+    m_Key: hearts_lost
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809876
+    m_Key: podium_free
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809877
+    m_Key: podium_player
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809878
+    m_Key: your_answer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809879
+    m_Key: all_answered
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 533214264138137719
+  references:
+    version: 2
+    RefIds:
+    - rid: 533214264138137719
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1795722920418

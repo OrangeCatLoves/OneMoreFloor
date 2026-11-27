@@ -1,4 +1,5 @@
 using FishNet.Object;
+using OneMoreFloor.FloorSDK;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,7 +12,7 @@ namespace OneMoreFloor.Game
     /// character runs it. Everyone else sees the character through its network components.
     /// </summary>
     [RequireComponent(typeof(PlayerMotor))]
-    public class PlayerController : NetworkBehaviour
+    public class PlayerController : NetworkBehaviour, IFloorPlayer
     {
         /// <summary>Physics layer of the players' characters.</summary>
         public const string PlayerLayer = "Player";
@@ -63,6 +64,46 @@ namespace OneMoreFloor.Game
         public bool IsBodyVisible { get; private set; } = true;
         public ViewZoom Zoom { get; private set; }
         public Transform CameraTarget => cameraTarget;
+
+        // IFloorPlayer: what floors may do with this character (e.g. hold it at a Trivia podium).
+        public int ClientId => OwnerId;
+        public bool IsLocal => IsLocalPlayer;
+        public Transform Body => transform;
+        public InputActionAsset Controls => controls;
+        public bool IsHeld { get; private set; }
+
+        public override void OnStartNetwork()
+        {
+            base.OnStartNetwork();
+            FloorPlayers.Register(this);
+        }
+
+        public override void OnStopNetwork()
+        {
+            base.OnStopNetwork();
+            FloorPlayers.Unregister(this);
+        }
+
+        private void OnDestroy() => FloorPlayers.Unregister(this);
+
+        /// <summary>Stand still here facing this way, with the mouse cursor free for on-screen buttons.</summary>
+        public void HoldAt(Vector3 position, float yaw)
+        {
+            if (!IsLocalPlayer)
+                return;
+            PlaceAt(position, yaw);
+            IsHeld = true;
+            SetInputActive(false);
+        }
+
+        /// <summary>Back to normal movement and mouse look.</summary>
+        public void Release()
+        {
+            if (!IsLocalPlayer || !IsHeld)
+                return;
+            IsHeld = false;
+            SetInputActive(true);
+        }
 
         public override void OnStartClient()
         {
@@ -164,6 +205,17 @@ namespace OneMoreFloor.Game
         {
             if (!IsLocalPlayer)
                 return;
+
+            if (IsHeld)
+            {
+                // Held in place by a floor (e.g. at a podium): no movement, look or cursor capture,
+                // but the character still stands on the ground and the camera keeps updating.
+                _motor.Tick(new MoveCommand(Vector2.zero, false, _yaw, Zoom.IsFirstPerson), Time.deltaTime);
+                playerAnimator.Apply(_motor, Time.deltaTime);
+                SmoothSteps(Time.deltaTime);
+                UpdateCamera(Time.deltaTime);
+                return;
+            }
 
             UpdateCursorCapture();
 

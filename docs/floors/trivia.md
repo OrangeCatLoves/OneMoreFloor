@@ -78,4 +78,6 @@ Answered 27 Nov 2026: 2-1-1 counts as a win for the 2; a tie re-asks once and a 
 
 Still open:
 - Do the questions themselves get harder per level? *(default — confirm: level 1 asks easy questions, level 2 medium, level 3 and up hard)*
+- Should a question end as soon as every player has voted? *(default — confirm: no, the full 30 seconds always runs, so votes can still change)*
+- The starter question bank (120 questions, 40 per difficulty) is ready for review: `Assets/_OneMoreFloor/Floors/Trivia/Data/TriviaQuestions.json`.
 - Does "realistic" for the host and audience mean the style of the images, or photorealistic?

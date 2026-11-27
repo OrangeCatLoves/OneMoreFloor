@@ -1,7 +1,7 @@
 {
     "name": "OneMoreFloor.FloorSDK",
     "rootNamespace": "OneMoreFloor.FloorSDK",
-    "references": ["OneMoreFloor.Core"],
+    "references": ["OneMoreFloor.Core", "FishNet.Runtime", "GameKit.Dependencies", "Unity.InputSystem", "Unity.TextMeshPro", "UnityEngine.UI", "Unity.Localization"],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

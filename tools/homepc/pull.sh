@@ -23,7 +23,8 @@ list_remote_files "$@" | LC_ALL=C sort > "$work/remote.txt"
 list_local_files "$@" | LC_ALL=C sort > "$work/local.txt"
 
 # New on the PC, or a different size, or modified later there.
-awk -F'\t' 'NR==FNR { size[$1]=$2; time[$1]=$3; next }
+# (FILENAME, not NR==FNR, tells the two lists apart: NR==FNR misreads the PC's list when nothing exists here yet.)
+awk -F'\t' 'FILENAME == ARGV[1] { size[$1]=$2; time[$1]=$3; next }
             !($1 in size) || size[$1]!=$2 || $3>time[$1] { print $1 }' "$work/local.txt" "$work/remote.txt" > "$work/fetch.txt"
 fetch_from_homepc "$work/fetch.txt"
 fetched=$(wc -l < "$work/fetch.txt")

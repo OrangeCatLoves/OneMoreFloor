@@ -9,5 +9,7 @@ EditorBuildSettings:
     path: Assets/_OneMoreFloor/Game/Scenes/MovementTest.unity
     guid: 140e72b7d5b4a8647867ec530bb99bca
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 45f32a590936be04fb074a8cbdbe682d, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    com.unity.localization.settings: {fileID: 11400000, guid: 8668b31ed0504ec4f90dede4d76f0e91, type: 2}
   m_UseUCBPForAssetBundles: 0

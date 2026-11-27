@@ -1,0 +1,128 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Trivia_en
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: b9577a69fd28d104ca5d57d151886866, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 425644032
+    m_Localized: Trivia
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809856
+    m_Localized: Time to put your knowledge to a test
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809857
+    m_Localized: Question {0} of {1}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809858
+    m_Localized: Asked again
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809859
+    m_Localized: Stand at a podium and press E to get into position
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809860
+    m_Localized: 'In position: {0}/{1}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809861
+    m_Localized: Waiting for everyone to get into position ({0}/{1})
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809862
+    m_Localized: Everyone's in position. Any player can press Ready.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809863
+    m_Localized: Ready
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809864
+    m_Localized: Press E to get into position
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809865
+    m_Localized: This podium is taken
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809866
+    m_Localized: 'E: step out'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809867
+    m_Localized: "Click an answer or press 1\u20134. You can change it until time
+      runs out."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809868
+    m_Localized: 1 vote
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809869
+    m_Localized: '{0} votes'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809870
+    m_Localized: Correct!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809871
+    m_Localized: Wrong answer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809872
+    m_Localized: Nobody answered
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809873
+    m_Localized: It's a tie! Vote again
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809874
+    m_Localized: Another tie
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809875
+    m_Localized: "\u2212{0} \u2665"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809876
+    m_Localized: 'Free
+
+      <size=60%>Press E to get into position</size>'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809877
+    m_Localized: 'Player {0}
+
+      <size=60%>In position</size>'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809878
+    m_Localized: Your answer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 450809879
+    m_Localized: All questions answered
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

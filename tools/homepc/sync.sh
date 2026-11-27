@@ -5,14 +5,19 @@
 # Exception: a .meta file that Unity on the home PC created for an asset this laptop also has is copied
 # back here instead of deleted, so the asset keeps its ID on both machines.
 # Anything else built on the home PC must be fetched with tools/homepc/pull.sh before the next sync.
+# As a safety net, files made on the home PC since the last sync are kept (and listed), not deleted;
+# --discard-pc-changes deletes them too.
 #
-# Usage, from the project root in Git Bash:  tools/homepc/sync.sh
+# Usage, from the project root in Git Bash:  tools/homepc/sync.sh [--discard-pc-changes]
 # Needs the "homepc" host in ~/.ssh/config (see docs/PROJECT_CONTEXT.md, section 11).
 set -euo pipefail
 
 cd "$(git rev-parse --show-toplevel)"
 source tools/homepc/common.sh
 SYNC_DIRS=(Assets Packages ProjectSettings docs tools art-source)
+SYNC_MARKER='C:\OneMoreFloorTools\last-sync'
+discard=0
+if [ "${1:-}" = "--discard-pc-changes" ]; then discard=1; fi
 
 work="$(mktemp -d)"
 trap 'rm -rf "$work"' EXIT
@@ -29,11 +34,23 @@ cut -f1 "$work/local.txt" | LC_ALL=C sort > "$work/local-paths.txt"
 cut -f1 "$work/remote.txt" | LC_ALL=C sort > "$work/remote-paths.txt"
 LC_ALL=C comm -13 "$work/local-paths.txt" "$work/remote-paths.txt" > "$work/only-there.txt"
 
-# Unity-made .meta files for assets that exist here come back; everything else only there is deleted.
-: > "$work/fetch.txt"; : > "$work/delete.txt"
+# When the last sync finished, by the home PC's clock (0 if it has never synced with this script).
+last_sync="$(echo "\$f = '$SYNC_MARKER'; if (Test-Path \$f) { [math]::Floor(((Get-Item \$f).LastWriteTimeUtc - [datetime]'1970-01-01').TotalSeconds) } else { 0 }" | run_remote_powershell | tr -dc '0-9')"
+last_sync="${last_sync:-0}"
+
+# Unity-made .meta files for assets that exist here come back. Other files only there are deleted, unless
+# they were made on the PC since the last sync (Unity or Blender output not pulled back yet): those are kept
+# and listed, so they aren't lost. Pull them back with tools/homepc/pull.sh, or delete them with
+# --discard-pc-changes.
+: > "$work/fetch.txt"; : > "$work/delete.txt"; : > "$work/kept.txt"
 while IFS= read -r path; do
     if [[ "$path" == *.meta ]] && grep -qxF "${path%.meta}" "$work/local-paths.txt"; then
         echo "$path" >> "$work/fetch.txt"
+        continue
+    fi
+    modified="$(awk -F'\t' -v p="$path" '$1 == p { print $3; exit }' "$work/remote.txt")"
+    if [ "$discard" -eq 0 ] && [ "$last_sync" -gt 0 ] && [ "${modified:-0}" -gt "$last_sync" ]; then
+        echo "$path" >> "$work/kept.txt"
     else
         echo "$path" >> "$work/delete.txt"
     fi
@@ -58,4 +75,13 @@ if [ "$delete_count" -gt 0 ]; then
     } | run_remote_powershell > /dev/null
 fi
 
+echo "Set-Content -LiteralPath '$SYNC_MARKER' -Value (Get-Date -Format o)" | run_remote_powershell > /dev/null
+
 echo "Sent $send_count file(s), removed $delete_count file(s) on $HOST:$REMOTE_DIR; copied back $fetch_count .meta file(s) Unity made there."
+kept_count=$(wc -l < "$work/kept.txt")
+if [ "$kept_count" -gt 0 ]; then
+    echo "Kept $kept_count file(s) made on the home PC since the last sync, which this laptop doesn't have yet:"
+    sed 's/^/  /' "$work/kept.txt" | head -20
+    [ "$kept_count" -gt 20 ] && echo "  ... and $((kept_count - 20)) more"
+    echo "Bring them here with tools/homepc/pull.sh <paths>, or delete them there with tools/homepc/sync.sh --discard-pc-changes."
+fi

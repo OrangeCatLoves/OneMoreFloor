@@ -1,0 +1,1445 @@
+{
+  "_note": "Trivia's starter question bank, drafted by Claude Code on 27 Nov 2026 for the owner to review. 'answer' is the right one; the game shuffles the order on screen. Difficulty: level 1 asks easy, level 2 medium, level 3 and up hard (default, to confirm). Add, edit or remove entries freely: keep each id unique and give each question exactly 3 wrong answers.",
+  "questions": [
+    {
+      "id": "e001",
+      "difficulty": "easy",
+      "category": "space",
+      "question": "What is the largest planet in our solar system?",
+      "answer": "Jupiter",
+      "wrong": [
+        "Saturn",
+        "Neptune",
+        "Earth"
+      ]
+    },
+    {
+      "id": "e002",
+      "difficulty": "easy",
+      "category": "general",
+      "question": "How many wheels does a tricycle have?",
+      "answer": "Three",
+      "wrong": [
+        "Two",
+        "Four",
+        "One"
+      ]
+    },
+    {
+      "id": "e003",
+      "difficulty": "easy",
+      "category": "science",
+      "question": "At sea level, water boils at what temperature?",
+      "answer": "100 °C",
+      "wrong": [
+        "90 °C",
+        "80 °C",
+        "120 °C"
+      ]
+    },
+    {
+      "id": "e004",
+      "difficulty": "easy",
+      "category": "nature",
+      "question": "Which animal is often called the \"King of the Jungle\"?",
+      "answer": "Lion",
+      "wrong": [
+        "Tiger",
+        "Elephant",
+        "Gorilla"
+      ]
+    },
+    {
+      "id": "e005",
+      "difficulty": "easy",
+      "category": "art",
+      "question": "What colour do you get by mixing blue and yellow paint?",
+      "answer": "Green",
+      "wrong": [
+        "Purple",
+        "Orange",
+        "Brown"
+      ]
+    },
+    {
+      "id": "e006",
+      "difficulty": "easy",
+      "category": "nature",
+      "question": "How many legs does a spider have?",
+      "answer": "Eight",
+      "wrong": [
+        "Six",
+        "Ten",
+        "Twelve"
+      ]
+    },
+    {
+      "id": "e007",
+      "difficulty": "easy",
+      "category": "geography",
+      "question": "What is the capital city of France?",
+      "answer": "Paris",
+      "wrong": [
+        "Lyon",
+        "Marseille",
+        "Nice"
+      ]
+    },
+    {
+      "id": "e008",
+      "difficulty": "easy",
+      "category": "space",
+      "question": "Which planet is known as the Red Planet?",
+      "answer": "Mars",
+      "wrong": [
+        "Venus",
+        "Jupiter",
+        "Mercury"
+      ]
+    },
+    {
+      "id": "e009",
+      "difficulty": "easy",
+      "category": "geography",
+      "question": "What is the largest ocean on Earth?",
+      "answer": "Pacific Ocean",
+      "wrong": [
+        "Atlantic Ocean",
+        "Indian Ocean",
+        "Arctic Ocean"
+      ]
+    },
+    {
+      "id": "e010",
+      "difficulty": "easy",
+      "category": "general",
+      "question": "How many days are there in a leap year?",
+      "answer": "366",
+      "wrong": [
+        "365",
+        "364",
+        "367"
+      ]
+    },
+    {
+      "id": "e011",
+      "difficulty": "easy",
+      "category": "science",
+      "question": "Which gas do plants take in from the air to make their food?",
+      "answer": "Carbon dioxide",
+      "wrong": [
+        "Oxygen",
+        "Nitrogen",
+        "Helium"
+      ]
+    },
+    {
+      "id": "e012",
+      "difficulty": "easy",
+      "category": "nature",
+      "question": "What is the fastest land animal?",
+      "answer": "Cheetah",
+      "wrong": [
+        "Lion",
+        "Horse",
+        "Greyhound"
+      ]
+    },
+    {
+      "id": "e013",
+      "difficulty": "easy",
+      "category": "maths",
+      "question": "How many sides does a hexagon have?",
+      "answer": "Six",
+      "wrong": [
+        "Five",
+        "Seven",
+        "Eight"
+      ]
+    },
+    {
+      "id": "e014",
+      "difficulty": "easy",
+      "category": "general",
+      "question": "Which bird is a well-known symbol of peace?",
+      "answer": "Dove",
+      "wrong": [
+        "Eagle",
+        "Owl",
+        "Parrot"
+      ]
+    },
+    {
+      "id": "e015",
+      "difficulty": "easy",
+      "category": "geography",
+      "question": "What is the main language spoken in Brazil?",
+      "answer": "Portuguese",
+      "wrong": [
+        "Spanish",
+        "French",
+        "Italian"
+      ]
+    },
+    {
+      "id": "e016",
+      "difficulty": "easy",
+      "category": "nature",
+      "question": "What sweet food do bees make?",
+      "answer": "Honey",
+      "wrong": [
+        "Silk",
+        "Milk",
+        "Syrup"
+      ]
+    },
+    {
+      "id": "e017",
+      "difficulty": "easy",
+      "category": "general",
+      "question": "How many minutes are there in an hour?",
+      "answer": "60",
+      "wrong": [
+        "100",
+        "30",
+        "90"
+      ]
+    },
+    {
+      "id": "e018",
+      "difficulty": "easy",
+      "category": "nature",
+      "question": "What is the tallest animal in the world?",
+      "answer": "Giraffe",
+      "wrong": [
+        "Elephant",
+        "Camel",
+        "Ostrich"
+      ]
+    },
+    {
+      "id": "e019",
+      "difficulty": "easy",
+      "category": "music",
+      "question": "Which instrument usually has 88 keys?",
+      "answer": "Piano",
+      "wrong": [
+        "Guitar",
+        "Violin",
+        "Trumpet"
+      ]
+    },
+    {
+      "id": "e020",
+      "difficulty": "easy",
+      "category": "space",
+      "question": "What is the star at the centre of our solar system?",
+      "answer": "The Sun",
+      "wrong": [
+        "Sirius",
+        "Polaris",
+        "Betelgeuse"
+      ]
+    },
+    {
+      "id": "e021",
+      "difficulty": "easy",
+      "category": "maths",
+      "question": "Which shape has exactly three sides?",
+      "answer": "Triangle",
+      "wrong": [
+        "Square",
+        "Circle",
+        "Pentagon"
+      ]
+    },
+    {
+      "id": "e022",
+      "difficulty": "easy",
+      "category": "history",
+      "question": "In which country are the Great Pyramids of Giza?",
+      "answer": "Egypt",
+      "wrong": [
+        "Mexico",
+        "Peru",
+        "Greece"
+      ]
+    },
+    {
+      "id": "e023",
+      "difficulty": "easy",
+      "category": "nature",
+      "question": "What is the largest animal on Earth?",
+      "answer": "Blue whale",
+      "wrong": [
+        "African elephant",
+        "Giraffe",
+        "Hippopotamus"
+      ]
+    },
+    {
+      "id": "e024",
+      "difficulty": "easy",
+      "category": "science",
+      "question": "How many colours are usually listed in a rainbow?",
+      "answer": "Seven",
+      "wrong": [
+        "Five",
+        "Six",
+        "Nine"
+      ]
+    },
+    {
+      "id": "e025",
+      "difficulty": "easy",
+      "category": "nature",
+      "question": "What do caterpillars grow up to become?",
+      "answer": "Butterflies",
+      "wrong": [
+        "Beetles",
+        "Bees",
+        "Dragonflies"
+      ]
+    },
+    {
+      "id": "e026",
+      "difficulty": "easy",
+      "category": "space",
+      "question": "What is the smallest planet in our solar system?",
+      "answer": "Mercury",
+      "wrong": [
+        "Mars",
+        "Venus",
+        "Earth"
+      ]
+    },
+    {
+      "id": "e027",
+      "difficulty": "easy",
+      "category": "science",
+      "question": "What is H2O better known as?",
+      "answer": "Water",
+      "wrong": [
+        "Salt",
+        "Hydrogen peroxide",
+        "Oxygen"
+      ]
+    },
+    {
+      "id": "e028",
+      "difficulty": "easy",
+      "category": "nature",
+      "question": "Kangaroos come from which country?",
+      "answer": "Australia",
+      "wrong": [
+        "New Zealand",
+        "South Africa",
+        "Brazil"
+      ]
+    },
+    {
+      "id": "e029",
+      "difficulty": "easy",
+      "category": "geography",
+      "question": "What is the capital city of Japan?",
+      "answer": "Tokyo",
+      "wrong": [
+        "Kyoto",
+        "Osaka",
+        "Seoul"
+      ]
+    },
+    {
+      "id": "e030",
+      "difficulty": "easy",
+      "category": "general",
+      "question": "How many hours are there in a day?",
+      "answer": "24",
+      "wrong": [
+        "12",
+        "20",
+        "36"
+      ]
+    },
+    {
+      "id": "e031",
+      "difficulty": "easy",
+      "category": "body",
+      "question": "Which organ pumps blood around the body?",
+      "answer": "Heart",
+      "wrong": [
+        "Lungs",
+        "Liver",
+        "Brain"
+      ]
+    },
+    {
+      "id": "e032",
+      "difficulty": "easy",
+      "category": "general",
+      "question": "What is the opposite direction to north?",
+      "answer": "South",
+      "wrong": [
+        "East",
+        "West",
+        "Up"
+      ]
+    },
+    {
+      "id": "e033",
+      "difficulty": "easy",
+      "category": "space",
+      "question": "Which planet is famous for its bright rings?",
+      "answer": "Saturn",
+      "wrong": [
+        "Mars",
+        "Mercury",
+        "Venus"
+      ]
+    },
+    {
+      "id": "e034",
+      "difficulty": "easy",
+      "category": "geography",
+      "question": "What is the name of the great hot desert of North Africa?",
+      "answer": "Sahara",
+      "wrong": [
+        "Gobi",
+        "Kalahari",
+        "Atacama"
+      ]
+    },
+    {
+      "id": "e035",
+      "difficulty": "easy",
+      "category": "sport",
+      "question": "Which sport is played with a bat, a ball and wickets?",
+      "answer": "Cricket",
+      "wrong": [
+        "Baseball",
+        "Tennis",
+        "Golf"
+      ]
+    },
+    {
+      "id": "e036",
+      "difficulty": "easy",
+      "category": "sport",
+      "question": "How many players does each football (soccer) team have on the pitch?",
+      "answer": "Eleven",
+      "wrong": [
+        "Nine",
+        "Ten",
+        "Twelve"
+      ]
+    },
+    {
+      "id": "e037",
+      "difficulty": "easy",
+      "category": "science",
+      "question": "At what temperature does water freeze?",
+      "answer": "0 °C",
+      "wrong": [
+        "10 °C",
+        "−10 °C",
+        "32 °C"
+      ]
+    },
+    {
+      "id": "e038",
+      "difficulty": "easy",
+      "category": "nature",
+      "question": "Which animal is famous for changing the colour of its skin?",
+      "answer": "Chameleon",
+      "wrong": [
+        "Crocodile",
+        "Tortoise",
+        "Hedgehog"
+      ]
+    },
+    {
+      "id": "e039",
+      "difficulty": "easy",
+      "category": "nature",
+      "question": "What is a baby cat called?",
+      "answer": "Kitten",
+      "wrong": [
+        "Puppy",
+        "Cub",
+        "Calf"
+      ]
+    },
+    {
+      "id": "e040",
+      "difficulty": "easy",
+      "category": "geography",
+      "question": "What is the largest continent?",
+      "answer": "Asia",
+      "wrong": [
+        "Africa",
+        "Europe",
+        "North America"
+      ]
+    },
+    {
+      "id": "m001",
+      "difficulty": "medium",
+      "category": "science",
+      "question": "What is the chemical symbol for gold?",
+      "answer": "Au",
+      "wrong": [
+        "Ag",
+        "Go",
+        "Gd"
+      ]
+    },
+    {
+      "id": "m002",
+      "difficulty": "medium",
+      "category": "art",
+      "question": "Who painted the Mona Lisa?",
+      "answer": "Leonardo da Vinci",
+      "wrong": [
+        "Michelangelo",
+        "Raphael",
+        "Vincent van Gogh"
+      ]
+    },
+    {
+      "id": "m003",
+      "difficulty": "medium",
+      "category": "space",
+      "question": "Which planet takes the shortest time to go around the Sun?",
+      "answer": "Mercury",
+      "wrong": [
+        "Venus",
+        "Mars",
+        "Earth"
+      ]
+    },
+    {
+      "id": "m004",
+      "difficulty": "medium",
+      "category": "science",
+      "question": "What is the hardest natural substance?",
+      "answer": "Diamond",
+      "wrong": [
+        "Granite",
+        "Quartz",
+        "Iron"
+      ]
+    },
+    {
+      "id": "m005",
+      "difficulty": "medium",
+      "category": "body",
+      "question": "How many bones are there in an adult human body?",
+      "answer": "206",
+      "wrong": [
+        "186",
+        "212",
+        "256"
+      ]
+    },
+    {
+      "id": "m006",
+      "difficulty": "medium",
+      "category": "geography",
+      "question": "Which ocean lies between Africa and Australia?",
+      "answer": "Indian Ocean",
+      "wrong": [
+        "Atlantic Ocean",
+        "Pacific Ocean",
+        "Arctic Ocean"
+      ]
+    },
+    {
+      "id": "m007",
+      "difficulty": "medium",
+      "category": "history",
+      "question": "In which year did people first land on the Moon?",
+      "answer": "1969",
+      "wrong": [
+        "1965",
+        "1972",
+        "1959"
+      ]
+    },
+    {
+      "id": "m008",
+      "difficulty": "medium",
+      "category": "geography",
+      "question": "What is the capital city of Canada?",
+      "answer": "Ottawa",
+      "wrong": [
+        "Toronto",
+        "Vancouver",
+        "Montreal"
+      ]
+    },
+    {
+      "id": "m009",
+      "difficulty": "medium",
+      "category": "science",
+      "question": "Which gas makes up most of Earth's air?",
+      "answer": "Nitrogen",
+      "wrong": [
+        "Oxygen",
+        "Carbon dioxide",
+        "Argon"
+      ]
+    },
+    {
+      "id": "m010",
+      "difficulty": "medium",
+      "category": "literature",
+      "question": "Who wrote \"Romeo and Juliet\"?",
+      "answer": "William Shakespeare",
+      "wrong": [
+        "Charles Dickens",
+        "Jane Austen",
+        "Geoffrey Chaucer"
+      ]
+    },
+    {
+      "id": "m011",
+      "difficulty": "medium",
+      "category": "geography",
+      "question": "What is the longest river in Africa?",
+      "answer": "The Nile",
+      "wrong": [
+        "The Congo",
+        "The Niger",
+        "The Zambezi"
+      ]
+    },
+    {
+      "id": "m012",
+      "difficulty": "medium",
+      "category": "maths",
+      "question": "How many sides does a decagon have?",
+      "answer": "Ten",
+      "wrong": [
+        "Eight",
+        "Twelve",
+        "Nine"
+      ]
+    },
+    {
+      "id": "m013",
+      "difficulty": "medium",
+      "category": "maths",
+      "question": "What is the square root of 144?",
+      "answer": "12",
+      "wrong": [
+        "11",
+        "14",
+        "16"
+      ]
+    },
+    {
+      "id": "m014",
+      "difficulty": "medium",
+      "category": "history",
+      "question": "Which country gave the Statue of Liberty to the United States?",
+      "answer": "France",
+      "wrong": [
+        "United Kingdom",
+        "Spain",
+        "Italy"
+      ]
+    },
+    {
+      "id": "m015",
+      "difficulty": "medium",
+      "category": "maths",
+      "question": "What is the smallest prime number?",
+      "answer": "2",
+      "wrong": [
+        "1",
+        "3",
+        "0"
+      ]
+    },
+    {
+      "id": "m016",
+      "difficulty": "medium",
+      "category": "science",
+      "question": "Who developed the theory of general relativity?",
+      "answer": "Albert Einstein",
+      "wrong": [
+        "Isaac Newton",
+        "Niels Bohr",
+        "Galileo Galilei"
+      ]
+    },
+    {
+      "id": "m017",
+      "difficulty": "medium",
+      "category": "food",
+      "question": "What is the main ingredient of guacamole?",
+      "answer": "Avocado",
+      "wrong": [
+        "Tomato",
+        "Pea",
+        "Cucumber"
+      ]
+    },
+    {
+      "id": "m018",
+      "difficulty": "medium",
+      "category": "space",
+      "question": "What is the largest moon of Saturn?",
+      "answer": "Titan",
+      "wrong": [
+        "Europa",
+        "Ganymede",
+        "Io"
+      ]
+    },
+    {
+      "id": "m019",
+      "difficulty": "medium",
+      "category": "music",
+      "question": "How many strings does a standard guitar have?",
+      "answer": "Six",
+      "wrong": [
+        "Four",
+        "Five",
+        "Seven"
+      ]
+    },
+    {
+      "id": "m020",
+      "difficulty": "medium",
+      "category": "language",
+      "question": "Which language has the most native speakers?",
+      "answer": "Mandarin Chinese",
+      "wrong": [
+        "English",
+        "Spanish",
+        "Hindi"
+      ]
+    },
+    {
+      "id": "m021",
+      "difficulty": "medium",
+      "category": "geography",
+      "question": "What is the currency of Japan?",
+      "answer": "Yen",
+      "wrong": [
+        "Won",
+        "Yuan",
+        "Ringgit"
+      ]
+    },
+    {
+      "id": "m022",
+      "difficulty": "medium",
+      "category": "body",
+      "question": "Which blood cells fight infections?",
+      "answer": "White blood cells",
+      "wrong": [
+        "Red blood cells",
+        "Platelets",
+        "Nerve cells"
+      ]
+    },
+    {
+      "id": "m023",
+      "difficulty": "medium",
+      "category": "geography",
+      "question": "What is the largest country in the world by area?",
+      "answer": "Russia",
+      "wrong": [
+        "Canada",
+        "China",
+        "United States"
+      ]
+    },
+    {
+      "id": "m024",
+      "difficulty": "medium",
+      "category": "history",
+      "question": "In which city is the Colosseum?",
+      "answer": "Rome",
+      "wrong": [
+        "Athens",
+        "Naples",
+        "Istanbul"
+      ]
+    },
+    {
+      "id": "m025",
+      "difficulty": "medium",
+      "category": "science",
+      "question": "Who described the laws of motion and gravity in 1687?",
+      "answer": "Isaac Newton",
+      "wrong": [
+        "Galileo Galilei",
+        "Johannes Kepler",
+        "Nicolaus Copernicus"
+      ]
+    },
+    {
+      "id": "m026",
+      "difficulty": "medium",
+      "category": "sport",
+      "question": "How many players does each basketball team have on the court?",
+      "answer": "Five",
+      "wrong": [
+        "Six",
+        "Seven",
+        "Four"
+      ]
+    },
+    {
+      "id": "m027",
+      "difficulty": "medium",
+      "category": "science",
+      "question": "At what temperature in Fahrenheit does water freeze?",
+      "answer": "32 °F",
+      "wrong": [
+        "0 °F",
+        "12 °F",
+        "100 °F"
+      ]
+    },
+    {
+      "id": "m028",
+      "difficulty": "medium",
+      "category": "music",
+      "question": "Who composed \"Für Elise\"?",
+      "answer": "Ludwig van Beethoven",
+      "wrong": [
+        "Wolfgang Amadeus Mozart",
+        "Johann Sebastian Bach",
+        "Frédéric Chopin"
+      ]
+    },
+    {
+      "id": "m029",
+      "difficulty": "medium",
+      "category": "body",
+      "question": "What is the largest organ of the human body?",
+      "answer": "The skin",
+      "wrong": [
+        "The liver",
+        "The brain",
+        "The lungs"
+      ]
+    },
+    {
+      "id": "m030",
+      "difficulty": "medium",
+      "category": "nature",
+      "question": "What do we call an animal that eats only plants?",
+      "answer": "Herbivore",
+      "wrong": [
+        "Carnivore",
+        "Omnivore",
+        "Insectivore"
+      ]
+    },
+    {
+      "id": "m031",
+      "difficulty": "medium",
+      "category": "geography",
+      "question": "On which continent is the Amazon rainforest?",
+      "answer": "South America",
+      "wrong": [
+        "Africa",
+        "Asia",
+        "Australia"
+      ]
+    },
+    {
+      "id": "m032",
+      "difficulty": "medium",
+      "category": "nature",
+      "question": "How many hearts does an octopus have?",
+      "answer": "Three",
+      "wrong": [
+        "One",
+        "Two",
+        "Eight"
+      ]
+    },
+    {
+      "id": "m033",
+      "difficulty": "medium",
+      "category": "geography",
+      "question": "What is the capital city of Australia?",
+      "answer": "Canberra",
+      "wrong": [
+        "Sydney",
+        "Melbourne",
+        "Perth"
+      ]
+    },
+    {
+      "id": "m034",
+      "difficulty": "medium",
+      "category": "body",
+      "question": "Which vitamin does your skin make in sunlight?",
+      "answer": "Vitamin D",
+      "wrong": [
+        "Vitamin C",
+        "Vitamin A",
+        "Vitamin B12"
+      ]
+    },
+    {
+      "id": "m035",
+      "difficulty": "medium",
+      "category": "maths",
+      "question": "What is 15 × 15?",
+      "answer": "225",
+      "wrong": [
+        "215",
+        "250",
+        "205"
+      ]
+    },
+    {
+      "id": "m036",
+      "difficulty": "medium",
+      "category": "history",
+      "question": "Which famous ship sank on its first voyage in 1912?",
+      "answer": "Titanic",
+      "wrong": [
+        "Lusitania",
+        "Britannic",
+        "Queen Mary"
+      ]
+    },
+    {
+      "id": "m037",
+      "difficulty": "medium",
+      "category": "body",
+      "question": "What is the longest bone in the human body?",
+      "answer": "The femur",
+      "wrong": [
+        "The tibia",
+        "The humerus",
+        "The fibula"
+      ]
+    },
+    {
+      "id": "m038",
+      "difficulty": "medium",
+      "category": "space",
+      "question": "Which planet has a giant storm called the Great Red Spot?",
+      "answer": "Jupiter",
+      "wrong": [
+        "Mars",
+        "Saturn",
+        "Neptune"
+      ]
+    },
+    {
+      "id": "m039",
+      "difficulty": "medium",
+      "category": "technology",
+      "question": "In computing, what does CPU stand for?",
+      "answer": "Central Processing Unit",
+      "wrong": [
+        "Computer Personal Unit",
+        "Central Program Utility",
+        "Core Power Unit"
+      ]
+    },
+    {
+      "id": "m040",
+      "difficulty": "medium",
+      "category": "geography",
+      "question": "What is the line of latitude at 0° called?",
+      "answer": "The Equator",
+      "wrong": [
+        "The Prime Meridian",
+        "The Tropic of Cancer",
+        "The Arctic Circle"
+      ]
+    },
+    {
+      "id": "h001",
+      "difficulty": "hard",
+      "category": "science",
+      "question": "What is the chemical symbol for tungsten?",
+      "answer": "W",
+      "wrong": [
+        "Tu",
+        "Tg",
+        "Ts"
+      ]
+    },
+    {
+      "id": "h002",
+      "difficulty": "hard",
+      "category": "history",
+      "question": "In which year did the Berlin Wall fall?",
+      "answer": "1989",
+      "wrong": [
+        "1987",
+        "1991",
+        "1985"
+      ]
+    },
+    {
+      "id": "h003",
+      "difficulty": "hard",
+      "category": "body",
+      "question": "What is the smallest bone in the human body?",
+      "answer": "The stapes",
+      "wrong": [
+        "The incus",
+        "The malleus",
+        "The hyoid"
+      ]
+    },
+    {
+      "id": "h004",
+      "difficulty": "hard",
+      "category": "science",
+      "question": "Roughly how fast does light travel in a vacuum?",
+      "answer": "About 300,000 km/s",
+      "wrong": [
+        "About 30,000 km/s",
+        "About 3,000,000 km/s",
+        "About 150,000 km/s"
+      ]
+    },
+    {
+      "id": "h005",
+      "difficulty": "hard",
+      "category": "history",
+      "question": "Who led the first expedition to reach the South Pole, in 1911?",
+      "answer": "Roald Amundsen",
+      "wrong": [
+        "Robert Falcon Scott",
+        "Ernest Shackleton",
+        "Edmund Hillary"
+      ]
+    },
+    {
+      "id": "h006",
+      "difficulty": "hard",
+      "category": "geography",
+      "question": "What is the capital city of Mongolia?",
+      "answer": "Ulaanbaatar",
+      "wrong": [
+        "Astana",
+        "Bishkek",
+        "Tashkent"
+      ]
+    },
+    {
+      "id": "h007",
+      "difficulty": "hard",
+      "category": "geography",
+      "question": "What is the longest river in Asia?",
+      "answer": "The Yangtze",
+      "wrong": [
+        "The Yellow River",
+        "The Mekong",
+        "The Ganges"
+      ]
+    },
+    {
+      "id": "h008",
+      "difficulty": "hard",
+      "category": "geography",
+      "question": "How many time zones does Russia span?",
+      "answer": "11",
+      "wrong": [
+        "9",
+        "13",
+        "7"
+      ]
+    },
+    {
+      "id": "h009",
+      "difficulty": "hard",
+      "category": "maths",
+      "question": "Whose \"Last Theorem\" was finally proved in 1994?",
+      "answer": "Pierre de Fermat",
+      "wrong": [
+        "Leonhard Euler",
+        "Carl Friedrich Gauss",
+        "Blaise Pascal"
+      ]
+    },
+    {
+      "id": "h010",
+      "difficulty": "hard",
+      "category": "science",
+      "question": "Which mineral has a hardness of 9 on the Mohs scale?",
+      "answer": "Corundum",
+      "wrong": [
+        "Topaz",
+        "Quartz",
+        "Feldspar"
+      ]
+    },
+    {
+      "id": "h011",
+      "difficulty": "hard",
+      "category": "history",
+      "question": "In which year did World War I begin?",
+      "answer": "1914",
+      "wrong": [
+        "1912",
+        "1916",
+        "1918"
+      ]
+    },
+    {
+      "id": "h012",
+      "difficulty": "hard",
+      "category": "space",
+      "question": "What is the largest moon in the solar system?",
+      "answer": "Ganymede",
+      "wrong": [
+        "Titan",
+        "Callisto",
+        "Io"
+      ]
+    },
+    {
+      "id": "h013",
+      "difficulty": "hard",
+      "category": "music",
+      "question": "Who composed \"The Four Seasons\"?",
+      "answer": "Antonio Vivaldi",
+      "wrong": [
+        "Johann Sebastian Bach",
+        "George Frideric Handel",
+        "Joseph Haydn"
+      ]
+    },
+    {
+      "id": "h014",
+      "difficulty": "hard",
+      "category": "science",
+      "question": "What is the most common element in Earth's crust?",
+      "answer": "Oxygen",
+      "wrong": [
+        "Silicon",
+        "Iron",
+        "Aluminium"
+      ]
+    },
+    {
+      "id": "h015",
+      "difficulty": "hard",
+      "category": "geography",
+      "question": "What is the capital city of New Zealand?",
+      "answer": "Wellington",
+      "wrong": [
+        "Auckland",
+        "Christchurch",
+        "Queenstown"
+      ]
+    },
+    {
+      "id": "h016",
+      "difficulty": "hard",
+      "category": "science",
+      "question": "Who wrote \"On the Origin of Species\" (1859)?",
+      "answer": "Charles Darwin",
+      "wrong": [
+        "Gregor Mendel",
+        "Alfred Russel Wallace",
+        "Jean-Baptiste Lamarck"
+      ]
+    },
+    {
+      "id": "h017",
+      "difficulty": "hard",
+      "category": "geography",
+      "question": "What is the deepest known point in Earth's oceans?",
+      "answer": "Challenger Deep",
+      "wrong": [
+        "Tonga Trench",
+        "Puerto Rico Trench",
+        "Java Trench"
+      ]
+    },
+    {
+      "id": "h018",
+      "difficulty": "hard",
+      "category": "science",
+      "question": "How many elements are in the periodic table today?",
+      "answer": "118",
+      "wrong": [
+        "108",
+        "112",
+        "124"
+      ]
+    },
+    {
+      "id": "h019",
+      "difficulty": "hard",
+      "category": "science",
+      "question": "What was the supercontinent of about 300 million years ago called?",
+      "answer": "Pangaea",
+      "wrong": [
+        "Gondwana",
+        "Laurasia",
+        "Rodinia"
+      ]
+    },
+    {
+      "id": "h020",
+      "difficulty": "hard",
+      "category": "science",
+      "question": "What is the unit of electrical resistance?",
+      "answer": "Ohm",
+      "wrong": [
+        "Volt",
+        "Ampere",
+        "Watt"
+      ]
+    },
+    {
+      "id": "h021",
+      "difficulty": "hard",
+      "category": "art",
+      "question": "Who painted \"The Persistence of Memory\", with its melting clocks?",
+      "answer": "Salvador Dalí",
+      "wrong": [
+        "René Magritte",
+        "Pablo Picasso",
+        "Joan Miró"
+      ]
+    },
+    {
+      "id": "h022",
+      "difficulty": "hard",
+      "category": "body",
+      "question": "What is the largest organ inside the human body?",
+      "answer": "The liver",
+      "wrong": [
+        "The lungs",
+        "The brain",
+        "The kidneys"
+      ]
+    },
+    {
+      "id": "h023",
+      "difficulty": "hard",
+      "category": "history",
+      "question": "Which city was Japan's capital for over 1,000 years before Tokyo?",
+      "answer": "Kyoto",
+      "wrong": [
+        "Osaka",
+        "Nara",
+        "Kamakura"
+      ]
+    },
+    {
+      "id": "h024",
+      "difficulty": "hard",
+      "category": "body",
+      "question": "How many chromosomes does a human body cell normally have?",
+      "answer": "46",
+      "wrong": [
+        "44",
+        "48",
+        "23"
+      ]
+    },
+    {
+      "id": "h025",
+      "difficulty": "hard",
+      "category": "space",
+      "question": "Triton, a moon that orbits backwards, circles which planet?",
+      "answer": "Neptune",
+      "wrong": [
+        "Uranus",
+        "Saturn",
+        "Jupiter"
+      ]
+    },
+    {
+      "id": "h026",
+      "difficulty": "hard",
+      "category": "history",
+      "question": "In which year did the first person travel into space?",
+      "answer": "1961",
+      "wrong": [
+        "1957",
+        "1965",
+        "1969"
+      ]
+    },
+    {
+      "id": "h027",
+      "difficulty": "hard",
+      "category": "science",
+      "question": "Who was the first woman to win a Nobel Prize?",
+      "answer": "Marie Curie",
+      "wrong": [
+        "Rosalind Franklin",
+        "Ada Lovelace",
+        "Dorothy Hodgkin"
+      ]
+    },
+    {
+      "id": "h028",
+      "difficulty": "hard",
+      "category": "geography",
+      "question": "What is the longest mountain range on land?",
+      "answer": "The Andes",
+      "wrong": [
+        "The Himalayas",
+        "The Rocky Mountains",
+        "The Alps"
+      ]
+    },
+    {
+      "id": "h029",
+      "difficulty": "hard",
+      "category": "space",
+      "question": "Which gas makes up most of the air on Mars?",
+      "answer": "Carbon dioxide",
+      "wrong": [
+        "Nitrogen",
+        "Oxygen",
+        "Methane"
+      ]
+    },
+    {
+      "id": "h030",
+      "difficulty": "hard",
+      "category": "nature",
+      "question": "What is the largest species of shark?",
+      "answer": "Whale shark",
+      "wrong": [
+        "Great white shark",
+        "Basking shark",
+        "Tiger shark"
+      ]
+    },
+    {
+      "id": "h031",
+      "difficulty": "hard",
+      "category": "science",
+      "question": "What does DNA stand for?",
+      "answer": "Deoxyribonucleic acid",
+      "wrong": [
+        "Dinitrogen acid",
+        "Deoxyribose nitrate",
+        "Dual nucleic acid"
+      ]
+    },
+    {
+      "id": "h032",
+      "difficulty": "hard",
+      "category": "geography",
+      "question": "Which country has the longest coastline?",
+      "answer": "Canada",
+      "wrong": [
+        "Russia",
+        "Indonesia",
+        "Australia"
+      ]
+    },
+    {
+      "id": "h033",
+      "difficulty": "hard",
+      "category": "space",
+      "question": "About how long does sunlight take to reach Earth?",
+      "answer": "About 8 minutes",
+      "wrong": [
+        "About 1 minute",
+        "About 30 minutes",
+        "About 2 hours"
+      ]
+    },
+    {
+      "id": "h034",
+      "difficulty": "hard",
+      "category": "geography",
+      "question": "What is the capital city of Turkey?",
+      "answer": "Ankara",
+      "wrong": [
+        "Istanbul",
+        "Izmir",
+        "Antalya"
+      ]
+    },
+    {
+      "id": "h035",
+      "difficulty": "hard",
+      "category": "science",
+      "question": "What is the chemical formula of table salt?",
+      "answer": "NaCl",
+      "wrong": [
+        "KCl",
+        "NaOH",
+        "CaCO3"
+      ]
+    },
+    {
+      "id": "h036",
+      "difficulty": "hard",
+      "category": "history",
+      "question": "Which of the Seven Wonders of the Ancient World stood in Alexandria?",
+      "answer": "The Lighthouse",
+      "wrong": [
+        "The Colossus",
+        "The Hanging Gardens",
+        "The Temple of Artemis"
+      ]
+    },
+    {
+      "id": "h037",
+      "difficulty": "hard",
+      "category": "mythology",
+      "question": "In Greek myth, who flew too close to the Sun on wings of wax?",
+      "answer": "Icarus",
+      "wrong": [
+        "Daedalus",
+        "Perseus",
+        "Hermes"
+      ]
+    },
+    {
+      "id": "h038",
+      "difficulty": "hard",
+      "category": "science",
+      "question": "Which element is named after the Moon?",
+      "answer": "Selenium",
+      "wrong": [
+        "Tellurium",
+        "Helium",
+        "Mercury"
+      ]
+    },
+    {
+      "id": "h039",
+      "difficulty": "hard",
+      "category": "geography",
+      "question": "What is the largest lake in Africa?",
+      "answer": "Lake Victoria",
+      "wrong": [
+        "Lake Tanganyika",
+        "Lake Malawi",
+        "Lake Chad"
+      ]
+    },
+    {
+      "id": "h040",
+      "difficulty": "hard",
+      "category": "space",
+      "question": "Which planet was found in 1846 after mathematicians predicted where it would be?",
+      "answer": "Neptune",
+      "wrong": [
+        "Uranus",
+        "Pluto",
+        "Saturn"
+      ]
+    }
+  ]
+}

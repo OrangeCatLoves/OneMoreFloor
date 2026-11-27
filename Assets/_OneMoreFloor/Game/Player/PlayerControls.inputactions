@@ -11,7 +11,12 @@
                 { "name": "Zoom", "type": "Value", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e05", "expectedControlType": "Axis", "processors": "", "interactions": "", "initialStateCheck": true },
                 { "name": "ToggleView", "type": "Button", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e06", "expectedControlType": "Button", "processors": "", "interactions": "", "initialStateCheck": false },
                 { "name": "ReleaseCursor", "type": "Button", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e07", "expectedControlType": "Button", "processors": "", "interactions": "", "initialStateCheck": false },
-                { "name": "CaptureCursor", "type": "Button", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e08", "expectedControlType": "Button", "processors": "", "interactions": "", "initialStateCheck": false }
+                { "name": "CaptureCursor", "type": "Button", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e08", "expectedControlType": "Button", "processors": "", "interactions": "", "initialStateCheck": false },
+                { "name": "Interact", "type": "Button", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e09", "expectedControlType": "Button", "processors": "", "interactions": "", "initialStateCheck": false },
+                { "name": "Choice1", "type": "Button", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e31", "expectedControlType": "Button", "processors": "", "interactions": "", "initialStateCheck": false },
+                { "name": "Choice2", "type": "Button", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e32", "expectedControlType": "Button", "processors": "", "interactions": "", "initialStateCheck": false },
+                { "name": "Choice3", "type": "Button", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e33", "expectedControlType": "Button", "processors": "", "interactions": "", "initialStateCheck": false },
+                { "name": "Choice4", "type": "Button", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e34", "expectedControlType": "Button", "processors": "", "interactions": "", "initialStateCheck": false }
             ],
             "bindings": [
                 { "name": "WASD", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e11", "path": "2DVector", "interactions": "", "processors": "", "groups": "", "action": "Move", "isComposite": true, "isPartOfComposite": false },
@@ -24,7 +29,16 @@
                 { "name": "", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e18", "path": "<Mouse>/scroll/y", "interactions": "", "processors": "", "groups": "", "action": "Zoom", "isComposite": false, "isPartOfComposite": false },
                 { "name": "", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e19", "path": "<Keyboard>/v", "interactions": "", "processors": "", "groups": "", "action": "ToggleView", "isComposite": false, "isPartOfComposite": false },
                 { "name": "", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e20", "path": "<Keyboard>/escape", "interactions": "", "processors": "", "groups": "", "action": "ReleaseCursor", "isComposite": false, "isPartOfComposite": false },
-                { "name": "", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e21", "path": "<Mouse>/leftButton", "interactions": "", "processors": "", "groups": "", "action": "CaptureCursor", "isComposite": false, "isPartOfComposite": false }
+                { "name": "", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e21", "path": "<Mouse>/leftButton", "interactions": "", "processors": "", "groups": "", "action": "CaptureCursor", "isComposite": false, "isPartOfComposite": false },
+                { "name": "", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e22", "path": "<Keyboard>/e", "interactions": "", "processors": "", "groups": "", "action": "Interact", "isComposite": false, "isPartOfComposite": false },
+                { "name": "", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e41", "path": "<Keyboard>/1", "interactions": "", "processors": "", "groups": "", "action": "Choice1", "isComposite": false, "isPartOfComposite": false },
+                { "name": "", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e42", "path": "<Keyboard>/numpad1", "interactions": "", "processors": "", "groups": "", "action": "Choice1", "isComposite": false, "isPartOfComposite": false },
+                { "name": "", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e43", "path": "<Keyboard>/2", "interactions": "", "processors": "", "groups": "", "action": "Choice2", "isComposite": false, "isPartOfComposite": false },
+                { "name": "", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e44", "path": "<Keyboard>/numpad2", "interactions": "", "processors": "", "groups": "", "action": "Choice2", "isComposite": false, "isPartOfComposite": false },
+                { "name": "", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e45", "path": "<Keyboard>/3", "interactions": "", "processors": "", "groups": "", "action": "Choice3", "isComposite": false, "isPartOfComposite": false },
+                { "name": "", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e46", "path": "<Keyboard>/numpad3", "interactions": "", "processors": "", "groups": "", "action": "Choice3", "isComposite": false, "isPartOfComposite": false },
+                { "name": "", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e47", "path": "<Keyboard>/4", "interactions": "", "processors": "", "groups": "", "action": "Choice4", "isComposite": false, "isPartOfComposite": false },
+                { "name": "", "id": "6f0c1a10-2b6e-4a57-9d10-3a1f5b7c9e48", "path": "<Keyboard>/numpad4", "interactions": "", "processors": "", "groups": "", "action": "Choice4", "isComposite": false, "isPartOfComposite": false }
             ]
         }
     ],

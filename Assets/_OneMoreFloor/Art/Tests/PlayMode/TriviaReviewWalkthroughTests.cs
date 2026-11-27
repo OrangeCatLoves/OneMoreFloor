@@ -116,7 +116,13 @@ namespace OneMoreFloor.ArtReview.Tests
                 yield return WalkTo(new Vector3(-6.2f,.6f,3.6f));
                 yield return WalkTo(new Vector3(-4.9f,.6f,3.6f));
                 yield return WalkTo(new Vector3(-5.45f,0,6.2f));
-                yield return new WaitForSeconds(.4f); // let the player land off the last step
+                // Let the player land off the last step. The controller is off while the test drives the
+                // motor, so keep ticking it (standing still) or gravity never brings the player down.
+                for (float landed = 0; landed < .4f; landed += Time.deltaTime)
+                {
+                    motor.Tick(new MoveCommand(Vector2.zero,false,0,false),Mathf.Clamp(Time.deltaTime,1f/120,.05f));
+                    yield return null;
+                }
                 Assert.That(player.transform.position.y,Is.LessThan(.1f),"Player must walk down the stage-left corner steps.");
                 yield return WalkTo(new Vector3(-9f,0,6.6f));
                 yield return WalkTo(new Vector3(-12.4f,0,7.2f));

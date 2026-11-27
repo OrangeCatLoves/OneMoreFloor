@@ -1,0 +1,14 @@
+{
+    "name": "OneMoreFloor.Dev",
+    "rootNamespace": "OneMoreFloor.Dev",
+    "references": ["OneMoreFloor.Core", "OneMoreFloor.FloorSDK", "OneMoreFloor.Game", "FishNet.Runtime", "GameKit.Dependencies", "Unity.InputSystem", "Unity.TextMeshPro", "UnityEngine.UI"],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": ["UNITY_EDITOR || DEVELOPMENT_BUILD"],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

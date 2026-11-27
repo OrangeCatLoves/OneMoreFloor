@@ -167,12 +167,47 @@ namespace OneMoreFloor.ArtReview
             camera.nearClipPlane = .05f;camera.farClipPlane = 100;
             camera.clearFlags = CameraClearFlags.SolidColor;camera.backgroundColor = new Color(.035f,.018f,.03f);
             new GameObject("TriviaReviewQuality").AddComponent<TriviaReviewQuality>();
+            // The game's run starter (made by OneMoreFloor > Setup > Run and Trivia Floor), so pressing Play
+            // here plays the Trivia floor and the Floor Tester can open this scene.
+            var runStarter = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/_OneMoreFloor/Game/Run/RunBootstrap.prefab");
+            if (runStarter != null) PrefabUtility.InstantiatePrefab(runStarter, scene);
+            AddScreenMarkers(room);
             AddLighting();
             TriviaReviewBaking.Bake(room);
             BakeReviewReflections();
             EditorSceneManager.SaveScene(scene, ScenePath);
             AssetDatabase.SaveAssets();
             Debug.Log("TRIVIA_REVIEW_SCENE_READY " + ScenePath);
+        }
+
+        // The game shows the questions on the room's screens. Their meshes can't be read while playing (the model
+        // isn't Read/Write), so each screen gets a marker, worked out here from its mesh: MK_Screen_<name> sits at the
+        // screen's centre, its forward (+Z) points out of the screen towards the viewers, and its scale is the
+        // screen's width (x) and height (y) in metres.
+        public static void AddScreenMarkers(GameObject room)
+        {
+            foreach (var old in room.GetComponentsInChildren<Transform>().Where(t => t.name.StartsWith("MK_Screen_")).ToArray())
+                Object.DestroyImmediate(old.gameObject);
+            foreach (var filter in room.GetComponentsInChildren<MeshFilter>())
+            {
+                string marker = filter.name == "SM_Trivia_QuestionScreen" ? "MK_Screen_Question"
+                    : filter.name == "SM_Trivia_PlayerScreen" ? "MK_Screen_Players"
+                    : filter.name.StartsWith("SM_Trivia_PodiumScreen_") ? "MK_Screen_Podium_" + filter.name.Substring("SM_Trivia_PodiumScreen_".Length)
+                    : null;
+                if (marker == null) continue;
+                Mesh mesh = filter.sharedMesh;
+                Transform t = filter.transform;
+                Vector3 facing = t.TransformDirection(mesh.normals[0]).normalized;
+                Quaternion rotation = Quaternion.LookRotation(facing, Vector3.up);
+                Vector3 right = rotation * Vector3.right, up = rotation * Vector3.up;
+                var points = mesh.vertices.Select(v => t.TransformPoint(v)).ToArray();
+                float width = points.Max(p => Vector3.Dot(p, right)) - points.Min(p => Vector3.Dot(p, right));
+                float height = points.Max(p => Vector3.Dot(p, up)) - points.Min(p => Vector3.Dot(p, up));
+                var anchor = new GameObject(marker).transform;
+                anchor.SetParent(room.transform, false);
+                anchor.SetPositionAndRotation(filter.GetComponent<Renderer>().bounds.center, rotation);
+                anchor.localScale = new Vector3(width, height, 1f);
+            }
         }
 
         static void AddLighting()

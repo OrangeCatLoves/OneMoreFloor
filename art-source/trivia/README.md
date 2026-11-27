@@ -12,6 +12,12 @@ awaiting the owner's playtest, not a completed Trivia game floor.
   behind it, into the cab (the review builder opens them by half the door width each). Flower urns
   flank the portal; two gallery doors sit above it. Cab interior from `docs/sizes.json`, floor flush
   with the cross-aisle, gold threshold flush with both.
+- **Screen markers (made in Unity, 27 Nov):** the game can't read mesh shapes while playing (the model
+  isn't Read/Write), so `TriviaReviewSceneBuilder.AddScreenMarkers` adds `MK_Screen_Question`,
+  `MK_Screen_Players` and `MK_Screen_Podium_01`-`04` when it builds the scene: each sits at its screen's
+  centre, its forward (+Z) points out of the screen and its scale is the screen's width and height in
+  metres. Trivia draws its question boards on them. The builder also adds the game's run starter
+  (`Assets/_OneMoreFloor/Game/Run/RunBootstrap.prefab`), so Play in this scene plays the Trivia floor.
 - **Markers:** `MK_Spawn_01`-`04` in the cab at x = +/-1, z = 27.9 and 29.3; `MK_Exit` at (0, 1.2, 25.3).
   `MK_PlayArea_01` (hall, aisles, cross-aisle and stage, under the galleries) and `MK_PlayArea_02` (lift
   cab) are empties whose position is a box centre and whose scale is its size in metres.

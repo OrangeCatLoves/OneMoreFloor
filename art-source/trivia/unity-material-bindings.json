@@ -20,10 +20,10 @@
     "renderer": "SM_Trivia_Podium_01",
     "materials": [
       {
-        "name": "M_Trivia_Gold",
+        "name": "M_Trivia_GoldDark",
         "shader": "Universal Render Pipeline/Lit",
-        "baseMap": "T_Trivia_Gold_BaseColor",
-        "metallicMap": "T_Trivia_Gold_MetallicSmoothness",
+        "baseMap": "T_Trivia_GoldDark_BaseColor",
+        "metallicMap": "T_Trivia_GoldDark_MetallicSmoothness",
         "specularMap": null,
         "keywords": [
           "_METALLICSPECGLOSSMAP",
@@ -31,10 +31,10 @@
         ]
       },
       {
-        "name": "M_Trivia_GoldDark",
+        "name": "M_Trivia_Gold",
         "shader": "Universal Render Pipeline/Lit",
-        "baseMap": "T_Trivia_GoldDark_BaseColor",
-        "metallicMap": "T_Trivia_GoldDark_MetallicSmoothness",
+        "baseMap": "T_Trivia_Gold_BaseColor",
+        "metallicMap": "T_Trivia_Gold_MetallicSmoothness",
         "specularMap": null,
         "keywords": [
           "_METALLICSPECGLOSSMAP",

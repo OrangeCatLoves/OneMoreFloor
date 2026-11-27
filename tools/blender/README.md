@@ -1,3 +1,11 @@
+# Lift design drafts (Claude Code, 27 Nov 2026)
+
+`lift_drafts.py` builds five lift designs at the shared sizes (`docs/sizes.json`) in front of the same
+plain wall and renders each with doors closed, doors open and from inside the cab:
+`tools/homepc/blender.sh tools/blender/lift_drafts.py [--drafts A,B --samples 192]`. Renders go to
+`art-source/renders/lift/drafts-01/` (small JPGs, kept in ordinary Git). Drafts for the owner to choose
+from; nothing goes to Unity yet.
+
 # Current task: Trivia round 3 (Claude Code)
 
 `trivia_round_three.py` applies the owner's round 3 feedback after the round 2 pass. Rebuild from the

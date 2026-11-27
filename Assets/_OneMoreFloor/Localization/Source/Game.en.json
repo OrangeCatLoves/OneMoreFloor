@@ -1,0 +1,10 @@
+{
+    "hearts": "♥ {0}/{1}",
+    "floor": "Floor {0}",
+    "hearts_lost": "−{0} ♥",
+    "floor_cleared": "Floor cleared!",
+    "game_over": "Game over",
+    "results_title": "Results",
+    "results_floors": "Floors cleared: {0}",
+    "play_again": "Play again"
+}

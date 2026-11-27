@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Dev_en
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 13f7b8b4460799940ba077478f355d1b, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 1172230144
+    m_Localized: Floor test
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1235144704
+    m_Localized: "{0}  \u2022  level {1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1235144705
+    m_Localized: Restart (F5)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1235144706
+    m_Localized: "Level \u2212 (F6)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1239339008
+    m_Localized: Level + (F7)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1239339009
+    m_Localized: Clear floor (F8)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1239339010
+    m_Localized: "\u22121 \u2665 (F9)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1239339011
+    m_Localized: 'Hearts: unlimited'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1239339012
+    m_Localized: 'Hearts: normal'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1239339013
+    m_Localized: "F1 hides this panel  \u2022  Esc frees the mouse to click"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

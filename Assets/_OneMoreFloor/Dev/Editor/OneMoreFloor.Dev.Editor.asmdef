@@ -1,0 +1,14 @@
+{
+    "name": "OneMoreFloor.Dev.Editor",
+    "rootNamespace": "OneMoreFloor.Dev",
+    "references": ["OneMoreFloor.Core", "OneMoreFloor.FloorSDK", "OneMoreFloor.Game", "OneMoreFloor.Dev"],
+    "includePlatforms": ["Editor"],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

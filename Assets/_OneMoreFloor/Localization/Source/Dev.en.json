@@ -1,0 +1,12 @@
+{
+    "title": "Floor test",
+    "floor_level": "{0}  •  level {1}",
+    "restart": "Restart (F5)",
+    "level_down": "Level − (F6)",
+    "level_up": "Level + (F7)",
+    "clear": "Clear floor (F8)",
+    "lose_heart": "−1 ♥ (F9)",
+    "hearts_unlimited": "Hearts: unlimited",
+    "hearts_normal": "Hearts: normal",
+    "mouse_hint": "F1 hides this panel  \u2022  Esc frees the mouse to click"
+}

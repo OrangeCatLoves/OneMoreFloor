@@ -1,0 +1,14 @@
+{
+    "name": "OneMoreFloor.Floors.Trivia.Rules",
+    "rootNamespace": "OneMoreFloor.Floors.Trivia",
+    "references": ["OneMoreFloor.Core"],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": true
+}

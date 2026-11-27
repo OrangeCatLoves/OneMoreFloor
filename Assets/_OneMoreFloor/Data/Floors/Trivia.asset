@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9bab2d6d2ad9c4db9e15c40bc88112, type: 3}
+  m_Name: Trivia
+  m_EditorClassIdentifier: OneMoreFloor.FloorSDK::OneMoreFloor.FloorSDK.FloorDefinition
+  id: trivia
+  stringTable: Trivia
+  nameKey: name
+  goalKey: goal
+  genre: q_and_a
+  minPlayers: 1
+  maxPlayers: 4
+  minFloor: 1
+  selectionWeight: 1
+  schemaVersion: 1
+  floorPrefab: {fileID: 2626566979780034954, guid: 21c48c39f7fddc146b86326ca69046cd, type: 3}
+  settings: {fileID: 11400000, guid: a388ab40d6a81a04494f0c8ae5db5c81, type: 2}
+  roomScene: Assets/_OneMoreFloor/Art/Floors/Trivia/Review/TriviaArtReview.unity

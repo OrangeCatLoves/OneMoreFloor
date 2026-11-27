@@ -8,11 +8,15 @@ namespace OneMoreFloor.Core
     /// </summary>
     public sealed class Run
     {
-        public Run(ulong seed, int playerCount, int heartsPerPlayer)
+        public Run(ulong seed, int playerCount, int heartsPerPlayer, int firstFloor = 1)
         {
+            if (firstFloor < 1)
+                throw new ArgumentOutOfRangeException(nameof(firstFloor), firstFloor, "Must be at least 1.");
+
             Seed = seed;
             PlayerCount = playerCount;
             Hearts = new HeartsPool(HeartsPool.StartingHearts(heartsPerPlayer, playerCount));
+            FloorNumber = firstFloor;
         }
 
         public ulong Seed { get; }
@@ -23,8 +27,8 @@ namespace OneMoreFloor.Core
         public HeartsPool Hearts { get; }
         public RunPhase Phase { get; private set; } = RunPhase.Lobby;
 
-        /// <summary>The floor the team is on or riding to, starting at 1.</summary>
-        public int FloorNumber { get; private set; } = 1;
+        /// <summary>The floor the team is on or riding to, starting at 1 (or the run's first floor).</summary>
+        public int FloorNumber { get; private set; }
 
         /// <summary>The run's score.</summary>
         public int FloorsCleared { get; private set; }

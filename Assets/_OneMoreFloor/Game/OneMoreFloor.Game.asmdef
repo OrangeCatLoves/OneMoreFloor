@@ -1,7 +1,16 @@
 {
     "name": "OneMoreFloor.Game",
     "rootNamespace": "OneMoreFloor.Game",
-    "references": ["OneMoreFloor.Core", "OneMoreFloor.FloorSDK", "FishNet.Runtime", "GameKit.Dependencies", "Unity.Cinemachine", "Unity.InputSystem"],
+    "references": [
+        "OneMoreFloor.Core",
+        "OneMoreFloor.FloorSDK",
+        "FishNet.Runtime",
+        "GameKit.Dependencies",
+        "Unity.Cinemachine",
+        "Unity.InputSystem",
+        "Unity.TextMeshPro",
+        "UnityEngine.UI"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
